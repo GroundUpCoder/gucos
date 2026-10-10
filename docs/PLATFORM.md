@@ -1,7 +1,8 @@
 # wasm-posix application platform
 
-Status: 1.0.0 candidate. Release requires the recorded compatibility, package,
-upgrade and browser gates; a version in candidate metadata is not a release.
+Status: 1.0.0, released 2026-10-10 at https://os.groundupcoder.net/.
+The compatibility, package, upgrade and live-browser gates passed; exact evidence
+and deployment identity are recorded in `docs/logs/2026-10-10/platform-1.0.md`.
 
 ## Identity and compatibility
 

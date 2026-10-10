@@ -66,3 +66,60 @@ not a full mechanical ABI signature/conformance certification.
 
 Expanded public-package compatibility and final release approval are pending at
 this checkpoint. Production has not been changed by this work yet.
+
+## Public packages and deployment
+
+Primary author executed the package thread's reviewed compatibility runner against
+this frozen candidate, using run platform-1-0-c4411d72. All 14 stages passed:
+17 original public packages, all 803 original output hashes before and after
+execution, old Lua/Zstandard/Xaw/Xpm library relinking, JWM feature/drag tests,
+X clients, xterm browser keyboard/PTY, launcher and final reload. No package
+binaries or manifests were rebuilt/retagged. The report SHA256 is
+2976bcc9857f6fc8b1e8a256c24c4b5460ebe2029e258fc5eddae19d194c0f80.
+Copied exact report and hash-verified stage logs into the packages/ evidence
+subdirectory. Harness ownership remains the external package thread; execution
+of this candidate run was performed by the primary author.
+
+Independent reviewer approved exact core commit
+f0fa450cd6390c2278756b03071791e5dd211419 and the above immutable payload. The review
+independently verified all 33 release files and source-derived runtime identity,
+reran the metadata gate, and inspected (not reran) the ten core browser results.
+Approval was conditional on unchanged-package acceptance before activation and
+mandatory live checks before transaction completion. Both conditions were met.
+
+Core was pushed, then the unchanged netguc hosting wrapper completed activation
+under operator.lock. Live browser job c1359165-1cf7-44ef-8423-c14333b36a4e passed
+public old-binary install, source build, terminal/two WebGPU VTs and persistence;
+it also passed normal-root startup display, HTTP/checksum failures and retries.
+The wrapper verified origin/public artifact hashes and isolation headers and
+unchanged historical /os2 responses. It exited zero with action complete.
+Production current is releases/b7b6e813e8dd462b5c7415ab8d03dd57588a86ccf80a944174aa18a70e96a1ef;
+no pending journal remained. Hosting commit/route are unchanged. Exact deployment
+output is committed in the research directory.
+
+An additional fresh-profile live X11/JWM/xterm smoke is running after activation;
+its outcome will be recorded separately. Do not infer its result from the local
+candidate's complete package acceptance.
+
+## Live desktop and 1.0.0 completion
+
+The primary author ran the external package author's reviewed live smoke
+(commit 8701f20), after activation, against https://os.groundupcoder.net/ in a
+fresh profile. Run platform-1-0-live-c4411d72 passed all six stages: exact candidate
+identity, original public X11/widget/JWM/xterm binary installation, actual JWM
+and xterm keyboard-through-PTY interaction, typed guest-file persistence after
+reload, and all 722 original desktop output hashes. Exact report and hash-verified
+logs are preserved under docs/research/platform-1.0/live-desktop/.
+
+All five authorized stabilization steps are complete: parallel baseline package
+work was preserved, the supported boundary is documented, compatibility uses
+platform/dependency requirements instead of universal build-hash equality,
+retained artifacts passed execution/relinking/upgrade gates, and the reviewed
+1.0.0 implementation is deployed. The original public package archives remain
+unchanged. New platform-aware manifests are supported; existing publications
+continue through the documented legacy-baseline mapping. No claim is made that
+all existing public package manifests were rewritten to the new schema.
+
+The platform contract is now marked released. Release tag v1.0.0 will identify
+the same implementation plus these final evidence records; documentation-only
+completion changes do not change the deployed runtime or release manifest.

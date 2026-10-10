@@ -1,0 +1,51 @@
+[machine-job] queued: /Users/jku/Library/pnpm/nodejs/25.8.2/bin/node tests/compatibility/check.mjs install jwm xterm
+[machine-job] running: 01c79a4b-49c1-49ff-a6b1-d19fad16e13d
+Already installed: x11-server
+Already installed: x11-toolkit
+Already installed: x11-widgets
+/usr/local/lib/gucman/packages/jwm/release.exgevu/manifest.json: OK
+/usr/local/lib/gucman/packages/jwm/release.exgevu/paths: OK
+/usr/local/lib/gucman/packages/jwm/release.exgevu/origin: OK
+/usr/local/lib/gucman/packages/jwm/release.exgevu/runtime: OK
+/usr/local/lib/gucman/packages/jwm/release.exgevu/dependency-hashes: OK
+/usr/local/lib/gucman/packages/jwm/release.exgevu/bin/jwm: OK
+/usr/local/lib/gucman/packages/jwm/release.exgevu/share/jwm/system.jwmrc: OK
+/usr/local/lib/gucman/packages/jwm/release.exgevu/share/jwm/wasm.jwmrc: OK
+/usr/local/lib/gucman/packages/jwm/release.exgevu/share/jwm/app-menu.sh: OK
+/usr/local/lib/gucman/packages/jwm/release.exgevu/share/licenses/jwm/LICENSE: OK
+/usr/local/lib/gucman/packages/jwm/release.exgevu/bin/start-jwm: OK
+/usr/local/lib/gucman/packages/jwm/release.exgevu/libexec/jwm/wait-display: OK
+Installed compatibility:jwm 2.4.6-1
+
+{
+  tail: '/gucman/packages/jwm/release.exgevu/share/licenses/jwm/LICENSE: OK\n' +
+    '/usr/local/lib/gucman/packages/jwm/release.exgevu/bin/start-jwm: OK\n' +
+    '/usr/local/lib/gucman/packages/jwm/release.exgevu/libexec/jwm/wait-display: OK\n' +
+    'Installed compatibility:jwm 2.4.6-1\n'
+}
+Already installed: x11-server
+Already installed: x11-toolkit
+Already installed: x11-widgets
+/usr/local/lib/gucman/packages/xterm/release.vlcktu/manifest.json: OK
+/usr/local/lib/gucman/packages/xterm/release.vlcktu/paths: OK
+/usr/local/lib/gucman/packages/xterm/release.vlcktu/origin: OK
+/usr/local/lib/gucman/packages/xterm/release.vlcktu/runtime: OK
+/usr/local/lib/gucman/packages/xterm/release.vlcktu/dependency-hashes: OK
+/usr/local/lib/gucman/packages/xterm/release.vlcktu/bin/xterm: OK
+/usr/local/lib/gucman/packages/xterm/release.vlcktu/share/xterm/termcap: OK
+/usr/local/lib/gucman/packages/xterm/release.vlcktu/share/X11/app-defaults/XTerm: OK
+/usr/local/lib/gucman/packages/xterm/release.vlcktu/share/licenses/xterm/libICE-COPYING: OK
+/usr/local/lib/gucman/packages/xterm/release.vlcktu/share/licenses/xterm/libSM-COPYING: OK
+/usr/local/lib/gucman/packages/xterm/release.vlcktu/share/licenses/xterm/libXaw-COPYING: OK
+/usr/local/lib/gucman/packages/xterm/release.vlcktu/share/licenses/xterm/libXft-COPYING: OK
+/usr/local/lib/gucman/packages/xterm/release.vlcktu/share/licenses/xterm/libXmu-COPYING: OK
+/usr/local/lib/gucman/packages/xterm/release.vlcktu/share/licenses/xterm/libXpm-COPYING: OK
+/usr/local/lib/gucman/packages/xterm/release.vlcktu/share/licenses/xterm/libXrandr-COPYING: OK
+/usr/local/lib/gucman/packages/xterm/release.vlcktu/share/licenses/xterm/libXt-COPYING: OK
+/usr/local/lib/gucman/packages/xterm/release.vlcktu/share/licenses/xterm/termcap-COPYING: OK
+/usr/local/lib/gucman/packages/xterm/release.vlcktu/share/licenses/xterm/xev-COPYING: OK
+/usr/local/lib/gucman/packages/xterm/release.vlcktu/share/licenses/xterm/xmessage-COPYING: OK
+/usr/local/lib/gucman/packages/xterm/release.vlcktu/share/licenses/xterm/xprop-COPYING: OK
+/usr/local/lib/gucman/packages/xterm/release.vlcktu/share/licenses/xterm/xterm-COPYING: OK
+Installed compatibility:xterm 411-1
+

@@ -1,0 +1,31 @@
+[machine-job] queued: /Users/jku/Library/pnpm/nodejs/25.8.2/bin/node tests/expansion-xclients.mjs
+[machine-job] running: 5813f5d5-9563-4e94-ab90-9a18cd71a8d1
+
+2317 functions, 2311830 bytes
+fixed
+PACKAGE_TEST(STRING) = "checked"
+Warning: Cannot convert string "calculator" to type Pixmap
+Warning: Missing charsets in String to FontSet conversion
+Warning: Cannot convert string "xlogo32" to type Pixmap
+Warning: Missing charsets in String to FontSet conversion
+Warning: Missing charsets in String to FontSet conversion
+MAPPED XClock
+MAPPED XCalc
+MAPPED XEyes
+MAPPED XLogo
+MAPPED Xmessage
+XAPPS clock-ticks
+XAPPS eyes-follow
+XAPPS calculator-result-three
+XAPPS message-button
+XAPPS event-key
+XCLIENTS-INTERACTION-PASS
+KeyPress event, serial 25, synthetic NO, window 0xa00001,
+X connection to :1 broken (explicit kill or server shutdown).
+xkill:  killing creator of resource 0x800001
+XCLIENTS-RUNTIME-PASS
+X connection to :1 broken (explicit kill or server shutdown).
+X connection to :1 broken (explicit kill or server shutdown).
+X connection to :1 broken (explicit kill or server shutdown).
+X connection to :1 broken (explicit kill or server shutdown).
+
