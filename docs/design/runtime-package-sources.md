@@ -80,3 +80,55 @@ Stable versioned syscall/object/libc/package interfaces reduce changes. UI/core
 build identity is separate from compatibility. Begin conservatively with exact
 runtime binary matching; broaden compatibility only with demonstrated contracts.
 No claim that arbitrary upstream software works, or that core fixes end forever.
+
+## Review clarifications
+
+Source identity v1 is the exact HTTPS catalog URL, independent of the local label.
+Installed packages retain it. Reusing a label for a different URL cannot upgrade
+those packages; removal never uninstalls. A source is trusted by explicit repo add
+(or the documented default); TLS authenticates its delivery, hashes bind its objects,
+not independent publisher identity. Catalog snapshots and source URLs are copied
+at command start. Cross-source dependencies require explicit source:name declarations
+and are displayed in the resolved plan before build; they only use configured sources.
+No hidden sources or default fallback. Source recipe execution has the same guest
+filesystem authority as the user. This warning is emitted by build; tests and recipe
+failures preserve package-manager publication but cannot undo arbitrary recipe writes.
+
+Transactions are per package, dependencies commit in dependency order and may remain
+installed if a later consumer fails. All closure ownership conflicts are preflighted.
+A global mkdir lock excludes concurrent commands; crash leaves it for explicit
+recovery, never PID guessing. Each publication retains a pending record with new
+release identity and old link; recovery completes or rolls back exact owned links.
+V1 refuses upgrades changing the public output path set. Old release directories
+remain; no garbage collection. Test failure/interrupt at link preparation and current
+switch, collisions, two concurrent commands, and source-URL replacement.
+
+New identities are wasm-posix-core-v1, wasm-posix-core-v1.journal and
+wasm-posix.core.files. Neither init nor reset may touch historical
+wasm-posix-os2-v1, its journal, wasm-posix.os2.files or legacy busybox disk/editor keys. Preserve prototype wasm-posix-minimal-v1,
+wasm-posix-minimal-v1.journal and wasm-posix.minimal.files too; sentinel tests
+cover their initialization/reset preservation.
+Core independence means boot/reload while package origins are unavailable; it does
+not promise reload while the core hosting origin is offline. No service worker.
+
+The default URL is
+https://raw.githubusercontent.com/GroundUpCoder/wasm-posix-packages/main/catalog.json.
+Source objects/manifests should use commit-addressed URLs. Fetches are credential-free,
+bounded to 8MiB catalogs and 256MiB objects, with transport deadlines. Only HTTPS and
+loopback HTTP input URLs accepted. HTTPS redirects must remain HTTPS and contain no
+credentials; actual final URL is checked by the fetch helper. Public delivery needs
+an actual-origin browser test before claiming anonymous acceptance. Repository
+visibility remains a user-owned choice; fixtures do not prove GitHub delivery.
+
+Hosting uses a separate /home/ubuntu/.gucchat/os/core tree, immutable releases by
+manifest digest and current symlink. The existing OS operator.lock serializes all
+mutations, but historical package state is never an input or modified. A core-only
+pending record binds old/new release and route hashes; interrupted operations refuse
+new deploys until explicit reconciliation. Private staging validates complete payload
+hashes and source tips; exact reviewed grants bind artifact and Caddy fragment.
+Preserve every existing /os2 route and its storage; only / changes to new index,
+with new /assets URLs. Route is activated after private-origin verification,
+Caddy validation/reload and public smoke; failed validation never switches route.
+Rollback restores prior root handling and/or the prior core symlink, with distinct
+browser storage preserved. This replaces only the relevant hosting instructions
+after exact review, not historical package publication rules.

@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>wasm-posix · terminal</title>
+<style>
+:root { color-scheme:dark; font:13px/1.4 ui-monospace,SFMono-Regular,Consolas,monospace; background:#0b1018; color:#d6e1ef; }
+* { box-sizing:border-box; } body { margin:0; overflow:hidden; } [hidden] { display:none !important; }
+#terminal { position:absolute; inset:12px 12px 42px; } .xterm { height:100%; } .xterm-viewport { scrollbar-width:thin; }
+body.desktop-mode { height:100vh; background:radial-gradient(ellipse at 75% 15%,#25475c,transparent 65%),linear-gradient(140deg,#101b2c,#142c38); }
+body.desktop-ready #terminal { visibility:hidden; pointer-events:none; }
+body.desktop-ready.terminal-open #terminal { visibility:visible; pointer-events:auto; z-index:2147483646; background:#0b1018; padding:12px; border:1px solid #7596ba; border-radius:7px; box-shadow:0 16px 55px #0009; }
+#taskbar { position:fixed; inset:auto 0 0; height:32px; display:flex; align-items:center; gap:8px; padding:0 10px; background:#121b29; border-top:1px solid #29364a; z-index:2147483647; }
+button { font:inherit; color:#b9c9df; background:transparent; border:0; cursor:pointer; } button:hover { background:#27384d; color:#fff; } button:focus-visible { outline:1px solid #70ddb2; }
+#tasks { display:flex; gap:4px; min-width:0; overflow:auto; } #tasks button { max-width:190px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; padding:4px 10px; background:#202e40; }
+#status { margin-left:auto; font-size:11px; color:#7c93b0; white-space:nowrap; }
+.screen { position:fixed; display:flex; flex-direction:column; border:1px solid #394b65; border-radius:7px; background:#080c13; box-shadow:0 16px 55px #0009; overflow:hidden; min-width:160px; min-height:100px; }
+.screen.active { border-color:#7596ba; box-shadow:0 18px 65px #000b; }
+.titlebar { height:34px; min-height:34px; display:flex; align-items:center; padding-left:12px; background:#1a2738; user-select:none; touch-action:none; cursor:move; }
+.active .titlebar { background:#24364b; } .window-title { flex:1; min-width:0; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; font-size:12px; }
+.window-controls { display:flex; height:100%; } .window-controls button { width:36px; font-size:18px; } .window-controls button:last-child:hover { background:#a83447; }
+.window-content { flex:1; min-height:0; display:flex; background:#030508; }
+canvas { width:100%; height:100%; object-fit:contain; display:block; image-rendering:pixelated; outline:none; }
+.resize-handle { position:absolute; width:20px; height:20px; right:0; bottom:0; cursor:nwse-resize; touch-action:none; background:linear-gradient(135deg,transparent 55%,#a3b4cc55 57%,transparent 63%,transparent 73%,#a3b4cc88 75%,transparent 81%); }
+</style>
+<div id="terminal" aria-label="Terminal"></div>
+<div id="screens"></div>
+<footer id="taskbar"><button id="terminal-focus" title="Focus terminal">›_ terminal</button><button id="desktop-launch" style="color:#70ddb2" title="Open the GTK desktop workspace">Desktop</button><button id="import-files" title="Copy files into ~/Downloads">Import files</button><button id="export-file" title="Download a file from the desktop">Export file…</button><input id="import-picker" type="file" multiple hidden><div id="tasks"></div><a id="license-link" target="_blank" rel="noopener">Licenses</a><span id="status">Unpacking…</span><button id="reset-install" title="Delete this installation’s files and start fresh">Reset…</button></footer>
+<script id="bundle" type="application/octet-stream">PAYLOAD</script>
+<script type="module">
+/* APP */
+</script>
+</html>
