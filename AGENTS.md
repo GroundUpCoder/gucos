@@ -10,5 +10,10 @@
 - Documentation belongs under docs/. Record exact provenance and tested scope.
 - Use machine-job for builds/browser tests. One browser job at a time.
 - Netguc hosting changes follow its local instructions and independent review.
+- Target graphics boundary: SDL is the only application-facing graphics API in
+  core. Each graphical VT owns one presentation surface; terminal VTs remain
+  available. X servers, window managers and graphical toolkits belong in runtime
+  packages. Remove inherited kernel desktop/window policy rather than extending
+  it. This is the target architecture, not a claim that migration is complete.
 - Never silently migrate historical browser disks. New core uses wasm-posix-core-v1,
   its .journal and wasm-posix.core.files. Preserve os2, minimal and legacy namespaces.

@@ -1,0 +1,62 @@
+# SDL virtual terminals
+
+User direction, 2026-10-10: core provides terminal VTs and fullscreen SDL VTs.
+X11 servers, window managers and toolkits are runtime packages. Legacy native
+GTK desktop/window-manager compatibility is not required. Preserve the old
+repository and its implementation as historical references.
+
+## Boundary
+
+One graphical VT has one presentation surface. Core owns VT allocation,
+activation, lifecycle, framebuffer presentation, input/focus delivery and the
+browser bridges required by SDL. It does not understand X protocol, X windows,
+desktop policy, stacking, decorations, snapping or a window-manager socket.
+Keep SDL as the application API; keep its internal host transport small and
+versioned rather than treating every SDL API function as a kernel primitive.
+
+VT fullscreen means filling the OS viewport. Entering browser fullscreen is
+optional and separate. Support viewport-sized surfaces and fixed logical sizes
+with scaling/letterboxing and correctly transformed pointer coordinates. SDL
+fullscreen/display-mode requests must report the implemented behavior honestly;
+browser support does not imply physical exclusive display-mode switching.
+
+Multiple SDL applications may occupy separate VTs. A console SDL backend can
+reject a second top-level window explicitly; multi-window applications use a
+packaged SDL X11 backend inside an X desktop. That backend and the core SDL
+backend must be selected intentionally; compatibility is not automatic.
+
+Inactive VTs stop unnecessary presentation and lose input focus. Do not freeze
+their processes, sockets, timers or background jobs. Focus transitions release
+held input and pointer capture; visibility must not make display-server request
+processing depend on an indefinitely blocked present. Background audio policy
+is separate from graphics presentation. Preserve a host-accessible switcher and
+recovery terminal even when a graphical application crashes or captures input.
+
+## Verified starting point and limits
+
+Inspection of this checkout confirms inherited /run/wm.sock policy in
+src/kernel.js and fullscreen rejection in libc/src/__SDL_video.c. The old
+apps/x11-server/port/browser-screen.c creates one SDL window and presents the
+X framebuffer through SDL_GetWindowSurface. These are code observations, not
+an acceptance run of X11 on the new core.
+
+The old X server README describes software rendering, a fixed-size display,
+and exclusions for GLX, DRI2, DRI3 and MIT-SHM. The architecture permits a
+userland X server but does not itself implement these extensions or arbitrary
+X application compatibility. Existing full-frame copies are implementation
+costs, not a proven lower bound or established native performance parity.
+
+## Migration and acceptance
+
+First implement a terminal plus two independent graphical VTs, switching,
+focus cleanup, sizing, application exit and crash recovery. Verify hidden
+applications and background shell jobs continue useful work without spinning
+on presentation. Then remove inherited WM protocol, compositor policy and
+desktop chrome together with obsolete tests, retaining surface transport and
+needed SDL browser bridges. Test the actual package X server with multiple
+clients and a packaged window manager on the new VT backend. Only then describe
+the new graphics contract as implemented and consider freezing its ABI.
+
+Package builds, source discovery and hosting retain the existing rule: no
+packages checkout is read by core assembly or hosting. Runtime package operations
+alone obtain X11 and other application inputs.
