@@ -44,10 +44,10 @@ V1 updates must retain the same output path set; removals and changing path sets
 future explicit transaction support. Source identity is the exact catalog URL,
 not its local label. Changing source URL cannot silently replace an installed package.
 
-A publication journal plus a global lock blocks interrupted transactions. After
-confirming the original guest process is no longer alive, `gucman recover` completes
-a prepared transaction. It refuses live lock owners or incomplete/corrupt preparation
-requiring inspection. Old releases remain; there is no automatic garbage collection.
+A publication journal plus a kernel record lock serializes package commands.
+Process exit releases the lock, including during recovery. `gucman recover` takes
+the same lock and completes a prepared transaction; active commands and incomplete
+or corrupt preparation are refused. Old releases remain; there is no automatic garbage collection.
 Trusted recipes may themselves change guest files: publication rollback does not
 undo arbitrary recipe effects.
 
@@ -56,3 +56,8 @@ idle deadlines. Redirect final URLs must not downgrade HTTPS. There is no networ
 proxy in the OS host. Upstream and artifact endpoints must permit browser CORS.
 The initial catalog is source-only jsmn; a prebuilt requires separately publishing
 its binary ref. Runtime changes currently invalidate binary compatibility conservatively.
+
+`gucman pack NAME /home/user/NAME.tar` exports the installed regular-file outputs
+and licenses as a USTAR archive, printing SHA256, size and build runtime. It does
+not upload or approve anything. A package publisher can pin that archive in a
+new manifest and independently test fresh binary installation before publication.

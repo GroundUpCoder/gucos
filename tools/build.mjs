@@ -21,7 +21,7 @@ async function collect(dir,prefix){for(const e of (await readdir(new URL(dir,roo
 await collect('vendor/busybox','/usr/src/busybox');
 await collect('vendor/make','/usr/src/make');
 for(const name of ['ar.c','cc-driver.c','fetch.c','guc-links.c'])files['/usr/libexec/'+name]=await read('examples/'+name);
-for(const name of ['json','unpack'])files['/usr/libexec/guc-repo-'+name+'.c']=await read('tools/guest-repository/'+name+'.c');
+for(const name of ['json','unpack','lock'])files['/usr/libexec/guc-repo-'+name+'.c']=await read('tools/guest-repository/'+name+'.c');
 const srcNames=(await readdir(new URL('src/',root))).sort();
 const buildId=sha(libc.manifest.digest+'\n'+await join(srcNames.map(n=>'src/'+n))+'\n'+JSON.stringify(files));
 const versions=JSON.parse(await read('tools/versions.json'));

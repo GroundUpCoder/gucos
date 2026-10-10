@@ -23,7 +23,7 @@ function desktopLaunchCommand(repository) {
 }
 async function installRepositoryManager(data,rawAsset,writeFile,readFile) {
   const config=repositoryBootConfig(data.repository);
-  const paths=['/usr/libexec/guc-json','/usr/libexec/guc-repo-fetch','/usr/libexec/guc-unpack','/usr/libexec/guc-links-v2'];
+  const paths=['/usr/libexec/guc-lock','/usr/libexec/guc-json','/usr/libexec/guc-repo-fetch','/usr/libexec/guc-unpack','/usr/libexec/guc-links-v2'];
   const prepared=[];
   for(const path of paths){
     const entry=data.prebuilt?.[path];
@@ -32,7 +32,8 @@ async function installRepositoryManager(data,rawAsset,writeFile,readFile) {
   }
   if(typeof data.repositoryScripts?.manager!=='string'||!data.repositoryScripts.manager.startsWith('#!/bin/sh\n'))throw Error('Missing package manager');
   for(const [path,bytes] of prepared)writeFile(path,bytes,0o755);
-  writeFile('/usr/bin/gucman',data.repositoryScripts.manager,0o755);
+  writeFile('/usr/libexec/guc-manager',data.repositoryScripts.manager,0o755);
+  writeFile('/usr/bin/gucman','#!/bin/sh\nset -eu\nmkdir -p /usr/local/lib/gucman\nexec /usr/libexec/guc-lock /usr/local/lib/gucman/transaction.lock /bin/sh /usr/libexec/guc-manager "$@"\n',0o755);
   writeFile('/etc/gucman/runtime',config.runtime+'\n',0o644);
   if(!readFile('/etc/gucman/initialized')){
     writeFile('/etc/gucman/sources.d/groundupcoder.url',config.url+'\n',0o644);

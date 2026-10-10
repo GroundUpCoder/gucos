@@ -96,8 +96,9 @@ failures preserve package-manager publication but cannot undo arbitrary recipe w
 
 Transactions are per package, dependencies commit in dependency order and may remain
 installed if a later consumer fails. All closure ownership conflicts are preflighted.
-A global mkdir lock excludes concurrent commands; crash leaves it for explicit
-recovery, never PID guessing. Each publication retains a pending record with new
+A kernel record lock held across exec excludes concurrent commands and releases
+on process death. The publication journal still requires explicit recovery;
+recovery takes the same lock and can be retried after interruption without PID guessing. Each publication retains a pending record with new
 release identity and old link; recovery completes or rolls back exact owned links.
 V1 refuses upgrades changing the public output path set. Old release directories
 remain; no garbage collection. Test failure/interrupt at link preparation and current
@@ -115,8 +116,9 @@ The default URL is
 https://raw.githubusercontent.com/GroundUpCoder/wasm-posix-packages/main/catalog.json.
 Source objects/manifests should use commit-addressed URLs. Fetches are credential-free,
 bounded to 8MiB catalogs and 256MiB objects, with transport deadlines. Only HTTPS and
-loopback HTTP input URLs accepted. HTTPS redirects must remain HTTPS and contain no
-credentials; actual final URL is checked by the fetch helper. Public delivery needs
+loopback HTTP input URLs accepted. Final redirect URLs must use HTTPS (or loopback HTTP for development), and cannot
+downgrade an HTTPS input or contain credentials. Browser fetch hides intermediate
+hops; no all-hop policy is claimed. The fetch helper checks the final URL. Public delivery needs
 an actual-origin browser test before claiming anonymous acceptance. Repository
 visibility remains a user-owned choice; fixtures do not prove GitHub delivery.
 

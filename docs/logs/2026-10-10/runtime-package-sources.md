@@ -20,3 +20,19 @@ root redirect /os2 and historical release2ec2182f. No live changes yet.
 Packages checkout has source-only jsmn recipe and immutable commit-addressed refs.
 Visibility remains private. Decision b0861cd4a7322f4c9ec10a04006c3be75c0208c002d93783e2314b3be865c477
 asks the owner about public anonymous delivery; no visibility change executed.
+
+Author follow-up: package origin isolation, ambiguity, URL-label reuse, source hash
+refusal, cycles, ancestor path conflict preflight, same-URL aliases, per-package
+failure preservation, actual killed publication recovery to version3, outage reload
+and old-disk/editor reset preservation passed in browser job e5f29c8a.
+Kernel fcntl lock replaces the prototype directory lock, including recovery.
+The first fault harness wrongly required a nonzero shell.command result after a
+signal; actual pending state showed the process had died. The corrected test
+asserts dead owner, prepared journal, unchanged old version, then recovered new
+version and cleared journal. Initial reset harness needed shell=bootstrap to avoid
+colliding with the interactive foreground shell. Both failures were test harness
+assumptions; no earlier pass was claimed for those checks.
+
+GitHub API now reports packages repository public; this thread did not change
+visibility. The obsolete visibility decision was cancelled, not answered on the
+user's behalf. Anonymous live recipe acceptance is the next test after push.

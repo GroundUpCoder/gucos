@@ -9,8 +9,8 @@ config=/etc/gucman/sources.d
 cache=/var/cache/gucman/v1
 state=/usr/local/lib/gucman
 runtime=$(cat /etc/gucman/runtime)
-work= lock= publishing=
-cleanup() { [ -z "$work" ] || rm -rf "$work"; [ -z "$lock" ] || { if [ -z "$publishing" ]; then rm -f "$lock/owner"; rmdir "$lock"; else echo "gucman: publication pending; run gucman recover" >&2; fi; }; }
+work= publishing=
+cleanup() { [ -z "$work" ] || rm -rf "$work"; [ -z "$publishing" ] || echo "gucman: publication pending; run gucman recover" >&2; }
 trap cleanup EXIT
 trap 'exit 1' HUP INT TERM
 fail() { echo "gucman: $*" >&2; exit 1; }
@@ -58,18 +58,23 @@ finish_publication() {
  rm -rf "$state/pending"
 }
 mkdir -p "$config" "$cache/objects" "$state/packages"
+printf '%s\n' "$$" > "$state/transaction-owner"
 action=${1:-help}; [ "$#" -eq 0 ] || shift
 case "$action" in
+ pack)
+  [ "$#" -eq 2 ] && name_ok "$1" || fail 'usage: gucman pack NAME /absolute/new.tar'
+  name=$1; output=$2; case "$output" in /*) ;; *) fail 'archive path must be absolute';; esac
+  [ ! -e "$output" ] && [ ! -L "$output" ] || fail 'archive destination exists'
+  root=$state/packages/$name/current
+  [ -f "$root/manifest.json" ] || fail 'package not installed'
+  [ ! -e "$state/pending" ] || fail 'unfinished publication; recover first'
+  tar -cf "$output" -C "$root" -T "$root/paths"
+  sha256sum "$output"; wc -c < "$output"; cat "$root/runtime"
+  exit;;
  recover)
   [ "$#" -eq 0 ] || fail 'usage: gucman recover'
-  [ -d "$state/lock" ] || { echo 'No interrupted transaction'; exit; }
-  owner=$(cat "$state/lock/owner") || fail 'missing lock owner; inspect lock manually'
-  case "$owner" in ''|*[!0-9]*) fail 'invalid lock owner';; esac
-  if kill -0 "$owner" 2>/dev/null; then fail 'transaction owner is still running'; fi
-  mkdir "$state/lock/recovery" 2>/dev/null || fail 'recovery already active'
-  if [ -d "$state/pending" ]; then finish_publication; fi
-  rm -rf "$state/lock"
-  echo 'Recovered package transaction'; exit;;
+  if [ -d "$state/pending" ]; then finish_publication; echo 'Recovered package transaction'; else echo 'No interrupted transaction'; fi
+  exit;;
  repo)
   sub=${1:-list}; [ "$#" -eq 0 ] || shift
   case "$sub" in
@@ -84,6 +89,7 @@ case "$action" in
  search|info|build|install|upgrade) [ "$#" -eq 1 ] || fail "usage: gucman $action [SOURCE:]NAME";;
  *) echo 'usage: gucman repo add|remove|list; list; search TERM; info|build|install|upgrade [SOURCE:]NAME; installed'; exit 1;;
 esac
+case "$action" in install|build|upgrade) [ ! -e "$state/pending" ] || fail 'unfinished publication; run gucman recover';; esac
 work=$(mktemp -d /tmp/gucman.XXXXXX)
 mkdir "$work/catalogs" "$work/plan" "$work/builds" "$work/sources"
 cp "$config"/*.url "$work/sources/" 2>/dev/null || :
@@ -137,7 +143,7 @@ resolve_package() (
  select_package "$1" "$2"
  dir=$work/plan/$pname
  if [ -d "$dir" ]; then
-  [ "$(cat "$dir/source")" = "$chosen" ] || fail 'dependency closure mixes origins for the same package'
+  [ "$(cat "$dir/origin")" = "$origin" ] && cmp -s "$manifest" "$dir/manifest.json" || fail 'dependency closure mixes origins for the same package'
   [ -f "$dir/done" ] || fail 'dependency cycle'; exit
  fi
  mkdir "$dir"; printf '%s\n' "$chosen" > "$dir/source"; printf '%s\n' "$origin" > "$dir/origin"; cp "$manifest" "$dir/manifest.json"
@@ -163,9 +169,6 @@ resolve_package() (
  : > "$dir/done"; printf '%s\n' "$pname" >> "$work/order"
 )
 resolve_package "$1" ''
-lock=$state/lock
-if ! mkdir "$lock" 2>/dev/null; then lock=; fail 'package transaction active or interrupted; inspect /usr/local/lib/gucman/lock'; fi
-printf '%s\n' "$$" > "$lock/owner"
 # Validate ownership for the entire closure before executing any package.
 while IFS= read -r name; do
  plan=$work/plan/$name; root=$state/packages/$name
@@ -176,9 +179,15 @@ while IFS= read -r name; do
   cmp -s "$plan/sorted" "$plan/old-sorted" || fail 'v1 updates must preserve installed path set'
  fi
  "$links" check /usr/local "$root" "$plan/paths" || fail 'package file ownership conflict'
- # Detect conflicts between packages that are not installed yet.
+ # Detect exact and file-versus-directory collisions across the full closure.
  while IFS= read -r path; do
-  for other in "$work/plan"/*; do [ "$other" = "$plan" ] && continue; grep -Fxq "$path" "$other/paths" && fail 'dependency output ownership conflict'; done
+  for other in "$work/plan"/*; do
+   while IFS= read -r otherpath; do
+    if [ "$other" = "$plan" ] && [ "$path" = "$otherpath" ]; then continue; fi
+    case "$path/" in "$otherpath/"*) fail 'dependency output ownership conflict';; esac
+    case "$otherpath/" in "$path/"*) fail 'dependency output ownership conflict';; esac
+   done < "$other/paths"
+  done
  done < "$plan/paths"
 done < "$work/order"
 while IFS= read -r name; do
@@ -221,6 +230,7 @@ while IFS= read -r name; do
  printf '%s\n' "$release" > "$state/pending/release"
  if [ -L "$root/current" ]; then readlink "$root/current" > "$state/pending/old"; else echo none > "$state/pending/old"; fi
  sha256sum "$release/manifest.json" "$release/paths" "$release/origin" "$release/runtime" > "$state/pending/checksums"
+ while IFS= read -r path; do sha256sum "$release/$path" >> "$state/pending/checksums"; done < "$release/paths"
  sync
  : > "$state/pending/ready"
  sync

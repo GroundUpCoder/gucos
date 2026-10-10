@@ -41,6 +41,7 @@ export async function buildPrebuilt({sources, buildId, toolchain, root, log=()=>
   const prebuilt={};
   const targets=[...BOOT_TARGETS];
   if(sources['/usr/libexec/guc-repo-json.c'])targets.push(
+    {out:'/usr/libexec/guc-lock',inputs:['/usr/libexec/guc-repo-lock.c']},
     {out:'/usr/libexec/guc-json',inputs:['/usr/libexec/guc-repo-json.c']},
     {out:'/usr/libexec/guc-unpack',inputs:['/usr/libexec/guc-repo-unpack.c']});
   for(const target of targets){

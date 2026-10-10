@@ -100,6 +100,7 @@ int main(int argc, char **argv) {
         final += 17;
         size_t length = strcspn(final, "\r\n");
         if ((strncmp(url, "https://", 8) == 0 && strncmp(final, "https://", 8) != 0) ||
+            (strncmp(final, "https://", 8) && strncmp(final, "http://127.0.0.1:", 17) && strncmp(final, "http://localhost:", 17)) ||
             memchr(final, '@', length) || memchr(final, '#', length)) {
             close(fd); fputs("guc-fetch: unsafe redirect\n", stderr); return 1;
         }

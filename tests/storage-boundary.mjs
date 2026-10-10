@@ -11,7 +11,7 @@ try{
  },{disks,edits});
  await s.command('echo disposable > /home/user/new-core-marker');
  s.page.on('dialog',dialog=>dialog.accept());
- await s.page.goto(s.url+'/?reset=1');await s.page.waitForFunction(()=>window.shell?.ready);
+ await s.page.goto(s.url+'/?reset=1&shell=bootstrap');await s.page.waitForFunction(()=>window.shell?.ready);
  const contents=await s.page.evaluate(async({disks,edits})=>{
   const root=await navigator.storage.getDirectory(),out={};
   for(const name of disks)out[name]=await (await (await root.getFileHandle(name)).getFile()).text();

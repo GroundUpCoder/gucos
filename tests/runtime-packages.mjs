@@ -30,7 +30,8 @@ const alpha=fixture(a,'hello','HELLO-A'), beta=fixture(b,'hello','HELLO-B');
 const dep=fixture(a,'dep','DEP'),consumer=fixture(a,'consumer','CONSUMER',{dependencies:['dep']});
 const bad=fixture(a,'bad','BAD',{bad:true});
 const cyc1=fixture(a,'cycle1','CYCLE',{dependencies:['cycle2']}),cyc2=fixture(a,'cycle2','CYCLE',{dependencies:['cycle1']});
-const catalog={format:1,packages:{hello:alpha.ref,dep:dep.ref,consumer:consumer.ref,bad:bad.ref,cycle1:cyc1.ref,cycle2:cyc2.ref}};
+const collision=fixture(a,'collision','COLLISION',{dependencies:['dep'],outputs:[{path:'bin/dep/child',mode:493},{path:'share/licenses/collision/LICENSE',mode:420}]});
+const catalog={format:1,packages:{hello:alpha.ref,dep:dep.ref,consumer:consumer.ref,collision:collision.ref,bad:bad.ref,cycle1:cyc1.ref,cycle2:cyc2.ref}};
 a.put('/catalog.json',catalog);b.put('/catalog.json',{format:1,packages:{hello:beta.ref}});
 try{
  s=await browserSession({allowedOrigins:[a.url,b.url]});
@@ -42,6 +43,11 @@ try{
  await s.command('if gucman build b:hello; then exit 99; fi');
  await s.command('if gucman build a:bad; then exit 99; fi\ntest ! -e /usr/local/bin/bad');
  await s.command('if gucman build a:cycle1; then exit 99; fi');
+ await s.command('set -eu\nif gucman build a:collision; then exit 99; fi\ntest ! -e /usr/local/bin/dep');
+ await s.command(`gucman repo add alias ${a.url}/catalog.json`);
+ const aliased=fixture(a,'aliased','ALIASED',{dependencies:['a:dep','alias:dep']});catalog.packages.aliased=aliased.ref;a.put('/catalog.json',catalog);
+ assert.match(await s.command('gucman build a:aliased\n/usr/local/bin/aliased'),/ALIASED/);
+ await s.command('gucman repo remove alias');
  assert.match(await s.command('gucman build a:consumer\n/usr/local/bin/consumer\n/usr/local/bin/dep'),/CONSUMER/);
  // Updates must preserve the previous installed release when the recipe fails.
  const failedUpdate=fixture(a,'hello','CHANGED',{version:'2'});
@@ -69,16 +75,20 @@ try{
  catalog.packages.hello=a.put('/interrupted.json',interrupted);a.put('/catalog.json',catalog);
  await s.command(`set -eu
 mv /usr/libexec/guc-links-v2 /tmp/original-links
-printf '%s\\n' '#!/bin/sh' 'if [ "$1" = link ]; then kill -KILL "$PPID"; exit 1; fi' 'exec /tmp/original-links "$@"' > /usr/libexec/guc-links-v2
+cat > /usr/libexec/guc-links-v2 <<'FAULT'
+#!/bin/sh
+if [ "$1" = link ]; then kill -KILL "$(cat /usr/local/lib/gucman/transaction-owner)"; exit 1; fi
+exec /tmp/original-links "$@"
+FAULT
 chmod 755 /usr/libexec/guc-links-v2`);
- let interruptedError=false;try{await s.command('gucman upgrade hello');}catch{interruptedError=true;}
- assert.ok(interruptedError,'fault injection must interrupt publication');
- await s.command('mv /tmp/original-links /usr/libexec/guc-links-v2\ngucman recover');
+ try{await s.command('gucman upgrade hello');}catch(error){console.log('Interrupted command:',error.message);}
+ await s.command('set -eu\ntest -f /usr/local/lib/gucman/pending/ready\ntest "$(/usr/libexec/guc-json string /usr/local/lib/gucman/packages/hello/current/manifest.json version)" = 1\nif kill -0 "$(cat /usr/local/lib/gucman/transaction-owner)" 2>/dev/null; then exit 99; fi');
+ await s.command('set -eu\nmv /tmp/original-links /usr/libexec/guc-links-v2\ngucman recover\ntest ! -e /usr/local/lib/gucman/pending\ntest "$(/usr/libexec/guc-json string /usr/local/lib/gucman/packages/hello/current/manifest.json version)" = 3');
  assert.match(await s.command('hello'),/HELLO-A/);
  // Package outage cannot prevent core reload or installed command execution.
  a.files.delete('/catalog.json');
  await s.page.reload();await s.page.waitForFunction(()=>window.shell?.ready);assert.match(await s.command('hello'),/HELLO-A/);
  await s.command('if gucman search hello; then exit 99; fi');
- await mkdir('test-results',{recursive:true});await writeFile('test-results/runtime-packages.json',JSON.stringify({passed:true,runtime:build.runtime,checks:['no package requests at boot','cross-origin catalogs','combined search','ambiguity refusal','explicit source build','source origin refusal','bad source hash refusal','dependency cycle refusal','dependency build','source config persistence','fresh binary install','binary reload','failed recipe preserves release','source label reuse refused','interrupted publication recovery','package-outage reload']},null,2)+'\n');
+ await mkdir('test-results',{recursive:true});await writeFile('test-results/runtime-packages.json',JSON.stringify({passed:true,runtime:build.runtime,checks:['no package requests at boot','cross-origin catalogs','combined search','ambiguity refusal','explicit source build','source origin refusal','bad source hash refusal','dependency cycle refusal','ancestor conflict preflight','same-URL source aliases','dependency build','source config persistence','fresh binary install','binary reload','failed recipe preserves release','source label reuse refused','interrupted publication recovery','package-outage reload']},null,2)+'\n');
  console.log('PASS runtime repositories, guest builds and binary installs');
 }finally{if(s)await s.close();await a.close();await b.close();}
