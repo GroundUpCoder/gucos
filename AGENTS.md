@@ -15,5 +15,11 @@
   available. X servers, window managers and graphical toolkits belong in runtime
   packages. Remove inherited kernel desktop/window policy rather than extending
   it. This is the target architecture, not a claim that migration is complete.
+- GPU applications run directly in their own VTs and own their GPU devices.
+  Retain the SDL3-compatible shim, WebGPU bindings and SDL/WebGPU surface bridge
+  as the starting implementation. Do not add X-specific GPU sharing, pixmap
+  interoperability or a shared GPU broker for hypothetical accelerated X clients.
+  X11 initially uses software rendering and presentation as a userland package;
+  any later compositing work must fit the generic core interface.
 - Never silently migrate historical browser disks. New core uses wasm-posix-core-v1,
   its .journal and wasm-posix.core.files. Preserve os2, minimal and legacy namespaces.
