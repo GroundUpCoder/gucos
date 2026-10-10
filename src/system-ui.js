@@ -98,11 +98,13 @@ class BusyBoxSession {
     this.running=true;
     const makeURL=source=>URL.createObjectURL(new Blob([source],{type:'text/javascript'}));
     this.compilerURL=this.payload.systemCompilerURL?new URL(this.payload.systemCompilerURL,location.href).href:makeURL(this.payload.systemCompiler);this.processURL=this.payload.systemProcessURL?new URL(this.payload.systemProcessURL,location.href).href:makeURL(this.payload.systemProcess);this.ownerURL=this.payload.systemOwnerURL?new URL(this.payload.systemOwnerURL,location.href).href:makeURL(this.payload.systemOwner);
+    startup.begin();
     this.worker=new Worker(this.ownerURL,{name:'busybox-filesystem-owner'});
     this.done=new Promise((resolve,reject)=>{this.resolve=resolve;this.reject=reject;});
     this.worker.onmessage=({data})=>{
+      if(data.type==='boot-progress')startup.update(data);
       if(data.type==='output'){this.log+=data.text;this.ui.print(data.text);}
-      if(data.type==='ready'){if(this.payload.hosted){for(const path of Object.keys(edited))delete edited[path];try{localStorage.removeItem(storageNames.edits);}catch{}}this.ready=true;this.persistence=data.persistence;$('status').textContent='BusyBox · '+data.persistence;}
+      if(data.type==='ready'){startup.finish();if(this.payload.hosted){for(const path of Object.keys(edited))delete edited[path];try{localStorage.removeItem(storageNames.edits);}catch{}}this.ready=true;this.persistence=data.persistence;$('status').textContent='BusyBox · '+data.persistence;}
       if(data.type==='compilation'){if(data.active)this.compilations.set(data.id,data);else this.compilations.delete(data.id);}
       if(data.type==='built'){this.ui.print(`${data.name}: ${data.stats.functions} functions, ${data.stats.bytes} bytes\n`);}
       if(data.type==='clipboard')navigator.clipboard?.writeText(data.text).catch(()=>{});
@@ -145,9 +147,9 @@ class BusyBoxSession {
         if(data.files){for(const [path,text] of Object.entries(data.files)){files[path]=edited[path]=text;}try{localStorage.setItem(storageNames.edits,JSON.stringify(edited));}catch{}}
         this.close();this.resolve({code:data.status>>>8,diskBytes:data.diskBytes});
       }
-      if(data.type==='error'){this.close();this.reject(new Error(data.text));}
+      if(data.type==='error'){startup.fail(data.text);this.close();this.reject(new Error(data.text));}
     };
-    this.worker.onerror=error=>{this.close();this.reject(new Error(error.message));};
+    this.worker.onerror=error=>{startup.fail(error.message);this.close();this.reject(new Error(error.message));};
     this.ui.session=this;
     this.terminal.write('\x1b[?2004l');
     this.resizeSubscription=this.terminal.onResize(({cols,rows})=>this.worker.postMessage({type:'terminal-size',cols,rows}));

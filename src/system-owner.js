@@ -2,12 +2,32 @@
 let systemFS, kernel, tty, processURL, compilerJobs, closeDisk=()=>{}, commitSoon=()=>{}, diskSize=()=>0;
 const workerHandles=new Map();
 let commandPid=0;
+let bootDownloads=new Map();
+const bootStatus=phase=>postMessage({type:'boot-progress',phase});
+function planBootDownloads(data){
+  const names={'/usr/lib/libc.a':'C development library','/usr/lib/libc.so.1':'C runtime','/usr/lib/libc-fork.so.1':'Process runtime','/usr/lib/wasm-posix/libc.json':'Runtime information','/bin/ash':'Shell','/bin/busybox':'System utilities','/usr/bin/make':'Make build tool','/bin/cc':'C compiler launcher','/usr/bin/ar':'Archive tool','/usr/bin/guc-fetch':'Download tool','/usr/bin/guc-links':'Link tool','/usr/libexec/guc-lock':'Package lock helper','/usr/libexec/guc-json':'Package metadata helper','/usr/libexec/guc-repo-fetch':'Package download helper','/usr/libexec/guc-unpack':'Package unpack helper','/usr/libexec/guc-links-v2':'Package link helper'};
+  const add=(path,entry)=>{if(entry?.url&&!bootDownloads.has(entry.url))bootDownloads.set(entry.url,{id:entry.url,name:names[path]||path.split('/').pop(),total:entry.size});};
+  bootDownloads=new Map();
+  for(const [path,url] of Object.entries(data.dataFiles||{}))if(!systemFS.lstat(path))add(path,{url});
+  if(!systemFS.stat('/usr/lib/libc.a')&&!systemFS.stat('/usr/lib/libc.so.1'))for(const path of ['/usr/lib/libc.a','/usr/lib/libc.so.1','/usr/lib/libc-fork.so.1','/usr/lib/wasm-posix/libc.json'])add(path,data.prebuilt?.[path]);
+  for(const path of ['/bin/ash','/bin/busybox','/usr/bin/make','/bin/cc','/usr/bin/ar','/usr/bin/guc-fetch','/usr/bin/guc-links'])if(!systemFS.stat(path))add(path,data.prebuilt?.[path]);
+  for(const path of (data.repository?['/usr/libexec/guc-lock','/usr/libexec/guc-json','/usr/libexec/guc-repo-fetch','/usr/libexec/guc-unpack','/usr/libexec/guc-links-v2']:['/usr/bin/guc-links']))add(path,data.prebuilt?.[path]);
+  postMessage({type:'boot-progress',phase:'Preparing your OS',items:[...bootDownloads.values()]});
+}
 async function rawAsset(url){
-  const response=await fetch(url);if(!response.ok)throw new Error(`Asset ${response.status}: ${url}`);
-  const bytes=new Uint8Array(await response.arrayBuffer());
-  const hash=[...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(b=>b.toString(16).padStart(2,'0')).join('');
-  if(!new URL(url).pathname.endsWith('/'+hash+'.bin'))throw new Error('Asset checksum mismatch: '+url);
-  return bytes;
+  const item=bootDownloads.get(url), report=(state,loaded)=>{if(item&&item.state!=='done'){Object.assign(item,{state,loaded});postMessage({type:'boot-progress',item:{...item}});}};
+  try{
+    report('downloading',0);
+    const response=await fetch(url);if(!response.ok)throw new Error(`Download failed (${response.status}): ${item?.name||url}`);
+    const reader=response.body.getReader(),chunks=[];let length=0,lastUpdate=0;
+    while(true){const {done,value}=await reader.read();if(done)break;chunks.push(value);length+=value.length;if(performance.now()-lastUpdate>100){report('downloading',length);lastUpdate=performance.now();}}
+    const bytes=new Uint8Array(length);let offset=0;for(const chunk of chunks){bytes.set(chunk,offset);offset+=chunk.length;}
+    report('verifying',length);
+    const hash=[...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(b=>b.toString(16).padStart(2,'0')).join('');
+    if(!new URL(url).pathname.endsWith('/'+hash+'.bin'))throw new Error('Download verification failed: '+(item?.name||url));
+    report('done',length);
+    return bytes;
+  }catch(error){report('failed',item?.loaded||0);throw error;}
 }
 async function runCommand(args){
   if(commandPid)throw new Error('A foreground command is already running');
@@ -26,6 +46,7 @@ function scheduleAudio(){
   },10);
 }
 async function initialize(data){
+  bootStatus('Opening your disk…');
   processURL=data.processURL;
   compilerJobs=new CompilerJobs(data.compilerURL,{
     readFile,snapshot,
@@ -75,6 +96,7 @@ async function initialize(data){
   if(!data.hosted&&typeof migrateLegacyPackageSources==='function')
     await migrateLegacyPackageSources(data,{systemFS,readFile,writeFile,output,decoder,encoder});
   if(data.hosted)for(const [path,text] of Object.entries(data.edited||{}))writeFile(path,text);
+  planBootDownloads(data);
   for(const [path,url] of Object.entries(data.dataFiles||{}))if(!systemFS.lstat(path))writeFile(path,await rawAsset(url));
   let sources;
   const bootSources=()=>sources||(sources=snapshot());
@@ -150,6 +172,7 @@ async function initialize(data){
   // Upstream scripts commonly use this absolute interpreter path.
   if(!systemFS.lstat('/usr/bin/env'))systemFS.symlink('/bin/env','/usr/bin/env');
   if(!systemFS.stat('/etc/passwd'))writeFile('/etc/passwd','user:x:1000:1000:Browser user:/home/user:/bin/sh\n');
+  bootStatus('Starting your shell…');
   systemFS._s.flush();
   kernel=new KERNEL.Kernel({onClipboard:clip=>postMessage({type:"clipboard",text:clip?.fmt===1?decoder.decode(clip.bytes):""}),keepAlive:data.hosted,onProcessExit:(pid,status)=>{
     if(data.hosted&&pid===commandPid){commandPid=0;systemFS._s.flush();postMessage({type:'command-exit',status,diskBytes:diskSize()});}

@@ -14,10 +14,30 @@ button { font:inherit; color:#b9c9df; background:transparent; border:0; cursor:p
 #status { margin-left:auto; font-size:11px; color:#7c93b0; white-space:nowrap; }
 .vt { position:fixed; inset:0 0 32px; background:#030508; }
 canvas { width:100%; height:100%; object-fit:contain; display:block; image-rendering:pixelated; outline:none; }
+#startup { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); width:min(520px,calc(100vw - 32px)); max-height:calc(100dvh - 90px); overflow:auto; box-sizing:border-box; padding:24px; border:1px solid #34495c; border-radius:14px; background:#101c29; box-shadow:0 20px 80px #0009; z-index:100; }
+#startup header { display:flex; align-items:center; gap:12px; } #startup h1 { font-size:18px; margin:0; flex:1; }
+#startup p { color:#91a9bc; line-height:1.5; } #startup progress { width:100%; height:8px; accent-color:#70ddb2; }
+#startup-downloads { list-style:none; padding:0; margin:18px 0 0; }
+#startup-downloads li { display:flex; justify-content:space-between; gap:12px; padding:7px 0; border-bottom:1px solid #213242; }
+#startup-downloads li span:first-child { min-width:0; overflow-wrap:anywhere; }
+#startup-downloads li span:last-child { flex-shrink:0; color:#91a9bc; font-size:12px; }
+#startup-downloads li[data-state="done"] span:last-child { color:#70ddb2; }
+#startup-downloads li[data-state="downloading"] { color:#fff; }
+#startup-downloads li[data-state="failed"] span:last-child { color:#ff9292; }
+#startup-retry { margin-top:16px; padding:8px 12px; border:1px solid #7596ba; border-radius:6px; }
+#startup-toggle { color:#70ddb2; white-space:nowrap; }
+@media(max-width:600px){#startup{padding:18px;}#taskbar{overflow-x:auto;}#taskbar>*{flex-shrink:0;}#status{display:none;}}
 </style>
+<section id="startup" aria-labelledby="startup-title">
+<header><h1 id="startup-title">Starting wasm-posix</h1><button id="startup-hide" aria-label="Hide startup progress">Hide</button></header>
+<p id="startup-summary" role="status" aria-live="polite">Unpacking the browser interface…</p>
+<progress id="startup-progress" aria-label="Startup downloads"></progress>
+<ul id="startup-downloads" aria-label="Required downloads"></ul>
+<button id="startup-retry" hidden>Retry startup</button>
+</section>
 <div id="terminal" aria-label="Terminal"></div>
 <div id="screens"></div>
-<footer id="taskbar"><button id="terminal-focus" title="Focus terminal">›_ terminal</button><button id="import-files" title="Copy files into ~/Downloads">Import files</button><button id="export-file" title="Download a file">Export file…</button><input id="import-picker" type="file" multiple hidden><div id="tasks" role="tablist" aria-label="Virtual terminals"></div><a id="license-link" target="_blank" rel="noopener">Licenses</a><span id="status">Unpacking…</span><button id="reset-install" title="Delete this installation’s files and start fresh">Reset…</button></footer>
+<footer id="taskbar"><button id="terminal-focus" title="Focus terminal">›_ terminal</button><button id="startup-toggle" aria-controls="startup" aria-expanded="true">Starting…</button><button id="import-files" title="Copy files into ~/Downloads">Import files</button><button id="export-file" title="Download a file">Export file…</button><input id="import-picker" type="file" multiple hidden><div id="tasks" role="tablist" aria-label="Virtual terminals"></div><a id="license-link" target="_blank" rel="noopener">Licenses</a><span id="status">Unpacking…</span><button id="reset-install" title="Delete this installation’s files and start fresh">Reset…</button></footer>
 <script id="bundle" type="application/octet-stream">PAYLOAD</script>
 <script type="module">
 /* APP */

@@ -243,4 +243,4 @@ if(crossOriginIsolated&&new URLSearchParams(location.search).get('shell')!=='boo
   ui.busy=true;
   const requestedApp=new URLSearchParams(location.search).get('app');
   command(typeof distributionStartupCommand==='function'?distributionStartupCommand(requestedApp):'sh',false,true).catch(error=>print(`BusyBox: ${error.message}\n`)).finally(()=>{ui.busy=false;ui.prompt();});
-}else{print('Bootstrap fallback shell (private process snapshots).\n');ui.prompt();}
+}else{startup.hide();print('Bootstrap fallback shell (private process snapshots).\n');ui.prompt();}

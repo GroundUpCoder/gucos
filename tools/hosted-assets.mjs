@@ -57,7 +57,7 @@ export async function hostedPayload(payload,root){
     delete p.licenseNotices;
   }
   delete p.licenses;delete p.distributionDataPaths;
-  for(const [path,e] of Object.entries(payload.prebuilt))p.prebuilt[path]={key:e.key,url:await asset(Buffer.from(e.bytes,'base64'),'bin')};
+  for(const [path,e] of Object.entries(payload.prebuilt)){const bytes=Buffer.from(e.bytes,'base64');p.prebuilt[path]={key:e.key,size:bytes.length,url:await asset(bytes,'bin')};}
   for(const key of ['systemOwner','systemProcess','systemCompiler','worker']){p[key+'URL']=await asset(Buffer.from(payload[key]),'js');delete p[key];}
   for(const [key,path] of Object.entries(payload.distributionAssetAliases||{})){p[key+'URL']=await asset(Buffer.from(payload[key],'base64'),'bin');p.dataFiles[path]=p[key+'URL'];p[key]='';}
   delete p.distributionAssetAliases;

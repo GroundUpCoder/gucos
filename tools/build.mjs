@@ -45,7 +45,7 @@ const payload={buildId,toolchain,versions,prebuilt,repository,
  applets:[...(await read('vendor/busybox/port/multicall_main.c')).matchAll(/\{\s*"([a-zA-Z0-9_[\]-]+)"\s*,/g)].map(m=>m[1]),
  terminalJS:await join(['vendor/terminal/xterm.js','vendor/terminal/addon-fit.js']),terminalCSS:await read('vendor/terminal/xterm.css'),files,binaryFiles:{},licenseNotices:notices};
 const hosted=await hostedPayload(payload,out);delete hosted.sourceArchives;
-const app=await join(['src/repository-boot.js','src/layout.js','src/windows.js','src/vi.js','src/terminal.js','src/list.js','src/system-audio.js','src/system-ui.js','src/reset.js','src/app.js']);
+const app=await join(['src/startup.js','src/repository-boot.js','src/layout.js','src/windows.js','src/vi.js','src/terminal.js','src/list.js','src/system-audio.js','src/system-ui.js','src/reset.js','src/app.js']);
 await writeFile(new URL('index.html',out),(await read('src/index.html')).replace('/* APP */',()=>app).replace('PAYLOAD',()=>packBundle(hosted)));
 await writeFile(new URL('build.json',out),JSON.stringify({format:1,runtime,toolchain,bootstrap:['libc','ash','busybox','cc','ar','make','guc-fetch','gucman']},null,2)+'\n');
 console.log('Built self-contained dist/; runtime '+runtime+'; package source is configured only at runtime.');
