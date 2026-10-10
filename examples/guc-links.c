@@ -89,7 +89,47 @@ static int owned(const char *path, const char *target, int *exists) {
              ? problem("file conflict or unmanaged symlink", path)
              : 0;
 }
+/* Validate the complete declared closure before any recipe executes. Checking
+ * sorted prefixes in C avoids quadratic shell/IPC work for header-heavy ports. */
+static int path_compare(const void *a, const void *b) {
+  return strcmp(*(char *const *)a, *(char *const *)b);
+}
+static int closure(int count, char **lists) {
+  char **paths = NULL; size_t used = 0, capacity = 0, bytes = 0;
+  for (int i=0;i<count;i++) {
+    FILE *file=fopen(lists[i],"r");
+    if(!file)return problem("cannot open closure file",lists[i]);
+    char name[PATH_MAX];
+    while(fgets(name,sizeof name,file)) {
+      size_t n=strlen(name);
+      if(!n || name[n-1]!='\n')return problem("invalid closure path",name);
+      name[--n]=0;
+      if(!relative_name(name))return problem("invalid closure path",name);
+      if(used>=100000 || (bytes+=n+1)>64*1024*1024)return problem("closure exceeds bound",name);
+      if(used==capacity) {
+        capacity=capacity?capacity*2:256;
+        char **next=realloc(paths,capacity*sizeof(*paths));
+        if(!next)return problem("out of memory",name);paths=next;
+      }
+      paths[used]=strdup(name);if(!paths[used])return problem("out of memory",name);used++;
+    }
+    if(ferror(file))return problem("cannot read closure file",lists[i]);
+    fclose(file);
+  }
+  qsort(paths,used,sizeof(*paths),path_compare);
+  for(size_t i=0;i<used;i++) {
+    if(i && !strcmp(paths[i-1],paths[i]))return problem("dependency output ownership conflict",paths[i]);
+    char prefix[PATH_MAX];strcpy(prefix,paths[i]);
+    for(char *p=prefix;*p;p++)if(*p=='/') {
+      *p=0;char *key=prefix;
+      int found=bsearch(&key,paths,used,sizeof(*paths),path_compare)!=NULL;
+      *p='/';if(found)return problem("dependency output ownership conflict",paths[i]);
+    }
+  }
+  for(size_t i=0;i<used;i++)free(paths[i]);free(paths);return 0;
+}
 int main(int argc, char **argv) {
+  if(argc>=3 && !strcmp(argv[1],"closure"))return closure(argc-2,argv+2);
   if (argc == 4 && !strcmp(argv[1], "move-noreplace"))
     return __rename_noreplace(argv[2], argv[3]) ?
       problem("cannot move source without replacing destination", argv[3]) : 0;

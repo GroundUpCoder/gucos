@@ -7797,6 +7797,7 @@ function createBrowserSDL({ canvas, ctx, sharedAudioBuffer, notifyAudio, notifyW
   // the converting call, 'bgra8unorm' when C hands over the window surface
   // itself. An opaque frame's fourth byte is padding.
   function blitPresent(win, ptr, w, h, pitch, format = 'rgba8unorm', opaque = false) {
+    if(cgpu.failed)throw cgpu.failure||new Error('SDL GPU initialization failed');
     if (!blit.ready) { blit.pending = { win: win, ptr: ptr, w: w, h: h, pitch: pitch, format: format, opaque: opaque }; blitEnsure(); return; }
     const dev = cgpu.device;
     if (canvas.width !== w) canvas.width = w;
@@ -8116,6 +8117,7 @@ function createBrowserSDL({ canvas, ctx, sharedAudioBuffer, notifyAudio, notifyW
   // PRESENT-time tails (rdrPresent) — a half-frame ImageBitmap ship would
   // burn the #484 budget.
   function rdrFlushSegment(rd) {
+    if(cgpu.failed)throw cgpu.failure||new Error('SDL GPU initialization failed');
     if (!rdrPipelines) { rdrResetBatch(rd); rd.segClear = null; return; }
     const dev = cgpu.device;
     const tgt = rd.target;
@@ -8183,6 +8185,7 @@ function createBrowserSDL({ canvas, ctx, sharedAudioBuffer, notifyAudio, notifyW
   // on-demand readback (getLastFrame), the per-window present hook, the frame
   // reset, and the deferred texture frees.
   function rdrPresent(rd) {
+    if(cgpu.failed)throw cgpu.failure||new Error('SDL GPU initialization failed');
     const dev = cgpu.device;
     const W = canvas.width || 1, H = canvas.height || 1;
     rdrFlushSegment(rd);
@@ -9013,7 +9016,7 @@ function createBrowserWebGPU({ canvas, ctx, notifyWindow, resolveGpu, shmSurface
         catch (e) { console.error('SDL_GetWGPUSurface: getContext(webgpu) failed', e); }
         if (!gpuCtx) { console.error('SDL_GetWGPUSurface: no webgpu canvas context'); return 0; }
         return alloc({ kind: 'surface', gpuCtx: gpuCtx, format: null,
-                       canvas: b ? b.canvas : null,
+                       canvas: b ? b.canvas : null, windowHandle: window|0,
                        present: b ? b.present : null });
       },
 
@@ -9060,6 +9063,7 @@ function createBrowserWebGPU({ canvas, ctx, notifyWindow, resolveGpu, shmSurface
 
       __wgpu_surface_configure: function (surface, device, format, usage, width, height, alphaMode, presentMode, viewFormatsPacked, viewFormatsLen) {
         const s = get(surface), d = get(device);
+        if(s?.windowHandle && bindWindow && !bindWindow(s.windowHandle))throw new Error('SDL surface owner window destroyed');
         if (s && s.shm) {
           if (!d) throw new Error('wgpuSurfaceConfigure: invalid device handle');
           const sfmt = wgpuFormat(format, 'surfaceConfigure.format') || preferredFormat();
@@ -9107,12 +9111,13 @@ function createBrowserWebGPU({ canvas, ctx, notifyWindow, resolveGpu, shmSurface
           }
         }
         s.gpuCtx.configure(cfg);
-        /* Reveal the canvas in the emitted page (reuses the SDL window path). */
-        if (notifyWindow) notifyWindow({ type: 'sdl-window', width: width, height: height });
+        /* Reconfiguration never changes SDL visibility or activation. */
+        if (notifyWindow) notifyWindow({ type: 'sdl-size', width: width, height: height });
       },
 
       __wgpu_surface_get_current_texture: function (surface) {
         const s = get(surface);
+        if(s?.windowHandle && bindWindow && !bindWindow(s.windowHandle))throw new Error('SDL surface owner window destroyed');
         if (s && s.shm) return s.tex ? alloc(s.tex) : 0;
         if (!s || !s.gpuCtx) return 0;
         try { return alloc(s.gpuCtx.getCurrentTexture()); }
@@ -9121,6 +9126,7 @@ function createBrowserWebGPU({ canvas, ctx, notifyWindow, resolveGpu, shmSurface
 
       __wgpu_surface_present: function (surface) {
         const s = get(surface);
+        if(s?.windowHandle && bindWindow && !bindWindow(s.windowHandle))throw new Error('SDL surface owner window destroyed');
         if (s && s.shm) {
           /* #712: count the main-live present CALL synchronously — the
            * browser twin (presentTo) guards before its own early-returns,

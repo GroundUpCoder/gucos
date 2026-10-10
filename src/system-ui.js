@@ -71,7 +71,7 @@ function bindCanvasInput(canvas,send,textInput=false){
     });
     for(const type of ['pointerenter','pointerleave'])
       canvas.addEventListener(type,e=>send({type:'mouse-crossing',entered:type==='pointerenter',...point(e)}));
-    canvas.addEventListener('pointermove',e=>send({type:'mouse-motion',state:(e.buttons&1)|((e.buttons&2)<<1)|((e.buttons&4)>>1)|(e.buttons&24),...point(e)}));
+    canvas.addEventListener('pointermove',e=>send({type:document.pointerLockElement===canvas?'mouse-relative':'mouse-motion',dx:e.movementX,dy:e.movementY,state:(e.buttons&1)|((e.buttons&2)<<1)|((e.buttons&4)>>1)|(e.buttons&24),...point(e)}));
     canvas.addEventListener('contextmenu',e=>e.preventDefault());
     canvas.addEventListener('wheel',e=>{e.preventDefault();const p=point(e);send({type:'mouse-wheel',x:-Math.sign(e.deltaX),y:-Math.sign(e.deltaY),pointerX:p.x,pointerY:p.y});},{passive:false});
     return paste;
@@ -113,7 +113,7 @@ class BusyBoxSession {
         if(win){
           if(event.handle)win.handle=event.handle;
           if(event.type==='sdl-cursor'){canvasCursor(win.canvas,event.shape);return;}
-          if(event.type==='sdl-relative-mouse'){win.canvas.dataset.relative=String(event.enabled);return;}
+          if(event.type==='sdl-relative-mouse'){win.canvas.dataset.relative=String(event.enabled);if(!event.enabled&&document.pointerLockElement===win.canvas)document.exitPointerLock();return;}
           if(event.type==='present')return;
           if((event.type==='sdl-window'||event.type==='sdl-size')&&event.width>0&&event.height>0){
             win.canvas.dataset.logicalWidth=event.width;win.canvas.dataset.logicalHeight=event.height;

@@ -12,6 +12,7 @@ self.onmessage=async({data})=>{
   if(data.type==='key'){sdl?.pushKeyEvent(data.handle||1,data.down?0x300:0x301,data.scan,data.sym,data.mod,data.repeat);return;}
   if(data.type==='mouse-button'){sdl?.pushMouseButtonEvent(data.handle||1,data.down?0x401:0x402,data.button,data.x,data.y);return;}
   if(data.type==='mouse-crossing'){sdl?.pushWindowEvent(data.handle||1,data.entered?0x20c:0x20d,data.x|0,data.y|0);return;}
+  if(data.type==='mouse-relative'){sdl?.pushMouseMotionRelEvent(data.handle||1,data.dx,data.dy,data.state);return;}
   if(data.type==='mouse-motion'){sdl?.pushMouseMotionEvent(data.handle||1,data.x,data.y,data.state);return;}
   if(data.type==='mouse-wheel'){sdl?.pushMouseWheelEvent(data.handle||1,data.x,data.y,0);return;}
   if(data.type==='focus'){sdl?.pushWindowEvent(data.handle||1,data.focused?0x20e:0x20f,0,0);return;}

@@ -156,7 +156,6 @@ resolve_package() (
   case "$path" in bin/*|sbin/*|include/*|share/*|libexec/*|lib/*) ;; *) fail 'output outside allowed prefix';; esac
   case "$path" in lib/gucman|lib/gucman/*|lib/wasm-posix|lib/wasm-posix/*) fail 'reserved package state';; esac
   case "$mode" in 420|493) ;; *) fail 'invalid output mode';; esac
-  grep -Fxq "$path" "$dir/paths" && fail 'duplicate output'
   printf '%s\n' "$path" >> "$dir/paths"
  done < "$dir/outputs"
  while IFS= read -r dep; do resolve_package "$dep" "$chosen"; done < "$dir/dependencies"
@@ -179,17 +178,9 @@ while IFS= read -r name; do
   cmp -s "$plan/sorted" "$plan/old-sorted" || fail 'v1 updates must preserve installed path set'
  fi
  "$links" check /usr/local "$root" "$plan/paths" || fail 'package file ownership conflict'
- # Detect exact and file-versus-directory collisions across the full closure.
- while IFS= read -r path; do
-  for other in "$work/plan"/*; do
-   while IFS= read -r otherpath; do
-    if [ "$other" = "$plan" ] && [ "$path" = "$otherpath" ]; then continue; fi
-    case "$path/" in "$otherpath/"*) fail 'dependency output ownership conflict';; esac
-    case "$otherpath/" in "$path/"*) fail 'dependency output ownership conflict';; esac
-   done < "$other/paths"
-  done
- done < "$plan/paths"
 done < "$work/order"
+"$links" closure "$work"/plan/*/paths || fail 'dependency output ownership conflict'
+
 while IFS= read -r name; do
  plan=$work/plan/$name; manifest=$plan/manifest.json; root=$state/packages/$name
  digest=$(sha256sum "$manifest"); digest=${digest%% *}

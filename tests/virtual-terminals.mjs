@@ -18,7 +18,7 @@ int main(int argc,char **argv){
    if(e.type==SDL_EVENT_QUIT)return 0;
    if(e.type==SDL_EVENT_KEY_DOWN&&e.key.key=='q')return 0;
    if(e.type==SDL_EVENT_KEY_DOWN&&e.key.key=='x')abort();
-   if(e.type==SDL_EVENT_KEY_UP){printf("UP-%s\\n",argv[1]);fflush(stdout);}
+   if(e.type==SDL_EVENT_KEY_UP){printf("UP-%s-%d\\n",argv[1],e.key.key);fflush(stdout);}
    if(e.type==SDL_EVENT_MOUSE_BUTTON_UP){printf("BUTTON-UP-%s\\n",argv[1]);fflush(stdout);}
   }
   SDL_Surface *v=SDL_GetWindowSurface(w);if(!v)return 3;
@@ -34,10 +34,12 @@ int main(int argc,char **argv){
  assert.equal(await visible().count(),1);
  assert.equal(await s.page.locator('#terminal').isVisible(),false);
  await s.page.getByRole('tab',{name:/first/}).click();
- await visible().locator('canvas').press('a');
  await visible().locator('canvas').focus();await s.page.keyboard.down('b');
- await s.page.getByRole('tab',{name:/second/}).click();
- await s.page.waitForFunction(()=>shell.busybox.log.includes('UP-first'));
+ const box=await visible().locator('canvas').boundingBox();await s.page.mouse.move(box.x+20,box.y+20);await s.page.mouse.down();
+ const releaseStart=await s.page.evaluate(()=>shell.busybox.log.length);
+ await s.page.getByRole('tab',{name:/second/}).evaluate(button=>button.click());
+ await s.page.waitForFunction(n=>{const tail=shell.busybox.log.slice(n);return tail.includes('UP-first-98')&&tail.includes('BUTTON-UP-first');},releaseStart);
+ await s.page.keyboard.up('b');await s.page.mouse.up();
  await s.page.setViewportSize({width:700,height:500});
  await s.page.waitForTimeout(500);
  const size=await visible().locator('canvas').evaluate(c=>[+c.dataset.logicalWidth,+c.dataset.logicalHeight]);
