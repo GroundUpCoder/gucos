@@ -1,0 +1,566 @@
+{
+  "startedAt": "2026-10-10T09:05:29.615Z",
+  "url": "https://os.groundupcoder.net",
+  "runtime": "61a87f8861fa6ddaa6052eb25408036a2bcb238ad4b8e48dd91303beb36714d0",
+  "browser": "153.0.8010.12",
+  "errors": [],
+  "measurement": {
+    "enter": 2352.5099999904633,
+    "first": 147.33000004291534,
+    "done": 130773.93500006199,
+    "events": [
+      {
+        "ms": 115.83000004291534,
+        "text": "gucman: install jwm: reading catalogs and resolving dependencies"
+      },
+      {
+        "ms": 213.3400000333786,
+        "text": "gucman: Reading catalog: groundupcoder"
+      },
+      {
+        "ms": 297.3050000667572,
+        "text": "  Downloaded 5280 bytes; transfer finished"
+      },
+      {
+        "ms": 412.0199999809265,
+        "text": "gucman: Resolving: groundupcoder:jwm"
+      },
+      {
+        "ms": 545.585000038147,
+        "text": "gucman: Downloading manifest for groundupcoder:jwm (2854 bytes)"
+      },
+      {
+        "ms": 577.9750000238419,
+        "text": "  Downloaded 2854 / 2854 bytes (100%); transfer finished"
+      },
+      {
+        "ms": 577.9750000238419,
+        "text": "gucman: Verifying download: manifest for groundupcoder:jwm"
+      },
+      {
+        "ms": 643.5550000667572,
+        "text": "gucman: Checking cached object: manifest for groundupcoder:jwm"
+      },
+      {
+        "ms": 1061.9950000047684,
+        "text": "gucman: Resolving: groundupcoder:x11-widgets"
+      },
+      {
+        "ms": 1208.9400000572205,
+        "text": "gucman: Downloading manifest for groundupcoder:x11-widgets (3440 bytes)"
+      },
+      {
+        "ms": 1243.7749999761581,
+        "text": "  Downloaded 3440 / 3440 bytes (100%); transfer finished"
+      },
+      {
+        "ms": 1243.7749999761581,
+        "text": "gucman: Verifying download: manifest for groundupcoder:x11-widgets"
+      },
+      {
+        "ms": 1311.7699999809265,
+        "text": "gucman: Checking cached object: manifest for groundupcoder:x11-widgets"
+      },
+      {
+        "ms": 1859.2799999713898,
+        "text": "gucman: Resolving: groundupcoder:x11-toolkit"
+      },
+      {
+        "ms": 2012.1100000143051,
+        "text": "gucman: Downloading manifest for groundupcoder:x11-toolkit (13790 bytes)"
+      },
+      {
+        "ms": 2044.0299999713898,
+        "text": "  Downloaded 13790 / 13790 bytes (100%); transfer finished"
+      },
+      {
+        "ms": 2044.0349999666214,
+        "text": "gucman: Verifying download: manifest for groundupcoder:x11-toolkit"
+      },
+      {
+        "ms": 2112.414999961853,
+        "text": "gucman: Checking cached object: manifest for groundupcoder:x11-toolkit"
+      },
+      {
+        "ms": 5212.610000014305,
+        "text": "gucman: Resolving: groundupcoder:x11-server"
+      },
+      {
+        "ms": 5360.675000071526,
+        "text": "gucman: Downloading manifest for groundupcoder:x11-server (47983 bytes)"
+      },
+      {
+        "ms": 5414.360000014305,
+        "text": "  Downloaded 47983 / 47983 bytes (100%); transfer finished"
+      },
+      {
+        "ms": 5414.360000014305,
+        "text": "gucman: Verifying download: manifest for groundupcoder:x11-server"
+      },
+      {
+        "ms": 5477.710000038147,
+        "text": "gucman: Checking cached object: manifest for groundupcoder:x11-server"
+      },
+      {
+        "ms": 16993.25499999523,
+        "text": "gucman: Plan: 4 packages (including dependencies); checking compatibility"
+      },
+      {
+        "ms": 18096.53499996662,
+        "text": "gucman: Checking file ownership for 4 packages"
+      },
+      {
+        "ms": 18327.37999999523,
+        "text": "gucman: Package 1/4: x11-server (3 remaining after this)"
+      },
+      {
+        "ms": 18710.289999961853,
+        "text": "gucman: Downloading x11-server archive (25956864 bytes)"
+      },
+      {
+        "ms": 19225.830000042915,
+        "text": "  Downloaded 4.84 / 24.75 MiB (19%)"
+      },
+      {
+        "ms": 19726.675000071526,
+        "text": "  Downloaded 10.05 / 24.75 MiB (40%)"
+      },
+      {
+        "ms": 20425.730000019073,
+        "text": "  Downloaded 12.81 / 24.75 MiB (51%)"
+      },
+      {
+        "ms": 21092.399999976158,
+        "text": "  Downloaded 16.02 / 24.75 MiB (64%)"
+      },
+      {
+        "ms": 21447.730000019073,
+        "text": "  Downloaded 24.75 / 24.75 MiB (100%); transfer finished"
+      },
+      {
+        "ms": 21447.735000014305,
+        "text": "gucman: Verifying download: x11-server archive"
+      },
+      {
+        "ms": 25209.705000042915,
+        "text": "gucman: Checking cached object: x11-server archive"
+      },
+      {
+        "ms": 28959.115000009537,
+        "text": "gucman: Unpacking: x11-server"
+      },
+      {
+        "ms": 30015.955000042915,
+        "text": "gucman: Installing x11-server: 0/527 files"
+      },
+      {
+        "ms": 33993.36500000954,
+        "text": "gucman: Installing x11-server: 25/527 files"
+      },
+      {
+        "ms": 36462.68500006199,
+        "text": "gucman: Installing x11-server: 50/527 files"
+      },
+      {
+        "ms": 38924.81500005722,
+        "text": "gucman: Installing x11-server: 75/527 files"
+      },
+      {
+        "ms": 41457.985000014305,
+        "text": "gucman: Installing x11-server: 100/527 files"
+      },
+      {
+        "ms": 44027.05500006676,
+        "text": "gucman: Installing x11-server: 125/527 files"
+      },
+      {
+        "ms": 46490.46500003338,
+        "text": "gucman: Installing x11-server: 150/527 files"
+      },
+      {
+        "ms": 49023.69000005722,
+        "text": "gucman: Installing x11-server: 175/527 files"
+      },
+      {
+        "ms": 51557.580000042915,
+        "text": "gucman: Installing x11-server: 200/527 files"
+      },
+      {
+        "ms": 54095.23000001907,
+        "text": "gucman: Installing x11-server: 225/527 files"
+      },
+      {
+        "ms": 56558.93500006199,
+        "text": "gucman: Installing x11-server: 250/527 files"
+      },
+      {
+        "ms": 59048.075000047684,
+        "text": "gucman: Installing x11-server: 275/527 files"
+      },
+      {
+        "ms": 61494.50499999523,
+        "text": "gucman: Installing x11-server: 300/527 files"
+      },
+      {
+        "ms": 64040.88499999046,
+        "text": "gucman: Installing x11-server: 325/527 files"
+      },
+      {
+        "ms": 66607.47500002384,
+        "text": "gucman: Installing x11-server: 350/527 files"
+      },
+      {
+        "ms": 69177.82500004768,
+        "text": "gucman: Installing x11-server: 375/527 files"
+      },
+      {
+        "ms": 71706.6100000143,
+        "text": "gucman: Installing x11-server: 400/527 files"
+      },
+      {
+        "ms": 74206.61500000954,
+        "text": "gucman: Installing x11-server: 425/527 files"
+      },
+      {
+        "ms": 76708.1100000143,
+        "text": "gucman: Installing x11-server: 450/527 files"
+      },
+      {
+        "ms": 79245.2649999857,
+        "text": "gucman: Installing x11-server: 475/527 files"
+      },
+      {
+        "ms": 81922.85000002384,
+        "text": "gucman: Installing x11-server: 500/527 files"
+      },
+      {
+        "ms": 84510.36500000954,
+        "text": "gucman: Installing x11-server: 525/527 files"
+      },
+      {
+        "ms": 84739.27999997139,
+        "text": "gucman: Installing x11-server: 527/527 files"
+      },
+      {
+        "ms": 84873.70000004768,
+        "text": "gucman: Preparing checksums: x11-server"
+      },
+      {
+        "ms": 85596.24000000954,
+        "text": "gucman: Checksummed x11-server: 25/527 files"
+      },
+      {
+        "ms": 86105.91999995708,
+        "text": "gucman: Checksummed x11-server: 50/527 files"
+      },
+      {
+        "ms": 86622.66999995708,
+        "text": "gucman: Checksummed x11-server: 75/527 files"
+      },
+      {
+        "ms": 87157.375,
+        "text": "gucman: Checksummed x11-server: 100/527 files"
+      },
+      {
+        "ms": 87696.03999996185,
+        "text": "gucman: Checksummed x11-server: 125/527 files"
+      },
+      {
+        "ms": 88240.82000005245,
+        "text": "gucman: Checksummed x11-server: 150/527 files"
+      },
+      {
+        "ms": 88810.8600000143,
+        "text": "gucman: Checksummed x11-server: 175/527 files"
+      },
+      {
+        "ms": 89393.32500004768,
+        "text": "gucman: Checksummed x11-server: 200/527 files"
+      },
+      {
+        "ms": 89941.43000006676,
+        "text": "gucman: Checksummed x11-server: 225/527 files"
+      },
+      {
+        "ms": 90459.41499996185,
+        "text": "gucman: Checksummed x11-server: 250/527 files"
+      },
+      {
+        "ms": 90991.03499996662,
+        "text": "gucman: Checksummed x11-server: 275/527 files"
+      },
+      {
+        "ms": 91527.52499997616,
+        "text": "gucman: Checksummed x11-server: 300/527 files"
+      },
+      {
+        "ms": 92061.39999997616,
+        "text": "gucman: Checksummed x11-server: 325/527 files"
+      },
+      {
+        "ms": 92595.80500006676,
+        "text": "gucman: Checksummed x11-server: 350/527 files"
+      },
+      {
+        "ms": 93109.6399999857,
+        "text": "gucman: Checksummed x11-server: 375/527 files"
+      },
+      {
+        "ms": 93639.8600000143,
+        "text": "gucman: Checksummed x11-server: 400/527 files"
+      },
+      {
+        "ms": 94174.55000007153,
+        "text": "gucman: Checksummed x11-server: 425/527 files"
+      },
+      {
+        "ms": 94742.06000006199,
+        "text": "gucman: Checksummed x11-server: 450/527 files"
+      },
+      {
+        "ms": 95311.44500005245,
+        "text": "gucman: Checksummed x11-server: 475/527 files"
+      },
+      {
+        "ms": 95877.61500000954,
+        "text": "gucman: Checksummed x11-server: 500/527 files"
+      },
+      {
+        "ms": 96422.37999999523,
+        "text": "gucman: Checksummed x11-server: 525/527 files"
+      },
+      {
+        "ms": 96455.24000000954,
+        "text": "gucman: Checksummed x11-server: 527/527 files"
+      },
+      {
+        "ms": 96455.24500000477,
+        "text": "gucman: Saving transaction: x11-server"
+      },
+      {
+        "ms": 96538.64499998093,
+        "text": "gucman: Verifying staged files: x11-server"
+      },
+      {
+        "ms": 96806.14499998093,
+        "text": "gucman: Activating: x11-server"
+      },
+      {
+        "ms": 97161.22000002861,
+        "text": "gucman: Package 2/4: x11-toolkit (2 remaining after this)"
+      },
+      {
+        "ms": 97573.59000003338,
+        "text": "gucman: Downloading x11-toolkit archive (2518016 bytes)"
+      },
+      {
+        "ms": 97856.32000005245,
+        "text": "  Downloaded 2.40 / 2.40 MiB (100%); transfer finished"
+      },
+      {
+        "ms": 97856.32500004768,
+        "text": "gucman: Verifying download: x11-toolkit archive"
+      },
+      {
+        "ms": 98473.97000002861,
+        "text": "gucman: Checking cached object: x11-toolkit archive"
+      },
+      {
+        "ms": 98906.93000006676,
+        "text": "gucman: Unpacking: x11-toolkit"
+      },
+      {
+        "ms": 99055.44500005245,
+        "text": "gucman: Installing x11-toolkit: 0/157 files"
+      },
+      {
+        "ms": 101725.21000003815,
+        "text": "gucman: Installing x11-toolkit: 25/157 files"
+      },
+      {
+        "ms": 104311.50999999046,
+        "text": "gucman: Installing x11-toolkit: 50/157 files"
+      },
+      {
+        "ms": 106855.71500003338,
+        "text": "gucman: Installing x11-toolkit: 75/157 files"
+      },
+      {
+        "ms": 109471.91499996185,
+        "text": "gucman: Installing x11-toolkit: 100/157 files"
+      },
+      {
+        "ms": 112121.57000005245,
+        "text": "gucman: Installing x11-toolkit: 125/157 files"
+      },
+      {
+        "ms": 114689.8600000143,
+        "text": "gucman: Installing x11-toolkit: 150/157 files"
+      },
+      {
+        "ms": 115404.44500005245,
+        "text": "gucman: Installing x11-toolkit: 157/157 files"
+      },
+      {
+        "ms": 115577.15499997139,
+        "text": "gucman: Preparing checksums: x11-toolkit"
+      },
+      {
+        "ms": 116124.49500000477,
+        "text": "gucman: Checksummed x11-toolkit: 25/157 files"
+      },
+      {
+        "ms": 116657.68500006199,
+        "text": "gucman: Checksummed x11-toolkit: 50/157 files"
+      },
+      {
+        "ms": 117188.66499996185,
+        "text": "gucman: Checksummed x11-toolkit: 75/157 files"
+      },
+      {
+        "ms": 117744.125,
+        "text": "gucman: Checksummed x11-toolkit: 100/157 files"
+      },
+      {
+        "ms": 118276.71500003338,
+        "text": "gucman: Checksummed x11-toolkit: 125/157 files"
+      },
+      {
+        "ms": 118810.70000004768,
+        "text": "gucman: Checksummed x11-toolkit: 150/157 files"
+      },
+      {
+        "ms": 118972.625,
+        "text": "gucman: Checksummed x11-toolkit: 157/157 files"
+      },
+      {
+        "ms": 118972.625,
+        "text": "gucman: Saving transaction: x11-toolkit"
+      },
+      {
+        "ms": 119055.15499997139,
+        "text": "gucman: Verifying staged files: x11-toolkit"
+      },
+      {
+        "ms": 119121.96000003815,
+        "text": "gucman: Activating: x11-toolkit"
+      },
+      {
+        "ms": 119360.1100000143,
+        "text": "gucman: Package 3/4: x11-widgets (1 remaining after this)"
+      },
+      {
+        "ms": 119738.13499999046,
+        "text": "gucman: Downloading x11-widgets archive (1338880 bytes)"
+      },
+      {
+        "ms": 119904.89999997616,
+        "text": "  Downloaded 1.28 / 1.28 MiB (100%); transfer finished"
+      },
+      {
+        "ms": 119904.89999997616,
+        "text": "gucman: Verifying download: x11-widgets archive"
+      },
+      {
+        "ms": 120171.75499999523,
+        "text": "gucman: Checking cached object: x11-widgets archive"
+      },
+      {
+        "ms": 120505.96500003338,
+        "text": "gucman: Unpacking: x11-widgets"
+      },
+      {
+        "ms": 120606.31000006199,
+        "text": "gucman: Installing x11-widgets: 0/15 files"
+      },
+      {
+        "ms": 122254.73000001907,
+        "text": "gucman: Installing x11-widgets: 15/15 files"
+      },
+      {
+        "ms": 122425.25999999046,
+        "text": "gucman: Preparing checksums: x11-widgets"
+      },
+      {
+        "ms": 122757.76999998093,
+        "text": "gucman: Checksummed x11-widgets: 15/15 files"
+      },
+      {
+        "ms": 122757.76999998093,
+        "text": "gucman: Saving transaction: x11-widgets"
+      },
+      {
+        "ms": 122838.77999997139,
+        "text": "gucman: Verifying staged files: x11-widgets"
+      },
+      {
+        "ms": 122871.20000004768,
+        "text": "gucman: Activating: x11-widgets"
+      },
+      {
+        "ms": 123077.97000002861,
+        "text": "gucman: Package 4/4: jwm (0 remaining after this)"
+      },
+      {
+        "ms": 123455.0149999857,
+        "text": "gucman: Downloading jwm archive (9654272 bytes)"
+      },
+      {
+        "ms": 123972.91499996185,
+        "text": "  Downloaded 5.12 / 9.21 MiB (55%)"
+      },
+      {
+        "ms": 124642,
+        "text": "  Downloaded 7.68 / 9.21 MiB (83%)"
+      },
+      {
+        "ms": 124739.46500003338,
+        "text": "  Downloaded 9.21 / 9.21 MiB (100%); transfer finished"
+      },
+      {
+        "ms": 124739.46500003338,
+        "text": "gucman: Verifying download: jwm archive"
+      },
+      {
+        "ms": 126558.1399999857,
+        "text": "gucman: Checking cached object: jwm archive"
+      },
+      {
+        "ms": 128074,
+        "text": "gucman: Unpacking: jwm"
+      },
+      {
+        "ms": 128540.53999996185,
+        "text": "gucman: Installing jwm: 0/7 files"
+      },
+      {
+        "ms": 129789.98000001907,
+        "text": "gucman: Installing jwm: 7/7 files"
+      },
+      {
+        "ms": 129956.71500003338,
+        "text": "gucman: Preparing checksums: jwm"
+      },
+      {
+        "ms": 130170.75,
+        "text": "gucman: Checksummed jwm: 7/7 files"
+      },
+      {
+        "ms": 130170.75499999523,
+        "text": "gucman: Saving transaction: jwm"
+      },
+      {
+        "ms": 130339.77499997616,
+        "text": "gucman: Verifying staged files: jwm"
+      },
+      {
+        "ms": 130454.69000005722,
+        "text": "gucman: Activating: jwm"
+      }
+    ],
+    "start": 139,
+    "log": "\ngucman: install jwm: reading catalogs and resolving dependencies\ngucman: Reading catalog: groundupcoder\n  Connecting; waiting for response…\n  Downloaded 5280 bytes; transfer finished\ngucman: Resolving: groundupcoder:jwm\ngucman: Downloading manifest for groundupcoder:jwm (2854 bytes)\n  Connecting; waiting for response…\n  Downloaded 2854 / 2854 bytes (100%); transfer finished\ngucman: Verifying download: manifest for groundupcoder:jwm\ngucman: Checking cached object: manifest for groundupcoder:jwm\ngucman: Resolving: groundupcoder:x11-widgets\ngucman: Downloading manifest for groundupcoder:x11-widgets (3440 bytes)\n  Connecting; waiting for response…\n  Downloaded 3440 / 3440 bytes (100%); transfer finished\ngucman: Verifying download: manifest for groundupcoder:x11-widgets\ngucman: Checking cached object: manifest for groundupcoder:x11-widgets\ngucman: Resolving: groundupcoder:x11-toolkit\ngucman: Downloading manifest for groundupcoder:x11-toolkit (13790 bytes)\n  Connecting; waiting for response…\n  Downloaded 13790 / 13790 bytes (100%); transfer finished\ngucman: Verifying download: manifest for groundupcoder:x11-toolkit\ngucman: Checking cached object: manifest for groundupcoder:x11-toolkit\ngucman: Resolving: groundupcoder:x11-server\ngucman: Downloading manifest for groundupcoder:x11-server (47983 bytes)\n  Connecting; waiting for response…\n  Downloaded 47983 / 47983 bytes (100%); transfer finished\ngucman: Verifying download: manifest for groundupcoder:x11-server\ngucman: Checking cached object: manifest for groundupcoder:x11-server\ngucman: Plan: 4 packages (including dependencies); checking compatibility\ngucman: Checking file ownership for 4 packages\ngucman: Package 1/4: x11-server (3 remaining after this)\ngucman: Downloading x11-server archive (25956864 bytes)\n  Connecting; waiting for response…\n  Downloaded 4.84 / 24.75 MiB (19%)\n  Downloaded 10.05 / 24.75 MiB (40%)\n  Downloaded 12.81 / 24.75 MiB (51%)\n  Downloaded 16.02 / 24.75 MiB (64%)\n  Downloaded 24.75 / 24.75 MiB (100%); transfer finished\ngucman: Verifying download: x11-server archive\ngucman: Checking cached object: x11-server archive\ngucman: Unpacking: x11-server\ngucman: Installing x11-server: 0/527 files\ngucman: Installing x11-server: 25/527 files\ngucman: Installing x11-server: 50/527 files\ngucman: Installing x11-server: 75/527 files\ngucman: Installing x11-server: 100/527 files\ngucman: Installing x11-server: 125/527 files\ngucman: Installing x11-server: 150/527 files\ngucman: Installing x11-server: 175/527 files\ngucman: Installing x11-server: 200/527 files\ngucman: Installing x11-server: 225/527 files\ngucman: Installing x11-server: 250/527 files\ngucman: Installing x11-server: 275/527 files\ngucman: Installing x11-server: 300/527 files\ngucman: Installing x11-server: 325/527 files\ngucman: Installing x11-server: 350/527 files\ngucman: Installing x11-server: 375/527 files\ngucman: Installing x11-server: 400/527 files\ngucman: Installing x11-server: 425/527 files\ngucman: Installing x11-server: 450/527 files\ngucman: Installing x11-server: 475/527 files\ngucman: Installing x11-server: 500/527 files\ngucman: Installing x11-server: 525/527 files\ngucman: Installing x11-server: 527/527 files\ngucman: Preparing checksums: x11-server\ngucman: Checksummed x11-server: 25/527 files\ngucman: Checksummed x11-server: 50/527 files\ngucman: Checksummed x11-server: 75/527 files\ngucman: Checksummed x11-server: 100/527 files\ngucman: Checksummed x11-server: 125/527 files\ngucman: Checksummed x11-server: 150/527 files\ngucman: Checksummed x11-server: 175/527 files\ngucman: Checksummed x11-server: 200/527 files\ngucman: Checksummed x11-server: 225/527 files\ngucman: Checksummed x11-server: 250/527 files\ngucman: Checksummed x11-server: 275/527 files\ngucman: Checksummed x11-server: 300/527 files\ngucman: Checksummed x11-server: 325/527 files\ngucman: Checksummed x11-server: 350/527 files\ngucman: Checksummed x11-server: 375/527 files\ngucman: Checksummed x11-server: 400/527 files\ngucman: Checksummed x11-server: 425/527 files\ngucman: Checksummed x11-server: 450/527 files\ngucman: Checksummed x11-server: 475/527 files\ngucman: Checksummed x11-server: 500/527 files\ngucman: Checksummed x11-server: 525/527 files\ngucman: Checksummed x11-server: 527/527 files\ngucman: Saving transaction: x11-server\ngucman: Verifying staged files: x11-server\ngucman: Activating: x11-server\nInstalled groundupcoder:x11-server 21.1.24-1\ngucman: Package 2/4: x11-toolkit (2 remaining after this)\ngucman: Downloading x11-toolkit archive (2518016 bytes)\n  Connecting; waiting for response…\n  Downloaded 2.40 / 2.40 MiB (100%); transfer finished\ngucman: Verifying download: x11-toolkit archive\ngucman: Checking cached object: x11-toolkit archive\ngucman: Unpacking: x11-toolkit\ngucman: Installing x11-toolkit: 0/157 files\ngucman: Installing x11-toolkit: 25/157 files\ngucman: Installing x11-toolkit: 50/157 files\ngucman: Installing x11-toolkit: 75/157 files\ngucman: Installing x11-toolkit: 100/157 files\ngucman: Installing x11-toolkit: 125/157 files\ngucman: Installing x11-toolkit: 150/157 files\ngucman: Installing x11-toolkit: 157/157 files\ngucman: Preparing checksums: x11-toolkit\ngucman: Checksummed x11-toolkit: 25/157 files\ngucman: Checksummed x11-toolkit: 50/157 files\ngucman: Checksummed x11-toolkit: 75/157 files\ngucman: Checksummed x11-toolkit: 100/157 files\ngucman: Checksummed x11-toolkit: 125/157 files\ngucman: Checksummed x11-toolkit: 150/157 files\ngucman: Checksummed x11-toolkit: 157/157 files\ngucman: Saving transaction: x11-toolkit\ngucman: Verifying staged files: x11-toolkit\ngucman: Activating: x11-toolkit\nInstalled groundupcoder:x11-toolkit 1.0-1\ngucman: Package 3/4: x11-widgets (1 remaining after this)\ngucman: Downloading x11-widgets archive (1338880 bytes)\n  Connecting; waiting for response…\n  Downloaded 1.28 / 1.28 MiB (100%); transfer finished\ngucman: Verifying download: x11-widgets archive\ngucman: Checking cached object: x11-widgets archive\ngucman: Unpacking: x11-widgets\ngucman: Installing x11-widgets: 0/15 files\ngucman: Installing x11-widgets: 15/15 files\ngucman: Preparing checksums: x11-widgets\ngucman: Checksummed x11-widgets: 15/15 files\ngucman: Saving transaction: x11-widgets\ngucman: Verifying staged files: x11-widgets\ngucman: Activating: x11-widgets\nInstalled groundupcoder:x11-widgets 1.0-1\ngucman: Package 4/4: jwm (0 remaining after this)\ngucman: Downloading jwm archive (9654272 bytes)\n  Connecting; waiting for response…\n  Downloaded 5.12 / 9.21 MiB (55%)\n  Downloaded 7.68 / 9.21 MiB (83%)\n  Downloaded 9.21 / 9.21 MiB (100%); transfer finished\ngucman: Verifying download: jwm archive\ngucman: Checking cached object: jwm archive\ngucman: Unpacking: jwm\ngucman: Installing jwm: 0/7 files\ngucman: Installing jwm: 7/7 files\ngucman: Preparing checksums: jwm\ngucman: Checksummed jwm: 7/7 files\ngucman: Saving transaction: jwm\ngucman: Verifying staged files: jwm\ngucman: Activating: jwm\nInstalled groundupcoder:jwm 2.4.6-1\n~ $ "
+  },
+  "video": "/Users/jku/git/wasm-posix/docs/research/package-progress-1.0.1/live/video/page@b18b5b31aa78fb160788f783cf3128e2.webm",
+  "status": "passed"
+}

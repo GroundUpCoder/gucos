@@ -3,3 +3,5 @@
 
 # Preserve hashed release evidence byte-for-byte (including terminal CRLF).
 docs/research/platform-1.0/** -text
+
+docs/research/package-progress-1.0.1/** -text

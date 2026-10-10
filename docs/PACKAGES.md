@@ -21,7 +21,8 @@ plus URL/hash/size refs. Recipe and test are paths among those input files.
 Outputs contain prefix-relative `path` and decimal `mode` 420 or 493. Licenses list
 output paths beneath `share/licenses/NAME/`; at least one is required.
 Binary is a URL/hash/size ref to a USTAR archive of prefix-relative outputs.
-The runtime must equal the current OS runtime for binary installation.
+Binary compatibility follows `docs/PLATFORM.md`: platform requirements or the
+explicitly supported legacy baseline, rather than equal build hashes.
 
 Build runs declared inputs in a private source directory with `DESTDIR` staging
 and `PREFIX=/usr/local`. The test runs before publication and should test staged
@@ -65,3 +66,9 @@ new manifest and independently test fresh binary installation before publication
 Platform compatibility and dependency requirements are specified in
 [PLATFORM.md](PLATFORM.md). Build hashes identify provenance; new manifests use
 platform requirements, and the named pre-contract baseline remains accepted.
+
+Since platform 1.0.1, install/build/upgrade report progress on stderr: dependency
+resolution, downloaded bytes and known-size percentages, package counts, unpacking,
+file-copy/checksum counts, verification and activation. A finished download still
+needs verification and installation. Cached objects are identified explicitly.
+Search/info/pack stdout remains usable by scripts.
