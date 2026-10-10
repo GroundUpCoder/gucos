@@ -8,6 +8,12 @@ links=/usr/libexec/guc-links-v2
 config=/etc/gucman/sources.d
 cache=/var/cache/gucman/v1
 state=/usr/local/lib/gucman
+reporting=0
+progress() { [ "$reporting" -eq 0 ] || printf 'gucman: %s\n' "$*" >&2; }
+download() {
+ expected=$1; shift
+ if [ "$reporting" -eq 1 ]; then "$fetch" -p "$expected" "$@"; else "$fetch" "$@"; fi
+}
 runtime=$(cat /etc/gucman/runtime)
 work= publishing=
 cleanup() { [ -z "$work" ] || rm -rf "$work"; [ -z "$publishing" ] || echo "gucman: publication pending; run gucman recover" >&2; }
@@ -36,12 +42,15 @@ verified() (
  dest=$cache/objects/$hash
  if [ ! -f "$dest" ]; then
   part=$(mktemp "$cache/objects/.fetch.XXXXXX"); trap 'rm -f "$part"' EXIT
-  "$fetch" -s -q -m "$size" "$url" "$part" || fail "download failed: $url"
+  progress "Downloading ${4:-object} ($size bytes)"
+  download "$size" -s -q -m "$size" "$url" "$part" || fail "download failed: $url"
+  progress "Verifying download: ${4:-object}"
   actual=$(sha256sum "$part"); [ "${actual%% *}" = "$hash" ] || fail 'object checksum mismatch'
   [ "$(wc -c < "$part")" -eq "$size" ] || fail 'object size mismatch'
   mv "$part" "$dest"
  fi
  [ ! -L "$dest" ] || fail 'symlink cache object'
+ progress "Checking cached object: ${4:-object}"
  actual=$(sha256sum "$dest"); [ "${actual%% *}" = "$hash" ] || fail 'cached checksum mismatch'
  [ "$(wc -c < "$dest")" -eq "$size" ] || fail 'cached size mismatch'
  printf '%s\n' "$dest"
@@ -53,7 +62,11 @@ finish_publication() {
  case "$rel" in "$pr"/release.*) ;; *) fail 'invalid pending release';; esac
  suffix=${rel#"$pr"/release.}; name_ok "$suffix" || case "$suffix" in ''|*[!a-zA-Z0-9]*) fail 'invalid release suffix';; esac
  [ -d "$rel" ] && [ ! -L "$rel" ] || fail 'missing pending release'
- sha256sum -c "$state/pending/checksums" || fail 'pending release metadata changed'
+ progress "Verifying staged files: $pn"
+ if ! sha256sum -c "$state/pending/checksums" > "$state/pending/verification.log"; then
+  cat "$state/pending/verification.log" >&2; fail 'pending release metadata changed'
+ fi
+ progress "Activating: $pn"
  old=$(cat "$state/pending/old"); current=none
  [ ! -L "$pr/current" ] || current=$(readlink "$pr/current")
  [ "$current" = "$old" ] || [ "$current" = "$rel" ] || fail 'current release differs from pending transaction'
@@ -97,7 +110,7 @@ case "$action" in
  search|info|build|install|upgrade) [ "$#" -eq 1 ] || fail "usage: gucman $action [SOURCE:]NAME";;
  *) echo 'usage: gucman platform; repo add|remove|list; list; search TERM; info|build|install|upgrade [SOURCE:]NAME; installed'; exit 1;;
 esac
-case "$action" in install|build|upgrade) [ ! -e "$state/pending" ] || fail 'unfinished publication; run gucman recover';; esac
+case "$action" in install|build|upgrade) reporting=1; progress "$action $1: reading catalogs and resolving dependencies"; [ ! -e "$state/pending" ] || fail 'unfinished publication; run gucman recover';; esac
 work=$(mktemp -d /tmp/gucman.XXXXXX)
 mkdir "$work/catalogs" "$work/plan" "$work/builds" "$work/sources"
 cp "$config"/*.url "$work/sources/" 2>/dev/null || :
@@ -107,7 +120,8 @@ for f in "$work/sources"/*.url; do
  [ -f "$f" ] || continue
  id=${f##*/}; id=${id%.url}; name_ok "$id" || fail 'invalid source file'
  url=$(cat "$f"); url_ok "$url" || fail 'invalid configured source URL'
- if "$fetch" -s -q -m 8388608 "$url" "$work/catalogs/$id.json" &&
+ progress "Reading catalog: $id"
+ if download 0 -s -q -m 8388608 "$url" "$work/catalogs/$id.json" &&
     [ "$("$json" get "$work/catalogs/$id.json" format)" = 1 ] &&
     "$json" keys "$work/catalogs/$id.json" packages > "$work/catalogs/$id.names"; then
   printf '%s\t%s\n' "$id" "$url" >> "$work/catalogs.tsv"
@@ -140,7 +154,8 @@ select_package() {
   [ -n "$chosen" ] || fail "package not found: $pname"
  fi
  catfile=$work/catalogs/$chosen.json
- manifest=$(verified "$(text "$catfile" packages "$pname" url)" "$(text "$catfile" packages "$pname" sha256)" "$("$json" get "$catfile" packages "$pname" size)")
+ progress "Resolving: $chosen:$pname"
+ manifest=$(verified "$(text "$catfile" packages "$pname" url)" "$(text "$catfile" packages "$pname" sha256)" "$("$json" get "$catfile" packages "$pname" size)" "manifest for $chosen:$pname")
  [ "$("$json" get "$manifest" format)" = 1 ] && [ "$(text "$manifest" name)" = "$pname" ] || fail 'manifest identity mismatch'
  version=$(text "$manifest" version); name_ok "$version" || fail 'invalid version'
  origin=$(cat "$work/sources/$chosen.url")
@@ -177,6 +192,8 @@ resolve_package() (
 )
 resolve_package "$1" ''
 # Check the entire selected graph before any install or recipe executes.
+total=$(wc -l < "$work/order")
+progress "Plan: $total packages (including dependencies); checking compatibility"
 while IFS= read -r name; do
  manifest=$work/plan/$name/manifest.json
  [ "$action" = build ] || compatible "$manifest"
@@ -210,6 +227,7 @@ for installed in "$state/packages"/*/current/manifest.json; do
  done < "$work/reverse-dependencies"
 done
 # Validate ownership for the entire closure before executing any package.
+progress "Checking file ownership for $total packages"
 while IFS= read -r name; do
  plan=$work/plan/$name; root=$state/packages/$name
  mkdir -p "$root"
@@ -222,7 +240,9 @@ while IFS= read -r name; do
 done < "$work/order"
 "$links" closure "$work"/plan/*/paths || fail 'dependency output ownership conflict'
 
+index=0
 while IFS= read -r name; do
+ index=$((index + 1)); progress "Package $index/$total: $name ($((total - index)) remaining after this)"
  plan=$work/plan/$name; manifest=$plan/manifest.json; root=$state/packages/$name
  digest=$(sha256sum "$manifest"); digest=${digest%% *}
  if [ -f "$root/current/manifest.json" ] && cmp -s "$manifest" "$root/current/manifest.json" && [ "$(cat "$root/current/runtime")" = "$runtime" ]; then echo "Already installed: $name"; continue; fi
@@ -232,7 +252,7 @@ while IFS= read -r name; do
   "$json" rows "$manifest" files path url sha256 size > "$plan/files"
   while IFS="$(printf '\t')" read -r path url hash size; do
    path_ok "$path" || fail 'unsafe source path'; [ ! -e "$source/$path" ] || fail 'duplicate input'
-   object=$(verified "$url" "$hash" "$size"); mkdir -p "$(dirname "$source/$path")"; cp "$object" "$source/$path"
+   object=$(verified "$url" "$hash" "$size" "$name source: $path"); mkdir -p "$(dirname "$source/$path")"; cp "$object" "$source/$path"
   done < "$plan/files"
   recipe=$(text "$manifest" build); testscript=$(text "$manifest" test)
   path_ok "$recipe" && path_ok "$testscript" || fail 'unsafe recipe path'
@@ -241,15 +261,20 @@ while IFS= read -r name; do
   (cd "$source"; export DESTDIR="$stage" PREFIX=/usr/local; sh "$recipe"; sh "$testscript")
  else
   compatible "$manifest"
-  object=$(verified "$(text "$manifest" binary url)" "$(text "$manifest" binary sha256)" "$("$json" get "$manifest" binary size)")
+  object=$(verified "$(text "$manifest" binary url)" "$(text "$manifest" binary sha256)" "$("$json" get "$manifest" binary size)" "$name archive")
+  progress "Unpacking: $name"
   "$unpack" "$object" "$stage"
  fi
  release=$(mktemp -d "$root/release.XXXXXX")
+ output_count=$(wc -l < "$plan/outputs"); copied=0
+ progress "Installing $name: 0/$output_count files"
  while IFS="$(printf '\t')" read -r path mode; do
   [ -f "$stage/$path" ] && [ ! -L "$stage/$path" ] || fail "missing or nonregular output: $path"
   # Reject any symlink parent before copying staged bytes.
   parent=${path%/*}; while [ "$parent" != . ]; do [ ! -L "$stage/$parent" ] || fail 'symlink output parent'; case "$parent" in */*) parent=${parent%/*};; *) parent=.;; esac; done
   mkdir -p "$(dirname "$release/$path")"; cp "$stage/$path" "$release/$path"
+  copied=$((copied + 1))
+  if [ $((copied % 25)) -eq 0 ] || [ "$copied" -eq "$output_count" ]; then progress "Installing $name: $copied/$output_count files"; fi
   case "$mode" in 493) chmod 755 "$release/$path";; *) chmod 644 "$release/$path";; esac
  done < "$plan/outputs"
  : > "$release/dependency-hashes"
@@ -267,7 +292,14 @@ while IFS= read -r name; do
  printf '%s\n' "$release" > "$state/pending/release"
  if [ -L "$root/current" ]; then readlink "$root/current" > "$state/pending/old"; else echo none > "$state/pending/old"; fi
  sha256sum "$release/manifest.json" "$release/paths" "$release/origin" "$release/runtime" "$release/dependency-hashes" > "$state/pending/checksums"
- while IFS= read -r path; do sha256sum "$release/$path" >> "$state/pending/checksums"; done < "$release/paths"
+ progress "Preparing checksums: $name"
+ checked=0
+ while IFS= read -r path; do
+  sha256sum "$release/$path" >> "$state/pending/checksums"
+  checked=$((checked + 1))
+  if [ $((checked % 25)) -eq 0 ] || [ "$checked" -eq "$output_count" ]; then progress "Checksummed $name: $checked/$output_count files"; fi
+ done < "$release/paths"
+ progress "Saving transaction: $name"
  sync
  : > "$state/pending/ready"
  sync

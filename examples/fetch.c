@@ -16,12 +16,41 @@
 #include <string.h>
 #include <strings.h>
 #include <unistd.h>
+#include <time.h>
 #include <sys/select.h>
 
 __import int __http_open(const char *method, const char *url, const char *headers, const void *body, int blen, int headers_ms, int idle_ms);
 __import int __http_status(int fd, int *status_out, char *hdr, int hdrcap);
 __import int __http_error(int fd, char *buf, int cap);
 
+/* Progress goes to stderr: callers may capture stdout as a filename. The
+ * expected size is supplied by the verified manifest, never inferred from the
+ * response cap or compressed Content-Length. Zero means unknown total. */
+static int progress;
+static unsigned long expected_size;
+static double last_progress;
+static double now_ms(void) {
+    struct timespec t;
+    if (clock_gettime(CLOCK_MONOTONIC, &t)) return 0;
+    return (double)t.tv_sec * 1000 + t.tv_nsec / 1000000.0;
+}
+static void report_progress(unsigned long received, int finished) {
+    double now = now_ms();
+    if (!progress || (!finished && now - last_progress < 500)) return;
+    last_progress = now;
+    if (expected_size >= 1048576)
+        fprintf(stderr, "  Downloaded %.2f / %.2f MiB (%lu%%)%s\n",
+                received / 1048576.0, expected_size / 1048576.0,
+                (unsigned long)(100.0 * received / expected_size),
+                finished ? "; transfer finished" : "");
+    else if (expected_size)
+        fprintf(stderr, "  Downloaded %lu / %lu bytes (%lu%%)%s\n", received,
+                expected_size, (unsigned long)(100.0 * received / expected_size),
+                finished ? "; transfer finished" : "");
+    else fprintf(stderr, "  Downloaded %lu bytes%s\n", received,
+                 finished ? "; transfer finished" : "");
+    fflush(stderr);
+}
 static int quiet;
 static int secure;
 static unsigned long byte_limit=ULONG_MAX;
@@ -65,6 +94,13 @@ int main(int argc, char **argv) {
         if (strcmp(argv[arg], "-s") == 0) { secure = 1; arg++; }
         else if (strcmp(argv[arg], "-q") == 0) { quiet = 1; arg++; }
         else if (strcmp(argv[arg], "-t") == 0 && arg + 1 < argc) { expected_type = argv[arg + 1]; arg += 2; }
+        else if (strcmp(argv[arg], "-p") == 0 && arg + 1 < argc) {
+            const char *s=argv[arg+1]; if(!*s){fputs("guc-fetch: invalid progress size\n",stderr);return 1;}
+            for(const char *p=s;*p;p++)if(*p<'0'||*p>'9'){fputs("guc-fetch: invalid progress size\n",stderr);return 1;}
+            errno=0;char *end;expected_size=strtoul(s,&end,10);
+            if(errno||*end){fputs("guc-fetch: invalid progress size\n",stderr);return 1;}
+            progress=1;arg+=2;
+        }
         else if (strcmp(argv[arg], "-m") == 0 && arg + 1 < argc) {
             const char *s=argv[arg+1]; if(!*s){fprintf(stderr,"guc-fetch: invalid byte limit\n");return 1;}
             for(const char *p=s;*p;p++)if(*p<'0'||*p>'9'){fprintf(stderr,"guc-fetch: invalid byte limit\n");return 1;}
@@ -72,8 +108,9 @@ int main(int argc, char **argv) {
         }
         else break;
     }
-    if (argc - arg != 2) { fprintf(stderr, "usage: guc-fetch [-q] [-t CONTENT-TYPE] [-m MAX_BYTES] URL FILE\n"); return 1; }
+    if (argc - arg != 2) { fprintf(stderr, "usage: guc-fetch [-q] [-t CONTENT-TYPE] [-m MAX_BYTES] [-p EXPECTED_BYTES_OR_0] URL FILE\n"); return 1; }
     const char *url = argv[arg], *path = argv[arg + 1];
+    if (progress) { fputs("  Connecting; waiting for response…\n",stderr); fflush(stderr); last_progress=now_ms(); }
     int fd = __http_open("GET", url, "", NULL, 0, 30000, 30000);
     if (fd < 0) return fail(-1, url);
     int status = 0;
@@ -115,6 +152,7 @@ int main(int argc, char **argv) {
             if ((unsigned long)n > byte_limit-received) {fprintf(stderr,"guc-fetch: response exceeds byte limit\n");fclose(out);close(fd);unlink(path);return 1;}
             received+=(unsigned long)n;
             if (fwrite(buffer, 1, (size_t)n, out) != (size_t)n) { fprintf(stderr, "guc-fetch: %s: %s\n", path, strerror(errno)); fclose(out); close(fd); return 1; }
+            report_progress(received, 0);
             continue;
         }
         if (n == 0) break;
@@ -125,5 +163,6 @@ int main(int argc, char **argv) {
     }
     close(fd);
     if (fclose(out) != 0) { fprintf(stderr, "guc-fetch: %s: %s\n", path, strerror(errno)); return 1; }
+    report_progress(received, 1);
     return 0;
 }
