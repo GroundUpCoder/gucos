@@ -19,3 +19,16 @@ Builds use existing runtime identity semantics: every source change produces a
 new exact package runtime key. No compatibility bypass is introduced. Existing
 installed programs remain on disk; source recipes can target the new runtime.
 Acceptance and exact release identities will be appended after execution.
+
+Author browser suite passed on first reviewed implementation: fresh 14 unique
+assets, persisted reload 5 helpers, exact remaining counts, actual shell/input,
+375px screenshot, HTTP/checksum failure with retry; compiler/Make/archive,
+package recovery/binary fixture and historical storage preservation all passed.
+Job cdb67e1f-d2fc-4bb5-af91-3852d4fd5c4d; /tmp/wasm-posix-startup-acceptance.log.
+
+Independent reviewer 01a123e0-2fb3-7521-9fa3-e936e0997405 (Codex gpt-6-astra)
+found no bootstrap correctness blocker, but requested actual streamed-byte UI
+coverage, focus restoration on hide, and release acceptance of explicit old
+binary rejection followed by source build on the new exact runtime. Incorporated
+all three. No package manager compatibility policy was changed. Final acceptance
+and exact payload review pending at this entry.

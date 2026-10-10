@@ -3,12 +3,19 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {browserSession} from '../tools/browser.mjs';
 const expected=process.argv[2];assert.match(expected||'',/^[a-f0-9]{64}$/);
-const options={url:'https://os.groundupcoder.net',allowedOrigins:['https://raw.githubusercontent.com'],gpu:true};
+const options={...(process.env.LIVE_CORE_URL==='local'?{}:{url:process.env.LIVE_CORE_URL||'https://os.groundupcoder.net'}),allowedOrigins:['https://raw.githubusercontent.com'],gpu:true};
 let s=await browserSession(options);
 try {
  assert.equal(await s.page.evaluate(()=>crossOriginIsolated),true);
  assert.equal(await s.page.evaluate(()=>shell.toolchain.systemBuild),expected);
- console.log(await s.command('set -eu\ngucman search jsmn\ngucman install groundupcoder:jsmn\n/usr/local/bin/jsmn-example\necho LIVE-BINARY-PASS'));
+ const info=JSON.parse(await s.command('gucman info groundupcoder:jsmn'));
+ if(info.runtime===expected){
+  console.log(await s.command('set -eu\ngucman install groundupcoder:jsmn\n/usr/local/bin/jsmn-example\necho LIVE-BINARY-PASS'));
+ }else{
+  await assert.rejects(()=>s.command('gucman install groundupcoder:jsmn'),/binary runtime mismatch/);
+  console.log('PASS LIVE old binary correctly rejected for runtime '+info.runtime);
+  console.log(await s.command('set -eu\ngucman build groundupcoder:jsmn\n/usr/local/bin/jsmn-example\necho LIVE-SOURCE-PASS'));
+ }
  await s.page.reload();await s.page.waitForFunction(()=>window.shell?.ready);
  assert.match(await s.command('/usr/local/bin/jsmn-example'),/UID: 1000/);
  await s.page.evaluate(async source=>shell.busybox.write('/tmp/gpu.c',new TextEncoder().encode(source)),await readFile(new URL('fixtures/webgpu-vt.c',import.meta.url),'utf8'));
@@ -25,5 +32,5 @@ try {
  assert.match(await s.command('set -eu\ngucman build groundupcoder:jsmn\n/usr/local/bin/jsmn-example'),/User: johndoe/);
  await s.page.reload();await s.page.waitForFunction(()=>window.shell?.ready);
  assert.match(await s.command('/usr/local/bin/jsmn-example'),/UID: 1000/);
- console.log('PASS LIVE core '+expected+': fresh boot/compiler, terminal/two GPU VTs, public binary install and source build, persistence/reload');
+ console.log('PASS LIVE core '+expected+': fresh boot/compiler, terminal/two GPU VTs, public binary compatibility check and source build, persistence/reload');
 }finally{await s.close();}

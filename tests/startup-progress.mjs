@@ -4,6 +4,20 @@ import {mkdir,readFile} from 'node:fs/promises';
 import {serve} from '../tools/serve.mjs';
 const live=process.env.STARTUP_TEST_URL;
 const site=live?{url:live,close:async()=>{}}:await serve();
+// Serve the first real binary in controlled chunks to test visible byte progress.
+let nextChunk,finishChunks;
+const secondChunk=new Promise(resolve=>nextChunk=resolve),lastChunks=new Promise(resolve=>finishChunks=resolve);
+if(!live){
+ const original=site.server.listeners('request')[0];let chunked=false;site.server.removeAllListeners('request');
+ site.server.on('request',async(req,res)=>{
+  if(chunked||!req.url.endsWith('.bin'))return original(req,res);
+  chunked=true;
+  const bytes=await readFile(new URL('../dist'+req.url,import.meta.url));
+  res.writeHead(200,{'Content-Type':'application/octet-stream','Content-Length':bytes.length,'Cross-Origin-Resource-Policy':'same-origin'});
+  res.write(bytes.subarray(0,32768));await secondChunk;await new Promise(r=>setTimeout(r,150));
+  res.write(bytes.subarray(32768,65536));await lastChunks;res.end(bytes.subarray(65536));
+ });
+}
 const browser=await chromium.launch({channel:'chromium',headless:true});
 await mkdir('test-results/startup',{recursive:true});
 try {
@@ -20,6 +34,12 @@ try {
  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
  await page.screenshot({path:'test-results/startup/downloading-375.png'});
  release();
+ if(!live){
+  await page.waitForFunction(()=>[...document.querySelectorAll('#startup-downloads li[data-state="downloading"]')].some(row=>row.textContent.includes('32 KB /')));
+  nextChunk();
+  await page.waitForFunction(()=>[...document.querySelectorAll('#startup-downloads li[data-state="downloading"]')].some(row=>row.textContent.includes('64 KB /')));
+  finishChunks();
+ }
  await page.waitForFunction(()=>window.shell?.busybox?.ready&&shell.busybox.log.includes('~ $ '));
  assert.match(await page.locator('#startup-summary').textContent(),/^14 of 14 downloads ready · 0 remaining$/);
  assert.equal(await page.locator('#startup-downloads li[data-state="done"]').count(),14);
@@ -27,6 +47,7 @@ try {
  await page.waitForFunction(()=>document.getElementById('startup').hidden);
  await page.locator('#startup-toggle').click();assert.equal(await page.locator('#startup').isVisible(),true);
  await page.locator('#startup-hide').click();
+ assert.equal(await page.evaluate(()=>document.activeElement.id),'startup-toggle');
  await page.locator('.xterm-helper-textarea').fill('echo STARTUP-INPUT-PASS');await page.locator('.xterm-helper-textarea').press('Enter');
  await page.waitForFunction(()=>shell.busybox.log.includes('STARTUP-INPUT-PASS\r\n')||shell.busybox.log.includes('STARTUP-INPUT-PASS\n'));
  await page.reload();await page.waitForFunction(()=>window.shell?.busybox?.ready&&shell.busybox.log.includes('~ $ '));

@@ -6,7 +6,7 @@ const startup = (() => {
   const retry=document.getElementById('startup-retry');
   let active=true, items=new Map(), rows=new Map(), hideTimer;
   const bytes=n=>n>=1048576?(n/1048576).toFixed(1)+' MB':Math.ceil(n/1024)+' KB';
-  function hide(){panel.hidden=true;toggle.setAttribute('aria-expanded','false');}
+  function hide(){const restore=panel.contains(document.activeElement);panel.hidden=true;toggle.setAttribute('aria-expanded','false');if(restore)toggle.focus();}
   function show(){clearTimeout(hideTimer);panel.hidden=false;toggle.setAttribute('aria-expanded','true');}
   toggle.onclick=()=>panel.hidden?show():hide();
   document.getElementById('startup-hide').onclick=hide;
