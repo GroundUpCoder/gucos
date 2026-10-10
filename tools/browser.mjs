@@ -2,7 +2,7 @@ import {chromium} from 'playwright';
 import {serve} from './serve.mjs';
 export const quote=s=>"'"+s.replaceAll("'","'\\''")+"'";
 export async function browserSession(options={}){
- const site=await serve(options);let browser;
+ const site=options.url?{url:new URL(options.url).origin,close:async()=>{}}:await serve(options);let browser;
  try{
   browser=await chromium.launch({channel:'chromium',headless:true,args:options.gpu?['--enable-unsafe-webgpu']:[]});
   const context=await browser.newContext();

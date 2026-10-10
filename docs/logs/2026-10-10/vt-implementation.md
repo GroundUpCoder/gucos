@@ -64,3 +64,9 @@ Author correction gates passed on runtime
   527 outputs, no host compilation, local HTTP runtime repository fixture.
   Log /tmp/wasm-posix-x11-runtime4.log. Real twm/toolkit acceptance on current
   runtime is underway in packages repository; public X11 discovery still pending.
+
+Prepared tests/live-core.mjs as the mandatory hosting wrapper browser command.
+It checks exact public runtime identity, fresh binary install, reload, guest
+compiler, two direct WebGPU VTs and terminal, then a separate fresh-profile public
+source build/reload. This gate has not yet run against production; it must run
+while the deployment wrapper retains operator.lock.
