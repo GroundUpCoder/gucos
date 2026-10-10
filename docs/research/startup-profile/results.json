@@ -1,0 +1,1610 @@
+{
+  "recordedAt": "2026-10-10T05:44:51.222Z",
+  "browser": "153.0.8010.12",
+  "url": "https://os.groundupcoder.net/",
+  "samples": [
+    {
+      "pair": 0,
+      "mode": "fresh",
+      "wallMs": 4936,
+      "probe": {
+        "events": [
+          {
+            "ms": 699.4349999427795,
+            "kind": "status",
+            "text": "Unpacking…"
+          },
+          {
+            "ms": 989.5099999904633,
+            "kind": "worker-created",
+            "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+            "name": "busybox-filesystem-owner"
+          },
+          {
+            "ms": 989.6899999380112,
+            "kind": "status",
+            "text": "JSPI · WebGPU"
+          },
+          {
+            "ms": 991.9249999523163,
+            "kind": "shell-ready"
+          },
+          {
+            "ms": 4692.549999952316,
+            "kind": "worker-ready"
+          },
+          {
+            "ms": 4692.580000042915,
+            "kind": "status",
+            "text": "BusyBox · OPFS"
+          },
+          {
+            "ms": 4804.919999957085,
+            "kind": "worker-output",
+            "text": "\n"
+          },
+          {
+            "ms": 4804.950000047684,
+            "kind": "worker-output",
+            "text": "\n"
+          },
+          {
+            "ms": 4805.0599999427795,
+            "kind": "worker-output",
+            "text": "BusyBox v1.37.0-wasm (2026-07-09 14:38:25 KST) built-in shell (ash)\n"
+          },
+          {
+            "ms": 4805.064999938011,
+            "kind": "worker-output",
+            "text": "Enter 'help' for a list of built-in commands.\n"
+          },
+          {
+            "ms": 4805.075000047684,
+            "kind": "worker-output",
+            "text": "\n"
+          },
+          {
+            "ms": 4809.485000014305,
+            "kind": "worker-output",
+            "text": "~ $ "
+          }
+        ],
+        "longTasks": [],
+        "status": "BusyBox · OPFS"
+      },
+      "navigation": [
+        {
+          "name": "https://os.groundupcoder.net/",
+          "entryType": "navigation",
+          "startTime": 0,
+          "duration": 1078.7050000429153,
+          "navigationId": 6107,
+          "initiatorType": "navigation",
+          "deliveryType": "",
+          "nextHopProtocol": "h2",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/html",
+          "contentEncoding": "zstd",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 0.21000003814697266,
+          "domainLookupStart": 0.4650000333786011,
+          "domainLookupEnd": 20.289999961853027,
+          "connectStart": 20.289999961853027,
+          "secureConnectionStart": 130.8049999475479,
+          "connectEnd": 182.29999995231628,
+          "requestStart": 182.35000002384186,
+          "responseStart": 689.0349999666214,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 689.0349999666214,
+          "responseEnd": 958.5199999809265,
+          "transferSize": 169259,
+          "encodedBodySize": 168959,
+          "decodedBodySize": 258215,
+          "responseStatus": 200,
+          "serverTiming": [
+            {
+              "name": "cfCacheStatus",
+              "duration": 0,
+              "description": "DYNAMIC"
+            },
+            {
+              "name": "cfEdge",
+              "duration": 15,
+              "description": ""
+            },
+            {
+              "name": "cfOrigin",
+              "duration": 431,
+              "description": ""
+            }
+          ],
+          "unloadEventStart": 0,
+          "unloadEventEnd": 0,
+          "domInteractive": 960.8149999380112,
+          "domContentLoadedEventStart": 1078.1499999761581,
+          "domContentLoadedEventEnd": 1078.1749999523163,
+          "domComplete": 1078.6499999761581,
+          "loadEventStart": 1078.664999961853,
+          "loadEventEnd": 1078.7050000429153,
+          "type": "navigate",
+          "redirectCount": 0,
+          "activationStart": 0,
+          "criticalCHRestart": 0,
+          "notRestoredReasons": null,
+          "confidence": {
+            "randomizedTriggerRate": 0.4994798,
+            "value": "high"
+          }
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920",
+          "entryType": "resource",
+          "startTime": 960.0950000286102,
+          "duration": 116.49000000953674,
+          "navigationId": 6107,
+          "initiatorType": "script",
+          "deliveryType": "",
+          "nextHopProtocol": "",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/javascript",
+          "contentEncoding": "gzip",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 960.0950000286102,
+          "domainLookupStart": 0,
+          "domainLookupEnd": 0,
+          "connectStart": 0,
+          "secureConnectionStart": 0,
+          "connectEnd": 0,
+          "requestStart": 0,
+          "responseStart": 0,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 0,
+          "responseEnd": 1076.585000038147,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0,
+          "responseStatus": 200,
+          "serverTiming": []
+        },
+        {
+          "name": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "entryType": "resource",
+          "startTime": 1065.0950000286102,
+          "duration": 252.32499992847443,
+          "navigationId": 6107,
+          "initiatorType": "other",
+          "deliveryType": "",
+          "nextHopProtocol": "h2",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/javascript",
+          "contentEncoding": "gzip",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 1065.0950000286102,
+          "domainLookupStart": 1065.0950000286102,
+          "domainLookupEnd": 1065.0950000286102,
+          "connectStart": 1065.0950000286102,
+          "secureConnectionStart": 1065.0950000286102,
+          "connectEnd": 1065.0950000286102,
+          "requestStart": 1065.0950000286102,
+          "responseStart": 1065.0950000286102,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 0,
+          "responseEnd": 1317.4199999570847,
+          "transferSize": 328358,
+          "encodedBodySize": 328058,
+          "decodedBodySize": 1076685,
+          "responseStatus": 200,
+          "serverTiming": []
+        },
+        {
+          "name": "https://os.groundupcoder.net/cdn-cgi/rum?",
+          "entryType": "resource",
+          "startTime": 1079.960000038147,
+          "duration": 69.17999994754791,
+          "navigationId": 6107,
+          "initiatorType": "xmlhttprequest",
+          "deliveryType": "",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/plain",
+          "contentEncoding": "",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 1079.960000038147,
+          "domainLookupStart": 1080.0750000476837,
+          "domainLookupEnd": 1080.0750000476837,
+          "connectStart": 1080.0750000476837,
+          "secureConnectionStart": 1080.0750000476837,
+          "connectEnd": 1080.0750000476837,
+          "requestStart": 1080.1849999427795,
+          "responseStart": 1148.9650000333786,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 1148.9650000333786,
+          "responseEnd": 1149.1399999856949,
+          "transferSize": 300,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0,
+          "responseStatus": 204,
+          "serverTiming": [
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ]
+        }
+      ],
+      "runtime": "2a9cca447a35af0d0d8894ea4b50cb254ce20821753af8ae70a1ad5060da2a0f",
+      "log": "\n\nBusyBox v1.37.0-wasm (2026-07-09 14:38:25 KST) built-in shell (ash)\nEnter 'help' for a list of built-in commands.\n\n~ $ "
+    },
+    {
+      "pair": 0,
+      "mode": "reload",
+      "wallMs": 694,
+      "probe": {
+        "events": [
+          {
+            "ms": 489.7699999809265,
+            "kind": "status",
+            "text": "Unpacking…"
+          },
+          {
+            "ms": 519.6499999761581,
+            "kind": "worker-created",
+            "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+            "name": "busybox-filesystem-owner"
+          },
+          {
+            "ms": 519.7549999952316,
+            "kind": "status",
+            "text": "JSPI · WebGPU"
+          },
+          {
+            "ms": 521.789999961853,
+            "kind": "shell-ready"
+          },
+          {
+            "ms": 556.9550000429153,
+            "kind": "worker-ready"
+          },
+          {
+            "ms": 556.9750000238419,
+            "kind": "status",
+            "text": "BusyBox · OPFS"
+          },
+          {
+            "ms": 581.1599999666214,
+            "kind": "worker-output",
+            "text": "\n"
+          },
+          {
+            "ms": 581.2749999761581,
+            "kind": "worker-output",
+            "text": "\n"
+          },
+          {
+            "ms": 581.2849999666214,
+            "kind": "worker-output",
+            "text": "BusyBox v1.37.0-wasm (2026-07-09 14:38:25 KST) built-in shell (ash)\n"
+          },
+          {
+            "ms": 581.2949999570847,
+            "kind": "worker-output",
+            "text": "Enter 'help' for a list of built-in commands.\n"
+          },
+          {
+            "ms": 581.3550000190735,
+            "kind": "worker-output",
+            "text": "\n"
+          },
+          {
+            "ms": 585.8200000524521,
+            "kind": "worker-output",
+            "text": "~ $ "
+          }
+        ],
+        "longTasks": [],
+        "status": "BusyBox · OPFS"
+      },
+      "navigation": [
+        {
+          "name": "https://os.groundupcoder.net/",
+          "entryType": "navigation",
+          "startTime": 0,
+          "duration": 492.1950000524521,
+          "navigationId": 188,
+          "initiatorType": "navigation",
+          "deliveryType": "cache",
+          "nextHopProtocol": "h2",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/html",
+          "contentEncoding": "zstd",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 0.16999995708465576,
+          "domainLookupStart": 0.16999995708465576,
+          "domainLookupEnd": 0.16999995708465576,
+          "connectStart": 0.16999995708465576,
+          "secureConnectionStart": 0.16999995708465576,
+          "connectEnd": 0.16999995708465576,
+          "requestStart": 0.5249999761581421,
+          "responseStart": 483.8700000047684,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 483.8700000047684,
+          "responseEnd": 484.375,
+          "transferSize": 300,
+          "encodedBodySize": 168959,
+          "decodedBodySize": 258215,
+          "responseStatus": 200,
+          "serverTiming": [
+            {
+              "name": "cfCacheStatus",
+              "duration": 0,
+              "description": "DYNAMIC"
+            },
+            {
+              "name": "cfEdge",
+              "duration": 8,
+              "description": ""
+            },
+            {
+              "name": "cfOrigin",
+              "duration": 427,
+              "description": ""
+            },
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ],
+          "unloadEventStart": 485.72500002384186,
+          "unloadEventEnd": 485.72500002384186,
+          "domInteractive": 490.00999999046326,
+          "domContentLoadedEventStart": 491.8949999809265,
+          "domContentLoadedEventEnd": 491.914999961853,
+          "domComplete": 492.1100000143051,
+          "loadEventStart": 492.164999961853,
+          "loadEventEnd": 492.1950000524521,
+          "type": "reload",
+          "redirectCount": 0,
+          "activationStart": 0,
+          "criticalCHRestart": 0,
+          "notRestoredReasons": null,
+          "confidence": {
+            "randomizedTriggerRate": 0.4994798,
+            "value": "low"
+          }
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920",
+          "entryType": "resource",
+          "startTime": 487.72500002384186,
+          "duration": 0,
+          "navigationId": 188,
+          "initiatorType": "script",
+          "deliveryType": "",
+          "nextHopProtocol": "",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/javascript",
+          "contentEncoding": "gzip",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 487.72500002384186,
+          "domainLookupStart": 0,
+          "domainLookupEnd": 0,
+          "connectStart": 0,
+          "secureConnectionStart": 0,
+          "connectEnd": 0,
+          "requestStart": 0,
+          "responseStart": 0,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 0,
+          "responseEnd": 487.72500002384186,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0,
+          "responseStatus": 200,
+          "serverTiming": []
+        },
+        {
+          "name": "https://os.groundupcoder.net/cdn-cgi/rum?",
+          "entryType": "resource",
+          "startTime": 494.3000000715256,
+          "duration": 49.859999895095825,
+          "navigationId": 188,
+          "initiatorType": "xmlhttprequest",
+          "deliveryType": "",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/plain",
+          "contentEncoding": "",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 494.3000000715256,
+          "domainLookupStart": 494.3000000715256,
+          "domainLookupEnd": 494.3000000715256,
+          "connectStart": 494.3000000715256,
+          "secureConnectionStart": 494.3000000715256,
+          "connectEnd": 494.3000000715256,
+          "requestStart": 494.52999997138977,
+          "responseStart": 544.0249999761581,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 544.0249999761581,
+          "responseEnd": 544.1599999666214,
+          "transferSize": 300,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0,
+          "responseStatus": 204,
+          "serverTiming": [
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ]
+        },
+        {
+          "name": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "entryType": "resource",
+          "startTime": 524.2150000333786,
+          "duration": -2.384999990463257,
+          "navigationId": 188,
+          "initiatorType": "other",
+          "deliveryType": "cache",
+          "nextHopProtocol": "h2",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/javascript",
+          "contentEncoding": "gzip",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 524.2150000333786,
+          "domainLookupStart": 524.2150000333786,
+          "domainLookupEnd": 524.2150000333786,
+          "connectStart": 524.2150000333786,
+          "secureConnectionStart": 524.2150000333786,
+          "connectEnd": 524.2150000333786,
+          "requestStart": 524.2150000333786,
+          "responseStart": 524.2150000333786,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 0,
+          "responseEnd": 521.8300000429153,
+          "transferSize": 0,
+          "encodedBodySize": 328058,
+          "decodedBodySize": 1076685,
+          "responseStatus": 200,
+          "serverTiming": []
+        }
+      ],
+      "runtime": "2a9cca447a35af0d0d8894ea4b50cb254ce20821753af8ae70a1ad5060da2a0f",
+      "log": "\n\nBusyBox v1.37.0-wasm (2026-07-09 14:38:25 KST) built-in shell (ash)\nEnter 'help' for a list of built-in commands.\n\n~ $ "
+    },
+    {
+      "pair": 1,
+      "mode": "fresh",
+      "wallMs": 4526,
+      "probe": {
+        "events": [
+          {
+            "ms": 583.0649999380112,
+            "kind": "status",
+            "text": "Unpacking…"
+          },
+          {
+            "ms": 875.6699999570847,
+            "kind": "worker-created",
+            "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+            "name": "busybox-filesystem-owner"
+          },
+          {
+            "ms": 875.8349999189377,
+            "kind": "status",
+            "text": "JSPI · WebGPU"
+          },
+          {
+            "ms": 877.9649999141693,
+            "kind": "shell-ready"
+          },
+          {
+            "ms": 4295.389999985695,
+            "kind": "worker-ready"
+          },
+          {
+            "ms": 4295.414999961853,
+            "kind": "status",
+            "text": "BusyBox · OPFS"
+          },
+          {
+            "ms": 4404.359999895096,
+            "kind": "worker-output",
+            "text": "\n"
+          },
+          {
+            "ms": 4404.474999904633,
+            "kind": "worker-output",
+            "text": "\n"
+          },
+          {
+            "ms": 4404.489999890327,
+            "kind": "worker-output",
+            "text": "BusyBox v1.37.0-wasm (2026-07-09 14:38:25 KST) built-in shell (ash)\n"
+          },
+          {
+            "ms": 4404.5,
+            "kind": "worker-output",
+            "text": "Enter 'help' for a list of built-in commands.\n"
+          },
+          {
+            "ms": 4404.569999933243,
+            "kind": "worker-output",
+            "text": "\n"
+          },
+          {
+            "ms": 4409.424999952316,
+            "kind": "worker-output",
+            "text": "~ $ "
+          }
+        ],
+        "longTasks": [],
+        "status": "BusyBox · OPFS"
+      },
+      "navigation": [
+        {
+          "name": "https://os.groundupcoder.net/",
+          "entryType": "navigation",
+          "startTime": 0,
+          "duration": 928.0349999666214,
+          "navigationId": 3736,
+          "initiatorType": "navigation",
+          "deliveryType": "",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/html",
+          "contentEncoding": "zstd",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 0.16499996185302734,
+          "domainLookupStart": 0.4249999523162842,
+          "domainLookupEnd": 14.234999895095825,
+          "connectStart": 14.234999895095825,
+          "secureConnectionStart": 14.379999995231628,
+          "connectEnd": 65.39499998092651,
+          "requestStart": 65.43499994277954,
+          "responseStart": 574.4749999046326,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 574.4749999046326,
+          "responseEnd": 846.6149998903275,
+          "transferSize": 168926,
+          "encodedBodySize": 168626,
+          "decodedBodySize": 258215,
+          "responseStatus": 200,
+          "serverTiming": [
+            {
+              "name": "cfCacheStatus",
+              "duration": 0,
+              "description": "DYNAMIC"
+            },
+            {
+              "name": "cfEdge",
+              "duration": 22,
+              "description": ""
+            },
+            {
+              "name": "cfOrigin",
+              "duration": 430,
+              "description": ""
+            },
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ],
+          "unloadEventStart": 0,
+          "unloadEventEnd": 0,
+          "domInteractive": 847.1999999284744,
+          "domContentLoadedEventStart": 927.4849998950958,
+          "domContentLoadedEventEnd": 927.5049999952316,
+          "domComplete": 927.9649999141693,
+          "loadEventStart": 927.9899998903275,
+          "loadEventEnd": 928.0349999666214,
+          "type": "navigate",
+          "redirectCount": 0,
+          "activationStart": 0,
+          "criticalCHRestart": 0,
+          "notRestoredReasons": null,
+          "confidence": {
+            "randomizedTriggerRate": 0.4994798,
+            "value": "high"
+          }
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920",
+          "entryType": "resource",
+          "startTime": 846.5949999094009,
+          "duration": 78.99500000476837,
+          "navigationId": 3736,
+          "initiatorType": "script",
+          "deliveryType": "",
+          "nextHopProtocol": "",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/javascript",
+          "contentEncoding": "gzip",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 846.5949999094009,
+          "domainLookupStart": 0,
+          "domainLookupEnd": 0,
+          "connectStart": 0,
+          "secureConnectionStart": 0,
+          "connectEnd": 0,
+          "requestStart": 0,
+          "responseStart": 0,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 0,
+          "responseEnd": 925.5899999141693,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0,
+          "responseStatus": 200,
+          "serverTiming": []
+        },
+        {
+          "name": "https://os.groundupcoder.net/cdn-cgi/rum?",
+          "entryType": "resource",
+          "startTime": 929.3099999427795,
+          "duration": 69.97000002861023,
+          "navigationId": 3736,
+          "initiatorType": "xmlhttprequest",
+          "deliveryType": "",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/plain",
+          "contentEncoding": "",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 929.3099999427795,
+          "domainLookupStart": 929.3099999427795,
+          "domainLookupEnd": 929.3099999427795,
+          "connectStart": 929.3099999427795,
+          "secureConnectionStart": 929.3099999427795,
+          "connectEnd": 929.3099999427795,
+          "requestStart": 929.5,
+          "responseStart": 999.1449999809265,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 999.1449999809265,
+          "responseEnd": 999.2799999713898,
+          "transferSize": 300,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0,
+          "responseStatus": 204,
+          "serverTiming": [
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ]
+        },
+        {
+          "name": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "entryType": "resource",
+          "startTime": 938.25,
+          "duration": 205.48499989509583,
+          "navigationId": 3736,
+          "initiatorType": "other",
+          "deliveryType": "",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/javascript",
+          "contentEncoding": "gzip",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 938.25,
+          "domainLookupStart": 938.25,
+          "domainLookupEnd": 938.25,
+          "connectStart": 938.25,
+          "secureConnectionStart": 938.25,
+          "connectEnd": 938.25,
+          "requestStart": 938.25,
+          "responseStart": 938.25,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 0,
+          "responseEnd": 1143.7349998950958,
+          "transferSize": 328358,
+          "encodedBodySize": 328058,
+          "decodedBodySize": 1076685,
+          "responseStatus": 200,
+          "serverTiming": [
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ]
+        }
+      ],
+      "runtime": "2a9cca447a35af0d0d8894ea4b50cb254ce20821753af8ae70a1ad5060da2a0f",
+      "log": "\n\nBusyBox v1.37.0-wasm (2026-07-09 14:38:25 KST) built-in shell (ash)\nEnter 'help' for a list of built-in commands.\n\n~ $ "
+    },
+    {
+      "pair": 1,
+      "mode": "reload",
+      "wallMs": 698,
+      "probe": {
+        "events": [
+          {
+            "ms": 482.2099999189377,
+            "kind": "status",
+            "text": "Unpacking…"
+          },
+          {
+            "ms": 511.79499995708466,
+            "kind": "worker-created",
+            "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+            "name": "busybox-filesystem-owner"
+          },
+          {
+            "ms": 511.9099999666214,
+            "kind": "status",
+            "text": "JSPI · WebGPU"
+          },
+          {
+            "ms": 515.2099999189377,
+            "kind": "shell-ready"
+          },
+          {
+            "ms": 553.3099999427795,
+            "kind": "worker-ready"
+          },
+          {
+            "ms": 553.3349999189377,
+            "kind": "status",
+            "text": "BusyBox · OPFS"
+          },
+          {
+            "ms": 577.4449999332428,
+            "kind": "worker-output",
+            "text": "\n"
+          },
+          {
+            "ms": 577.4749999046326,
+            "kind": "worker-output",
+            "text": "\n"
+          },
+          {
+            "ms": 577.5849999189377,
+            "kind": "worker-output",
+            "text": "BusyBox v1.37.0-wasm (2026-07-09 14:38:25 KST) built-in shell (ash)\n"
+          },
+          {
+            "ms": 577.5949999094009,
+            "kind": "worker-output",
+            "text": "Enter 'help' for a list of built-in commands.\n"
+          },
+          {
+            "ms": 577.5999999046326,
+            "kind": "worker-output",
+            "text": "\n"
+          },
+          {
+            "ms": 582.329999923706,
+            "kind": "worker-output",
+            "text": "~ $ "
+          }
+        ],
+        "longTasks": [],
+        "status": "BusyBox · OPFS"
+      },
+      "navigation": [
+        {
+          "name": "https://os.groundupcoder.net/",
+          "entryType": "navigation",
+          "startTime": 0,
+          "duration": 484.71999990940094,
+          "navigationId": 3795,
+          "initiatorType": "navigation",
+          "deliveryType": "cache",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/html",
+          "contentEncoding": "zstd",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 0.15999996662139893,
+          "domainLookupStart": 0.15999996662139893,
+          "domainLookupEnd": 0.15999996662139893,
+          "connectStart": 0.15999996662139893,
+          "secureConnectionStart": 0.15999996662139893,
+          "connectEnd": 0.15999996662139893,
+          "requestStart": 0.5149999856948853,
+          "responseStart": 474.36499989032745,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 474.36499989032745,
+          "responseEnd": 475.02999997138977,
+          "transferSize": 300,
+          "encodedBodySize": 168626,
+          "decodedBodySize": 258215,
+          "responseStatus": 200,
+          "serverTiming": [
+            {
+              "name": "cfCacheStatus",
+              "duration": 0,
+              "description": "DYNAMIC"
+            },
+            {
+              "name": "cfEdge",
+              "duration": 10,
+              "description": ""
+            },
+            {
+              "name": "cfOrigin",
+              "duration": 417,
+              "description": ""
+            },
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ],
+          "unloadEventStart": 477.3899999856949,
+          "unloadEventEnd": 477.3899999856949,
+          "domInteractive": 482.5749999284744,
+          "domContentLoadedEventStart": 484.4799998998642,
+          "domContentLoadedEventEnd": 484.4950000047684,
+          "domComplete": 484.68999993801117,
+          "loadEventStart": 484.6949999332428,
+          "loadEventEnd": 484.71999990940094,
+          "type": "reload",
+          "redirectCount": 0,
+          "activationStart": 0,
+          "criticalCHRestart": 0,
+          "notRestoredReasons": null,
+          "confidence": {
+            "randomizedTriggerRate": 0.4994798,
+            "value": "low"
+          }
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920",
+          "entryType": "resource",
+          "startTime": 480.1949999332428,
+          "duration": 0,
+          "navigationId": 3795,
+          "initiatorType": "script",
+          "deliveryType": "",
+          "nextHopProtocol": "",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/javascript",
+          "contentEncoding": "gzip",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 480.1949999332428,
+          "domainLookupStart": 0,
+          "domainLookupEnd": 0,
+          "connectStart": 0,
+          "secureConnectionStart": 0,
+          "connectEnd": 0,
+          "requestStart": 0,
+          "responseStart": 0,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 0,
+          "responseEnd": 480.1949999332428,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0,
+          "responseStatus": 200,
+          "serverTiming": []
+        },
+        {
+          "name": "https://os.groundupcoder.net/cdn-cgi/rum?",
+          "entryType": "resource",
+          "startTime": 486.80999994277954,
+          "duration": 47.75,
+          "navigationId": 3795,
+          "initiatorType": "xmlhttprequest",
+          "deliveryType": "",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/plain",
+          "contentEncoding": "",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 486.80999994277954,
+          "domainLookupStart": 486.80999994277954,
+          "domainLookupEnd": 486.80999994277954,
+          "connectStart": 486.80999994277954,
+          "secureConnectionStart": 486.80999994277954,
+          "connectEnd": 486.80999994277954,
+          "requestStart": 487.02999997138977,
+          "responseStart": 534.4199999570847,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 534.4199999570847,
+          "responseEnd": 534.5599999427795,
+          "transferSize": 300,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0,
+          "responseStatus": 204,
+          "serverTiming": [
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ]
+        },
+        {
+          "name": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "entryType": "resource",
+          "startTime": 516.5149999856949,
+          "duration": -2.540000081062317,
+          "navigationId": 3795,
+          "initiatorType": "other",
+          "deliveryType": "cache",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/javascript",
+          "contentEncoding": "gzip",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 516.5149999856949,
+          "domainLookupStart": 516.5149999856949,
+          "domainLookupEnd": 516.5149999856949,
+          "connectStart": 516.5149999856949,
+          "secureConnectionStart": 516.5149999856949,
+          "connectEnd": 516.5149999856949,
+          "requestStart": 516.5149999856949,
+          "responseStart": 516.5149999856949,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 0,
+          "responseEnd": 513.9749999046326,
+          "transferSize": 0,
+          "encodedBodySize": 328058,
+          "decodedBodySize": 1076685,
+          "responseStatus": 200,
+          "serverTiming": [
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ]
+        }
+      ],
+      "runtime": "2a9cca447a35af0d0d8894ea4b50cb254ce20821753af8ae70a1ad5060da2a0f",
+      "log": "\n\nBusyBox v1.37.0-wasm (2026-07-09 14:38:25 KST) built-in shell (ash)\nEnter 'help' for a list of built-in commands.\n\n~ $ "
+    },
+    {
+      "pair": 2,
+      "mode": "fresh",
+      "wallMs": 4004,
+      "probe": {
+        "events": [
+          {
+            "ms": 301.6200000047684,
+            "kind": "status",
+            "text": "Unpacking…"
+          },
+          {
+            "ms": 409.210000038147,
+            "kind": "worker-created",
+            "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+            "name": "busybox-filesystem-owner"
+          },
+          {
+            "ms": 409.375,
+            "kind": "status",
+            "text": "JSPI · WebGPU"
+          },
+          {
+            "ms": 411.5400000810623,
+            "kind": "shell-ready"
+          },
+          {
+            "ms": 3774.1299999952316,
+            "kind": "worker-ready"
+          },
+          {
+            "ms": 3774.1650000810623,
+            "kind": "status",
+            "text": "BusyBox · OPFS"
+          },
+          {
+            "ms": 3884.725000023842,
+            "kind": "worker-output",
+            "text": "\n"
+          },
+          {
+            "ms": 3884.8150000572205,
+            "kind": "worker-output",
+            "text": "\n"
+          },
+          {
+            "ms": 3884.8400000333786,
+            "kind": "worker-output",
+            "text": "BusyBox v1.37.0-wasm (2026-07-09 14:38:25 KST) built-in shell (ash)\n"
+          },
+          {
+            "ms": 3884.8550000190735,
+            "kind": "worker-output",
+            "text": "Enter 'help' for a list of built-in commands.\n"
+          },
+          {
+            "ms": 3884.920000076294,
+            "kind": "worker-output",
+            "text": "\n"
+          },
+          {
+            "ms": 3889.280000090599,
+            "kind": "worker-output",
+            "text": "~ $ "
+          }
+        ],
+        "longTasks": [],
+        "status": "BusyBox · OPFS"
+      },
+      "navigation": [
+        {
+          "name": "https://os.groundupcoder.net/",
+          "entryType": "navigation",
+          "startTime": 0,
+          "duration": 452.1449999809265,
+          "navigationId": 7412,
+          "initiatorType": "navigation",
+          "deliveryType": "",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/html",
+          "contentEncoding": "zstd",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 0.1700000762939453,
+          "domainLookupStart": 0.5099999904632568,
+          "domainLookupEnd": 23.695000052452087,
+          "connectStart": 23.695000052452087,
+          "secureConnectionStart": 23.860000014305115,
+          "connectEnd": 76.81500005722046,
+          "requestStart": 76.85000002384186,
+          "responseStart": 291.7699999809265,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 291.7699999809265,
+          "responseEnd": 380.1050000190735,
+          "transferSize": 168660,
+          "encodedBodySize": 168360,
+          "decodedBodySize": 258215,
+          "responseStatus": 200,
+          "serverTiming": [
+            {
+              "name": "cfCacheStatus",
+              "duration": 0,
+              "description": "DYNAMIC"
+            },
+            {
+              "name": "cfEdge",
+              "duration": 9,
+              "description": ""
+            },
+            {
+              "name": "cfOrigin",
+              "duration": 149,
+              "description": ""
+            },
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ],
+          "unloadEventStart": 0,
+          "unloadEventEnd": 0,
+          "domInteractive": 381.6299999952316,
+          "domContentLoadedEventStart": 451.6299999952316,
+          "domContentLoadedEventEnd": 451.65500009059906,
+          "domComplete": 452.0900000333786,
+          "loadEventStart": 452.1050000190735,
+          "loadEventEnd": 452.1449999809265,
+          "type": "navigate",
+          "redirectCount": 0,
+          "activationStart": 0,
+          "criticalCHRestart": 0,
+          "notRestoredReasons": null,
+          "confidence": {
+            "randomizedTriggerRate": 0.4994798,
+            "value": "high"
+          }
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920",
+          "entryType": "resource",
+          "startTime": 381.1750000715256,
+          "duration": 68.57999992370605,
+          "navigationId": 7412,
+          "initiatorType": "script",
+          "deliveryType": "",
+          "nextHopProtocol": "",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/javascript",
+          "contentEncoding": "gzip",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 381.1750000715256,
+          "domainLookupStart": 0,
+          "domainLookupEnd": 0,
+          "connectStart": 0,
+          "secureConnectionStart": 0,
+          "connectEnd": 0,
+          "requestStart": 0,
+          "responseStart": 0,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 0,
+          "responseEnd": 449.7549999952316,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0,
+          "responseStatus": 200,
+          "serverTiming": []
+        },
+        {
+          "name": "https://os.groundupcoder.net/cdn-cgi/rum?",
+          "entryType": "resource",
+          "startTime": 453.35000002384186,
+          "duration": 78.6800000667572,
+          "navigationId": 7412,
+          "initiatorType": "xmlhttprequest",
+          "deliveryType": "",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/plain",
+          "contentEncoding": "",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 453.35000002384186,
+          "domainLookupStart": 453.35000002384186,
+          "domainLookupEnd": 453.35000002384186,
+          "connectStart": 453.35000002384186,
+          "secureConnectionStart": 453.35000002384186,
+          "connectEnd": 453.35000002384186,
+          "requestStart": 453.5550000667572,
+          "responseStart": 531.8949999809265,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 531.8949999809265,
+          "responseEnd": 532.0300000905991,
+          "transferSize": 300,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0,
+          "responseStatus": 204,
+          "serverTiming": [
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ]
+        },
+        {
+          "name": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "entryType": "resource",
+          "startTime": 466.1399999856949,
+          "duration": 154.87000000476837,
+          "navigationId": 7412,
+          "initiatorType": "other",
+          "deliveryType": "",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/javascript",
+          "contentEncoding": "gzip",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 466.1399999856949,
+          "domainLookupStart": 466.1399999856949,
+          "domainLookupEnd": 466.1399999856949,
+          "connectStart": 466.1399999856949,
+          "secureConnectionStart": 466.1399999856949,
+          "connectEnd": 466.1399999856949,
+          "requestStart": 466.1399999856949,
+          "responseStart": 466.1399999856949,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 0,
+          "responseEnd": 621.0099999904633,
+          "transferSize": 328358,
+          "encodedBodySize": 328058,
+          "decodedBodySize": 1076685,
+          "responseStatus": 200,
+          "serverTiming": [
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ]
+        }
+      ],
+      "runtime": "2a9cca447a35af0d0d8894ea4b50cb254ce20821753af8ae70a1ad5060da2a0f",
+      "log": "\n\nBusyBox v1.37.0-wasm (2026-07-09 14:38:25 KST) built-in shell (ash)\nEnter 'help' for a list of built-in commands.\n\n~ $ "
+    },
+    {
+      "pair": 2,
+      "mode": "reload",
+      "wallMs": 416,
+      "probe": {
+        "events": [
+          {
+            "ms": 209.07499992847443,
+            "kind": "status",
+            "text": "Unpacking…"
+          },
+          {
+            "ms": 238.66499996185303,
+            "kind": "worker-created",
+            "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+            "name": "busybox-filesystem-owner"
+          },
+          {
+            "ms": 238.78999996185303,
+            "kind": "status",
+            "text": "JSPI · WebGPU"
+          },
+          {
+            "ms": 240.7299998998642,
+            "kind": "shell-ready"
+          },
+          {
+            "ms": 279.5699999332428,
+            "kind": "worker-ready"
+          },
+          {
+            "ms": 279.5899999141693,
+            "kind": "status",
+            "text": "BusyBox · OPFS"
+          },
+          {
+            "ms": 303.875,
+            "kind": "worker-output",
+            "text": "\n"
+          },
+          {
+            "ms": 304.00999999046326,
+            "kind": "worker-output",
+            "text": "\n"
+          },
+          {
+            "ms": 304.02999997138977,
+            "kind": "worker-output",
+            "text": "BusyBox v1.37.0-wasm (2026-07-09 14:38:25 KST) built-in shell (ash)\n"
+          },
+          {
+            "ms": 304.0349999666214,
+            "kind": "worker-output",
+            "text": "Enter 'help' for a list of built-in commands.\n"
+          },
+          {
+            "ms": 304.0499999523163,
+            "kind": "worker-output",
+            "text": "\n"
+          },
+          {
+            "ms": 308.4599999189377,
+            "kind": "worker-output",
+            "text": "~ $ "
+          }
+        ],
+        "longTasks": [],
+        "status": "BusyBox · OPFS"
+      },
+      "navigation": [
+        {
+          "name": "https://os.groundupcoder.net/",
+          "entryType": "navigation",
+          "startTime": 0,
+          "duration": 211.50499999523163,
+          "navigationId": 6365,
+          "initiatorType": "navigation",
+          "deliveryType": "cache",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/html",
+          "contentEncoding": "zstd",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 0.16499996185302734,
+          "domainLookupStart": 0.16499996185302734,
+          "domainLookupEnd": 0.16499996185302734,
+          "connectStart": 0.16499996185302734,
+          "secureConnectionStart": 0.16499996185302734,
+          "connectEnd": 0.16499996185302734,
+          "requestStart": 0.4950000047683716,
+          "responseStart": 201.9299999475479,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 201.9299999475479,
+          "responseEnd": 202.57999992370605,
+          "transferSize": 300,
+          "encodedBodySize": 168360,
+          "decodedBodySize": 258215,
+          "responseStatus": 200,
+          "serverTiming": [
+            {
+              "name": "cfCacheStatus",
+              "duration": 0,
+              "description": "DYNAMIC"
+            },
+            {
+              "name": "cfEdge",
+              "duration": 4,
+              "description": ""
+            },
+            {
+              "name": "cfOrigin",
+              "duration": 148,
+              "description": ""
+            },
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ],
+          "unloadEventStart": 204.8049999475479,
+          "unloadEventEnd": 204.8049999475479,
+          "domInteractive": 209.30999994277954,
+          "domContentLoadedEventStart": 211.20999991893768,
+          "domContentLoadedEventEnd": 211.2299998998642,
+          "domComplete": 211.4299999475479,
+          "loadEventStart": 211.4799998998642,
+          "loadEventEnd": 211.50499999523163,
+          "type": "reload",
+          "redirectCount": 0,
+          "activationStart": 0,
+          "criticalCHRestart": 0,
+          "notRestoredReasons": null,
+          "confidence": {
+            "randomizedTriggerRate": 0.4994798,
+            "value": "low"
+          }
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920",
+          "entryType": "resource",
+          "startTime": 207.04999995231628,
+          "duration": 0,
+          "navigationId": 6365,
+          "initiatorType": "script",
+          "deliveryType": "",
+          "nextHopProtocol": "",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/javascript",
+          "contentEncoding": "gzip",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 207.04999995231628,
+          "domainLookupStart": 0,
+          "domainLookupEnd": 0,
+          "connectStart": 0,
+          "secureConnectionStart": 0,
+          "connectEnd": 0,
+          "requestStart": 0,
+          "responseStart": 0,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 0,
+          "responseEnd": 207.04999995231628,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0,
+          "responseStatus": 200,
+          "serverTiming": []
+        },
+        {
+          "name": "https://os.groundupcoder.net/cdn-cgi/rum?",
+          "entryType": "resource",
+          "startTime": 213.63999998569489,
+          "duration": 49.355000019073486,
+          "navigationId": 6365,
+          "initiatorType": "xmlhttprequest",
+          "deliveryType": "",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/plain",
+          "contentEncoding": "",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 213.63999998569489,
+          "domainLookupStart": 213.63999998569489,
+          "domainLookupEnd": 213.63999998569489,
+          "connectStart": 213.63999998569489,
+          "secureConnectionStart": 213.63999998569489,
+          "connectEnd": 213.63999998569489,
+          "requestStart": 213.86500000953674,
+          "responseStart": 262.86500000953674,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 262.86500000953674,
+          "responseEnd": 262.9950000047684,
+          "transferSize": 300,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0,
+          "responseStatus": 204,
+          "serverTiming": [
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ]
+        },
+        {
+          "name": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "entryType": "resource",
+          "startTime": 241.8399999141693,
+          "duration": -1.0499999523162842,
+          "navigationId": 6365,
+          "initiatorType": "other",
+          "deliveryType": "cache",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/javascript",
+          "contentEncoding": "gzip",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 241.8399999141693,
+          "domainLookupStart": 241.8399999141693,
+          "domainLookupEnd": 241.8399999141693,
+          "connectStart": 241.8399999141693,
+          "secureConnectionStart": 241.8399999141693,
+          "connectEnd": 241.8399999141693,
+          "requestStart": 241.8399999141693,
+          "responseStart": 241.8399999141693,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 0,
+          "responseEnd": 240.78999996185303,
+          "transferSize": 0,
+          "encodedBodySize": 328058,
+          "decodedBodySize": 1076685,
+          "responseStatus": 200,
+          "serverTiming": [
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ]
+        }
+      ],
+      "runtime": "2a9cca447a35af0d0d8894ea4b50cb254ce20821753af8ae70a1ad5060da2a0f",
+      "log": "\n\nBusyBox v1.37.0-wasm (2026-07-09 14:38:25 KST) built-in shell (ash)\nEnter 'help' for a list of built-in commands.\n\n~ $ "
+    }
+  ]
+}

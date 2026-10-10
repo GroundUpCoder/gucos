@@ -1,0 +1,1309 @@
+{
+  "recordedAt": "2026-10-10T05:44:25.664Z",
+  "browser": "153.0.8010.12",
+  "url": "https://os.groundupcoder.net/",
+  "samples": [
+    {
+      "pair": 0,
+      "mode": "fresh",
+      "wallMs": 995,
+      "probe": {
+        "events": [
+          {
+            "ms": 615.3550000190735,
+            "kind": "status",
+            "text": "Unpacking…"
+          },
+          {
+            "ms": 747.8550000190735,
+            "kind": "worker-created",
+            "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+            "name": "busybox-filesystem-owner"
+          },
+          {
+            "ms": 748.0249999761581,
+            "kind": "status",
+            "text": "JSPI · WebGPU"
+          },
+          {
+            "ms": 750.2000000476837,
+            "kind": "shell-ready"
+          }
+        ],
+        "longTasks": [],
+        "status": "JSPI · WebGPU"
+      },
+      "navigation": [
+        {
+          "name": "https://os.groundupcoder.net/",
+          "entryType": "navigation",
+          "startTime": 0,
+          "duration": 880.1150000095367,
+          "navigationId": 3191,
+          "initiatorType": "navigation",
+          "deliveryType": "",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/html",
+          "contentEncoding": "zstd",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 0.25,
+          "domainLookupStart": 0.6449999809265137,
+          "domainLookupEnd": 77.75499999523163,
+          "connectStart": 77.75499999523163,
+          "secureConnectionStart": 77.89999997615814,
+          "connectEnd": 156.83500003814697,
+          "requestStart": 156.875,
+          "responseStart": 541.1299999952316,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 541.1299999952316,
+          "responseEnd": 717.6950000524521,
+          "transferSize": 168878,
+          "encodedBodySize": 168578,
+          "decodedBodySize": 258215,
+          "responseStatus": 200,
+          "serverTiming": [
+            {
+              "name": "cfCacheStatus",
+              "duration": 0,
+              "description": "DYNAMIC"
+            },
+            {
+              "name": "cfEdge",
+              "duration": 26,
+              "description": ""
+            },
+            {
+              "name": "cfOrigin",
+              "duration": 280,
+              "description": ""
+            },
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ],
+          "unloadEventStart": 0,
+          "unloadEventEnd": 0,
+          "domInteractive": 719.4399999380112,
+          "domContentLoadedEventStart": 879.5900000333786,
+          "domContentLoadedEventEnd": 879.6200000047684,
+          "domComplete": 880.0549999475479,
+          "loadEventStart": 880.0649999380112,
+          "loadEventEnd": 880.1150000095367,
+          "type": "navigate",
+          "redirectCount": 0,
+          "activationStart": 0,
+          "criticalCHRestart": 0,
+          "notRestoredReasons": null,
+          "confidence": {
+            "randomizedTriggerRate": 0.4994798,
+            "value": "low"
+          }
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920",
+          "entryType": "resource",
+          "startTime": 718.9550000429153,
+          "duration": 157.12000000476837,
+          "navigationId": 3191,
+          "initiatorType": "script",
+          "deliveryType": "",
+          "nextHopProtocol": "",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/javascript",
+          "contentEncoding": "gzip",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 718.9550000429153,
+          "domainLookupStart": 0,
+          "domainLookupEnd": 0,
+          "connectStart": 0,
+          "secureConnectionStart": 0,
+          "connectEnd": 0,
+          "requestStart": 0,
+          "responseStart": 0,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 0,
+          "responseEnd": 876.0750000476837,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0,
+          "responseStatus": 200,
+          "serverTiming": []
+        },
+        {
+          "name": "https://os.groundupcoder.net/cdn-cgi/rum?",
+          "entryType": "resource",
+          "startTime": 882.085000038147,
+          "duration": 73.12999999523163,
+          "navigationId": 3191,
+          "initiatorType": "xmlhttprequest",
+          "deliveryType": "",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/plain",
+          "contentEncoding": "",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 882.085000038147,
+          "domainLookupStart": 882.085000038147,
+          "domainLookupEnd": 882.085000038147,
+          "connectStart": 882.085000038147,
+          "secureConnectionStart": 882.085000038147,
+          "connectEnd": 882.085000038147,
+          "requestStart": 882.289999961853,
+          "responseStart": 955.0700000524521,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 955.0700000524521,
+          "responseEnd": 955.2150000333786,
+          "transferSize": 300,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0,
+          "responseStatus": 204,
+          "serverTiming": [
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ]
+        }
+      ],
+      "runtime": "2a9cca447a35af0d0d8894ea4b50cb254ce20821753af8ae70a1ad5060da2a0f",
+      "log": ""
+    },
+    {
+      "pair": 0,
+      "mode": "reload",
+      "wallMs": 325,
+      "probe": {
+        "events": [
+          {
+            "ms": 188.875,
+            "kind": "status",
+            "text": "Unpacking…"
+          },
+          {
+            "ms": 219.0549999475479,
+            "kind": "worker-created",
+            "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+            "name": "busybox-filesystem-owner"
+          },
+          {
+            "ms": 219.17499995231628,
+            "kind": "status",
+            "text": "JSPI · WebGPU"
+          },
+          {
+            "ms": 221.27499997615814,
+            "kind": "shell-ready"
+          }
+        ],
+        "longTasks": [],
+        "status": "JSPI · WebGPU"
+      },
+      "navigation": [
+        {
+          "name": "https://os.groundupcoder.net/",
+          "entryType": "navigation",
+          "startTime": 0,
+          "duration": 191.0199999809265,
+          "navigationId": 4732,
+          "initiatorType": "navigation",
+          "deliveryType": "cache",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/html",
+          "contentEncoding": "zstd",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 0.16999995708465576,
+          "domainLookupStart": 0.16999995708465576,
+          "domainLookupEnd": 0.16999995708465576,
+          "connectStart": 0.16999995708465576,
+          "secureConnectionStart": 0.16999995708465576,
+          "connectEnd": 0.16999995708465576,
+          "requestStart": 0.4950000047683716,
+          "responseStart": 181.36500000953674,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 181.36500000953674,
+          "responseEnd": 181.87000000476837,
+          "transferSize": 300,
+          "encodedBodySize": 168578,
+          "decodedBodySize": 258215,
+          "responseStatus": 200,
+          "serverTiming": [
+            {
+              "name": "cfCacheStatus",
+              "duration": 0,
+              "description": "DYNAMIC"
+            },
+            {
+              "name": "cfEdge",
+              "duration": 6,
+              "description": ""
+            },
+            {
+              "name": "cfOrigin",
+              "duration": 99,
+              "description": ""
+            },
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ],
+          "unloadEventStart": 185.04999995231628,
+          "unloadEventEnd": 185.04999995231628,
+          "domInteractive": 189.12000000476837,
+          "domContentLoadedEventStart": 190.72499990463257,
+          "domContentLoadedEventEnd": 190.74500000476837,
+          "domComplete": 190.93499994277954,
+          "loadEventStart": 190.9799998998642,
+          "loadEventEnd": 191.0199999809265,
+          "type": "reload",
+          "redirectCount": 0,
+          "activationStart": 0,
+          "criticalCHRestart": 0,
+          "notRestoredReasons": null,
+          "confidence": {
+            "randomizedTriggerRate": 0.4994798,
+            "value": "high"
+          }
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920",
+          "entryType": "resource",
+          "startTime": 186.81499993801117,
+          "duration": 0,
+          "navigationId": 4732,
+          "initiatorType": "script",
+          "deliveryType": "",
+          "nextHopProtocol": "",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/javascript",
+          "contentEncoding": "gzip",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 186.81499993801117,
+          "domainLookupStart": 0,
+          "domainLookupEnd": 0,
+          "connectStart": 0,
+          "secureConnectionStart": 0,
+          "connectEnd": 0,
+          "requestStart": 0,
+          "responseStart": 0,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 0,
+          "responseEnd": 186.81499993801117,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0,
+          "responseStatus": 200,
+          "serverTiming": []
+        },
+        {
+          "name": "https://os.groundupcoder.net/cdn-cgi/rum?",
+          "entryType": "resource",
+          "startTime": 193.08499991893768,
+          "duration": 61.03000009059906,
+          "navigationId": 4732,
+          "initiatorType": "xmlhttprequest",
+          "deliveryType": "",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/plain",
+          "contentEncoding": "",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 193.08499991893768,
+          "domainLookupStart": 193.08499991893768,
+          "domainLookupEnd": 193.08499991893768,
+          "connectStart": 193.08499991893768,
+          "secureConnectionStart": 193.08499991893768,
+          "connectEnd": 193.08499991893768,
+          "requestStart": 193.27999997138977,
+          "responseStart": 254.04999995231628,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 254.04999995231628,
+          "responseEnd": 254.11500000953674,
+          "transferSize": 300,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0,
+          "responseStatus": 204,
+          "serverTiming": [
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ]
+        },
+        {
+          "name": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "entryType": "resource",
+          "startTime": 222.7149999141693,
+          "duration": -1.5049999952316284,
+          "navigationId": 4732,
+          "initiatorType": "other",
+          "deliveryType": "cache",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/javascript",
+          "contentEncoding": "gzip",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 222.7149999141693,
+          "domainLookupStart": 222.7149999141693,
+          "domainLookupEnd": 222.7149999141693,
+          "connectStart": 222.7149999141693,
+          "secureConnectionStart": 222.7149999141693,
+          "connectEnd": 222.7149999141693,
+          "requestStart": 222.7149999141693,
+          "responseStart": 222.7149999141693,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 0,
+          "responseEnd": 221.20999991893768,
+          "transferSize": 0,
+          "encodedBodySize": 328058,
+          "decodedBodySize": 1076685,
+          "responseStatus": 200,
+          "serverTiming": [
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ]
+        }
+      ],
+      "runtime": "2a9cca447a35af0d0d8894ea4b50cb254ce20821753af8ae70a1ad5060da2a0f",
+      "log": ""
+    },
+    {
+      "pair": 1,
+      "mode": "fresh",
+      "wallMs": 1199,
+      "probe": {
+        "events": [
+          {
+            "ms": 762.2799999713898,
+            "kind": "status",
+            "text": "Unpacking…"
+          },
+          {
+            "ms": 1046.2050000429153,
+            "kind": "worker-created",
+            "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+            "name": "busybox-filesystem-owner"
+          },
+          {
+            "ms": 1046.375,
+            "kind": "status",
+            "text": "JSPI · WebGPU"
+          },
+          {
+            "ms": 1047.3100000619888,
+            "kind": "shell-ready"
+          }
+        ],
+        "longTasks": [],
+        "status": "JSPI · WebGPU"
+      },
+      "navigation": [
+        {
+          "name": "https://os.groundupcoder.net/",
+          "entryType": "navigation",
+          "startTime": 0,
+          "duration": 1087.6150000095367,
+          "navigationId": 6625,
+          "initiatorType": "navigation",
+          "deliveryType": "",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/html",
+          "contentEncoding": "zstd",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 0.16499996185302734,
+          "domainLookupStart": 0.48500001430511475,
+          "domainLookupEnd": 202.8400000333786,
+          "connectStart": 202.8400000333786,
+          "secureConnectionStart": 203.03999996185303,
+          "connectEnd": 257.5349999666214,
+          "requestStart": 257.59500002861023,
+          "responseStart": 752.3400000333786,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 752.3400000333786,
+          "responseEnd": 1015.7150000333786,
+          "transferSize": 169078,
+          "encodedBodySize": 168778,
+          "decodedBodySize": 258215,
+          "responseStatus": 200,
+          "serverTiming": [
+            {
+              "name": "cfCacheStatus",
+              "duration": 0,
+              "description": "DYNAMIC"
+            },
+            {
+              "name": "cfEdge",
+              "duration": 17,
+              "description": ""
+            },
+            {
+              "name": "cfOrigin",
+              "duration": 419,
+              "description": ""
+            },
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ],
+          "unloadEventStart": 0,
+          "unloadEventEnd": 0,
+          "domInteractive": 1018.1200000047684,
+          "domContentLoadedEventStart": 1087.0950000286102,
+          "domContentLoadedEventEnd": 1087.1200000047684,
+          "domComplete": 1087.570000052452,
+          "loadEventStart": 1087.585000038147,
+          "loadEventEnd": 1087.6150000095367,
+          "type": "navigate",
+          "redirectCount": 0,
+          "activationStart": 0,
+          "criticalCHRestart": 0,
+          "notRestoredReasons": null,
+          "confidence": {
+            "randomizedTriggerRate": 0.4994798,
+            "value": "low"
+          }
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920",
+          "entryType": "resource",
+          "startTime": 1017.25,
+          "duration": 68.00999999046326,
+          "navigationId": 6625,
+          "initiatorType": "script",
+          "deliveryType": "",
+          "nextHopProtocol": "",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/javascript",
+          "contentEncoding": "gzip",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 1017.25,
+          "domainLookupStart": 0,
+          "domainLookupEnd": 0,
+          "connectStart": 0,
+          "secureConnectionStart": 0,
+          "connectEnd": 0,
+          "requestStart": 0,
+          "responseStart": 0,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 0,
+          "responseEnd": 1085.2599999904633,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0,
+          "responseStatus": 200,
+          "serverTiming": []
+        },
+        {
+          "name": "https://os.groundupcoder.net/cdn-cgi/rum?",
+          "entryType": "resource",
+          "startTime": 1088.7849999666214,
+          "duration": 62.69500005245209,
+          "navigationId": 6625,
+          "initiatorType": "xmlhttprequest",
+          "deliveryType": "",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/plain",
+          "contentEncoding": "",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 1088.7849999666214,
+          "domainLookupStart": 1088.7849999666214,
+          "domainLookupEnd": 1088.7849999666214,
+          "connectStart": 1088.7849999666214,
+          "secureConnectionStart": 1088.7849999666214,
+          "connectEnd": 1088.7849999666214,
+          "requestStart": 1088.9650000333786,
+          "responseStart": 1151.3400000333786,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 1151.3400000333786,
+          "responseEnd": 1151.4800000190735,
+          "transferSize": 300,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0,
+          "responseStatus": 204,
+          "serverTiming": [
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ]
+        }
+      ],
+      "runtime": "2a9cca447a35af0d0d8894ea4b50cb254ce20821753af8ae70a1ad5060da2a0f",
+      "log": ""
+    },
+    {
+      "pair": 1,
+      "mode": "reload",
+      "wallMs": 353,
+      "probe": {
+        "events": [
+          {
+            "ms": 218.9449999332428,
+            "kind": "status",
+            "text": "Unpacking…"
+          },
+          {
+            "ms": 248.2849999666214,
+            "kind": "worker-created",
+            "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+            "name": "busybox-filesystem-owner"
+          },
+          {
+            "ms": 248.38999998569489,
+            "kind": "status",
+            "text": "JSPI · WebGPU"
+          },
+          {
+            "ms": 250.35000002384186,
+            "kind": "shell-ready"
+          }
+        ],
+        "longTasks": [],
+        "status": "JSPI · WebGPU"
+      },
+      "navigation": [
+        {
+          "name": "https://os.groundupcoder.net/",
+          "entryType": "navigation",
+          "startTime": 0,
+          "duration": 221.18499994277954,
+          "navigationId": 5549,
+          "initiatorType": "navigation",
+          "deliveryType": "cache",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/html",
+          "contentEncoding": "zstd",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 0.16999995708465576,
+          "domainLookupStart": 0.16999995708465576,
+          "domainLookupEnd": 0.16999995708465576,
+          "connectStart": 0.16999995708465576,
+          "secureConnectionStart": 0.16999995708465576,
+          "connectEnd": 0.16999995708465576,
+          "requestStart": 0.49000000953674316,
+          "responseStart": 213.1599999666214,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 213.1599999666214,
+          "responseEnd": 213.61500000953674,
+          "transferSize": 300,
+          "encodedBodySize": 168778,
+          "decodedBodySize": 258215,
+          "responseStatus": 200,
+          "serverTiming": [
+            {
+              "name": "cfCacheStatus",
+              "duration": 0,
+              "description": "DYNAMIC"
+            },
+            {
+              "name": "cfEdge",
+              "duration": 8,
+              "description": ""
+            },
+            {
+              "name": "cfOrigin",
+              "duration": 146,
+              "description": ""
+            },
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ],
+          "unloadEventStart": 214.83499991893768,
+          "unloadEventEnd": 214.83499991893768,
+          "domInteractive": 219.2149999141693,
+          "domContentLoadedEventStart": 220.875,
+          "domContentLoadedEventEnd": 220.8949999809265,
+          "domComplete": 221.08499991893768,
+          "loadEventStart": 221.1449999809265,
+          "loadEventEnd": 221.18499994277954,
+          "type": "reload",
+          "redirectCount": 0,
+          "activationStart": 0,
+          "criticalCHRestart": 0,
+          "notRestoredReasons": null,
+          "confidence": {
+            "randomizedTriggerRate": 0.4994798,
+            "value": "low"
+          }
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920",
+          "entryType": "resource",
+          "startTime": 216.75999999046326,
+          "duration": 0,
+          "navigationId": 5549,
+          "initiatorType": "script",
+          "deliveryType": "",
+          "nextHopProtocol": "",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/javascript",
+          "contentEncoding": "gzip",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 216.75999999046326,
+          "domainLookupStart": 0,
+          "domainLookupEnd": 0,
+          "connectStart": 0,
+          "secureConnectionStart": 0,
+          "connectEnd": 0,
+          "requestStart": 0,
+          "responseStart": 0,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 0,
+          "responseEnd": 216.75999999046326,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0,
+          "responseStatus": 200,
+          "serverTiming": []
+        },
+        {
+          "name": "https://os.groundupcoder.net/cdn-cgi/rum?",
+          "entryType": "resource",
+          "startTime": 223.37000000476837,
+          "duration": 65.125,
+          "navigationId": 5549,
+          "initiatorType": "xmlhttprequest",
+          "deliveryType": "",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/plain",
+          "contentEncoding": "",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 223.37000000476837,
+          "domainLookupStart": 223.37000000476837,
+          "domainLookupEnd": 223.37000000476837,
+          "connectStart": 223.37000000476837,
+          "secureConnectionStart": 223.37000000476837,
+          "connectEnd": 223.37000000476837,
+          "requestStart": 223.5899999141693,
+          "responseStart": 288.3899999856949,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 288.3899999856949,
+          "responseEnd": 288.4950000047684,
+          "transferSize": 300,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0,
+          "responseStatus": 204,
+          "serverTiming": [
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ]
+        },
+        {
+          "name": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "entryType": "resource",
+          "startTime": 252.72500002384186,
+          "duration": -2.325000047683716,
+          "navigationId": 5549,
+          "initiatorType": "other",
+          "deliveryType": "cache",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/javascript",
+          "contentEncoding": "gzip",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 252.72500002384186,
+          "domainLookupStart": 252.72500002384186,
+          "domainLookupEnd": 252.72500002384186,
+          "connectStart": 252.72500002384186,
+          "secureConnectionStart": 252.72500002384186,
+          "connectEnd": 252.72500002384186,
+          "requestStart": 252.72500002384186,
+          "responseStart": 252.72500002384186,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 0,
+          "responseEnd": 250.39999997615814,
+          "transferSize": 0,
+          "encodedBodySize": 328058,
+          "decodedBodySize": 1076685,
+          "responseStatus": 200,
+          "serverTiming": [
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ]
+        }
+      ],
+      "runtime": "2a9cca447a35af0d0d8894ea4b50cb254ce20821753af8ae70a1ad5060da2a0f",
+      "log": ""
+    },
+    {
+      "pair": 2,
+      "mode": "fresh",
+      "wallMs": 659,
+      "probe": {
+        "events": [
+          {
+            "ms": 305.7149999141693,
+            "kind": "status",
+            "text": "Unpacking…"
+          },
+          {
+            "ms": 512.5499999523163,
+            "kind": "worker-created",
+            "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+            "name": "busybox-filesystem-owner"
+          },
+          {
+            "ms": 512.7199999094009,
+            "kind": "status",
+            "text": "JSPI · WebGPU"
+          },
+          {
+            "ms": 514.9249999523163,
+            "kind": "shell-ready"
+          }
+        ],
+        "longTasks": [],
+        "status": "JSPI · WebGPU"
+      },
+      "navigation": [
+        {
+          "name": "https://os.groundupcoder.net/",
+          "entryType": "navigation",
+          "startTime": 0,
+          "duration": 548.2349998950958,
+          "navigationId": 881,
+          "initiatorType": "navigation",
+          "deliveryType": "",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/html",
+          "contentEncoding": "zstd",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 0.17499995231628418,
+          "domainLookupStart": 0.49499988555908203,
+          "domainLookupEnd": 21.994999885559082,
+          "connectStart": 21.994999885559082,
+          "secureConnectionStart": 22.164999961853027,
+          "connectEnd": 73.97499990463257,
+          "requestStart": 74.00499999523163,
+          "responseStart": 295.55999994277954,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 295.55999994277954,
+          "responseEnd": 483.05999994277954,
+          "transferSize": 168962,
+          "encodedBodySize": 168662,
+          "decodedBodySize": 258215,
+          "responseStatus": 200,
+          "serverTiming": [
+            {
+              "name": "cfCacheStatus",
+              "duration": 0,
+              "description": "DYNAMIC"
+            },
+            {
+              "name": "cfEdge",
+              "duration": 11,
+              "description": ""
+            },
+            {
+              "name": "cfOrigin",
+              "duration": 147,
+              "description": ""
+            },
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ],
+          "unloadEventStart": 0,
+          "unloadEventEnd": 0,
+          "domInteractive": 484.9099999666214,
+          "domContentLoadedEventStart": 547.7099999189377,
+          "domContentLoadedEventEnd": 547.7399998903275,
+          "domComplete": 548.1749999523163,
+          "loadEventStart": 548.1949999332428,
+          "loadEventEnd": 548.2349998950958,
+          "type": "navigate",
+          "redirectCount": 0,
+          "activationStart": 0,
+          "criticalCHRestart": 0,
+          "notRestoredReasons": null,
+          "confidence": {
+            "randomizedTriggerRate": 0.4994798,
+            "value": "low"
+          }
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920",
+          "entryType": "resource",
+          "startTime": 484.3799999952316,
+          "duration": 61.5349999666214,
+          "navigationId": 881,
+          "initiatorType": "script",
+          "deliveryType": "",
+          "nextHopProtocol": "",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/javascript",
+          "contentEncoding": "gzip",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 484.3799999952316,
+          "domainLookupStart": 0,
+          "domainLookupEnd": 0,
+          "connectStart": 0,
+          "secureConnectionStart": 0,
+          "connectEnd": 0,
+          "requestStart": 0,
+          "responseStart": 0,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 0,
+          "responseEnd": 545.914999961853,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0,
+          "responseStatus": 200,
+          "serverTiming": []
+        },
+        {
+          "name": "https://os.groundupcoder.net/cdn-cgi/rum?",
+          "entryType": "resource",
+          "startTime": 549.3699998855591,
+          "duration": 61.080000042915344,
+          "navigationId": 881,
+          "initiatorType": "xmlhttprequest",
+          "deliveryType": "",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/plain",
+          "contentEncoding": "",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 549.3699998855591,
+          "domainLookupStart": 549.3699998855591,
+          "domainLookupEnd": 549.3699998855591,
+          "connectStart": 549.3699998855591,
+          "secureConnectionStart": 549.3699998855591,
+          "connectEnd": 549.3699998855591,
+          "requestStart": 549.5499999523163,
+          "responseStart": 610.2999999523163,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 610.2999999523163,
+          "responseEnd": 610.4499999284744,
+          "transferSize": 300,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0,
+          "responseStatus": 204,
+          "serverTiming": [
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ]
+        },
+        {
+          "name": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "entryType": "resource",
+          "startTime": 565.4399999380112,
+          "duration": 79.91999995708466,
+          "navigationId": 881,
+          "initiatorType": "other",
+          "deliveryType": "",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/javascript",
+          "contentEncoding": "gzip",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 565.4399999380112,
+          "domainLookupStart": 565.4399999380112,
+          "domainLookupEnd": 565.4399999380112,
+          "connectStart": 565.4399999380112,
+          "secureConnectionStart": 565.4399999380112,
+          "connectEnd": 565.4399999380112,
+          "requestStart": 565.4399999380112,
+          "responseStart": 565.4399999380112,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 0,
+          "responseEnd": 645.3599998950958,
+          "transferSize": 328358,
+          "encodedBodySize": 328058,
+          "decodedBodySize": 1076685,
+          "responseStatus": 200,
+          "serverTiming": [
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ]
+        }
+      ],
+      "runtime": "2a9cca447a35af0d0d8894ea4b50cb254ce20821753af8ae70a1ad5060da2a0f",
+      "log": ""
+    },
+    {
+      "pair": 2,
+      "mode": "reload",
+      "wallMs": 662,
+      "probe": {
+        "events": [
+          {
+            "ms": 526.5199999809265,
+            "kind": "status",
+            "text": "Unpacking…"
+          },
+          {
+            "ms": 556.7450000047684,
+            "kind": "worker-created",
+            "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+            "name": "busybox-filesystem-owner"
+          },
+          {
+            "ms": 556.8550000190735,
+            "kind": "status",
+            "text": "JSPI · WebGPU"
+          },
+          {
+            "ms": 558.9199999570847,
+            "kind": "shell-ready"
+          }
+        ],
+        "longTasks": [],
+        "status": "JSPI · WebGPU"
+      },
+      "navigation": [
+        {
+          "name": "https://os.groundupcoder.net/",
+          "entryType": "navigation",
+          "startTime": 0,
+          "duration": 528.875,
+          "navigationId": 4094,
+          "initiatorType": "navigation",
+          "deliveryType": "cache",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/html",
+          "contentEncoding": "zstd",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 0.16999995708465576,
+          "domainLookupStart": 0.16999995708465576,
+          "domainLookupEnd": 0.16999995708465576,
+          "connectStart": 0.16999995708465576,
+          "secureConnectionStart": 0.16999995708465576,
+          "connectEnd": 0.16999995708465576,
+          "requestStart": 0.4950000047683716,
+          "responseStart": 521.0149999856949,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 521.0149999856949,
+          "responseEnd": 521.4750000238419,
+          "transferSize": 300,
+          "encodedBodySize": 168662,
+          "decodedBodySize": 258215,
+          "responseStatus": 200,
+          "serverTiming": [
+            {
+              "name": "cfCacheStatus",
+              "duration": 0,
+              "description": "DYNAMIC"
+            },
+            {
+              "name": "cfEdge",
+              "duration": 9,
+              "description": ""
+            },
+            {
+              "name": "cfOrigin",
+              "duration": 418,
+              "description": ""
+            },
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ],
+          "unloadEventStart": 522.5649999380112,
+          "unloadEventEnd": 522.5699999332428,
+          "domInteractive": 526.789999961853,
+          "domContentLoadedEventStart": 528.5900000333786,
+          "domContentLoadedEventEnd": 528.6100000143051,
+          "domComplete": 528.8049999475479,
+          "loadEventStart": 528.8500000238419,
+          "loadEventEnd": 528.875,
+          "type": "reload",
+          "redirectCount": 0,
+          "activationStart": 0,
+          "criticalCHRestart": 0,
+          "notRestoredReasons": null,
+          "confidence": {
+            "randomizedTriggerRate": 0.4994798,
+            "value": "low"
+          }
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920",
+          "entryType": "resource",
+          "startTime": 524.3450000286102,
+          "duration": 0,
+          "navigationId": 4094,
+          "initiatorType": "script",
+          "deliveryType": "",
+          "nextHopProtocol": "",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/javascript",
+          "contentEncoding": "gzip",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 524.3450000286102,
+          "domainLookupStart": 0,
+          "domainLookupEnd": 0,
+          "connectStart": 0,
+          "secureConnectionStart": 0,
+          "connectEnd": 0,
+          "requestStart": 0,
+          "responseStart": 0,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 0,
+          "responseEnd": 524.3450000286102,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0,
+          "responseStatus": 200,
+          "serverTiming": []
+        },
+        {
+          "name": "https://os.groundupcoder.net/cdn-cgi/rum?",
+          "entryType": "resource",
+          "startTime": 531.0249999761581,
+          "duration": 52,
+          "navigationId": 4094,
+          "initiatorType": "xmlhttprequest",
+          "deliveryType": "",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/plain",
+          "contentEncoding": "",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 531.0249999761581,
+          "domainLookupStart": 531.0249999761581,
+          "domainLookupEnd": 531.0249999761581,
+          "connectStart": 531.0249999761581,
+          "secureConnectionStart": 531.0249999761581,
+          "connectEnd": 531.0249999761581,
+          "requestStart": 531.2549999952316,
+          "responseStart": 582.9349999427795,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 582.9349999427795,
+          "responseEnd": 583.0249999761581,
+          "transferSize": 300,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0,
+          "responseStatus": 204,
+          "serverTiming": [
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ]
+        },
+        {
+          "name": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "entryType": "resource",
+          "startTime": 560.1449999809265,
+          "duration": -1.2949999570846558,
+          "navigationId": 4094,
+          "initiatorType": "other",
+          "deliveryType": "cache",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/javascript",
+          "contentEncoding": "gzip",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 560.1449999809265,
+          "domainLookupStart": 560.1449999809265,
+          "domainLookupEnd": 560.1449999809265,
+          "connectStart": 560.1449999809265,
+          "secureConnectionStart": 560.1449999809265,
+          "connectEnd": 560.1449999809265,
+          "requestStart": 560.1449999809265,
+          "responseStart": 560.1449999809265,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 0,
+          "responseEnd": 558.8500000238419,
+          "transferSize": 0,
+          "encodedBodySize": 328058,
+          "decodedBodySize": 1076685,
+          "responseStatus": 200,
+          "serverTiming": [
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ]
+        }
+      ],
+      "runtime": "2a9cca447a35af0d0d8894ea4b50cb254ce20821753af8ae70a1ad5060da2a0f",
+      "log": ""
+    }
+  ]
+}
