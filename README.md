@@ -4,6 +4,9 @@ A standalone browser OS with a persistent filesystem, BusyBox shell, C compiler,
 libc, GNU Make, archive tools and HTTP downloads. Applications are discovered,
 built and installed by the browser from configured package repositories.
 
+The application boundary and compatibility rules are documented in
+[the platform contract](docs/PLATFORM.md).
+
 Build and serve with Node (tested with 25.8.2):
 
 ```sh

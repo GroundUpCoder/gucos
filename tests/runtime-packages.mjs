@@ -70,6 +70,17 @@ try{
  const binaryManifest={...alpha.m,binary};catalog.packages.hello=a.put('/hello/binary.json',binaryManifest);a.put('/catalog.json',catalog);
  await s.close();s=await browserSession({allowedOrigins:[a.url]});
  await s.command(`set -eu\ngucman repo remove groundupcoder\ngucman repo add a ${a.url}/catalog.json\ngucman install hello\nhello`);
+ // Platform/dependency mismatches fail before changing installed files.
+ const platform={target:'wasm32-wasm-posix',minVersion:'1.0.0',runtimeAbi:5,objectAbi:3,features:['posix-core']};
+ const installedBefore=await s.command('sha256sum /usr/local/lib/gucman/packages/hello/current/manifest.json');
+ for(const change of [{platform:{...platform,minVersion:'2.0.0'}},{platform:{...platform,target:'wasm64'}},{platform:{...platform,features:['missing-feature']}},{platform,dependencies:['dep'],dependencyRequirements:{dep:{version:'999'}}}]){
+  catalog.packages.hello=a.put('/incompatible.json',{...binaryManifest,...change});a.put('/catalog.json',catalog);
+  await assert.rejects(()=>s.command('gucman upgrade hello'),/requirements not met/);
+  assert.equal(await s.command('sha256sum /usr/local/lib/gucman/packages/hello/current/manifest.json'),installedBefore);
+  assert.match(await s.command('hello'),/HELLO-A/);
+ }
+ catalog.packages.hello=a.put('/hello/binary.json',binaryManifest);a.put('/catalog.json',catalog);
+ console.log('PASS incompatible platform/dependency graphs preserve installed manifest and executable');
  // Interrupt the real publication path before link creation, then recover it.
  const interrupted={...binaryManifest,version:'3'};
  catalog.packages.hello=a.put('/interrupted.json',interrupted);a.put('/catalog.json',catalog);

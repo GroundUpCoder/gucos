@@ -8,14 +8,7 @@ let s=await browserSession(options);
 try {
  assert.equal(await s.page.evaluate(()=>crossOriginIsolated),true);
  assert.equal(await s.page.evaluate(()=>shell.toolchain.systemBuild),expected);
- const info=JSON.parse(await s.command('gucman info groundupcoder:jsmn'));
- if(info.runtime===expected){
-  console.log(await s.command('set -eu\ngucman install groundupcoder:jsmn\n/usr/local/bin/jsmn-example\necho LIVE-BINARY-PASS'));
- }else{
-  await assert.rejects(()=>s.command('gucman install groundupcoder:jsmn'),/binary runtime mismatch/);
-  console.log('PASS LIVE old binary correctly rejected for runtime '+info.runtime);
-  console.log(await s.command('set -eu\ngucman build groundupcoder:jsmn\n/usr/local/bin/jsmn-example\necho LIVE-SOURCE-PASS'));
- }
+ console.log(await s.command('set -eu\ngucman install groundupcoder:jsmn\n/usr/local/bin/jsmn-example\necho LIVE-BINARY-PASS'));
  await s.page.reload();await s.page.waitForFunction(()=>window.shell?.ready);
  assert.match(await s.command('/usr/local/bin/jsmn-example'),/UID: 1000/);
  await s.page.evaluate(async source=>shell.busybox.write('/tmp/gpu.c',new TextEncoder().encode(source)),await readFile(new URL('fixtures/webgpu-vt.c',import.meta.url),'utf8'));

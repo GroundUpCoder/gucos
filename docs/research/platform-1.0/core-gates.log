@@ -1,0 +1,61 @@
+Candidate c4411d720bede49ead5c1de69bfe7b1247656a146b72d991d209883606e300fb platform 1.0.0
+
+{"name":"platform-posix","status":0,"signal":null,"seconds":0.891}
+5 functions, 23087 bytes
+PLATFORM-POSIX-PASS
+
+
+{"name":"platform-ime","status":0,"signal":null,"seconds":1.018}
+545 functions, 504417 bytes
+
+PASS SDL composition updates, UTF-8 commit exactly once, stop suppression, unsupported window flags/fullscreen
+
+{"name":"startup-progress","status":0,"signal":null,"seconds":2.565}
+Controlled stream /assets/4a4fd31f4286b5b3296bbc66b97a12fcc4d22528547f4412e62d8cd77fa085fa.bin 1403780
+PASS startup fresh, byte/download states, exact remaining counts, prompt/input, history, 375px and persisted reload
+PASS startup http failure stays visible and retry succeeds
+PASS startup checksum failure stays visible and retry succeeds
+
+{"name":"platform-upgrade","status":0,"signal":null,"seconds":1.768}
+OLD-ANSWER-42
+OLD-DSO-42
+
+OLD-ANSWER-42
+OLD-DSO-42
+3 functions, 5133 bytes
+OLD-ANSWER-42
+
+PASS upgraded baseline disk, unchanged executable/DSO, preserved object/archive relink, new libc APIs and second reload
+
+{"name":"smoke","status":0,"signal":null,"seconds":1.333}
+/bin/sh
+cc -c hello.c -o hello.o
+cc hello.o -o hello
+2 functions, 4558 bytes
+MINIMAL-COMPILER-PASS
+hello.o
+groundupcoder	https://raw.githubusercontent.com/GroundUpCoder/wasm-posix-packages/main/catalog.json
+
+PASS: fresh boot, Make parallel recipe, compiler, archive, repository listing, persistence and reload
+
+{"name":"runtime-packages","status":0,"signal":null,"seconds":34.083}
+PASS incompatible platform/dependency graphs preserve installed manifest and executable
+PASS runtime repositories, guest builds and binary installs
+
+{"name":"storage-boundary","status":0,"signal":null,"seconds":0.887}
+PASS new-core reset preserves all historical disk, journal and editor namespaces
+
+{"name":"virtual-terminals","status":0,"signal":null,"seconds":5.582}
+545 functions, 504751 bytes
+
+PASS: two SDL VTs, single visible surface, terminal switching, key release, resize, bounded hidden progress, crash and exit recovery; no WM socket
+
+{"name":"webgpu-vt","status":0,"signal":null,"seconds":3.118}
+620 functions, 586677 bytes
+
+PASS: two direct WebGPU applications through SDL bridge, resize, independent crash/continued device progress and terminal recovery
+
+{"name":"vt-host-regressions","status":0,"signal":null,"seconds":0.036}
+PASS function probes: lost device blocks submissions, configure preserves visibility, invalid/stale SDL surface refused, relative movement retained
+[sdl-gpu] device lost: reason=destroyed msg=injected
+SDL_GetWGPUSurface: no such window 999

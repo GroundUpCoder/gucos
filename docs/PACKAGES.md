@@ -61,3 +61,7 @@ its binary ref. Runtime changes currently invalidate binary compatibility conser
 and licenses as a USTAR archive, printing SHA256, size and build runtime. It does
 not upload or approve anything. A package publisher can pin that archive in a
 new manifest and independently test fresh binary installation before publication.
+
+Platform compatibility and dependency requirements are specified in
+[PLATFORM.md](PLATFORM.md). Build hashes identify provenance; new manifests use
+platform requirements, and the named pre-contract baseline remains accepted.

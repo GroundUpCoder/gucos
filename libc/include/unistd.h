@@ -85,11 +85,10 @@ static inline void sync(void) { }
 __import int chmod(const char *path, int mode);
 __import int fchmod(int fd, int mode);
 __import int link(const char *oldpath, const char *newpath);
-/* Ownership: single root user (uid/gid 0 everywhere, see getuid below) and
-   the fs stores no owner metadata — "changing" ownership always succeeds. */
-static inline int chown(const char *path, unsigned owner, unsigned group)  { (void)path; (void)owner; (void)group; return 0; }
-static inline int lchown(const char *path, unsigned owner, unsigned group) { (void)path; (void)owner; (void)group; return 0; }
-static inline int fchown(int fd, unsigned owner, unsigned group)           { (void)fd; (void)owner; (void)group; return 0; }
+/* Single-user ownership: validate the target; changing to nonzero IDs fails. */
+int chown(const char *path,unsigned owner,unsigned group);
+int lchown(const char *path,unsigned owner,unsigned group);
+int fchown(int fd,unsigned owner,unsigned group);
 __import unsigned int sleep(unsigned int seconds);
 __import int symlink(const char *target, const char *linkpath);
 __import int chmod(const char *path, int mode);
@@ -172,8 +171,8 @@ int execlp(const char *file, const char *arg, ...);
 __import void __exit(int status);
 static inline void  _exit(int s)            { __exit(s); for (;;) {} }
 static inline long  sysconf(int name)       { if (name == _SC_PAGESIZE) return 4096; if (name == _SC_NPROCESSORS_ONLN) return 4; return -1; }
-static inline int   setuid(unsigned uid)    { (void)uid; return -1; }
-static inline int   setgid(unsigned gid)    { (void)gid; return -1; }
+static inline int   setuid(unsigned uid)    { if(!uid)return 0; errno=ENOTSUP; return -1; }
+static inline int   setgid(unsigned gid)    { if(!gid)return 0; errno=ENOTSUP; return -1; }
 /* kill() lives in __signal.c (declared in signal.h; declared here too for
    unistd-only callers): self-directed signals must deliver through the libc
    handler tables, not just the kernel RPC. __signal.c links into every

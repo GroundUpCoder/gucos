@@ -78,6 +78,42 @@ static void output(int n){puts(scalar(n));}
 static const char *text_member(int n,const char *key){int k=member(n,key);if(k<0||nodes[k].type!='s')die("missing string field");return scalar(k);}
 static int identifier(const char *s){size_t len=strlen(s);if(!len||len>128||!((*s>='a'&&*s<='z')||(*s>='0'&&*s<='9')))return 0;for(;*s;s++)if(!((*s>='a'&&*s<='z')||(*s>='0'&&*s<='9')||*s=='+'||*s=='.'||*s=='-'))return 0;return 1;}
 static int has_string(int n,const char *value){if(n<0||nodes[n].type!='[')die("expected string array");int k=nodes[n].child,found=0;for(int i=0;i<nodes[n].count;i++){if(nodes[k].type!='s')die("expected string array");if(!strcmp(scalar(k),value))found=1;k=nodes[k].next;}return found;}
+/* Platform versions are strict stable Major.Minor.Patch triples. */
+static void semver(const char *s,unsigned v[3]){
+ for(int i=0;i<3;i++){
+  if(!isdigit(*s)||(*s=='0'&&isdigit(s[1])))die("invalid stable semantic version");
+  unsigned n=0;while(isdigit(*s)){if(n>100000000)die("version component too large");n=n*10+(*s++-'0');}v[i]=n;
+  if(i<2){if(*s++!='.')die("invalid stable semantic version");}else if(*s)die("prerelease or invalid version not accepted");
+ }
+}
+static int compare_version(const char *a,const char *b){unsigned x[3],y[3];semver(a,x);semver(b,y);for(int i=0;i<3;i++)if(x[i]!=y[i])return x[i]<y[i]?-1:1;return 0;}
+static void compatible(int n,int argc,char **argv){
+ if(argc!=10)die("compatible needs target version runtimeABI objectABI features legacyBuild currentBuild");
+ int p=member(n,"platform");
+ if(p<0){if(strcmp(text_member(n,"runtime"),argv[8])&&strcmp(text_member(n,"runtime"),argv[9]))die("unrecognized legacy binary baseline");return;}
+ if(nodes[p].type!='{')die("invalid platform requirements");
+ if(strcmp(text_member(p,"target"),argv[3]))die("binary target mismatch");
+ const char *minimum=text_member(p,"minVersion");unsigned want[3],host[3];semver(minimum,want);semver(argv[4],host);
+ if(want[0]!=host[0]||compare_version(argv[4],minimum)<0)die("binary platform version mismatch");
+ int k=member(p,"runtimeAbi");if(k<0||nodes[k].type!='n'||strcmp(scalar(k),argv[5]))die("binary runtime ABI mismatch");
+ k=member(p,"objectAbi");if(k>=0&&(nodes[k].type!='n'||strcmp(scalar(k),argv[6])))die("binary object ABI mismatch");
+ k=member(p,"features");if(k<0||nodes[k].type!='[')die("missing platform features");
+ int f=nodes[k].child;for(int i=0;i<nodes[k].count;i++){
+  if(nodes[f].type!='s'||!identifier(scalar(f)))die("invalid feature name");
+  char needle[132];snprintf(needle,sizeof needle,",%s,",scalar(f));if(!strstr(argv[7],needle))die("required platform feature unavailable");f=nodes[f].next;
+ }
+}
+static void dependency(int n,int argc,char **argv){
+ if(argc!=6)die("dependency needs name version manifestSHA256");
+ int requirements=member(n,"dependencyRequirements"),r=requirements<0?-1:member(requirements,argv[3]);
+ if(r<0){if(member(n,"platform")>=0)die("missing dependency compatibility requirement");return;}
+ if(nodes[r].type!='{')die("invalid dependency requirement");
+ int constraints=0,k=member(r,"version");if(k>=0){constraints++;if(nodes[k].type!='s'||strcmp(scalar(k),argv[4]))die("dependency version mismatch");}
+ k=member(r,"sha256");if(k>=0){constraints++;if(nodes[k].type!='s'||strcmp(scalar(k),argv[5]))die("dependency manifest mismatch");}
+ k=member(r,"minVersion");if(k>=0){constraints++;if(nodes[k].type!='s'||compare_version(argv[4],scalar(k))<0)die("dependency minimum version mismatch");}
+ k=member(r,"maxExclusive");if(k>=0){constraints++;if(nodes[k].type!='s'||compare_version(argv[4],scalar(k))>=0)die("dependency maximum version mismatch");}
+ if(!constraints)die("empty dependency compatibility requirement");
+}
 static int executable_path(const char *s){
  if(strncmp(s,"/usr/local/bin/",15)&&strncmp(s,"/usr/local/sbin/",16)&&strncmp(s,"/usr/local/libexec/",19))return 0;
  for(const char *p=s+1;*p;){const char *start=p;while(*p&&*p!='/'){unsigned char c=*p++;if(!((c>='a'&&c<='z')||(c>='A'&&c<='Z')||(c>='0'&&c<='9')||c=='_'||c=='+'||c=='.'||c=='-'))return 0;}size_t len=(size_t)(p-start);if(!len||(len==1&&*start=='.')||(len==2&&!memcmp(start,"..",2)))return 0;if(*p&&!p[1])return 0;if(*p)p++;}return 1;
@@ -114,6 +150,8 @@ int main(int argc,char **argv){
  FILE *f=fopen(argv[2],"rb");if(!f)die("cannot open JSON");char *bytes=allocate(MAX_BYTES+1);size_t size=fread(bytes,1,MAX_BYTES+1,f);if(ferror(f)||size>MAX_BYTES)die("JSON exceeds bound or read failed");fclose(f);
  utf8((unsigned char *)bytes,size);cursor=(unsigned char *)bytes;end=cursor+size;int n=value(0);space();if(cursor!=end)die("trailing JSON data");
  if(!strcmp(argv[1],"launch"))launch(n,argc,argv);
+ if(!strcmp(argv[1],"compatible")){compatible(n,argc,argv);return 0;}
+ if(!strcmp(argv[1],"dependency")){dependency(n,argc,argv);return 0;}
  if(!strcmp(argv[1],"pairs")){
   if(argc!=5)die("pairs needs object and string field");n=member(n,argv[3]);if(n<0||nodes[n].type!='{')die("expected pairs object");
   int k=nodes[n].child;

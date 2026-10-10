@@ -41,10 +41,17 @@ typedef int pthread_spinlock_t;
 #define PTHREAD_PROCESS_SHARED 1
 #define PTHREAD_KEYS_MAX 128
 #define PTHREAD_DESTRUCTOR_ITERATIONS 4
+#define PTHREAD_CANCEL_ENABLE 0
+#define PTHREAD_CANCEL_DISABLE 1
+#define PTHREAD_CANCEL_DEFERRED 0
+#define PTHREAD_CANCEL_ASYNCHRONOUS 1
 #define PTHREAD_CANCELED ((void *)-1)
-/* No cancellation: the cleanup routine runs only when popped with execute != 0. */
-#define pthread_cleanup_push(routine, arg) do { void (*__cleanup_routine)(void *) = (routine); void *__cleanup_arg = (arg);
-#define pthread_cleanup_pop(execute) if (execute) __cleanup_routine(__cleanup_arg); } while (0)
+/* Cleanup registration preserves public pthread object layouts. */
+struct __pthread_cleanup { void (*routine)(void *); void *arg; unsigned owner; struct __pthread_cleanup *next; };
+void __pthread_cleanup_push(struct __pthread_cleanup *,void (*)(void *),void *);
+void __pthread_cleanup_pop(struct __pthread_cleanup *,int);
+#define pthread_cleanup_push(routine,arg) do { struct __pthread_cleanup __cleanup; __pthread_cleanup_push(&__cleanup,(routine),(arg));
+#define pthread_cleanup_pop(execute) __pthread_cleanup_pop(&__cleanup,(execute)); } while (0)
 
 int pthread_create(pthread_t *thread, const pthread_attr_t *attr, void *(*start)(void *), void *arg);
 int pthread_join(pthread_t thread, void **retval);

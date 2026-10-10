@@ -12,7 +12,7 @@ function repositoryBootConfig(value) {
   const url=new URL(value.url);
   if(!['http:','https:'].includes(url.protocol)||url.username||url.password||url.search||url.hash)throw Error('Invalid repository boot URL');
   if(value.desktopLauncher!==undefined&&(typeof value.desktopLauncher!=='string'||!(/^[a-z0-9][a-z0-9+.-]{0,127}$/).test(value.desktopLauncher)))throw Error('Invalid repository desktop launcher');
-  return {format:1,url:url.href,runtime:value.runtime,...(value.desktopLauncher===undefined?{}:{desktopLauncher:value.desktopLauncher})};
+  return {format:1,url:url.href,runtime:value.runtime,platform:value.platform,...(value.desktopLauncher===undefined?{}:{desktopLauncher:value.desktopLauncher})};
 }
 // The boot configuration selects one reviewed launcher, not a bundled catalog.
 // Legacy disks keep their original GTK action. A repository must opt in explicitly.
@@ -35,6 +35,7 @@ async function installRepositoryManager(data,rawAsset,writeFile,readFile) {
   writeFile('/usr/libexec/guc-manager',data.repositoryScripts.manager,0o755);
   writeFile('/usr/bin/gucman','#!/bin/sh\nset -eu\nmkdir -p /usr/local/lib/gucman\nexec /usr/libexec/guc-lock /usr/local/lib/gucman/transaction.lock /bin/sh /usr/libexec/guc-manager "$@"\n',0o755);
   writeFile('/etc/gucman/runtime',config.runtime+'\n',0o644);
+  if(config.platform)writeFile('/etc/gucman/platform.json',JSON.stringify(config.platform)+'\n',0o644);
   if(!readFile('/etc/gucman/initialized')){
     writeFile('/etc/gucman/sources.d/groundupcoder.url',config.url+'\n',0o644);
     writeFile('/etc/gucman/initialized','1\n',0o644);

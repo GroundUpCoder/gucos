@@ -11,7 +11,7 @@ function canvasPoint(rect,width,height,clientX,clientY){
   const top=rect.top+(rect.height-height*rect.width/width)/2;
   return {x:(clientX-rect.left)*width/rect.width,y:(clientY-top)*width/rect.width};
 }
-function bindCanvasInput(canvas,send,textInput=false){
+function bindCanvasInput(canvas,send,textInput=false,graphicsText=false){
     const scans={Enter:40,Escape:41,Backspace:42,Tab:43,Space:44,ArrowRight:79,ArrowLeft:80,ArrowDown:81,ArrowUp:82,ControlLeft:224,ShiftLeft:225,AltLeft:226,MetaLeft:227,ControlRight:228,ShiftRight:229,AltRight:230,MetaRight:231,Delete:76,Home:74,End:77,PageUp:75,PageDown:78};
     // Physical USB/SDL key positions are required by XKB and SDL games even
     // when a separate Unicode keysym is available. Keep the named positions
@@ -25,16 +25,20 @@ function bindCanvasInput(canvas,send,textInput=false){
     for(let n=1;n<=12;n++)scans['F'+n]=57+n;
     const held=new Map(),buttons=new Map(),pointers=new Set();
     let composing=false,paste=null;
-    if(textInput){
+    if(textInput||graphicsText){
     canvas.contentEditable='true';canvas.setAttribute('role','application');
-    canvas.addEventListener('compositionstart',()=>{composing=true;});
-    canvas.addEventListener('compositionend',e=>{composing=false;if(e.data)send({type:'text',text:e.data});});
+    canvas.addEventListener('compositionstart',()=>{composing=true;if(graphicsText)send({type:'text-editing',text:'',start:0,length:0});});
+    canvas.addEventListener('compositionupdate',e=>{if(graphicsText)send({type:'text-editing',text:e.data||'',start:0,length:[...(e.data||'')].length});});
+    canvas.addEventListener('compositionend',e=>{composing=false;if(graphicsText)send({type:'text-editing',text:'',start:0,length:0});if(e.data)send({type:'text',text:e.data});});
     canvas.addEventListener('beforeinput',e=>{e.preventDefault();});
-    paste=e=>{const text=e.clipboardData?.getData('text/plain');if(text!==undefined){e.preventDefault();send({type:'clipboard-paste',text});}};
-    canvas.addEventListener('paste',paste);
+    if(textInput)paste=e=>{const text=e.clipboardData?.getData('text/plain');if(text!==undefined){e.preventDefault();send({type:'clipboard-paste',text});}};
+    if(paste)canvas.addEventListener('paste',paste);
     }
     const key=(e,down)=>{
-      if(composing||e.isComposing||e.keyCode===229)return;
+      if(composing||e.isComposing||e.keyCode===229){
+        if(!down&&held.has(e.code)){send({...held.get(e.code),down:false,repeat:false,mod:(e.shiftKey?3:0)|(e.ctrlKey?192:0)|(e.altKey?768:0)|(e.metaKey?3072:0)|(e.getModifierState?.('CapsLock')?8192:0)});held.delete(e.code);}
+        return;
+      }
       const mac=/Mac/.test(globalThis.navigator?.platform||'');
       if(textInput&&(e.metaKey||(e.ctrlKey&&!mac))&&e.key.toLowerCase()==='v')return; // browser paste event carries text
       const appleEditing=textInput&&mac&&e.metaKey&&['a','c','x','z','s','o','f'].includes(e.key.toLowerCase());
@@ -159,7 +163,7 @@ class BusyBoxSession {
     // Explicit edits take precedence over bundled defaults.
     const bootFiles={...Object.fromEntries(Object.entries(this.payload.binaryFiles||{}).map(([path,b64])=>[path,unbase64(b64)])),...files};
     // Boot executables compiled by the bundler (tools/prebuilt.mjs).
-    const prebuilt=Object.fromEntries(Object.entries(this.payload.prebuilt||{}).map(([path,e])=>[path,e.url?{key:e.key,url:new URL(e.url,location.href).href}:{bytes:unbase64(e.bytes),key:e.key}]));
+    const prebuilt=Object.fromEntries(Object.entries(this.payload.prebuilt||{}).map(([path,e])=>[path,e.url?{key:e.key,url:new URL(e.url,location.href).href,size:e.size}:{bytes:unbase64(e.bytes),key:e.key}]));
     // Prebuilt package artifacts live next to the page when the server
     // publishes them (docs/PACKAGES.md); gucman fetches by key from here.
     const artifacts=/^https?:$/.test(location.protocol)?new URL('artifacts/',location.href).href:'';
@@ -176,7 +180,7 @@ class BusyBoxSession {
     const win=new VirtualTerminal(canvas,()=>this.worker.postMessage({type:'kill',pid}),(width,height)=>send({type:'resize',width,height}),()=>this.terminal.focus());
     win.title.textContent=`[${pid}] ${path}`;this.windows.set(pid,win);
     win.visibility=active=>send({type:'vt-active',active});
-    bindCanvasInput(canvas,send);
+    bindCanvasInput(canvas,send,false,true);
     const offscreen=canvas.transferControlToOffscreen();this.worker.postMessage({type:'canvas',pid,canvas:offscreen},[offscreen]);
   }
   metadata(path){return new Promise(resolve=>{const id=this.nextId++;this.requests.set(id,resolve);this.worker.postMessage({type:'metadata',path,id});});}

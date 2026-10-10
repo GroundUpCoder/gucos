@@ -4,12 +4,16 @@ const workerHandles=new Map();
 let commandPid=0;
 let bootDownloads=new Map();
 const bootStatus=phase=>postMessage({type:'boot-progress',phase});
+function needsCoreLibc(data){
+  if(!systemFS.stat('/usr/lib/libc.a')||!systemFS.stat('/usr/lib/libc.so.1')||!systemFS.stat('/usr/lib/libc-fork.so.1'))return true;
+  try{return JSON.parse(decoder.decode(readFile('/usr/lib/wasm-posix/libc.json'))).libcDigest!==data.toolchain.libcDigest;}catch{return true;}
+}
 function planBootDownloads(data){
   const names={'/usr/lib/libc.a':'C development library','/usr/lib/libc.so.1':'C runtime','/usr/lib/libc-fork.so.1':'Process runtime','/usr/lib/wasm-posix/libc.json':'Runtime information','/bin/ash':'Shell','/bin/busybox':'System utilities','/usr/bin/make':'Make build tool','/bin/cc':'C compiler launcher','/usr/bin/ar':'Archive tool','/usr/bin/guc-fetch':'Download tool','/usr/bin/guc-links':'Link tool','/usr/libexec/guc-lock':'Package lock helper','/usr/libexec/guc-json':'Package metadata helper','/usr/libexec/guc-repo-fetch':'Package download helper','/usr/libexec/guc-unpack':'Package unpack helper','/usr/libexec/guc-links-v2':'Package link helper'};
   const add=(path,entry)=>{if(entry?.url&&!bootDownloads.has(entry.url))bootDownloads.set(entry.url,{id:entry.url,name:names[path]||path.split('/').pop(),total:entry.size});};
   bootDownloads=new Map();
   for(const [path,url] of Object.entries(data.dataFiles||{}))if(!systemFS.lstat(path))add(path,{url});
-  if(!systemFS.stat('/usr/lib/libc.a')&&!systemFS.stat('/usr/lib/libc.so.1'))for(const path of ['/usr/lib/libc.a','/usr/lib/libc.so.1','/usr/lib/libc-fork.so.1','/usr/lib/wasm-posix/libc.json'])add(path,data.prebuilt?.[path]);
+  if(needsCoreLibc(data))for(const path of ['/usr/lib/libc.a','/usr/lib/libc.so.1','/usr/lib/libc-fork.so.1','/usr/lib/wasm-posix/libc.json'])add(path,data.prebuilt?.[path]);
   for(const path of ['/bin/ash','/bin/busybox','/usr/bin/make','/bin/cc','/usr/bin/ar','/usr/bin/guc-fetch','/usr/bin/guc-links'])if(!systemFS.stat(path))add(path,data.prebuilt?.[path]);
   for(const path of (data.repository?['/usr/libexec/guc-lock','/usr/libexec/guc-json','/usr/libexec/guc-repo-fetch','/usr/libexec/guc-unpack','/usr/libexec/guc-links-v2']:['/usr/bin/guc-links']))add(path,data.prebuilt?.[path]);
   postMessage({type:'boot-progress',phase:'Preparing your OS',items:[...bootDownloads.values()]});
@@ -19,8 +23,8 @@ async function rawAsset(url){
   try{
     report('downloading',0);
     const response=await fetch(url);if(!response.ok)throw new Error(`Download failed (${response.status}): ${item?.name||url}`);
-    const reader=response.body.getReader(),chunks=[];let length=0,lastUpdate=0;
-    while(true){const {done,value}=await reader.read();if(done)break;chunks.push(value);length+=value.length;if(performance.now()-lastUpdate>100){report('downloading',length);lastUpdate=performance.now();}}
+    const reader=response.body.getReader(),chunks=[];let length=0;
+    while(true){const {done,value}=await reader.read();if(done)break;chunks.push(value);length+=value.length;report('downloading',length);}
     const bytes=new Uint8Array(length);let offset=0;for(const chunk of chunks){bytes.set(chunk,offset);offset+=chunk.length;}
     report('verifying',length);
     const hash=[...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(b=>b.toString(16).padStart(2,'0')).join('');
@@ -113,7 +117,7 @@ async function initialize(data){
   // Seed a coherent runtime pair on a fresh disk. Installed packages keep their
   // own producer/ABI manifest and survive compiler-only upgrades.
   const libcInfo='/usr/lib/wasm-posix/libc.json';
-  if(!systemFS.stat('/usr/lib/libc.a')&&!systemFS.stat('/usr/lib/libc.so.1')){
+  if(needsCoreLibc(data)){
     if(data.prebuilt?.[libcInfo]){
       const paths=['/usr/lib/libc.a','/usr/lib/libc.so.1','/usr/lib/libc-fork.so.1',libcInfo];
       // Fetch and verify the entire pair before publishing any of it. A failed

@@ -23,7 +23,7 @@ bool SDL_SetWindowMinimumSize(SDL_Window *w,int width,int height){if(!video_live
 bool SDL_SetWindowResizable(SDL_Window *w,bool enabled){if(!video_live(w))return 0;if(!!(w->flags&SDL_WINDOW_RESIZABLE)==!!enabled)return 1;return SDL_SetError("Changing window resize policy is unavailable");}
 bool SDL_SetWindowBordered(SDL_Window *w,bool bordered){if(!video_live(w))return 0;if(!!(w->flags&SDL_WINDOW_BORDERLESS)==!bordered)return 1;return SDL_SetError("Changing window decorations is unavailable");}
 bool SDL_MinimizeWindow(SDL_Window *w){if(!video_live(w))return 0;return SDL_SetError("Programmatic window minimization is unavailable");}
-bool SDL_SetWindowFullscreen(SDL_Window *w,bool fullscreen){if(!video_live(w))return 0;if(fullscreen)w->flags|=SDL_WINDOW_FULLSCREEN;else w->flags&=~SDL_WINDOW_FULLSCREEN;return 1;}
+bool SDL_SetWindowFullscreen(SDL_Window *w,bool fullscreen){if(!video_live(w))return 0;if(!!(w->flags&SDL_WINDOW_FULLSCREEN)==!!fullscreen)return 1;return SDL_SetError("Changing fullscreen policy is unavailable on the VT platform");}
 bool SDL_SetWindowFullscreenMode(SDL_Window *w,const SDL_DisplayMode *mode){if(!video_live(w))return 0;if(!mode)return 1;return SDL_SetError("Exclusive fullscreen display modes are unavailable");}
 bool SDL_UpdateWindowSurfaceRects(SDL_Window *w,const SDL_Rect *rects,int count){if(count<0||(count&&!rects))return SDL_SetError("Invalid dirty rectangles");if(!video_live(w))return 0;return count?SDL_UpdateWindowSurface(w):1;}
 bool SDL_GetWindowMouseGrab(SDL_Window *w){if(!video_live(w))return 0;return 0;}

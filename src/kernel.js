@@ -225,6 +225,7 @@ var OP = {
   // embedder hook — egress without a host is meaningless, fail loud).
   EGRESS: 0x0304,
   // 0x04xx — the brokered filesystem (KERNEL.md "fd/data-plane amendment").
+  FS_AT: 0x0430,
   FS_OPEN: 0x0401, FS_CLOSE: 0x0402, FS_READ: 0x0403, FS_WRITE: 0x0404,
   FS_LSEEK: 0x0405, FS_STAT: 0x0406, FS_LSTAT: 0x0407, FS_FSTAT: 0x0408,
   FS_ACCESS: 0x0409, FS_UNLINK: 0x040A, FS_RENAME: 0x040B, FS_MKDIR: 0x040C,
@@ -3406,6 +3407,25 @@ Kernel.prototype._fsRpcBody = function (pcb, op, req) {
   var P = function (p) { return self._pathFor(pcb, p); };
   var r;
 
+  if(op===OP.FS_AT){
+    const resolve=(fd,p)=>{
+      if(typeof p!=='string'||!p){fs._lastError='ENOENT';return null;}
+      if(p[0]==='/'||fd===-100)return P(p);
+      const o=ofdOf(fd);
+      if(!o){fs._lastError='EBADF';return null;}
+      if(o.kind!=='file'){fs._lastError='ENOTDIR';return null;}
+      const base=fs.directoryPath(o.bfsFd);
+      return base===null?null:base.replace(/\/$/,'')+'/'+p;
+    };
+    const p=resolve(req.fd,req.path);if(p===null){this._respond(pcb,eFs());return;}
+    let q=req.path2;
+    if(req.action===6||req.action===8){q=resolve(req.fd2,q);if(q===null){this._respond(pcb,eFs());return;}}
+    const actions=[OP.FS_OPEN,OP.FS_STAT,OP.FS_LSTAT,OP.FS_MKDIR,OP.FS_UNLINK,OP.FS_RMDIR,OP.FS_RENAME,OP.FS_ACCESS,OP.FS_LINK,OP.FS_SYMLINK,OP.FS_READLINK,OP.FS_CHMOD,OP.FS_UTIME];
+    op=actions[req.action];if(op===undefined){this._respond(pcb,{errno:'EINVAL'});return;}
+    let from=p;
+    if(req.action===8&&req.a){from=fs.realpathPhysical(p);if(from===null){this._respond(pcb,eFs());return;}}
+    req={path:p,from,to:q,target:q,flags:req.a,mode:req.action===0?req.b:req.a,atime:req.a,mtime:req.b};
+  }
   switch (op) {
     case OP.FS_OPEN: {
       // FS_WATCH bookkeeping: record the path on every file OFD (cheap —
@@ -6504,6 +6524,22 @@ RemoteFS.prototype.futime = function (fd, a, m) {
     return lr === null ? this._setErr(this._ro.fs._lastError || 'EIO') : 0;
   }
   return this._ok(this._c.call(OP.FS_FUTIME, { fd: fd, atime: a, mtime: m })) && 0;
+};
+RemoteFS.prototype.atOperation = function(action,fd,path,fd2,path2,a,b) {
+  const local=(fd,p)=>{
+    if(p[0]==='/'||fd===-100||!this._roFd(fd))return {fd,path:p};
+    const base=this._ro.fs.directoryPath(fd-RO_FD_BASE);
+    if(base===null)return this._setErr(this._ro.fs._lastError);
+    return {fd:-100,path:this._ro.prefix+base.replace(/\/$/,'')+'/'+p};
+  };
+  const p=local(fd,path);if(p===null)return null;
+  const q=(action===6||action===8)?local(fd2,path2):{fd:fd2,path:path2};if(q===null)return null;
+  const r=this._ok(this._c.call(OP.FS_AT,{action,fd:p.fd,path:p.path,fd2:q.fd,path2:q.path,a,b}));
+  if(r===null)return null;
+  if(action===0){this._fdTable[r.fd]={type:'remote'};return r.fd;}
+  if(action===1||action===2)return r.st;
+  if(action===10)return new TextEncoder().encode(r.target).slice(0,a);
+  return 0;
 };
 RemoteFS.prototype.chdir = function (p) { return this._ok(this._c.call(OP.FS_CHDIR, { path: p })) && 0; };
 RemoteFS.prototype.fchdir = function (fd) { return this._ok(this._c.call(OP.FS_CHDIR, { fd: fd })) && 0; };

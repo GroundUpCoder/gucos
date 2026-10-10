@@ -23,6 +23,13 @@ url_ok() {
 hash_ok() { [ "${#1}" -eq 64 ] || return 1; case "$1" in *[!a-f0-9]*) return 1;; esac; }
 size_ok() { case "$1" in ''|*[!0-9]*) return 1;; esac; [ "${#1}" -le 9 ] && [ "$1" -gt 0 ] && [ "$1" -le 268435456 ]; }
 text() { "$json" string "$@"; }
+compatible() {
+ if [ ! -f /etc/gucman/platform.json ]; then [ "$(text "$1" runtime)" = "$runtime" ] || fail 'binary runtime mismatch'; return; fi
+ host=/etc/gucman/platform.json
+ features=,$("$json" strings "$host" features | tr '\n' ',' )
+ "$json" compatible "$1" "$(text "$host" target)" "$(text "$host" version)" "$("$json" get "$host" runtimeAbi)" "$("$json" get "$host" objectAbi)" "$features" "$(text "$host" legacyRuntime)" "$runtime" || fail 'binary platform requirements not met'
+}
+
 verified() (
  url=$1; hash=$2; size=$3
  url_ok "$url" && hash_ok "$hash" && size_ok "$size" || fail 'invalid object reference'
@@ -61,6 +68,7 @@ mkdir -p "$config" "$cache/objects" "$state/packages"
 printf '%s\n' "$$" > "$state/transaction-owner"
 action=${1:-help}; [ "$#" -eq 0 ] || shift
 case "$action" in
+ platform) [ "$#" -eq 0 ] || fail 'usage: gucman platform'; cat /etc/gucman/platform.json; exit;;
  pack)
   [ "$#" -eq 2 ] && name_ok "$1" || fail 'usage: gucman pack NAME /absolute/new.tar'
   name=$1; output=$2; case "$output" in /*) ;; *) fail 'archive path must be absolute';; esac
@@ -87,7 +95,7 @@ case "$action" in
  installed) for p in "$state/packages"/*/current/manifest.json; do [ -f "$p" ] || continue; printf '%s\t%s\t%s\n' "$(text "$p" name)" "$(text "$p" version)" "$(cat "${p%/manifest.json}/origin")"; done; exit;;
  list|refresh) [ "$#" -eq 0 ] || fail 'unexpected arguments';;
  search|info|build|install|upgrade) [ "$#" -eq 1 ] || fail "usage: gucman $action [SOURCE:]NAME";;
- *) echo 'usage: gucman repo add|remove|list; list; search TERM; info|build|install|upgrade [SOURCE:]NAME; installed'; exit 1;;
+ *) echo 'usage: gucman platform; repo add|remove|list; list; search TERM; info|build|install|upgrade [SOURCE:]NAME; installed'; exit 1;;
 esac
 case "$action" in install|build|upgrade) [ ! -e "$state/pending" ] || fail 'unfinished publication; run gucman recover';; esac
 work=$(mktemp -d /tmp/gucman.XXXXXX)
@@ -168,6 +176,39 @@ resolve_package() (
  : > "$dir/done"; printf '%s\n' "$pname" >> "$work/order"
 )
 resolve_package "$1" ''
+# Check the entire selected graph before any install or recipe executes.
+while IFS= read -r name; do
+ manifest=$work/plan/$name/manifest.json
+ [ "$action" = build ] || compatible "$manifest"
+ while IFS= read -r dep; do
+  depname=${dep#*:}; depmanifest=$work/plan/$depname/manifest.json
+  dephash=$(sha256sum "$depmanifest"); dephash=${dephash%% *}
+  "$json" dependency "$manifest" "$dep" "$(text "$depmanifest" version)" "$dephash" || fail 'dependency requirements not met'
+ done < "$work/plan/$name/dependencies"
+done < "$work/order"
+# A dependency upgrade must also satisfy installed reverse dependencies that
+# are not themselves part of this transaction. Legacy receipts pin exact bytes.
+for installed in "$state/packages"/*/current/manifest.json; do
+ [ -f "$installed" ] || continue
+ owner=$(text "$installed" name)
+ [ ! -d "$work/plan/$owner" ] || continue
+ "$json" strings "$installed" dependencies > "$work/reverse-dependencies"
+ while IFS= read -r dep; do
+  depname=${dep#*:}; selected=$work/plan/$depname/manifest.json
+  [ -f "$selected" ] || continue
+  dephash=$(sha256sum "$selected"); dephash=${dephash%% *}
+  "$json" dependency "$installed" "$dep" "$(text "$selected" version)" "$dephash" || fail "installed dependent incompatible: $owner"
+  receipt=${installed%/manifest.json}/dependency-hashes
+  if [ -f "$receipt" ]; then
+   oldhash=$(awk -v name="$depname" '$1==name {print $2; exit}' "$receipt")
+  else
+   previous=$state/packages/$depname/current/manifest.json
+   [ -f "$previous" ] || fail "installed dependency missing: $owner"
+   oldhash=$(sha256sum "$previous"); oldhash=${oldhash%% *}
+  fi
+  [ -z "$oldhash" ] || [ "$oldhash" = "$dephash" ] || fail "reinstall dependent with dependency update: $owner"
+ done < "$work/reverse-dependencies"
+done
 # Validate ownership for the entire closure before executing any package.
 while IFS= read -r name; do
  plan=$work/plan/$name; root=$state/packages/$name
@@ -199,7 +240,7 @@ while IFS= read -r name; do
   echo "Building $(cat "$plan/source"):$name; running trusted recipe with access to your guest files"
   (cd "$source"; export DESTDIR="$stage" PREFIX=/usr/local; sh "$recipe"; sh "$testscript")
  else
-  [ "$(text "$manifest" runtime)" = "$runtime" ] || fail 'binary runtime mismatch; use build or a compatible binary'
+  compatible "$manifest"
   object=$(verified "$(text "$manifest" binary url)" "$(text "$manifest" binary sha256)" "$("$json" get "$manifest" binary size)")
   "$unpack" "$object" "$stage"
  fi
@@ -211,6 +252,11 @@ while IFS= read -r name; do
   mkdir -p "$(dirname "$release/$path")"; cp "$stage/$path" "$release/$path"
   case "$mode" in 493) chmod 755 "$release/$path";; *) chmod 644 "$release/$path";; esac
  done < "$plan/outputs"
+ : > "$release/dependency-hashes"
+ while IFS= read -r dep; do
+  depname=${dep#*:}; dephash=$(sha256sum "$work/plan/$depname/manifest.json"); dephash=${dephash%% *}
+  printf '%s %s\n' "$depname" "$dephash" >> "$release/dependency-hashes"
+ done < "$plan/dependencies"
  cp "$manifest" "$release/manifest.json"; cp "$plan/origin" "$release/origin"; cp "$plan/paths" "$release/paths"
  printf '%s\n' "$runtime" > "$release/runtime"
  # No public files change before all output checks. Existing links refer through
@@ -220,7 +266,7 @@ while IFS= read -r name; do
  printf '%s\n' "$name" > "$state/pending/name"
  printf '%s\n' "$release" > "$state/pending/release"
  if [ -L "$root/current" ]; then readlink "$root/current" > "$state/pending/old"; else echo none > "$state/pending/old"; fi
- sha256sum "$release/manifest.json" "$release/paths" "$release/origin" "$release/runtime" > "$state/pending/checksums"
+ sha256sum "$release/manifest.json" "$release/paths" "$release/origin" "$release/runtime" "$release/dependency-hashes" > "$state/pending/checksums"
  while IFS= read -r path; do sha256sum "$release/$path" >> "$state/pending/checksums"; done < "$release/paths"
  sync
  : > "$state/pending/ready"

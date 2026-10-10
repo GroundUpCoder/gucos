@@ -240,122 +240,40 @@ long fpathconf(int fd, int name) {
   return __pathconf_value(name);
 }
 
-/* ---- the *at() family (docs/archive/0382 gaps 7-8, docs/archive/0325 Group B) --------
- *
- * OWNED BY docs/archive/0325 Group B, which lists the whole family; docs/archive/0382
- * names openat/fstatat and defers to it. Both tickets record that.
- *
- * POSIX resolution rules, in order:
- *   1. An ABSOLUTE path ignores dirfd entirely.
- *   2. AT_FDCWD resolves against the current working directory.
- *   3. Anything else resolves against the directory the fd refers to.
- *
- * Cases 1 and 2 are implemented. O_DIRECTORY and fchdir now expose real
- * directory descriptors, but the *at family still lacks descriptor-relative
- * path resolution. Such requests return ENOTSUP; applications must select
- * their chdir/fchdir fallback until that separate capability is implemented.
- */
-static int __at_ok(int dirfd, const char *path) {
-  if (path && path[0] == '/') return 0;      /* absolute: dirfd is ignored */
-  if (dirfd == AT_FDCWD) return 0;
-  struct stat st;
-  if (fstat(dirfd, &st) != 0) { errno = EBADF; return -1; }
-  errno = S_ISDIR(st.st_mode) ? ENOTSUP : ENOTDIR;
-  return -1;
+/* Descriptor-relative operations are resolved atomically by the filesystem
+ * broker. No temporary chdir and no path cached across kernel requests. */
+__import int __at_op(int op, int fd, const char *path, int fd2, const char *path2,
+                    long long a, long long b, void *out);
+static int __at_flags(int flags, int allowed) {
+  if (flags & ~allowed) { errno=EINVAL; return -1; } return 0;
 }
-
-int openat(int dirfd, const char *path, int flags, ...) {
-  int mode = 0;
-  if (flags & O_CREAT) {
-    va_list ap;
-    va_start(ap, flags);
-    mode = va_arg(ap, int);
-    va_end(ap);
-  }
-  if (__at_ok(dirfd, path) != 0) return -1;
-  return open(path, flags, mode);            /* open() applies the umask */
+int openat(int fd,const char *p,int flags,...) {
+  int mode=0; if(flags&O_CREAT){va_list ap;va_start(ap,flags);mode=va_arg(ap,int);va_end(ap);}
+  return __at_op(0,fd,p,0,0,flags,mode & ~__umask_val,0);
 }
-
-int fstatat(int dirfd, const char *path, struct stat *buf, int flags) {
-  if (__at_ok(dirfd, path) != 0) return -1;
-  return (flags & AT_SYMLINK_NOFOLLOW) ? lstat(path, buf) : stat(path, buf);
+int fstatat(int fd,const char *p,struct stat *st,int flags) {
+  if(__at_flags(flags,AT_SYMLINK_NOFOLLOW))return -1;
+  return __at_op(flags&AT_SYMLINK_NOFOLLOW?2:1,fd,p,0,0,0,0,st);
 }
-
-int mkdirat(int dirfd, const char *path, mode_t mode) {
-  if (__at_ok(dirfd, path) != 0) return -1;
-  return mkdir(path, mode);
+int mkdirat(int fd,const char *p,mode_t mode){return __at_op(3,fd,p,0,0,mode & ~__umask_val,0,0);}
+int unlinkat(int fd,const char *p,int flags){if(__at_flags(flags,AT_REMOVEDIR))return -1;return __at_op(flags&AT_REMOVEDIR?5:4,fd,p,0,0,0,0,0);}
+int renameat(int fd,const char *p,int fd2,const char *p2){return __at_op(6,fd,p,fd2,p2,0,0,0);}
+int faccessat(int fd,const char *p,int mode,int flags){if(__at_flags(flags,AT_EACCESS))return -1;return __at_op(7,fd,p,0,0,mode,0,0);}
+int linkat(int fd,const char *p,int fd2,const char *p2,int flags){if(__at_flags(flags,AT_SYMLINK_FOLLOW))return -1;return __at_op(8,fd,p,fd2,p2,flags,0,0);}
+int symlinkat(const char *target,int fd,const char *p){return __at_op(9,fd,p,0,target,0,0,0);}
+long readlinkat(int fd,const char *p,char *buf,unsigned long size){return __at_op(10,fd,p,0,0,size,0,buf);}
+int fchmodat(int fd,const char *p,mode_t mode,int flags){
+  if(__at_flags(flags,AT_SYMLINK_NOFOLLOW))return -1;
+  if(flags&AT_SYMLINK_NOFOLLOW){errno=ENOTSUP;return -1;}
+  return __at_op(11,fd,p,0,0,mode,0,0);
 }
-
-int unlinkat(int dirfd, const char *path, int flags) {
-  if (__at_ok(dirfd, path) != 0) return -1;
-  return (flags & AT_REMOVEDIR) ? rmdir(path) : unlink(path);
+int fchownat(int fd,const char *p,unsigned owner,unsigned group,int flags){
+  struct stat st;if(fstatat(fd,p,&st,flags))return -1;
+  if((owner!=0&&owner!=(unsigned)-1)||(group!=0&&group!=(unsigned)-1)){errno=ENOTSUP;return -1;}return 0;
 }
-
-int renameat(int olddirfd, const char *oldpath, int newdirfd, const char *newpath) {
-  if (__at_ok(olddirfd, oldpath) != 0) return -1;
-  if (__at_ok(newdirfd, newpath) != 0) return -1;
-  return rename(oldpath, newpath);
-}
-
-int faccessat(int dirfd, const char *path, int mode, int flags) {
-  if (__at_ok(dirfd, path) != 0) return -1;
-  /* AT_EACCESS asks for the EFFECTIVE ids. Real and effective ids are both
-     root here (see getuid/geteuid in <unistd.h>), so the two agree by
-     construction and the flag is a no-op rather than an unimplemented one. */
-  (void)flags;
-  return access(path, mode);
-}
-
-int linkat(int olddirfd, const char *oldpath, int newdirfd, const char *newpath, int flags) {
-  if (__at_ok(olddirfd, oldpath) != 0) return -1;
-  if (__at_ok(newdirfd, newpath) != 0) return -1;
-  if (flags & AT_SYMLINK_FOLLOW) {
-    /* link(2) never follows a final symlink; AT_SYMLINK_FOLLOW asks it to.
-       Resolve first, then link the resolved target. */
-    char resolved[4096];
-    if (realpath(oldpath, resolved) == 0) return -1;
-    return link(resolved, newpath);
-  }
-  return link(oldpath, newpath);
-}
-
-int symlinkat(const char *target, int newdirfd, const char *linkpath) {
-  /* NB the target is NOT resolved against newdirfd — it is stored verbatim as
-     the link body, which is why only linkpath is checked. */
-  if (__at_ok(newdirfd, linkpath) != 0) return -1;
-  return symlink(target, linkpath);
-}
-
-long readlinkat(int dirfd, const char *path, char *buf, unsigned long bufsize) {
-  if (__at_ok(dirfd, path) != 0) return -1;
-  return readlink(path, buf, (long)bufsize);
-}
-
-int fchmodat(int dirfd, const char *path, mode_t mode, int flags) {
-  if (__at_ok(dirfd, path) != 0) return -1;
-  /* AT_SYMLINK_NOFOLLOW would mean "change the LINK's mode". Link modes are
-     not settable on this fs (nor on Linux), so POSIX's ENOTSUP is the
-     honest answer rather than silently changing the target instead. */
-  if (flags & AT_SYMLINK_NOFOLLOW) { errno = ENOTSUP; return -1; }
-  return chmod(path, (int)mode);
-}
-
-int fchownat(int dirfd, const char *path, unsigned owner, unsigned group, int flags) {
-  if (__at_ok(dirfd, path) != 0) return -1;
-  return (flags & AT_SYMLINK_NOFOLLOW) ? lchown(path, owner, group)
-                                       : chown(path, owner, group);
-}
-
-int futimesat(int dirfd, const char *path, const struct timeval times[2]) {
-  if (__at_ok(dirfd, path) != 0) return -1;
-  if (times == 0) {
-    struct timeval now;
-    gettimeofday(&now, 0);
-    return __utime(path, now.tv_sec, now.tv_sec);
-  }
-  /* Sub-second precision is dropped: the filesystems here are
-     second-granularity (see utimes() in <sys/time.h>, same treatment). */
-  return __utime(path, times[0].tv_sec, times[1].tv_sec);
+int futimesat(int fd,const char *p,const struct timeval times[2]){
+  struct timeval now;if(!times){gettimeofday(&now,0);return __at_op(12,fd,p,0,0,now.tv_sec,now.tv_sec,0);}
+  return __at_op(12,fd,p,0,0,times[0].tv_sec,times[1].tv_sec,0);
 }
 
 /* ---- truncate / posix_fallocate / posix_fadvise (docs/archive/0325 Group B) ---- */
@@ -384,4 +302,7 @@ int posix_fallocate(int fd, off_t offset, off_t len) {
   if (ftruncate(fd, need) != 0) return errno;
   return 0;
 }
-  
+
+int chown(const char *p,unsigned u,unsigned g){return fchownat(AT_FDCWD,p,u,g,0);}
+int lchown(const char *p,unsigned u,unsigned g){return fchownat(AT_FDCWD,p,u,g,AT_SYMLINK_NOFOLLOW);}
+int fchown(int fd,unsigned u,unsigned g){struct stat st;if(fstat(fd,&st))return -1;if((u&&u!=(unsigned)-1)||(g&&g!=(unsigned)-1)){errno=ENOTSUP;return -1;}return 0;}

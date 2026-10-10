@@ -4136,6 +4136,34 @@ var BLOCK_FS = (function () {
     }
     return this._setErr('ENOENT');
   };
+  // Version 1 application ABI: descriptor-relative operations. Resolution and
+  // mutation run in the same synchronous call (and broker request remotely).
+  BlockFS.prototype.atOperation = function(op,fd,path,fd2,path2,a,b) {
+    const resolve=(fd,p)=>{
+      if(!p)return this._setErr('ENOENT');
+      if(p[0]==='/'||fd===-100)return p;
+      const base=this.directoryPath(fd);return base===null?null:base.replace(/\/$/,'')+'/'+p;
+    };
+    const p=resolve(fd,path);if(p===null)return null;
+    let q=path2;
+    if(op===6||op===8){q=resolve(fd2,path2);if(q===null)return null;}
+    switch(op){
+      case 0:return this.open(p,a,b);
+      case 1:return this.stat(p);
+      case 2:return this.lstat(p);
+      case 3:return this.mkdir(p,a);
+      case 4:return this.unlink(p);
+      case 5:return this.rmdir(p);
+      case 6:return this.rename(p,q);
+      case 7:return this.access(p,a);
+      case 8:{const from=a?this.realpathPhysical(p):p;return from===null?null:this.link(from,q);}
+      case 9:return this.symlink(q,p);
+      case 10:{const buf=new Uint8Array(Math.min(a,4096));const n=this.readlink(p,buf,buf.length);return n===null?null:buf.slice(0,n);}
+      case 11:return this.chmod(p,a);
+      case 12:return this.utime(p,a,b);
+      default:return this._setErr('EINVAL');
+    }
+  };
   BlockFS.prototype.fchdir = function (fd) {
     var path = this.directoryPath(fd);
     if (path === null) return null;
@@ -4153,8 +4181,10 @@ var BLOCK_FS = (function () {
   };
 
   BlockFS.prototype.access = function (path, mode) {
+    if(mode & ~7)return this._setErr('EINVAL');
     var w = this._walkPath(this._resolvePath(path));
     if (!w) return this._setErr('ENOENT');
+    if((mode&1)&&(w.ino.mode&S_IFMT)===S_IFREG&&!(w.ino.mode&0o111))return this._setErr('EACCES');
     return 0;
   };
 
@@ -5003,6 +5033,15 @@ var BLOCK_FS = (function () {
       }),
       chdir: wrap(function (path_ptr) {
         return this.chdir(readString(path_ptr));
+      }),
+      __at_op: wrap(function(op,fd,p,fd2,p2,a,b,out) {
+        if(!p){this._lastError='EFAULT';return null;}
+        if((op===6||op===8||op===9)&&!p2){this._lastError='EFAULT';return null;}
+        const r=this.atOperation(op,fd,readString(p),fd2,p2?readString(p2):'',Number(a),Number(b));
+        if(r===null)return null;
+        if(op===1||op===2){if(!validStatIdentity(r)){this._lastError='EIO';return null;}writeStatBuf(getMemory(),out,r);return 0;}
+        if(op===10){new Uint8Array(getMemory().buffer,out,r.length).set(r);return r.length;}
+        return r;
       }),
       __fchdir: wrap(function (fd) {
         return this.fchdir(fd);
@@ -6068,6 +6107,7 @@ var BLOCK_FS = (function () {
     return mount.prefix==='/' ? path : mount.prefix+(path==='/'?'':path);
   };
   MountFS.prototype.fchdir = BlockFS.prototype.fchdir;
+  MountFS.prototype.atOperation = BlockFS.prototype.atOperation;
   // Physical realpath over the full mount namespace — each lstat/readlink hop
   // routes by longest prefix, so a symlink crossing a mount (/bin -> /usr/bin,
   // /usr/local -> /var/local) resolves correctly. See physicalRealpath. (0263)
@@ -7718,6 +7758,18 @@ function createBrowserSDL({ canvas, ctx, sharedAudioBuffer, notifyAudio, notifyW
     }
     const batch = inputQueue; inputQueue = [];
     for (const {name, args} of batch) {
+      if(name==='__sdl_push_text_event'){
+        const ex=getExports(),alloc=ex.__sdl_text_alloc,deliver=ex.__sdl_push_text_event;
+        if(!alloc||!deliver)continue; // preserved binaries may predate IME
+        const encoded=new TextEncoder().encode(args[2]);
+        if(encoded.length>=65536)continue;
+        const ptr=await captureWasmCallback(alloc,false)(encoded.length+1);
+        if(!ptr)continue;
+        const bytes=new Uint8Array(getMemory().buffer,ptr,encoded.length+1);
+        bytes.set(encoded);bytes[encoded.length]=0;
+        await captureWasmCallback(deliver,false)(args[0],args[1],ptr,args[3],args[4]);
+        continue;
+      }
       if (name === '__sdl_push_window_event') {
         const win = sdlWindows[args[0] - 1];
         if (win && args[1] === 0x206) {
@@ -8671,6 +8723,7 @@ function createBrowserSDL({ canvas, ctx, sharedAudioBuffer, notifyAudio, notifyW
       : null,
     /* Push a key event from external source (e.g. worker message). mod is an
      * SDL_Keymod bitmask, repeat the DOM auto-repeat flag. */
+    pushTextEvent: function(handle,type,text,start,length){queueInput('__sdl_push_text_event',[handle,type,String(text),start,length]);},
     pushKeyEvent: function (handle, eventType, scancode, sym, mod, repeat) {
       queueInput('__sdl_push_key_event', [handle, eventType, scancode, sym, mod | 0, repeat ? 1 : 0]);
     },

@@ -9,6 +9,7 @@ self.onmessage=async({data})=>{
   if(data.type==='process-result'){controls.get(data.id)?.(data.result);controls.delete(data.id);return;}
   if(data.type==='canvas'){canvasResolve(data.canvas);return;}
   if(data.type==='vt-active'){self.vtActive=!!data.active;return;}
+  if(data.type==='text'||data.type==='text-editing'){sdl?.pushTextEvent?.(data.handle||1,data.type==='text'?0x303:0x302,data.text,data.start||0,data.length||0);return;}
   if(data.type==='key'){sdl?.pushKeyEvent(data.handle||1,data.down?0x300:0x301,data.scan,data.sym,data.mod,data.repeat);return;}
   if(data.type==='mouse-button'){sdl?.pushMouseButtonEvent(data.handle||1,data.down?0x401:0x402,data.button,data.x,data.y);return;}
   if(data.type==='mouse-crossing'){sdl?.pushWindowEvent(data.handle||1,data.entered?0x20c:0x20d,data.x|0,data.y|0);return;}

@@ -34,6 +34,21 @@ static void __threads_unlock(void) {
 static unsigned __process_main = __THREAD_MAIN;
 static unsigned __all_threads;   /* head of the record list, guarded above */
 
+static struct __pthread_cleanup *__cleanup_head;
+void __pthread_cleanup_push(struct __pthread_cleanup *p,void (*fn)(void *),void *arg){
+  p->routine=fn;p->arg=arg;p->owner=SELF();__threads_lock();p->next=__cleanup_head;__cleanup_head=p;__threads_unlock();
+}
+void __pthread_cleanup_pop(struct __pthread_cleanup *p,int execute){
+  __threads_lock();struct __pthread_cleanup **q=&__cleanup_head;while(*q&&*q!=p)q=&(*q)->next;
+  int found=*q!=0;if(found)*q=p->next;__threads_unlock();if(found&&execute)p->routine(p->arg);
+}
+static void __run_cleanups(void){
+  for(;;){__threads_lock();struct __pthread_cleanup **q=&__cleanup_head;
+    while(*q&&(*q)->owner!=SELF())q=&(*q)->next;
+    struct __pthread_cleanup *p=*q;if(p)*q=p->next;__threads_unlock();if(!p)break;p->routine(p->arg);
+  }
+}
+
 static void __thread_release(unsigned rec) {
   void *raw = (void *)REC(rec, __THREAD_RAW);
   REC(rec, __THREAD_RAW) = 0;
@@ -118,6 +133,7 @@ void __thread_main(void) {
 __export __thread_main = __thread_main;
 
 void pthread_exit(void *ret) {
+  __run_cleanups();
   unsigned rec = SELF();
   REC(rec, __THREAD_RETVAL) = (unsigned)ret;
   if (rec == __process_main) {
@@ -161,12 +177,12 @@ int pthread_detach(pthread_t t) {
 pthread_t pthread_self(void) { return SELF(); }
 int pthread_equal(pthread_t a, pthread_t b) { return a == b; }
 int pthread_yield(void) { return sched_yield(); }
-int pthread_setname_np(pthread_t t, const char *name) { (void)t; (void)name; return 0; }
-int pthread_getname_np(pthread_t t, char *name, size_t len) { (void)t; if (len) name[0] = 0; return 0; }
+int pthread_setname_np(pthread_t t, const char *name) { (void)t; (void)name; return ENOTSUP; }
+int pthread_getname_np(pthread_t t, char *name, size_t len) { (void)t; (void)name; (void)len; return ENOTSUP; }
 int pthread_kill(pthread_t t, int sig) { if (sig == 0) return 0; if (t == __process_main) { raise(sig); return 0; } return ENOTSUP; }
 int pthread_cancel(pthread_t t) { (void)t; return ENOTSUP; }
-int pthread_setcancelstate(int state, int *old) { (void)state; if (old) *old = 0; return 0; }
-int pthread_setcanceltype(int type, int *old) { (void)type; if (old) *old = 0; return 0; }
+int pthread_setcancelstate(int state, int *old) { (void)old; return (state==PTHREAD_CANCEL_ENABLE||state==PTHREAD_CANCEL_DISABLE)?ENOTSUP:EINVAL; }
+int pthread_setcanceltype(int type, int *old) { (void)old; return (type==PTHREAD_CANCEL_DEFERRED||type==PTHREAD_CANCEL_ASYNCHRONOUS)?ENOTSUP:EINVAL; }
 void pthread_testcancel(void) {}
 
 
@@ -174,7 +190,7 @@ int pthread_attr_init(pthread_attr_t *a) { a->stacksize = 0; a->detached = 0; re
 int pthread_attr_destroy(pthread_attr_t *a) { (void)a; return 0; }
 int pthread_attr_setstacksize(pthread_attr_t *a, size_t size) { if (size < PTHREAD_STACK_MIN) return EINVAL; a->stacksize = (unsigned)size; return 0; }
 int pthread_attr_getstacksize(const pthread_attr_t *a, size_t *size) { *size = a->stacksize ? a->stacksize : DEFAULT_STACK; return 0; }
-int pthread_attr_setdetachstate(pthread_attr_t *a, int state) { a->detached = state; return 0; }
+int pthread_attr_setdetachstate(pthread_attr_t *a, int state) { if(state!=PTHREAD_CREATE_JOINABLE&&state!=PTHREAD_CREATE_DETACHED)return EINVAL;a->detached = state; return 0; }
 int pthread_attr_getdetachstate(const pthread_attr_t *a, int *state) { *state = a->detached; return 0; }
 
 /* ---- mutex: futex protocol (0 free, 1 held, 2 held with waiters) ---- */
@@ -226,7 +242,7 @@ int pthread_mutexattr_init(pthread_mutexattr_t *a) { a->type = PTHREAD_MUTEX_NOR
 int pthread_mutexattr_destroy(pthread_mutexattr_t *a) { (void)a; return 0; }
 int pthread_mutexattr_settype(pthread_mutexattr_t *a, int type) { if (type < 0 || type > 2) return EINVAL; a->type = type; return 0; }
 int pthread_mutexattr_gettype(const pthread_mutexattr_t *a, int *type) { *type = a->type; return 0; }
-int pthread_mutexattr_setpshared(pthread_mutexattr_t *a, int pshared) { (void)a; (void)pshared; return 0; }
+int pthread_mutexattr_setpshared(pthread_mutexattr_t *a, int pshared) { (void)a; return pshared==PTHREAD_PROCESS_PRIVATE?0:pshared==PTHREAD_PROCESS_SHARED?ENOTSUP:EINVAL; }
 
 /* ---- condition variables: sequence word plus futex wait ---- */
 static int __cond_wait_timed(pthread_cond_t *c, pthread_mutex_t *m, long long timeout_ns) {
@@ -392,7 +408,7 @@ int pthread_barrier_wait(pthread_barrier_t *b) {
   pthread_mutex_unlock(&b->m);
   return 0;
 }
-int pthread_spin_init(pthread_spinlock_t *l, int pshared) { (void)pshared; *l = 0; return 0; }
+int pthread_spin_init(pthread_spinlock_t *l, int pshared) { if(pshared!=PTHREAD_PROCESS_PRIVATE)return pshared==PTHREAD_PROCESS_SHARED?ENOTSUP:EINVAL;*l = 0; return 0; }
 int pthread_spin_destroy(pthread_spinlock_t *l) { (void)l; return 0; }
 int pthread_spin_lock(pthread_spinlock_t *l) { while (__builtin(atomic_cmpxchg32, l, 0, 1) != 0) __thread_wait(l, 1, 1000000LL); return 0; }
 int pthread_spin_trylock(pthread_spinlock_t *l) { return __builtin(atomic_cmpxchg32, l, 0, 1) == 0 ? 0 : EBUSY; }

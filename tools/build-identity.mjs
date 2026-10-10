@@ -1,6 +1,7 @@
 import {createHash} from 'node:crypto';
 export const digest = text => createHash('sha256').update(text).digest('hex');
 export function buildIdentity(versions, compilerSources) {
+  if (!/^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/.test(versions.platform||'')) throw Error('Invalid platform version');
   if (!/^\d+\.\d+\.\d+$/.test(versions.compiler) || !/^\d+\.\d+\.\d+$/.test(versions.runtime)) throw Error('Invalid compiler/runtime version');
   for (const name of ['objects','runtime']) if (!Number.isSafeInteger(versions.abi[name]) || versions.abi[name]<1) throw Error('Invalid ABI epoch: '+name);
   const abi={objects:versions.abi.objects,runtime:versions.abi.runtime};

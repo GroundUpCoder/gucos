@@ -273,6 +273,8 @@ SDL_InitFlags SDL_WasInit(SDL_InitFlags flags) {
 }
 
 SDL_Window *SDL_CreateWindow(const char *title, int w, int h, SDL_WindowFlags flags) {
+    const SDL_WindowFlags supported=SDL_WINDOW_FULLSCREEN|SDL_WINDOW_HIDDEN|SDL_WINDOW_BORDERLESS|SDL_WINDOW_RESIZABLE;
+    if(flags&~supported){SDL_SetError("Unsupported window flags on the VT platform");return NULL;}
     /* SDL3 dropped the x,y args; the host centers the window, so pass 0,0. */
     int handle = __sdl_create_window(title, 0, 0, w, h, (int)flags);
     if (handle <= 0) { SDL_SetError("SDL_CreateWindow: host failed to create a window"); return NULL; }
@@ -685,8 +687,8 @@ void __sdl_push_key_event(int window_id, int type, int scancode, int sym, int mo
     e->event.key.mod = (SDL_Keymod)mod;
     __sdl_eq_push(e);
     /* DOM keycodes already carry modifier-applied Unicode. Synthesize plain
-       text only here, at the explicit safe pump boundary. IME composition
-       and candidate rectangles still have no backend and remain unsupported. */
+       text only here, at the explicit safe pump boundary. IME composition is delivered separately by the browser event pump;
+       candidate rectangle positioning remains unsupported. */
     SDL_Window *window=__sdl_window_by_handle(window_id);
     Uint32 cp=(Uint32)sym;
     if((cp&0x40000000u)&&(mod&SDL_KMOD_NUM)&&scancode>=89&&scancode<=98)cp=scancode==98?'0':'1'+scancode-89;
@@ -699,6 +701,23 @@ void __sdl_push_key_event(int window_id, int type, int scancode, int sym, int mo
     }
 }
 __export __sdl_push_key_event = __sdl_push_key_event;
+
+/* Called only at the host's allocator-safe event pump boundary. */
+void *__sdl_text_alloc(int size){return size>0&&size<=65536?malloc(size):NULL;}
+__export __sdl_text_alloc = __sdl_text_alloc;
+void __sdl_push_text_event(int handle,int type,char *text,int start,int length){
+    SDL_Window *w=__sdl_window_by_handle(handle);
+    if(!text)return;
+    if(!w||!SDL_TextInputActive(w)){free(text);return;}
+    __SDL_EventEntry *e=__sdl_eq_alloc();
+    e->text=__sdl_copy_text(text);free(text);
+    if(!e->text){pthread_mutex_lock(&__sdl_event_lock);e->next=__sdl_eq_free;__sdl_eq_free=e;pthread_mutex_unlock(&__sdl_event_lock);return;}
+    memset(&e->event,0,sizeof(SDL_Event));
+    e->event.type=type;e->event.text.timestamp=__sdl_now_ns();e->event.text.windowID=handle;e->event.text.text=e->text->bytes;
+    if(type==SDL_EVENT_TEXT_EDITING){e->event.edit.start=start;e->event.edit.length=length;}
+    __sdl_eq_push(e);
+}
+__export __sdl_push_text_event = __sdl_push_text_event;
 
 void __sdl_push_mouse_button_event(int window_id, int type, int button, double x, double y) {
     __SDL_EventEntry *e = __sdl_eq_alloc();
@@ -1211,7 +1230,7 @@ static bool __sdl_eq_type_in(Uint32 type, Uint32 minType, Uint32 maxType) {
 static void __sdl_eq_add(const SDL_Event *event) {
     __SDL_EventEntry *e = __sdl_eq_alloc();
     e->event = *event;
-    if(event->type==SDL_EVENT_TEXT_INPUT&&event->text.text){e->text=__sdl_copy_text(event->text.text);if(e->text)e->event.text.text=e->text->bytes;else e->event.text.text="";}
+    if((event->type==SDL_EVENT_TEXT_INPUT||event->type==SDL_EVENT_TEXT_EDITING)&&event->text.text){e->text=__sdl_copy_text(event->text.text);if(e->text)e->event.text.text=e->text->bytes;else e->event.text.text="";}
     if (!e->event.common.timestamp) e->event.common.timestamp = __sdl_now_ns();
     __sdl_eq_push_raw(e);
 }
