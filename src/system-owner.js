@@ -1,8 +1,7 @@
 // One filesystem owner. OPFS handles and all fd/pipe state stay in this worker.
 let systemFS, kernel, tty, processURL, compilerJobs, closeDisk=()=>{}, commitSoon=()=>{}, diskSize=()=>0;
 const workerHandles=new Map();
-let commandPid=0, desktopPid=0;
-let desktopLaunchScript;
+let commandPid=0;
 async function rawAsset(url){
   const response=await fetch(url);if(!response.ok)throw new Error(`Asset ${response.status}: ${url}`);
   const bytes=new Uint8Array(await response.arrayBuffer());
@@ -17,9 +16,6 @@ async function runCommand(args){
 }
 const decoder=new TextDecoder(), encoder=new TextEncoder();
 function output(text){postMessage({type:'output',text});}
-// Software surface compositor bridge. Kernel IDs and lifecycle remain
-// authoritative; only changed frames cross to the DOM as transferable pixels.
-let surfaceTimer=null;
 let audioTimer=null,audioOutput=null;
 function scheduleAudio(){
   if(!audioOutput){audioOutput=kernel.audioInit();postMessage({type:'audio-output',...audioOutput});}
@@ -29,48 +25,7 @@ function scheduleAudio(){
     if(!kernel.audioStreamCount()){clearInterval(audioTimer);audioTimer=null;}
   },10);
 }
-const publishedSurfaces=new Map();
-function scheduleSurfaces(){if(surfaceTimer===null)surfaceTimer=setTimeout(publishSurfaces,0);}
-function publishSurfaces(){
-  surfaceTimer=null;
-  const surfaces=kernel.wmList(),live=new Set(surfaces.map(s=>s.sid));
-  for(const sid of publishedSurfaces.keys())if(!live.has(sid)){
-    publishedSurfaces.delete(sid);postMessage({type:'surface-gone',sid});
-  }
-  for(const meta of surfaces){
-    if(!meta.mapped&&!meta.parent&&meta.requestedVisible)kernel.wmMove(meta.sid,meta.x,meta.y);
-    const signature=JSON.stringify(meta),previous=publishedSurfaces.get(meta.sid);
-    if(previous?.signature===signature)continue;
-    let frame=null;
-    if(meta.viewable&&(!previous||previous.seq!==meta.frameSeq||previous.gen!==meta.gen||!previous.viewable))frame=kernel.wmScreenshot(meta.sid);
-    postMessage({type:'surface',meta,frame},frame?[frame.rgba.buffer]:[]);
-    publishedSurfaces.set(meta.sid,{signature,seq:meta.frameSeq,gen:meta.gen,viewable:meta.viewable});
-  }
-}
-function surfaceInput(sid,event){
-  const surface=kernel.wmList().find(s=>s.sid===sid);if(!surface)return;
-  if(event.type==='close'){kernel.wmCloseRequest(sid);return;}
-  if(event.type==='activate'){kernel.wmFocus(sid);return;}
-  if(event.type==='minimize'){kernel.wmMinimize(sid);return;}
-  if(event.type==='move'){kernel.wmMove(sid,event.x,event.y);return;}
-  if(event.type==='resize'){kernel.wmResize(sid,event.width,event.height);return;}
-  if(event.type==='focus'){if(event.focused)kernel.wmFocus(sid);else kernel.wmBlur(sid);return;}
-  if(event.type==='text'){if(surface.viewable)for(const ch of event.text){kernel.wmKey(true,0,ch.codePointAt(0),0,false,sid);kernel.wmKey(false,0,ch.codePointAt(0),0,false,sid);}return;}
-  if(event.type==='key'){if(!event.down||surface.viewable)kernel.wmKey(event.down,event.scan,event.sym,event.mod,event.repeat,sid);return;}
-  if(!surface.viewable)return;
-  if(event.serial!==surface.committedSerial)return; // stale DOM geometry
-  const px=event.type==='mouse-wheel'?event.pointerX:event.x,py=event.type==='mouse-wheel'?event.pointerY:event.y;
-  const x=surface.x+(px||0)*surface.dstW/surface.w,y=surface.y+(py||0)*surface.dstH/surface.h;
-  if(event.type==='mouse-crossing'){
-    if(event.entered)kernel.wmPointer('enter',x,y);
-    else kernel.wmPointerLeave(sid,x,y);
-  }
-  else if(event.type==='mouse-button')kernel.wmPointer(event.down?'down':'up',x,y,{button:event.button});
-  else if(event.type==='mouse-motion')kernel.wmPointer('move',x,y,{buttons:event.state});
-  else if(event.type==='mouse-wheel')kernel.wmPointer('wheel',x,y,{wheelX:event.x,wheelY:event.y});
-}
 async function initialize(data){
-  desktopLaunchScript=desktopLaunchCommand(data.repository);
   processURL=data.processURL;
   compilerJobs=new CompilerJobs(data.compilerURL,{
     readFile,snapshot,
@@ -197,7 +152,6 @@ async function initialize(data){
   if(!systemFS.stat('/etc/passwd'))writeFile('/etc/passwd','user:x:1000:1000:Browser user:/home/user:/bin/sh\n');
   systemFS._s.flush();
   kernel=new KERNEL.Kernel({onClipboard:clip=>postMessage({type:"clipboard",text:clip?.fmt===1?decoder.decode(clip.bytes):""}),keepAlive:data.hosted,onProcessExit:(pid,status)=>{
-    if(pid===desktopPid){desktopPid=0;if(status)output('Desktop session exited ('+(status>>>8)+').\n');}
     if(data.hosted&&pid===commandPid){commandPid=0;systemFS._s.flush();postMessage({type:'command-exit',status,diskBytes:diskSize()});}
   },fs:new BLOCK_FS.MountFS({'/':systemFS,'/proc':new KERNEL.ProcFS()}),
     createWorker:spec=>{
@@ -221,15 +175,10 @@ async function initialize(data){
     commit:()=>commitSoon(),
     onOutput:(pid,fd,bytes)=>output(decoder.decode(bytes)),
     onAudioStream:scheduleAudio,
-    onHalt:status=>{clearInterval(audioTimer);audioTimer=null;clearTimeout(surfaceTimer);surfaceTimer=null;compilerJobs.close();const current=snapshot();const changed=Object.fromEntries(Object.entries(current).filter(([path,text])=>data.files[path]!==text));const deleted=Object.keys(data.files).filter(path=>!systemFS.lstat(path));closeDisk();postMessage({type:'halt',status,files:changed,deleted,diskBytes:diskSize()});},
+    onHalt:status=>{clearInterval(audioTimer);audioTimer=null;compilerJobs.close();const current=snapshot();const changed=Object.fromEntries(Object.entries(current).filter(([path,text])=>data.files[path]!==text));const deleted=Object.keys(data.files).filter(path=>!systemFS.lstat(path));closeDisk();postMessage({type:'halt',status,files:changed,deleted,diskBytes:diskSize()});},
     log:text=>output(text+'\n')
   });
-  kernel.wmServe();
-  kernel.wmOnDamage(scheduleSurfaces);
-  // This bridge has no continuous compositor loop. Keep the shared-memory
-  // present doorbell armed, including for processes spawned after boot.
-  kernel.compSetParked(true);
-  if(data.screenWidth&&data.screenHeight)kernel.wmSetScreen(data.screenWidth,data.screenHeight);
+  if(data.screenWidth&&data.screenHeight)kernel.setScreen(data.screenWidth,data.screenHeight);
   tty=kernel.createTty({cols:data.cols,rows:data.rows,interactiveOut:!data.args.length,output:bytes=>output(decoder.decode(bytes))});
   await runCommand(data.args);
   postMessage({type:'ready',persistence});
@@ -238,22 +187,11 @@ self.onmessage=async({data})=>{
   try{
     if(data.type==='boot')await initialize(data);
     else if(data.type==='run')await runCommand(data.args);
-    else if(data.type==='desktop-launch'){
-      const desktop=kernel.wmList().find(surface=>surface.layer===-1&&surface.borderless);
-      if(desktop){kernel.wmFocus(desktop.sid);return;}
-      if(desktopPid)return;
-      if(!desktopLaunchScript){output('No desktop launcher configured for this repository.\n');return;}
-      desktopPid=-1;
-      try{desktopPid=await kernel.service({path:'/bin/sh',argv:['/bin/sh','-c',desktopLaunchScript],cwd:HOME_DIRECTORY,envp:['PATH=/usr/local/bin:/usr/bin:/bin','HOME='+HOME_DIRECTORY,'USER=user','LOGNAME=user','PWD='+HOME_DIRECTORY]});}
-      catch(error){desktopPid=0;throw error;}
-      if(!desktopPid)output('Could not start desktop.\n');
-    }
     else if(data.type==='input')tty?.input(encoder.encode(data.text));
-    else if(data.type==='screen-size')kernel?.wmSetScreen(data.width,data.height);
+    else if(data.type==='screen-size')kernel?.setScreen(data.width,data.height);
     else if(data.type==='terminal-size')tty?.resize(data.cols,data.rows);
     else if(data.type==='canvas')workerHandles.get(data.pid)?.postMessage({type:'canvas',canvas:data.canvas},[data.canvas]);
     else if(data.type==='clipboard')kernel?.clipSet(1,encoder.encode(data.text));
-    else if(data.type==='surface-input')surfaceInput(data.sid,data.event);
     else if(data.type==='process-input')workerHandles.get(data.pid)?.postMessage(data.event);
     else if(data.type==='kill')kernel?.kill(data.pid,9,0);
     else if(data.type==='metadata'){

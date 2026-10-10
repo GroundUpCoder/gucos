@@ -4,12 +4,12 @@ export const quote=s=>"'"+s.replaceAll("'","'\\''")+"'";
 export async function browserSession(options={}){
  const site=await serve(options);let browser;
  try{
-  browser=await chromium.launch({headless:true});
+  browser=await chromium.launch({channel:'chromium',headless:true,args:options.gpu?['--enable-unsafe-webgpu']:[]});
   const context=await browser.newContext();
   const errors=[];
   await context.route('**/*',route=>[site.url,...(options.allowedOrigins||[])].includes(new URL(route.request().url()).origin)?route.continue():route.abort());
   const page=await context.newPage();page.setDefaultTimeout(180000);page.on('pageerror',e=>errors.push(e.message));
-  const timer=setTimeout(()=>void browser.close(),600000);
+  const timer=setTimeout(()=>void browser.close(),options.timeout||600000);
   const close=async()=>{clearTimeout(timer);await browser.close();await site.close();};
   try{await page.goto(site.url+'/?shell=bootstrap');await page.waitForFunction(()=>window.shell?.ready);}catch(e){await close();throw e;}
   async function command(script){

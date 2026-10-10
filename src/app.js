@@ -118,7 +118,7 @@ function run(path, args = [], stdin = '') {
   const offscreen = canvas.transferControlToOffscreen();
   const proc = spawn(path, { action: 'run', bytes: executable.bytes, args: [path, ...args],
     stdin, interactive: stdin===null, cwd, directories:SYSTEM_DIRECTORIES, files: { ...files, ...(typeof distributionProcessFiles==='function'?distributionProcessFiles():{}) }, canvas: offscreen }, [offscreen]);
-  const win = new DesktopWindow(canvas, () => kill(proc.pid), (width,height) => proc.worker.postMessage({type:'resize',width,height}), () => terminal.focus());
+  const win = new VirtualTerminal(canvas, () => kill(proc.pid), (width,height) => proc.worker.postMessage({type:'resize',width,height}), () => terminal.focus());
   win.title.textContent=`[${proc.pid}] ${path}`;
   Object.assign(proc, { win, screen:win.element, canvas, title:win.title });
   const scans = { Enter:40, Escape:41, Backspace:42, Tab:43, Space:44, ArrowRight:79, ArrowLeft:80, ArrowDown:81, ArrowUp:82, ControlLeft:224, ShiftLeft:225, AltLeft:226, ControlRight:228, ShiftRight:229, AltRight:230 };
@@ -200,26 +200,9 @@ async function command(line, echo = true, interactive = false) {
   } else return run(cmd, args, interactive&&!background?null:'').pid;
 }
 ui = new ShellTerminal(terminal, command, save);
-$('terminal-focus').onclick=()=>{
-  if(document.body.classList.contains('desktop-ready'))document.body.classList.toggle('terminal-open');
-  terminal.focus();
-};
-$('tasks').addEventListener('click',()=>document.body.classList.remove('terminal-open'));
-function desktopMode(){
-  document.title='wasm-posix · desktop';
-  document.body.classList.add('desktop-mode','desktop-ready');
-}
-window.addEventListener('desktop-session',({detail:{active}})=>{
-  if(active){desktopMode();document.body.classList.remove('terminal-open');}
-  else {document.body.classList.remove('desktop-mode','desktop-ready','terminal-open');document.title='wasm-posix';terminal.focus();}
-});
-$('desktop-launch').onclick=()=>{
-  if(!busybox?.ready){print('Wait for the shell to start before opening the desktop.\n');return;}
-  document.body.classList.remove('terminal-open');
-  busybox.worker.postMessage({type:'desktop-launch'});
-};
+$('terminal-focus').onclick=()=>VirtualTerminal.select(null);
 $('import-files').onclick=()=>{
-  if(!busybox?.worker){print('Start the desktop or shell before importing files.\n');return;}
+  if(!busybox?.worker){print('Start the shell before importing files.\n');return;}
   $('import-picker').click();
 };
 $('import-picker').onchange=async event=>{
@@ -237,8 +220,8 @@ $('import-picker').onchange=async event=>{
 };
 
 $('export-file').onclick=async()=>{
-  if(!busybox?.worker){print('Start the desktop or shell before exporting files.\n');return;}
-  const path=prompt('File to download (full desktop path):','/home/user/');
+  if(!busybox?.worker){print('Start the shell before exporting files.\n');return;}
+  const path=prompt('File to download (full path):','/home/user/');
   if(!path)return;
   try{
     const metadata=await busybox.metadata(path);

@@ -60,3 +60,37 @@ the new graphics contract as implemented and consider freezing its ABI.
 Package builds, source discovery and hosting retain the existing rule: no
 packages checkout is read by core assembly or hosting. Runtime package operations
 alone obtain X11 and other application inputs.
+
+## Concrete VT lifecycle and pacing contract
+
+The page allocates a canvas when a process worker starts; a VT becomes selectable
+only when SDL creates its one window. The canvas transfers directly to that
+process worker. SDL rejects an additional top-level window. The WebGPU handle
+table and every requested GPUDevice live in that process, never in the kernel.
+SDL_GetWGPUSurface validates its handle against that process's SDL window table.
+The process configures the shared SDL/WebGPU canvas; X receives no GPU sharing API.
+
+Present imports suspend the guest through JSPI for a deadline-based interval:
+60 Hz while active, 10 Hz while inactive or the browser tab is hidden. Only one
+present call is outstanding on that C stack; there is no frame transfer queue.
+An inactive application is never parked waiting for activation. Its worker event
+loop, other guest processes, socket operations and timers continue; a sequential
+application resumes from a present within the 100 ms pacing interval plus host
+scheduling delay. Browser background throttling may extend that delay. Callback
+frame loops receive the same active/inactive cadence. An event-driven application
+with no pending present schedules no periodic presentation work.
+
+Viewport changes resize resizable SDL windows through queued SDL events. Fixed
+logical windows retain dimensions and are letterboxed, with input transformed
+through that content box. Window fullscreen denotes the VT viewport; no exclusive
+monitor mode is promised. Switches release held keys/buttons, canvas pointer
+capture and pointer lock. Alt+1 selects the terminal; Alt+2..9 select graphical
+VTs. The page switcher remains outside the application canvas.
+
+Exit/crash removes that process's page canvas and tab and returns an active VT
+to the terminal. Exec replaces the canvas before starting the new image. Thus
+old workers cannot present into a reused VT. Normal invocation cleanup destroys
+owned devices; forced worker termination ends its device ownership. SDL device
+loss is an error on subsequent rendering rather than a shared-device restart;
+other processes and the terminal remain independent. These are implementation
+contracts; acceptance evidence records which paths have actually been exercised.

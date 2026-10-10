@@ -1,3 +1,4 @@
+self.vtActive=false;
 // Process bootstrap for the shared BusyBox filesystem/TTY broker.
 let sdl, instance, canvasResolve;
 let controlId=0;
@@ -7,6 +8,7 @@ let canvasReady=new Promise(resolve=>canvasResolve=resolve);
 self.onmessage=async({data})=>{
   if(data.type==='process-result'){controls.get(data.id)?.(data.result);controls.delete(data.id);return;}
   if(data.type==='canvas'){canvasResolve(data.canvas);return;}
+  if(data.type==='vt-active'){self.vtActive=!!data.active;return;}
   if(data.type==='key'){sdl?.pushKeyEvent(data.handle||1,data.down?0x300:0x301,data.scan,data.sym,data.mod,data.repeat);return;}
   if(data.type==='mouse-button'){sdl?.pushMouseButtonEvent(data.handle||1,data.down?0x401:0x402,data.button,data.x,data.y);return;}
   if(data.type==='mouse-crossing'){sdl?.pushWindowEvent(data.handle||1,data.entered?0x20c:0x20d,data.x|0,data.y|0);return;}
@@ -29,7 +31,7 @@ self.onmessage=async({data})=>{
   for(;;)try {
     const code=await runModule({
       bytes:wd.image||undefined,module:wd.module||undefined,args:wd.argv,executablePath:wd.path,env,pid:wd.pid,ppid:wd.ppid,thread:wd.thread||undefined,vm:wd.vm||undefined,
-      getppid:()=>client.getppid(),stdinSab:wd.ttySab||undefined,getBrowserSDL:env.WASM_POSIX_SURFACES==='1'?null:canvas,
+      getppid:()=>client.getppid(),stdinSab:wd.ttySab||undefined,getBrowserSDL:canvas,
       blockFsFactory:async ctx=>{
         const imports=BLOCK_FS.BlockFS.prototype.toWasmEnv.call(rfs,ctx);
         imports.__select_impl=rfs.selectImpl(ctx,true);imports.__poll_impl=rfs.pollImpl(ctx,true);imports.isatty=fd=>rfs.isatty(fd);
@@ -57,7 +59,7 @@ self.onmessage=async({data})=>{
           return result.library||null;
         });
       },
-      spawnHooks:Object.assign(rfs.wrapSpawnHooks(client.spawnHooks()),env.WASM_POSIX_SURFACES==='1'?{softwareSurfaces:true}:{}),
+      spawnHooks:rfs.wrapSpawnHooks(client.spawnHooks()),
       forkSnapshot:wd.forkSnapshot,sharedChild:wd.sharedChild,execState:wd.execState,
       processControl:(op,data)=>{
         if(op==='fork')data.snapshot.fsState={fds:rfs._fdTable,dirs:rfs._dirs};

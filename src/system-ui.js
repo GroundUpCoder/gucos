@@ -1,3 +1,4 @@
+function canvasCursor(canvas,shape){canvas.style.cursor=['default','text','wait','crosshair','progress','nwse-resize','nesw-resize','ew-resize','ns-resize','move','not-allowed','pointer'][shape]||(shape===-1?'none':'default');}
 // The canvas is letterboxed (object-fit: contain, centered): map through the
 // displayed content box, not the element box.
 function canvasPoint(rect,width,height,clientX,clientY){
@@ -22,7 +23,7 @@ function bindCanvasInput(canvas,send,textInput=false){
       Numpad0:98,NumpadDecimal:99,IntlBackslash:100,ContextMenu:101,Digit0:39});
     for(let n=1;n<=9;n++){scans['Digit'+n]=29+n;scans['Numpad'+n]=88+n;}
     for(let n=1;n<=12;n++)scans['F'+n]=57+n;
-    const held=new Map();
+    const held=new Map(),buttons=new Map(),pointers=new Set();
     let composing=false,paste=null;
     if(textInput){
     canvas.contentEditable='true';canvas.setAttribute('role','application');
@@ -49,7 +50,7 @@ function bindCanvasInput(canvas,send,textInput=false){
       if(down)held.set(e.code,event);else held.delete(e.code);send(event);
     };
     canvas.addEventListener('keydown',e=>key(e,true));canvas.addEventListener('keyup',e=>key(e,false));
-    canvas.addEventListener('blur',()=>{composing=false;for(const e of held.values())send({...e,down:false,repeat:false});held.clear();send({type:'focus',focused:false});});
+    canvas.addEventListener('blur',()=>{composing=false;for(const e of held.values())send({...e,down:false,repeat:false});held.clear();for(const id of pointers)if(canvas.hasPointerCapture(id))canvas.releasePointerCapture(id);pointers.clear();for(const e of buttons.values())send({...e,down:false});buttons.clear();send({type:'focus',focused:false});});
     canvas.addEventListener('focus',()=>send({type:'focus',focused:true}));
     const point=e=>{
       const r=canvas.getBoundingClientRect();
@@ -60,11 +61,12 @@ function bindCanvasInput(canvas,send,textInput=false){
       return canvasPoint(r,width,height,e.clientX,e.clientY);
     };
     canvas.addEventListener('pointerdown',e=>{
-      e.preventDefault();canvas.focus();canvas.setPointerCapture(e.pointerId);
-      send({type:'mouse-button',down:true,button:[1,2,3,4,5][e.button]||0,...point(e)});
+      e.preventDefault();canvas.focus();canvas.setPointerCapture(e.pointerId);pointers.add(e.pointerId);
+      const event={type:'mouse-button',down:true,button:[1,2,3,4,5][e.button]||0,...point(e)};buttons.set(e.button,event);send(event);
+      if(canvas.dataset.relative==='true')canvas.requestPointerLock()?.catch(error=>console.error(error));
     });
     canvas.addEventListener('pointerup',e=>{
-      send({type:'mouse-button',down:false,button:[1,2,3,4,5][e.button]||0,...point(e)});
+      pointers.delete(e.pointerId);buttons.delete(e.button);send({type:'mouse-button',down:false,button:[1,2,3,4,5][e.button]||0,...point(e)});
       if(canvas.hasPointerCapture(e.pointerId))canvas.releasePointerCapture(e.pointerId);
     });
     for(const type of ['pointerenter','pointerleave'])
@@ -105,19 +107,20 @@ class BusyBoxSession {
       if(data.type==='built'){this.ui.print(`${data.name}: ${data.stats.functions} functions, ${data.stats.bytes} bytes\n`);}
       if(data.type==='clipboard')navigator.clipboard?.writeText(data.text).catch(()=>{});
       if(data.type==='audio-output'){this.audioPlayer?.close();this.audioPlayer=createSystemAudioPlayer(data);}
-      if(data.type==='surface')this.updateSurface(data);
-      if(data.type==='surface-gone'){this.surfaceWindows.get(data.sid)?.win.destroy();this.surfaceWindows.delete(data.sid);this.updateDesktopSession();}
       if(data.type==='process')this.createWindow(data.pid,data.path);
       if(data.type==='window'){
         const win=this.windows.get(data.pid), event=data.event;
         if(win){
           if(event.handle)win.handle=event.handle;
+          if(event.type==='sdl-cursor'){canvasCursor(win.canvas,event.shape);return;}
+          if(event.type==='sdl-relative-mouse'){win.canvas.dataset.relative=String(event.enabled);return;}
+          if(event.type==='present')return;
           if((event.type==='sdl-window'||event.type==='sdl-size')&&event.width>0&&event.height>0){
             win.canvas.dataset.logicalWidth=event.width;win.canvas.dataset.logicalHeight=event.height;
           }
           if(event.type==='sdl-visible'||event.type==='sdl-destroy'){
             win.programHidden=event.type==='sdl-destroy'||event.hidden;
-            win.element.hidden=win.programHidden;win.task.hidden=win.programHidden;
+            win.setVisible(!win.programHidden);
             if(!win.programHidden)win.focus();
           }else if(event.type==='sdl-raise')win.focus();
           else if(event.type==='sdl-size'){
@@ -126,7 +129,7 @@ class BusyBoxSession {
             if(event.type==='sdl-window'){win.shown=false;win.minimized=false;win.programHidden=!!event.hidden;}
             win.show({...event,...(event.title?{title:`[${data.pid}] ${event.title}`}:{})});
             if(event.hidden!==undefined)win.programHidden=event.hidden;
-            if(win.programHidden){win.element.hidden=true;win.task.hidden=true;}
+            if(win.programHidden)win.setVisible(false);
           }
         }
       }
@@ -168,70 +171,11 @@ class BusyBoxSession {
   createWindow(pid,path) {
     const canvas=document.createElement('canvas');canvas.width=640;canvas.height=400;canvas.tabIndex=0;
     const send=event=>this.worker.postMessage({type:'process-input',pid,event:{handle:win.handle||1,...event}});
-    const win=new DesktopWindow(canvas,()=>this.worker.postMessage({type:'kill',pid}),(width,height)=>send({type:'resize',width,height}),()=>this.terminal.focus());
+    const win=new VirtualTerminal(canvas,()=>this.worker.postMessage({type:'kill',pid}),(width,height)=>send({type:'resize',width,height}),()=>this.terminal.focus());
     win.title.textContent=`[${pid}] ${path}`;this.windows.set(pid,win);
+    win.visibility=active=>send({type:'vt-active',active});
     bindCanvasInput(canvas,send);
     const offscreen=canvas.transferControlToOffscreen();this.worker.postMessage({type:'canvas',pid,canvas:offscreen},[offscreen]);
-  }
-  updateDesktopSession(){
-    const active=[...this.surfaceWindows.values()].some(r=>r.meta.layer===-1&&r.meta.borderless&&r.meta.viewable&&r.painted);
-    const top=active?Math.max(0,...[...this.surfaceWindows.values()].filter(r=>r.meta.viewable&&r.meta.borderless&&r.meta.layer===1&&r.meta.y===0&&r.meta.dstW>=innerWidth-4).map(r=>r.meta.dstH)):0;
-    for(const {win} of this.surfaceWindows.values())if(win.onViewportResize&&(win.workAreaTop||0)!==top){win.workAreaTop=top;win.onViewportResize();}
-    if(active!==!!this.desktopSession){this.desktopSession=active;window.dispatchEvent(new CustomEvent('desktop-session',{detail:{active}}));}
-  }
-  updateSurface({meta,frame}) {
-    let record=this.surfaceWindows.get(meta.sid);
-    if(!record){
-      const canvas=document.createElement('canvas');canvas.tabIndex=0;
-      const send=event=>{if(event.type==='clipboard-paste'){this.worker.postMessage({type:'clipboard',text:event.text});for(const down of [true,false])this.worker.postMessage({type:'surface-input',sid:meta.sid,event:{type:'key',down,scan:25,sym:118,mod:192,repeat:false}});return;}this.worker.postMessage({type:'surface-input',sid:meta.sid,event:{serial:record.meta.committedSerial,...event}});};
-      let win;
-      if(meta.borderless||meta.parent){
-        const element=document.createElement('section');element.className='screen';element.hidden=true;
-        Object.assign(element.style,{border:'0',borderRadius:'0',minWidth:'1px',minHeight:'1px',boxShadow:'none',background:'transparent'});
-        element.append(canvas);document.getElementById('screens').append(element);
-        win={element,canvas,destroy:()=>element.remove()};
-      }else{
-        win=new DesktopWindow(canvas,()=>{send({type:'close'});return false;},(width,height)=>send({type:'resize',width,height}),()=>this.terminal.focus());
-        win.kernelGeometry=true;
-        win.onActivate=()=>send({type:'activate'});
-        win.onMinimize=()=>send({type:'minimize'});
-        win.onMove=(x,y)=>send({type:'move',x:x+1,y:y+35});
-        win.task.onclick=()=>send({type:'activate'});
-        win.show({title:meta.title,width:meta.dstW,height:meta.dstH,resizable:meta.resizable,hidden:true});
-      }
-      record={win,canvas,context:canvas.getContext('2d'),meta:{}};this.surfaceWindows.set(meta.sid,record);
-      record.paste=bindCanvasInput(canvas,send,true);
-    }
-    // Fit newly shown desktop windows into the work area. GTK file dialogs
-    // can request a natural size larger than the viewport. Ask the application
-    // to resize once, retaining kernel geometry and input-coordinate ownership.
-    if(meta.viewable&&!record.wasViewable&&!meta.borderless&&!meta.parent){
-      const width=Math.max(160,Math.min(meta.dstW,innerWidth-16));
-      const height=Math.max(100,Math.min(meta.dstH,innerHeight-84-(record.win.workAreaTop||0)));
-      const x=Math.max(8,Math.min(meta.x,innerWidth-width-8));
-      const y=Math.max(43+(record.win.workAreaTop||0),Math.min(meta.y,innerHeight-40-height));
-      if(meta.resizable&&(width!==meta.dstW||height!==meta.dstH))this.worker.postMessage({type:'surface-input',sid:meta.sid,event:{type:'resize',width,height}});
-      if(x!==meta.x||y!==meta.y)this.worker.postMessage({type:'surface-input',sid:meta.sid,event:{type:'move',x,y}});
-    }
-    record.wasViewable=meta.viewable;
-    const {win,canvas}=record,previous=record.meta;record.meta=meta;
-    win.element.dataset.surfaceId=meta.sid;
-    win.element.hidden=!meta.viewable;
-    win.element.style.zIndex=String(100+meta.z);
-    win.element.classList.toggle('active',meta.focused);
-    if(win.task){
-      win.task.hidden=!meta.requestedVisible||!!meta.owner;win.title.textContent=meta.title;win.task.textContent=meta.title;
-      if(previous.x!==meta.x||previous.y!==meta.y||previous.dstW!==meta.dstW||previous.dstH!==meta.dstH){
-        win.geometry={x:meta.x-1,y:meta.y-35,w:meta.dstW+2,h:meta.dstH+36};win.apply();
-      }
-    }else Object.assign(win.element.style,{left:meta.x+'px',top:meta.y+'px',width:meta.dstW+'px',height:meta.dstH+'px'});
-    if(frame){
-      record.painted=true;
-      if(canvas.width!==frame.w)canvas.width=frame.w;if(canvas.height!==frame.h)canvas.height=frame.h;
-      record.context.putImageData(new ImageData(new Uint8ClampedArray(frame.rgba.buffer,frame.rgba.byteOffset,frame.rgba.byteLength),frame.w,frame.h),0,0);
-    }
-    if(meta.focused&&!previous.focused&&meta.viewable)canvas.focus();
-    this.updateDesktopSession();
   }
   metadata(path){return new Promise(resolve=>{const id=this.nextId++;this.requests.set(id,resolve);this.worker.postMessage({type:'metadata',path,id});});}
   read(path){return new Promise(resolve=>{const id=this.nextId++;this.requests.set(id,resolve);this.worker.postMessage({type:'read-file',path,id});});}
