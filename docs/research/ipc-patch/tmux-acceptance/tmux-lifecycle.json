@@ -1,0 +1,40 @@
+{
+  "runtime": "e1a1d35aab446d25eb19126cec01e17e5508b672bc16f73b4cbb5e0a01f3b8a8",
+  "steps": [
+    {
+      "step": "create-two-panes",
+      "panes": "%0 6\n%1 8\n"
+    },
+    {
+      "step": "terminal-erase",
+      "status": "passed"
+    },
+    {
+      "step": "attach-and-real-terminal-input",
+      "status": "passed"
+    },
+    {
+      "step": "detach",
+      "status": "passed"
+    },
+    {
+      "step": "continued-process-after-detach",
+      "before": 5,
+      "after": 15
+    },
+    {
+      "step": "terminal-resize",
+      "observed": "110 33\n"
+    },
+    {
+      "step": "reconnect-other-pane-same-shell-pids",
+      "status": "passed"
+    },
+    {
+      "step": "pane-exit-survivor-and-final-session-exit",
+      "status": "passed"
+    }
+  ],
+  "status": "passed",
+  "finishedAt": "2026-10-11T09:14:03.637Z"
+}

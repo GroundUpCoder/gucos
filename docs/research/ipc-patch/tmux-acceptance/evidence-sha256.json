@@ -1,0 +1,13 @@
+{
+  "artifact-export/08efddf8191d41b41299ce8df494c981bb1e0bf216152dfccdc618f0190bd879.tar": "08efddf8191d41b41299ce8df494c981bb1e0bf216152dfccdc618f0190bd879",
+  "artifact-export/tmux-receipt.json": "af334cfe5b7a3fab785d8b54b69cb11dcc63a451f663dc130b526b88be04294c",
+  "config.json": "6b76e3431997974650ae05503507425755ca4d07859e8c10a40105925ffacbd4",
+  "dist-files.json": "10d000daaf83579510b31fd7ecc0982e1fbffa7176c8f9c12f317005658c4452",
+  "execution.log": "a45250f96c9aa63ebafcb310c1fd14d6223c0fa9d112d15d0a3cd3eb38faa3f1",
+  "export-tmux.log": "d7516916812272ff3ce415797772f5c8e1ea01357f8699dd68592c187ab8d5cd",
+  "integrated-compile.json": "4f837237664abfdef1542ada3a31c748b18ffbfa29508324abfbb01c295bcab6",
+  "observed-runtime.json": "484f5c2041222a9b971a88f983e7ed25f9b96f173dae08dfbc3c9e5edef28e14",
+  "tmux-Makefile": "5b83825df33047f6b665cddec6e006f5e9f91356cfb1bd601f4cb7b7ed207028",
+  "tmux-config.log": "c3df74e92ad89223c1c6e98270806e8b2b3d193f288347157f0f9938305efb99",
+  "tmux-lifecycle.json": "4c6c4ff4933e7f8afa3b0a77808af531a02e250c0ec4d066c246b94b779e4bdf"
+}

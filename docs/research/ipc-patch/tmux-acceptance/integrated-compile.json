@@ -1,0 +1,22 @@
+{
+  "runtime": "e1a1d35aab446d25eb19126cec01e17e5508b672bc16f73b4cbb5e0a01f3b8a8",
+  "stages": [
+    {
+      "name": "libevent",
+      "status": "consumer-recompiled-and-passed",
+      "scope": "Original bootstrap dependency artifacts; integrated-runtime consumers and tools executed."
+    },
+    {
+      "name": "ncurses",
+      "status": "consumer-recompiled-and-passed",
+      "scope": "Original bootstrap dependency artifacts; integrated-runtime consumers and tools executed."
+    },
+    {
+      "name": "tmux",
+      "status": "compiled-and-version-smoke-passed"
+    }
+  ],
+  "status": "passed",
+  "tmuxBuildMode": "clean source extraction and configure; dependencies reused with recompiled consumers",
+  "finishedAt": "2026-10-11T09:13:47.471Z"
+}

@@ -52,10 +52,10 @@ after reload. Exact fetched catalog, manifest and archive bytes are retained.
 The catalog was read from mutable main, not a verified commit pin. Coverage is
 one published package, not the entire catalog.
 
-Tmux is the intended integration demo. Its dependency consumer checks pass
-with exported bootstrap artifacts on the integrated runtime, but tmux build
-and interactive lifecycle acceptance remain pending. No release or deployment is established
-by these candidate results.
+Tmux is the integration demo. Its dependency consumer checks passed with
+exported bootstrap artifacts; the later closefrom candidate also passed its
+clean build and interactive lifecycle, recorded below. No release or deployment
+is established by these candidate results.
 
 The adapted upstream probes remain one-off research evidence. They are not
 added to the recurring core test gates; selected handwritten regressions live
@@ -92,9 +92,29 @@ platform-posix) passed again on the frozen new runtime in reservation
 `fb504328-8e9c-4a4d-9ad9-723cc066ab06`; evidence is in
 `closefrom-regressions/`. All 63 frozen runtime file hashes remained unchanged.
 The candidate was supplied explicitly to the tmux worker for a clean recipe
-build and lifecycle testing, which remain pending.
+build and lifecycle testing, which subsequently passed as recorded below.
 
 Scope limit: cache invalidation does not close sibling workers' local sealed
 descriptor tables. Shipped browser workers do not enable that configuration;
 these results must not be generalized to it. No finite fd limit, getdtablesize
 or close_range API was added.
+
+## Tmux flagship acceptance and patch preparation
+
+The external package worker completed a clean tmux 3.5a build and interactive
+lifecycle on e1a1d35a in browser reservation
+`9beb82a4-86df-4a22-9804-473b2b5619fa`. Recipe `206a49b` links retained dependency
+archives with --enable-fork and uses dynamic libc-fork.so.1. The clean build,
+version smoke, input/Backspace, two panes, resize, detach with continued child
+progress, reattach with unchanged shell PIDs, pane exit and final session exit
+all passed. Reattach means the same running browser runtime, not surviving a
+browser reload. Package evidence commit is `b8178c0`; the report and selected
+machine results are copied under `tmux-acceptance/`. Complete evidence and the
+exported artifact remain in the explicitly identified package checkout.
+
+Core metadata now prepares platform 1.0.2 and runtime 0.5.9, preserving compiler
+0.5.13 and object/runtime ABI versions 3/5. Feature declarations are unix-rights,
+unix-dgram, unix-seqpacket, flock, eventfd, posix-named-semaphores and closefrom,
+alongside all existing features. These describe the bounded contracts above,
+not complete POSIX or Linux IPC compatibility. The final metadata-bearing build
+and acceptance are pending; nothing has been published or deployed.
