@@ -1,0 +1,44 @@
+{
+  "status": "passed",
+  "reservation": "fb504328-8e9c-4a4d-9ad9-723cc066ab06",
+  "snapshot": "/home/ubuntu/git/gucos-core-snapshots/ipc-closefrom-e1a1d35a",
+  "runtime": "e1a1d35aab446d25eb19126cec01e17e5508b672bc16f73b4cbb5e0a01f3b8a8",
+  "runtimeFiles": 63,
+  "snapshotIncludingManifestUnchanged": true,
+  "buildJsonSHA256": "689b0702f578325dbc52ee4684d555e82ba84469118acf2280ca55655674ae0f",
+  "indexHtmlSHA256": "5c2bb848d9b3c358b988d18e85e7d9b9498ad12c9264934510e5b23427199903",
+  "snapshotManifestSHA256": "9e6eb8b186f29a41d5f3cdeca98e08f71802378cba6809c76e0bdee47c7b45dd",
+  "tests": [
+    {
+      "test": "ipc-sockets",
+      "exitCode": 0,
+      "startedUTC": "2026-10-11T08:34:55.689627+00:00",
+      "completedUTC": "2026-10-11T08:35:01.779928+00:00"
+    },
+    {
+      "test": "ipc-services",
+      "exitCode": 0,
+      "startedUTC": "2026-10-11T08:35:01.780116+00:00",
+      "completedUTC": "2026-10-11T08:35:11.683702+00:00"
+    },
+    {
+      "test": "ipc-terminal",
+      "exitCode": 0,
+      "startedUTC": "2026-10-11T08:35:11.683997+00:00",
+      "completedUTC": "2026-10-11T08:35:17.060488+00:00"
+    },
+    {
+      "test": "ipc-symbols",
+      "exitCode": 0,
+      "startedUTC": "2026-10-11T08:35:17.060693+00:00",
+      "completedUTC": "2026-10-11T08:35:21.978257+00:00"
+    },
+    {
+      "test": "platform-posix",
+      "exitCode": 0,
+      "startedUTC": "2026-10-11T08:35:21.978467+00:00",
+      "completedUTC": "2026-10-11T08:35:27.389123+00:00"
+    }
+  ],
+  "scopeLimit": "Worker-local sealed descriptor tables are not invalidated in sibling workers by fd epoch. Shipped browser workers do not enable this fast path; no cross-worker sealed-table coverage is claimed."
+}

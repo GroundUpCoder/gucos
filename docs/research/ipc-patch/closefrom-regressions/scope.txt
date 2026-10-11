@@ -1,0 +1,3 @@
+Frozen snapshot regression only: sockets, services, terminal, IPC libc symbols and platform POSIX. No repeated closefrom focused checks, source edits or rebuilds.
+Each original runner is adapted only for fixture/import/output paths; the browser helper forces frozen dist and verifies both build.json and shell.toolchain.systemBuild runtime.
+Sealed descriptor tables are worker-local. The descriptor epoch does not invalidate sibling workers' sealed tables. Shipped browser workers do not enable this sealed local fast path. These regressions do not establish cross-worker sealed-descriptor closure.

@@ -1,0 +1,7 @@
+VERIFIED-FROZEN-RUNTIME e1a1d35aab446d25eb19126cec01e17e5508b672bc16f73b4cbb5e0a01f3b8a8
+18 functions, 201456 bytes
+flock ownership/conversion/fork PASS
+eventfd counter/readiness/blocking/signal/fork PASS
+named semaphore identity/unlink/fork/exec/timeout PASS
+IPC-SERVICES-PASS
+

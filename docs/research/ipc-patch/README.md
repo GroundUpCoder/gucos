@@ -70,9 +70,31 @@ descriptor enumeration through procfs. A guessed scan bound would leave high
 inherited descriptors open. Existing spawn closefrom actions already enumerate
 the kernel fd map, but do not provide a callable API in forked processes.
 
-A standalone closefrom API is being implemented in an isolated remote checkout.
-It must cover both broker descriptors and sealed process-local descriptors,
+The resulting closefrom work was assigned to an isolated remote checkout.
+Its requirements cover both broker descriptors and sealed process-local descriptors,
 preserve descriptors below the threshold, and perform normal ownership cleanup.
-The tested baae3b75 candidate does not contain this addition. Tmux lifecycle is
-blocked pending the new implementation, review, and guest validation. No finite
+The tested baae3b75 candidate does not contain this addition. Tmux lifecycle was
+blocked pending the implementation, review, and guest validation below. No finite
 descriptor limit or descriptor-count result is fabricated for the package.
+
+### Reviewed closefrom candidate
+
+The implementation is now committed as remote `d7d91ac` (local `63a553f`).
+Runtime `e1a1d35aab446d25eb19126cec01e17e5508b672bc16f73b4cbb5e0a01f3b8a8`
+contains the earlier integrated changes plus closefrom. Focused kernel and guest
+tests passed for sparse descriptors, fork isolation, pipe EOF, flock ownership,
+shared-thread closure, negative thresholds and canonical libc symbol lookup.
+The six changed src/libc files matched the independent review snapshot hashes.
+The report is retained in `review/closefrom-review.md`.
+
+All five existing guest checks (sockets, services, terminal, symbols and
+platform-posix) passed again on the frozen new runtime in reservation
+`fb504328-8e9c-4a4d-9ad9-723cc066ab06`; evidence is in
+`closefrom-regressions/`. All 63 frozen runtime file hashes remained unchanged.
+The candidate was supplied explicitly to the tmux worker for a clean recipe
+build and lifecycle testing, which remain pending.
+
+Scope limit: cache invalidation does not close sibling workers' local sealed
+descriptor tables. Shipped browser workers do not enable that configuration;
+these results must not be generalized to it. No finite fd limit, getdtablesize
+or close_range API was added.

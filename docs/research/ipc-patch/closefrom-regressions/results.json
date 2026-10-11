@@ -1,0 +1,32 @@
+[
+  {
+    "test": "ipc-sockets",
+    "exitCode": 0,
+    "startedUTC": "2026-10-11T08:34:55.689627+00:00",
+    "completedUTC": "2026-10-11T08:35:01.779928+00:00"
+  },
+  {
+    "test": "ipc-services",
+    "exitCode": 0,
+    "startedUTC": "2026-10-11T08:35:01.780116+00:00",
+    "completedUTC": "2026-10-11T08:35:11.683702+00:00"
+  },
+  {
+    "test": "ipc-terminal",
+    "exitCode": 0,
+    "startedUTC": "2026-10-11T08:35:11.683997+00:00",
+    "completedUTC": "2026-10-11T08:35:17.060488+00:00"
+  },
+  {
+    "test": "ipc-symbols",
+    "exitCode": 0,
+    "startedUTC": "2026-10-11T08:35:17.060693+00:00",
+    "completedUTC": "2026-10-11T08:35:21.978257+00:00"
+  },
+  {
+    "test": "platform-posix",
+    "exitCode": 0,
+    "startedUTC": "2026-10-11T08:35:21.978467+00:00",
+    "completedUTC": "2026-10-11T08:35:27.389123+00:00"
+  }
+]

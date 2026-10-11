@@ -1,0 +1,8 @@
+{
+  "test": "ipc-sockets",
+  "fixtureSHA256": "7ed4420729ce67aea27ebc23af98afa38f6e96d6082fe18da47eff8e1fdad639",
+  "status": "passed",
+  "runtime": "e1a1d35aab446d25eb19126cec01e17e5508b672bc16f73b4cbb5e0a01f3b8a8",
+  "log": "10 functions, 128369 bytes\nIPC-SOCKET-PTY-PASS\nIPC-SOCKET-PASS\n",
+  "completedUTC": "2026-10-11T08:35:01.760Z"
+}

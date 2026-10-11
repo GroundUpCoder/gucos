@@ -1,0 +1,40 @@
+[machine-job] queued: env LD_LIBRARY_PATH=/home/ubuntu/git/gucos-ipc-services/.ipc-browser-deps/root/usr/lib/x86_64-linux-gnu python3 /tmp/gucos-closefrom-regressions-iio3kww1/run.py
+(node:1188042) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[machine-job] running: fb504328-8e9c-4a4d-9ad9-723cc066ab06
+START ipc-sockets
+VERIFIED-FROZEN-RUNTIME e1a1d35aab446d25eb19126cec01e17e5508b672bc16f73b4cbb5e0a01f3b8a8
+IPC-SOCKET-RUNTIME e1a1d35aab446d25eb19126cec01e17e5508b672bc16f73b4cbb5e0a01f3b8a8
+10 functions, 128369 bytes
+IPC-SOCKET-PTY-PASS
+IPC-SOCKET-PASS
+
+
+START ipc-services
+VERIFIED-FROZEN-RUNTIME e1a1d35aab446d25eb19126cec01e17e5508b672bc16f73b4cbb5e0a01f3b8a8
+18 functions, 201456 bytes
+flock ownership/conversion/fork PASS
+eventfd counter/readiness/blocking/signal/fork PASS
+named semaphore identity/unlink/fork/exec/timeout PASS
+IPC-SERVICES-PASS
+
+
+START ipc-terminal
+VERIFIED-FROZEN-RUNTIME e1a1d35aab446d25eb19126cec01e17e5508b672bc16f73b4cbb5e0a01f3b8a8
+8 functions, 46093 bytes
+IPC-TERMINAL-PASS
+
+
+START ipc-symbols
+VERIFIED-FROZEN-RUNTIME e1a1d35aab446d25eb19126cec01e17e5508b672bc16f73b4cbb5e0a01f3b8a8
+2 functions, 6449 bytes
+IPC-SYMBOLS-PASS
+
+
+START platform-posix
+VERIFIED-FROZEN-RUNTIME e1a1d35aab446d25eb19126cec01e17e5508b672bc16f73b4cbb5e0a01f3b8a8
+5 functions, 23087 bytes
+PLATFORM-POSIX-PASS
+
+
+SNAPSHOT-UNCHANGED True
