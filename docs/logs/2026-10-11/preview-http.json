@@ -1,0 +1,217 @@
+{
+  "origin": "https://f85fd6eb.gucos.pages.dev",
+  "checkedAt": "2026-10-11T04:12:52.562Z",
+  "passed": true,
+  "files": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "sha256": "4925e29819be3de5514e5bb1b89d458e5aa4c859ca27af5e8d19ad3ebe6c5d17",
+      "cache": "no-cache"
+    },
+    {
+      "path": "build.json",
+      "status": 200,
+      "sha256": "4867045d46e4317f46c61c89475eb0e0e05d0cc011a5cd0f7496b14759a2a02e",
+      "cache": "no-cache"
+    },
+    {
+      "path": "hosted-distribution.json",
+      "status": 200,
+      "sha256": "c929e704beae5bcbff6638776d9ec119b06f6af6a788b6063d300f85f1d4ca74",
+      "cache": "no-cache"
+    },
+    {
+      "path": "assets/00174569ecd70feefa9c35d506570f57a4010b272017e4df1c26f790037180b4.js",
+      "status": 200,
+      "sha256": "00174569ecd70feefa9c35d506570f57a4010b272017e4df1c26f790037180b4",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "assets/08d761e005cdb552dbb5a21caa69e99e282e851b3514cd80e849bc51e7747943.bin",
+      "status": 200,
+      "sha256": "08d761e005cdb552dbb5a21caa69e99e282e851b3514cd80e849bc51e7747943",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "assets/3f2bf733d13b1e20f7457acc5baf47aa94b3982901cce4f6d7e80438bf9b6b13.txt",
+      "status": 200,
+      "sha256": "3f2bf733d13b1e20f7457acc5baf47aa94b3982901cce4f6d7e80438bf9b6b13",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "assets/4028d5fd3695cddf5fca7d48170993ab279e935a659a09876db56af4e41590f2.bin",
+      "status": 200,
+      "sha256": "4028d5fd3695cddf5fca7d48170993ab279e935a659a09876db56af4e41590f2",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "assets/49e023f76451cf73b366f9a1009b22ae0a802d61c2958ad76e6c60c75194113d.bin",
+      "status": 200,
+      "sha256": "49e023f76451cf73b366f9a1009b22ae0a802d61c2958ad76e6c60c75194113d",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "assets/4a19f3711c5575bbe8c54999eadc021f1e7913538c3ace15940ac8fe528b0b65.html",
+      "status": 200,
+      "sha256": "4a19f3711c5575bbe8c54999eadc021f1e7913538c3ace15940ac8fe528b0b65",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "assets/4a4fd31f4286b5b3296bbc66b97a12fcc4d22528547f4412e62d8cd77fa085fa.bin",
+      "status": 200,
+      "sha256": "4a4fd31f4286b5b3296bbc66b97a12fcc4d22528547f4412e62d8cd77fa085fa",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "assets/4c8d40cdc917a65f6498598f10b3cc668febba61958503a319c2c266e2a94a4a.bin",
+      "status": 200,
+      "sha256": "4c8d40cdc917a65f6498598f10b3cc668febba61958503a319c2c266e2a94a4a",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "assets/58e8e4b83ebd78451bbe152fc68b194cb327c80d0770dbb5d7879ef374667acc.txt",
+      "status": 200,
+      "sha256": "58e8e4b83ebd78451bbe152fc68b194cb327c80d0770dbb5d7879ef374667acc",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "assets/62001eba50b0cba0b7bad8eba8aaf4e4f10c057331fd2a8e1f62e16bdd7b7a76.txt",
+      "status": 200,
+      "sha256": "62001eba50b0cba0b7bad8eba8aaf4e4f10c057331fd2a8e1f62e16bdd7b7a76",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "assets/66ebe1c3a7c5689456e49e9bf0cd9ceae112b8123839f2fa734b944ebcc0a9dd.html",
+      "status": 200,
+      "sha256": "66ebe1c3a7c5689456e49e9bf0cd9ceae112b8123839f2fa734b944ebcc0a9dd",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "assets/7eecb9ebfcc0ac3b3177f9d4f9ad43472c4017138f32afd5e25a4fc10b88097a.bin",
+      "status": 200,
+      "sha256": "7eecb9ebfcc0ac3b3177f9d4f9ad43472c4017138f32afd5e25a4fc10b88097a",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "assets/9ffef346671fb773532d3958395ac4eb6d8fa4a0dcbcfc1703993f42350a83f7.tar",
+      "status": 200,
+      "sha256": "9ffef346671fb773532d3958395ac4eb6d8fa4a0dcbcfc1703993f42350a83f7",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "assets/a1044a84b3a242d6eecbc17ed3bf63f5122f02f36fadbbf1d5486c73de881553.bin",
+      "status": 200,
+      "sha256": "a1044a84b3a242d6eecbc17ed3bf63f5122f02f36fadbbf1d5486c73de881553",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "assets/a8c3dcf5e54484ac99a7ed48216179141faf899aa93aa7838c2a18e56fbeda5d.bin",
+      "status": 200,
+      "sha256": "a8c3dcf5e54484ac99a7ed48216179141faf899aa93aa7838c2a18e56fbeda5d",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "assets/a9db0494cf71e5fb71b8c7f0e9799c08f84b95fbd4150da9724fd29c9e110831.bin",
+      "status": 200,
+      "sha256": "a9db0494cf71e5fb71b8c7f0e9799c08f84b95fbd4150da9724fd29c9e110831",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "assets/afeafc88f15df843f98b627cbadafbf6ebfe3fe110b5b612d93104fa7fe04e61.bin",
+      "status": 200,
+      "sha256": "afeafc88f15df843f98b627cbadafbf6ebfe3fe110b5b612d93104fa7fe04e61",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "assets/b4030e79f8cd97f1457d7995dda6ffd9dc00714e7196051fee1abc491f8cbcda.bin",
+      "status": 200,
+      "sha256": "b4030e79f8cd97f1457d7995dda6ffd9dc00714e7196051fee1abc491f8cbcda",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "assets/b569f629d00f2626a8100df2a1798210535621e42164dfd426a6fe5aac7b0ccd.txt",
+      "status": 200,
+      "sha256": "b569f629d00f2626a8100df2a1798210535621e42164dfd426a6fe5aac7b0ccd",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "assets/b97deaddf0c42d06758291b0de449ccf482e56c87ac81fa5bc0133b7c9439288.js",
+      "status": 200,
+      "sha256": "b97deaddf0c42d06758291b0de449ccf482e56c87ac81fa5bc0133b7c9439288",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "assets/bbfc9843646d483c334664f651c208b9839626891d8f17604db2146962f43548.txt",
+      "status": 200,
+      "sha256": "bbfc9843646d483c334664f651c208b9839626891d8f17604db2146962f43548",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "assets/c18a4e0fafbfe15e2aeb9b0567c206fa152fca6e09f929e9223d9e6abdde12fb.bin",
+      "status": 200,
+      "sha256": "c18a4e0fafbfe15e2aeb9b0567c206fa152fca6e09f929e9223d9e6abdde12fb",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "assets/c72f3deca164e519fcbe01063afb15b6d4a68fdcfb3bcc2d13094cf9b52b51e7.js",
+      "status": 200,
+      "sha256": "c72f3deca164e519fcbe01063afb15b6d4a68fdcfb3bcc2d13094cf9b52b51e7",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "assets/d28d25db219dc267ac61933eb80889b13f75bce4bb28e456561036eeeb119da7.bin",
+      "status": 200,
+      "sha256": "d28d25db219dc267ac61933eb80889b13f75bce4bb28e456561036eeeb119da7",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "assets/e256f01188af527e4d06d21d06fbf785ae9c50d4b328bf03cbe0ba7f0aa4228f.txt",
+      "status": 200,
+      "sha256": "e256f01188af527e4d06d21d06fbf785ae9c50d4b328bf03cbe0ba7f0aa4228f",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "assets/e7a93b009565cfce55919a381437ac4db883e9da2126fa28b91d12732bc53d96.txt",
+      "status": 200,
+      "sha256": "e7a93b009565cfce55919a381437ac4db883e9da2126fa28b91d12732bc53d96",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "assets/e86d4d7d38c1cf9e2651fa16e7aa13ec37e7b37b8c7b7c3e3c4fa967dccd378a.tar",
+      "status": 200,
+      "sha256": "e86d4d7d38c1cf9e2651fa16e7aa13ec37e7b37b8c7b7c3e3c4fa967dccd378a",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "assets/e971cd3371db3b18892fcf2427a0ba198aef6aa1ebe151ab7c2956edc74689e0.js",
+      "status": 200,
+      "sha256": "e971cd3371db3b18892fcf2427a0ba198aef6aa1ebe151ab7c2956edc74689e0",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "assets/f9bc4423732350eb0b3f7ed7e91d530298476f8fec0c6c427a1c04ade22655af.txt",
+      "status": 200,
+      "sha256": "f9bc4423732350eb0b3f7ed7e91d530298476f8fec0c6c427a1c04ade22655af",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "assets/f9e18ede9cd229fc1a07a96e355ff3ecc08ede27bd36aa817e599d04f4fcd2e9.bin",
+      "status": 200,
+      "sha256": "f9e18ede9cd229fc1a07a96e355ff3ecc08ede27bd36aa817e599d04f4fcd2e9",
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "/missing-asset.bin",
+      "status": 404
+    },
+    {
+      "path": "/release.json",
+      "status": 404
+    },
+    {
+      "path": "/pages-release.json",
+      "status": 404
+    }
+  ]
+}

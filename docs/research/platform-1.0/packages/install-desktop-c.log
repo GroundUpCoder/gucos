@@ -1,0 +1,117 @@
+[machine-job] queued: /Users/jku/Library/pnpm/nodejs/25.8.2/bin/node tests/compatibility/check.mjs install xmessage xprop xev lua zstd
+[machine-job] running: 13a60374-5538-4586-b832-728adb30b3d1
+Already installed: x11-server
+Already installed: x11-toolkit
+Already installed: x11-widgets
+/usr/local/lib/gucman/packages/xmessage/release.tkrdvu/manifest.json: OK
+/usr/local/lib/gucman/packages/xmessage/release.tkrdvu/paths: OK
+/usr/local/lib/gucman/packages/xmessage/release.tkrdvu/origin: OK
+/usr/local/lib/gucman/packages/xmessage/release.tkrdvu/runtime: OK
+/usr/local/lib/gucman/packages/xmessage/release.tkrdvu/dependency-hashes: OK
+/usr/local/lib/gucman/packages/xmessage/release.tkrdvu/bin/xmessage: OK
+/usr/local/lib/gucman/packages/xmessage/release.tkrdvu/share/licenses/xmessage/libICE-COPYING: OK
+/usr/local/lib/gucman/packages/xmessage/release.tkrdvu/share/licenses/xmessage/libSM-COPYING: OK
+/usr/local/lib/gucman/packages/xmessage/release.tkrdvu/share/licenses/xmessage/libXaw-COPYING: OK
+/usr/local/lib/gucman/packages/xmessage/release.tkrdvu/share/licenses/xmessage/libXft-COPYING: OK
+/usr/local/lib/gucman/packages/xmessage/release.tkrdvu/share/licenses/xmessage/libXmu-COPYING: OK
+/usr/local/lib/gucman/packages/xmessage/release.tkrdvu/share/licenses/xmessage/libXpm-COPYING: OK
+/usr/local/lib/gucman/packages/xmessage/release.tkrdvu/share/licenses/xmessage/libXrandr-COPYING: OK
+/usr/local/lib/gucman/packages/xmessage/release.tkrdvu/share/licenses/xmessage/libXt-COPYING: OK
+/usr/local/lib/gucman/packages/xmessage/release.tkrdvu/share/licenses/xmessage/termcap-COPYING: OK
+/usr/local/lib/gucman/packages/xmessage/release.tkrdvu/share/licenses/xmessage/xev-COPYING: OK
+/usr/local/lib/gucman/packages/xmessage/release.tkrdvu/share/licenses/xmessage/xmessage-COPYING: OK
+/usr/local/lib/gucman/packages/xmessage/release.tkrdvu/share/licenses/xmessage/xprop-COPYING: OK
+/usr/local/lib/gucman/packages/xmessage/release.tkrdvu/share/licenses/xmessage/xterm-COPYING: OK
+Installed compatibility:xmessage 1.0.7-1
+
+{
+  tail: 'ge-COPYING: OK\n' +
+    '/usr/local/lib/gucman/packages/xmessage/release.tkrdvu/share/licenses/xmessage/xprop-COPYING: OK\n' +
+    '/usr/local/lib/gucman/packages/xmessage/release.tkrdvu/share/licenses/xmessage/xterm-COPYING: OK\n' +
+    'Installed compatibility:xmessage 1.0.7-1\n'
+}
+Already installed: x11-server
+Already installed: x11-toolkit
+Already installed: x11-widgets
+/usr/local/lib/gucman/packages/xprop/release.szohtu/manifest.json: OK
+/usr/local/lib/gucman/packages/xprop/release.szohtu/paths: OK
+/usr/local/lib/gucman/packages/xprop/release.szohtu/origin: OK
+/usr/local/lib/gucman/packages/xprop/release.szohtu/runtime: OK
+/usr/local/lib/gucman/packages/xprop/release.szohtu/dependency-hashes: OK
+/usr/local/lib/gucman/packages/xprop/release.szohtu/bin/xprop: OK
+/usr/local/lib/gucman/packages/xprop/release.szohtu/share/licenses/xprop/libICE-COPYING: OK
+/usr/local/lib/gucman/packages/xprop/release.szohtu/share/licenses/xprop/libSM-COPYING: OK
+/usr/local/lib/gucman/packages/xprop/release.szohtu/share/licenses/xprop/libXaw-COPYING: OK
+/usr/local/lib/gucman/packages/xprop/release.szohtu/share/licenses/xprop/libXft-COPYING: OK
+/usr/local/lib/gucman/packages/xprop/release.szohtu/share/licenses/xprop/libXmu-COPYING: OK
+/usr/local/lib/gucman/packages/xprop/release.szohtu/share/licenses/xprop/libXpm-COPYING: OK
+/usr/local/lib/gucman/packages/xprop/release.szohtu/share/licenses/xprop/libXrandr-COPYING: OK
+/usr/local/lib/gucman/packages/xprop/release.szohtu/share/licenses/xprop/libXt-COPYING: OK
+/usr/local/lib/gucman/packages/xprop/release.szohtu/share/licenses/xprop/termcap-COPYING: OK
+/usr/local/lib/gucman/packages/xprop/release.szohtu/share/licenses/xprop/xev-COPYING: OK
+/usr/local/lib/gucman/packages/xprop/release.szohtu/share/licenses/xprop/xmessage-COPYING: OK
+/usr/local/lib/gucman/packages/xprop/release.szohtu/share/licenses/xprop/xprop-COPYING: OK
+/usr/local/lib/gucman/packages/xprop/release.szohtu/share/licenses/xprop/xterm-COPYING: OK
+Installed compatibility:xprop 1.2.8-1
+
+{
+  tail: 'es/xprop/xmessage-COPYING: OK\n' +
+    '/usr/local/lib/gucman/packages/xprop/release.szohtu/share/licenses/xprop/xprop-COPYING: OK\n' +
+    '/usr/local/lib/gucman/packages/xprop/release.szohtu/share/licenses/xprop/xterm-COPYING: OK\n' +
+    'Installed compatibility:xprop 1.2.8-1\n'
+}
+Already installed: x11-server
+Already installed: x11-toolkit
+Already installed: x11-widgets
+/usr/local/lib/gucman/packages/xev/release.ymbiuu/manifest.json: OK
+/usr/local/lib/gucman/packages/xev/release.ymbiuu/paths: OK
+/usr/local/lib/gucman/packages/xev/release.ymbiuu/origin: OK
+/usr/local/lib/gucman/packages/xev/release.ymbiuu/runtime: OK
+/usr/local/lib/gucman/packages/xev/release.ymbiuu/dependency-hashes: OK
+/usr/local/lib/gucman/packages/xev/release.ymbiuu/bin/xev: OK
+/usr/local/lib/gucman/packages/xev/release.ymbiuu/share/licenses/xev/libICE-COPYING: OK
+/usr/local/lib/gucman/packages/xev/release.ymbiuu/share/licenses/xev/libSM-COPYING: OK
+/usr/local/lib/gucman/packages/xev/release.ymbiuu/share/licenses/xev/libXaw-COPYING: OK
+/usr/local/lib/gucman/packages/xev/release.ymbiuu/share/licenses/xev/libXft-COPYING: OK
+/usr/local/lib/gucman/packages/xev/release.ymbiuu/share/licenses/xev/libXmu-COPYING: OK
+/usr/local/lib/gucman/packages/xev/release.ymbiuu/share/licenses/xev/libXpm-COPYING: OK
+/usr/local/lib/gucman/packages/xev/release.ymbiuu/share/licenses/xev/libXrandr-COPYING: OK
+/usr/local/lib/gucman/packages/xev/release.ymbiuu/share/licenses/xev/libXt-COPYING: OK
+/usr/local/lib/gucman/packages/xev/release.ymbiuu/share/licenses/xev/termcap-COPYING: OK
+/usr/local/lib/gucman/packages/xev/release.ymbiuu/share/licenses/xev/xev-COPYING: OK
+/usr/local/lib/gucman/packages/xev/release.ymbiuu/share/licenses/xev/xmessage-COPYING: OK
+/usr/local/lib/gucman/packages/xev/release.ymbiuu/share/licenses/xev/xprop-COPYING: OK
+/usr/local/lib/gucman/packages/xev/release.ymbiuu/share/licenses/xev/xterm-COPYING: OK
+Installed compatibility:xev 1.2.7-1
+
+/usr/local/lib/gucman/packages/lua/release.pxfeuu/manifest.json: OK
+/usr/local/lib/gucman/packages/lua/release.pxfeuu/paths: OK
+/usr/local/lib/gucman/packages/lua/release.pxfeuu/origin: OK
+/usr/local/lib/gucman/packages/lua/release.pxfeuu/runtime: OK
+/usr/local/lib/gucman/packages/lua/release.pxfeuu/dependency-hashes: OK
+/usr/local/lib/gucman/packages/lua/release.pxfeuu/bin/lua: OK
+/usr/local/lib/gucman/packages/lua/release.pxfeuu/bin/luac: OK
+/usr/local/lib/gucman/packages/lua/release.pxfeuu/lib/liblua.a: OK
+/usr/local/lib/gucman/packages/lua/release.pxfeuu/include/lua.h: OK
+/usr/local/lib/gucman/packages/lua/release.pxfeuu/include/luaconf.h: OK
+/usr/local/lib/gucman/packages/lua/release.pxfeuu/include/lualib.h: OK
+/usr/local/lib/gucman/packages/lua/release.pxfeuu/include/lauxlib.h: OK
+/usr/local/lib/gucman/packages/lua/release.pxfeuu/include/lua.hpp: OK
+/usr/local/lib/gucman/packages/lua/release.pxfeuu/share/licenses/lua/lua.h: OK
+Installed compatibility:lua 5.4.9-1
+
+/usr/local/lib/gucman/packages/zstd/release.tqrbuu/manifest.json: OK
+/usr/local/lib/gucman/packages/zstd/release.tqrbuu/paths: OK
+/usr/local/lib/gucman/packages/zstd/release.tqrbuu/origin: OK
+/usr/local/lib/gucman/packages/zstd/release.tqrbuu/runtime: OK
+/usr/local/lib/gucman/packages/zstd/release.tqrbuu/dependency-hashes: OK
+/usr/local/lib/gucman/packages/zstd/release.tqrbuu/bin/zstd: OK
+/usr/local/lib/gucman/packages/zstd/release.tqrbuu/lib/libzstd.a: OK
+/usr/local/lib/gucman/packages/zstd/release.tqrbuu/include/zstd.h: OK
+/usr/local/lib/gucman/packages/zstd/release.tqrbuu/include/zdict.h: OK
+/usr/local/lib/gucman/packages/zstd/release.tqrbuu/include/zstd_errors.h: OK
+/usr/local/lib/gucman/packages/zstd/release.tqrbuu/lib/pkgconfig/libzstd.pc: OK
+/usr/local/lib/gucman/packages/zstd/release.tqrbuu/share/licenses/zstd/LICENSE: OK
+/usr/local/lib/gucman/packages/zstd/release.tqrbuu/share/licenses/zstd/COPYING: OK
+Installed compatibility:zstd 1.5.7-1
+

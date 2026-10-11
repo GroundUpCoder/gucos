@@ -1,0 +1,16 @@
+{
+  "project": "gucos",
+  "subdomain": "gucos.pages.dev",
+  "productionDeployment": {
+    "id": "f65c4256-a53e-447a-8498-c4e744a7c73d",
+    "url": "https://f65c4256.gucos.pages.dev",
+    "environment": "production",
+    "status": "success"
+  },
+  "domains": [
+    {
+      "name": "os.groundupcoder.com",
+      "status": "active"
+    }
+  ]
+}

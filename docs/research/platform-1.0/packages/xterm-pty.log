@@ -1,0 +1,6 @@
+[machine-job] queued: /Users/jku/Library/pnpm/nodejs/25.8.2/bin/node tests/expansion-xterm.mjs
+[machine-job] running: c3dc8810-b1dc-4e55-8e6b-1ab77e3492bf
+2220 functions, 2230829 bytes
+XTERM-FOCUSED
+XTERM-PTY-PASS
+

@@ -1,0 +1,42 @@
+[machine-job] queued: node tests/live-core.mjs 19609f47c28f9d81c12ad6525d65347057ad5ad2ddec5eb48f5762a922d72441
+[machine-job] running: 61cae15e-cd65-4b66-a1c0-7532f8a32991
+gucman: install groundupcoder:jsmn: reading catalogs and resolving dependencies
+gucman: Reading catalog: groundupcoder
+  Connecting; waiting for response…
+  Downloaded 19113 bytes; transfer finished
+gucman: Resolving: groundupcoder:jsmn
+gucman: Downloading manifest for groundupcoder:jsmn (2336 bytes)
+  Connecting; waiting for response…
+  Downloaded 2336 / 2336 bytes (100%); transfer finished
+gucman: Verifying download: manifest for groundupcoder:jsmn
+gucman: Checking cached object: manifest for groundupcoder:jsmn
+gucman: Plan: 1 packages (including dependencies); checking compatibility
+gucman: Checking file ownership for 1 packages
+gucman: Package 1/1: jsmn (0 remaining after this)
+gucman: Downloading jsmn archive (28160 bytes)
+  Connecting; waiting for response…
+  Downloaded 28160 / 28160 bytes (100%); transfer finished
+gucman: Verifying download: jsmn archive
+gucman: Checking cached object: jsmn archive
+gucman: Unpacking: jsmn
+gucman: Installing jsmn: 0/3 files
+gucman: Installing jsmn: 3/3 files
+gucman: Preparing checksums: jsmn
+gucman: Checksummed jsmn: 3/3 files
+gucman: Saving transaction: jsmn
+gucman: Verifying staged files: jsmn
+gucman: Activating: jsmn
+Installed groundupcoder:jsmn 1.1.0-1
+- User: johndoe
+- Admin: false
+- UID: 1000
+- Groups:
+  * users
+  * wheel
+  * audio
+  * video
+LIVE-BINARY-PASS
+
+620 functions, 586677 bytes
+
+PASS LIVE core 19609f47c28f9d81c12ad6525d65347057ad5ad2ddec5eb48f5762a922d72441: fresh boot/compiler, terminal/two GPU VTs, public binary compatibility check and source build, persistence/reload

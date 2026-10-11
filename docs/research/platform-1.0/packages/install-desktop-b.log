@@ -1,0 +1,84 @@
+[machine-job] queued: /Users/jku/Library/pnpm/nodejs/25.8.2/bin/node tests/compatibility/check.mjs install xeyes xlogo xlsfonts xkill xrefresh
+[machine-job] running: 0825494b-0f79-4d6f-b21e-217062ed7a90
+Already installed: x11-server
+Already installed: x11-toolkit
+Already installed: x11-widgets
+/usr/local/lib/gucman/packages/xeyes/release.ffqevu/manifest.json: OK
+/usr/local/lib/gucman/packages/xeyes/release.ffqevu/paths: OK
+/usr/local/lib/gucman/packages/xeyes/release.ffqevu/origin: OK
+/usr/local/lib/gucman/packages/xeyes/release.ffqevu/runtime: OK
+/usr/local/lib/gucman/packages/xeyes/release.ffqevu/dependency-hashes: OK
+/usr/local/lib/gucman/packages/xeyes/release.ffqevu/bin/xeyes: OK
+/usr/local/lib/gucman/packages/xeyes/release.ffqevu/share/licenses/xeyes/COPYING: OK
+Installed compatibility:xeyes 1.3.1-1
+
+{
+  tail: 'b/gucman/packages/xeyes/release.ffqevu/dependency-hashes: OK\n' +
+    '/usr/local/lib/gucman/packages/xeyes/release.ffqevu/bin/xeyes: OK\n' +
+    '/usr/local/lib/gucman/packages/xeyes/release.ffqevu/share/licenses/xeyes/COPYING: OK\n' +
+    'Installed compatibility:xeyes 1.3.1-1\n'
+}
+Already installed: x11-server
+Already installed: x11-toolkit
+Already installed: x11-widgets
+/usr/local/lib/gucman/packages/xlogo/release.gzhktu/manifest.json: OK
+/usr/local/lib/gucman/packages/xlogo/release.gzhktu/paths: OK
+/usr/local/lib/gucman/packages/xlogo/release.gzhktu/origin: OK
+/usr/local/lib/gucman/packages/xlogo/release.gzhktu/runtime: OK
+/usr/local/lib/gucman/packages/xlogo/release.gzhktu/dependency-hashes: OK
+/usr/local/lib/gucman/packages/xlogo/release.gzhktu/bin/xlogo: OK
+/usr/local/lib/gucman/packages/xlogo/release.gzhktu/share/licenses/xlogo/COPYING: OK
+/usr/local/lib/gucman/packages/xlogo/release.gzhktu/share/X11/app-defaults/XLogo: OK
+/usr/local/lib/gucman/packages/xlogo/release.gzhktu/share/X11/app-defaults/XLogo-color: OK
+Installed compatibility:xlogo 1.0.7-1
+
+{
+  tail: 'e/X11/app-defaults/XLogo: OK\n' +
+    '/usr/local/lib/gucman/packages/xlogo/release.gzhktu/share/X11/app-defaults/XLogo-color: OK\n' +
+    'Installed compatibility:xlogo 1.0.7-1\n' +
+    'Already installed: x11-server\n' +
+    'Already installed: x11-toolkit\n' +
+    'Already installed: x11-widgets\n'
+}
+Already installed: x11-server
+Already installed: x11-toolkit
+Already installed: x11-widgets
+/usr/local/lib/gucman/packages/xlsfonts/release.qruxtu/manifest.json: OK
+/usr/local/lib/gucman/packages/xlsfonts/release.qruxtu/paths: OK
+/usr/local/lib/gucman/packages/xlsfonts/release.qruxtu/origin: OK
+/usr/local/lib/gucman/packages/xlsfonts/release.qruxtu/runtime: OK
+/usr/local/lib/gucman/packages/xlsfonts/release.qruxtu/dependency-hashes: OK
+/usr/local/lib/gucman/packages/xlsfonts/release.qruxtu/bin/xlsfonts: OK
+/usr/local/lib/gucman/packages/xlsfonts/release.qruxtu/share/licenses/xlsfonts/COPYING: OK
+Installed compatibility:xlsfonts 1.0.9-1
+
+Already installed: x11-server
+Already installed: x11-toolkit
+Already installed: x11-widgets
+/usr/local/lib/gucman/packages/xkill/release.maxswu/manifest.json: OK
+/usr/local/lib/gucman/packages/xkill/release.maxswu/paths: OK
+/usr/local/lib/gucman/packages/xkill/release.maxswu/origin: OK
+/usr/local/lib/gucman/packages/xkill/release.maxswu/runtime: OK
+/usr/local/lib/gucman/packages/xkill/release.maxswu/dependency-hashes: OK
+/usr/local/lib/gucman/packages/xkill/release.maxswu/bin/xkill: OK
+/usr/local/lib/gucman/packages/xkill/release.maxswu/share/licenses/xkill/COPYING: OK
+Installed compatibility:xkill 1.0.7-1
+
+{
+  tail: 'b/gucman/packages/xkill/release.maxswu/dependency-hashes: OK\n' +
+    '/usr/local/lib/gucman/packages/xkill/release.maxswu/bin/xkill: OK\n' +
+    '/usr/local/lib/gucman/packages/xkill/release.maxswu/share/licenses/xkill/COPYING: OK\n' +
+    'Installed compatibility:xkill 1.0.7-1\n'
+}
+Already installed: x11-server
+Already installed: x11-toolkit
+Already installed: x11-widgets
+/usr/local/lib/gucman/packages/xrefresh/release.kfigxu/manifest.json: OK
+/usr/local/lib/gucman/packages/xrefresh/release.kfigxu/paths: OK
+/usr/local/lib/gucman/packages/xrefresh/release.kfigxu/origin: OK
+/usr/local/lib/gucman/packages/xrefresh/release.kfigxu/runtime: OK
+/usr/local/lib/gucman/packages/xrefresh/release.kfigxu/dependency-hashes: OK
+/usr/local/lib/gucman/packages/xrefresh/release.kfigxu/bin/xrefresh: OK
+/usr/local/lib/gucman/packages/xrefresh/release.kfigxu/share/licenses/xrefresh/COPYING: OK
+Installed compatibility:xrefresh 1.1.1-1
+

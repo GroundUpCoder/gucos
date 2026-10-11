@@ -1,0 +1,93 @@
+[machine-job] queued: /Users/jku/Library/pnpm/nodejs/25.8.2/bin/node tests/compatibility/check.mjs install jwm xterm xcalc xclock
+[machine-job] running: 43907839-15ad-4844-ac8d-f80abeb7dc36
+Already installed: x11-server
+Already installed: x11-toolkit
+Already installed: x11-widgets
+/usr/local/lib/gucman/packages/jwm/release.jvievu/manifest.json: OK
+/usr/local/lib/gucman/packages/jwm/release.jvievu/paths: OK
+/usr/local/lib/gucman/packages/jwm/release.jvievu/origin: OK
+/usr/local/lib/gucman/packages/jwm/release.jvievu/runtime: OK
+/usr/local/lib/gucman/packages/jwm/release.jvievu/dependency-hashes: OK
+/usr/local/lib/gucman/packages/jwm/release.jvievu/bin/jwm: OK
+/usr/local/lib/gucman/packages/jwm/release.jvievu/share/jwm/system.jwmrc: OK
+/usr/local/lib/gucman/packages/jwm/release.jvievu/share/jwm/wasm.jwmrc: OK
+/usr/local/lib/gucman/packages/jwm/release.jvievu/share/jwm/app-menu.sh: OK
+/usr/local/lib/gucman/packages/jwm/release.jvievu/share/licenses/jwm/LICENSE: OK
+/usr/local/lib/gucman/packages/jwm/release.jvievu/bin/start-jwm: OK
+/usr/local/lib/gucman/packages/jwm/release.jvievu/libexec/jwm/wait-display: OK
+Installed compatibility:jwm 2.4.6-1
+
+{
+  tail: '/gucman/packages/jwm/release.jvievu/share/licenses/jwm/LICENSE: OK\n' +
+    '/usr/local/lib/gucman/packages/jwm/release.jvievu/bin/start-jwm: OK\n' +
+    '/usr/local/lib/gucman/packages/jwm/release.jvievu/libexec/jwm/wait-display: OK\n' +
+    'Installed compatibility:jwm 2.4.6-1\n'
+}
+Already installed: x11-server
+Already installed: x11-toolkit
+Already installed: x11-widgets
+/usr/local/lib/gucman/packages/xterm/release.uwcktu/manifest.json: OK
+/usr/local/lib/gucman/packages/xterm/release.uwcktu/paths: OK
+/usr/local/lib/gucman/packages/xterm/release.uwcktu/origin: OK
+/usr/local/lib/gucman/packages/xterm/release.uwcktu/runtime: OK
+/usr/local/lib/gucman/packages/xterm/release.uwcktu/dependency-hashes: OK
+/usr/local/lib/gucman/packages/xterm/release.uwcktu/bin/xterm: OK
+/usr/local/lib/gucman/packages/xterm/release.uwcktu/share/xterm/termcap: OK
+/usr/local/lib/gucman/packages/xterm/release.uwcktu/share/X11/app-defaults/XTerm: OK
+/usr/local/lib/gucman/packages/xterm/release.uwcktu/share/licenses/xterm/libICE-COPYING: OK
+/usr/local/lib/gucman/packages/xterm/release.uwcktu/share/licenses/xterm/libSM-COPYING: OK
+/usr/local/lib/gucman/packages/xterm/release.uwcktu/share/licenses/xterm/libXaw-COPYING: OK
+/usr/local/lib/gucman/packages/xterm/release.uwcktu/share/licenses/xterm/libXft-COPYING: OK
+/usr/local/lib/gucman/packages/xterm/release.uwcktu/share/licenses/xterm/libXmu-COPYING: OK
+/usr/local/lib/gucman/packages/xterm/release.uwcktu/share/licenses/xterm/libXpm-COPYING: OK
+/usr/local/lib/gucman/packages/xterm/release.uwcktu/share/licenses/xterm/libXrandr-COPYING: OK
+/usr/local/lib/gucman/packages/xterm/release.uwcktu/share/licenses/xterm/libXt-COPYING: OK
+/usr/local/lib/gucman/packages/xterm/release.uwcktu/share/licenses/xterm/termcap-COPYING: OK
+/usr/local/lib/gucman/packages/xterm/release.uwcktu/share/licenses/xterm/xev-COPYING: OK
+/usr/local/lib/gucman/packages/xterm/release.uwcktu/share/licenses/xterm/xmessage-COPYING: OK
+/usr/local/lib/gucman/packages/xterm/release.uwcktu/share/licenses/xterm/xprop-COPYING: OK
+/usr/local/lib/gucman/packages/xterm/release.uwcktu/share/licenses/xterm/xterm-COPYING: OK
+Installed compatibility:xterm 411-1
+
+{
+  tail: 'nses/xterm/xmessage-COPYING: OK\n' +
+    '/usr/local/lib/gucman/packages/xterm/release.uwcktu/share/licenses/xterm/xprop-COPYING: OK\n' +
+    '/usr/local/lib/gucman/packages/xterm/release.uwcktu/share/licenses/xterm/xterm-COPYING: OK\n' +
+    'Installed compatibility:xterm 411-1\n'
+}
+Already installed: x11-server
+Already installed: x11-toolkit
+Already installed: x11-widgets
+/usr/local/lib/gucman/packages/xcalc/release.qghxtu/manifest.json: OK
+/usr/local/lib/gucman/packages/xcalc/release.qghxtu/paths: OK
+/usr/local/lib/gucman/packages/xcalc/release.qghxtu/origin: OK
+/usr/local/lib/gucman/packages/xcalc/release.qghxtu/runtime: OK
+/usr/local/lib/gucman/packages/xcalc/release.qghxtu/dependency-hashes: OK
+/usr/local/lib/gucman/packages/xcalc/release.qghxtu/bin/xcalc: OK
+/usr/local/lib/gucman/packages/xcalc/release.qghxtu/share/licenses/xcalc/COPYING: OK
+/usr/local/lib/gucman/packages/xcalc/release.qghxtu/share/X11/app-defaults/XCalc: OK
+/usr/local/lib/gucman/packages/xcalc/release.qghxtu/share/X11/app-defaults/XCalc-color: OK
+Installed compatibility:xcalc 1.1.3-1
+
+{
+  tail: 'tu/share/licenses/xcalc/COPYING: OK\n' +
+    '/usr/local/lib/gucman/packages/xcalc/release.qghxtu/share/X11/app-defaults/XCalc: OK\n' +
+    '/usr/local/lib/gucman/packages/xcalc/release.qghxtu/share/X11/app-defaults/XCalc-color: OK\n' +
+    'Installed compatibility:xcalc 1.1.3-1\n'
+}
+Already installed: x11-server
+Already installed: x11-toolkit
+Already installed: x11-widgets
+/usr/local/lib/gucman/packages/xclock/release.vuetwu/manifest.json: OK
+/usr/local/lib/gucman/packages/xclock/release.vuetwu/paths: OK
+/usr/local/lib/gucman/packages/xclock/release.vuetwu/origin: OK
+/usr/local/lib/gucman/packages/xclock/release.vuetwu/runtime: OK
+/usr/local/lib/gucman/packages/xclock/release.vuetwu/dependency-hashes: OK
+/usr/local/lib/gucman/packages/xclock/release.vuetwu/bin/xclock: OK
+/usr/local/lib/gucman/packages/xclock/release.vuetwu/share/licenses/xclock/COPYING: OK
+/usr/local/lib/gucman/packages/xclock/release.vuetwu/share/X11/app-defaults/XClock: OK
+/usr/local/lib/gucman/packages/xclock/release.vuetwu/share/X11/app-defaults/XClock-ampm: OK
+/usr/local/lib/gucman/packages/xclock/release.vuetwu/share/X11/app-defaults/XClock-color: OK
+/usr/local/lib/gucman/packages/xclock/release.vuetwu/share/X11/app-defaults/XClock-grandfather: OK
+Installed compatibility:xclock 1.2.1-1
+

@@ -1,0 +1,88 @@
+# Package progress — platform 1.0.1
+
+The generic package client now prints an initial resolving message, catalog and
+manifest activity, per-download byte totals/percentages (when the manifest gives
+a size), package count/remaining count, and separate unpack/copy/checksum/save/
+verification/activation stages. Download updates are throttled to 500 ms plus a
+final transfer count. Unknown lengths show bytes without inventing a percentage.
+Large known files use MiB; small files show bytes. Transfer completion is not a
+claim of checksum verification or successful installation.
+
+Progress goes to stderr so shell command substitutions still receive only the
+cache filename. Successful staged-checksum output is summarized; failed checks
+retain their per-file diagnostic. File copy/checksum preparation reports every
+25 files and the final count. No application ABI or package artifacts changed.
+Platform patch version is 1.0.1, with unchanged object ABI 3 / runtime ABI 5.
+The private fetch companion updates with the manager on existing browser disks.
+
+## Tests and measurement
+
+`tests/package-progress.mjs` uses an actual browser and deliberately held HTTP
+body to prove byte progress arrives before transfer completion. It covers cached
+archives, download checksum rejection, corrupt staged-checksum recovery rejection,
+retention of the old executable, failure detail, quiet successful verification,
+and HTTP failure. Corrected an initial harness assumption about exact network
+chunk boundaries; the final test accepts any genuine partial count for the
+specific held archive. Passed job 145bca7a-48da-4e67-b65e-0527efbcf993.
+
+`tests/package-progress-experience.mjs` installs unchanged public JWM archives
+using an actual Enter keypress at the normal homepage. xterm render events plus
+two animation frames approximate visible paint time; this is not a hardware
+measurement. Stage event timestamps are output/render observations, not CPU
+profiling or network-only timings. Candidate and live results/video are kept in
+separate directories. Recording overhead is included. The runner asserts the
+expected runtime, successful four-package installation and absence of page errors.
+
+`tests/package-progress-upgrade.mjs` opens a fresh disk on the retained actual
+1.0.0 release, switches the same origin to the candidate, and verifies the new
+private fetch binary, its progress behavior, platform 1.0.1 and preserved user
+file. It never opens or changes the user's own browser disk.
+
+## Candidate observations
+
+First visible feedback: 135 ms; total JWM install: 125.83 s (one observation).
+The x11-server archive (25,956,864 bytes) went from the download phase to
+verification in 2.83 s. File copying (527 files) took about 52.1 s, from the
+initial copy count at 29.38 s to checksum preparation at 81.51 s; checksum
+preparation then took about 11.0 s. This demonstrates substantial local work,
+not a purely network-bound wait. It does not isolate CPU versus filesystem or
+process-spawn cost inside that loop. Total duration is not a controlled
+before/after speed benchmark; this change primarily makes progress visible.
+
+Generic repository regression and core smoke passed; see `gates.json`.
+Existing-disk upgrade passed job d31a46fa-7e74-4fe0-a17c-0c808cf3a8c2;
+exact old/new private-helper hashes and preserved-file result are in `upgrade.json`.
+
+## Release provenance
+
+Implementation: 2721a051fccfce18c1cb4f256fc5da24f8306930.
+Runtime: 61a87f8861fa6ddaa6052eb25408036a2bcb238ad4b8e48dd91303beb36714d0.
+Frozen release manifest: db46e7c8cf2f412a8d988a1b8f2f61f0c7f9e0d805d8eb503083fae24398a743.
+Hosting commit: eb5f19fa8dcc179973e4c47bbda8a985b063f4a1.
+Route: e18b20eed8181db0b99e9365bc4a37b6665f4dbe60a7573305ccd71607f90ba1.
+
+Independent reviewer cc thread 01a123e0-2fb3-7521-9fa3-e936e0997405
+(Codex / gpt-6-astra) approved exact implementation/export/unchanged hosting in
+message 01a1250c-bce5-7aaf-a521-c9f4b312f2b9, conditional on candidate experience
+and existing-disk upgrade passing before deployment and guarded live acceptance
+passing before completion. Both predeployment checks passed. The reviewer
+inspected source, hashes and recorded evidence; did not execute browser tests.
+
+## Live completion
+
+Guarded deployment completed successfully; `deployment.log` records successful
+live-core acceptance and actual live keyboard-driven JWM installation, followed
+by transaction completion. Live browser job e5ad8c36-e32b-47a9-bb3b-d9f32a958208.
+Direct postdeployment read confirmed the db46e7c8 release is current and no pending
+deployment remains. Historical /os2 response and isolation checks are part of the
+guarded wrapper. No hosting source changed.
+
+Live first feedback: **147 ms**; total JWM install: **130.77 s** (one recorded run).
+Four archive download stages totaled 4.47 s; file copying totaled 74.61 s.
+These sums exclude catalog/manifest downloads and other phases; all individual
+phase intervals are in `live/timings.json`, generated by `analyze.py`.
+The change improves feedback, not the underlying per-file installation cost.
+
+`live-progress-8x.gif` and `live-progress-8x.mp4` are the actual continuous live
+recording, accelerated 8× and resized, with no waits removed. Full-speed original
+WebM is retained alongside the result. These are not generated mockups.

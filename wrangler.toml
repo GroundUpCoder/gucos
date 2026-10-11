@@ -1,0 +1,3 @@
+name = "gucos"
+pages_build_output_dir = "releases/current/site"
+compatibility_date = "2026-10-11"

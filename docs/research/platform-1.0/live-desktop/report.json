@@ -1,0 +1,59 @@
+{
+  "url": "https://os.groundupcoder.net/",
+  "expectedRuntime": "c4411d720bede49ead5c1de69bfe7b1247656a146b72d991d209883606e300fb",
+  "startedAt": "2026-10-10T07:16:33.428Z",
+  "scope": "live-desktop-smoke",
+  "baselineCatalog": "fab65cba24c8c6dd59e11a63e096138e13835c42",
+  "status": "passed",
+  "stages": [
+    {
+      "name": "probe",
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 5006,
+      "log": "probe.log",
+      "sha256": "f1af443d799eaddfe9279797f0096a9fd7db8428a951d88d49376ec9b04dcb1b"
+    },
+    {
+      "name": "install-server",
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 77548,
+      "log": "install-server.log",
+      "sha256": "b5d0f8f39167732c61822cef5d633f238adab0bdf2e50cdee47b8a56f6e386c8"
+    },
+    {
+      "name": "install-widgets",
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 38263,
+      "log": "install-widgets.log",
+      "sha256": "3c8055421eef279cb14c19047d7a79480b7bce91d86aa952b284c7f820ce3e1e"
+    },
+    {
+      "name": "install-desktop",
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 51711,
+      "log": "install-desktop.log",
+      "sha256": "71faf487201210723dc71eae6b2c0b5623d2e3a439b48b899d2fd3dc75601fa0"
+    },
+    {
+      "name": "jwm-xterm-keyboard",
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 5006,
+      "log": "jwm-xterm-keyboard.log",
+      "sha256": "6020b6b649a248cbbb24e2d6ea2bdd04efb58f747872136afb2d18adfee875c2"
+    },
+    {
+      "name": "reload",
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 2526,
+      "log": "reload.log",
+      "sha256": "59284c7a6d483747b46df709f57763676930d9b720cb2dd60fd10474f0923000"
+    }
+  ],
+  "finishedAt": "2026-10-10T07:19:33.995Z"
+}

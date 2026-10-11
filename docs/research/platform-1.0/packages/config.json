@@ -1,0 +1,6 @@
+{
+  "expectedRuntime": "c4411d720bede49ead5c1de69bfe7b1247656a146b72d991d209883606e300fb",
+  "startedAt": "2026-10-10T07:03:58.532Z",
+  "dist": "/private/tmp/wasm-posix-platform-c4411d72",
+  "distributionSnapshotSha256": "d2eab05f0ed137af0afbe8bae8043fd6b4e3a7ec82829bca871f228546757a36"
+}

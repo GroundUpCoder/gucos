@@ -1,0 +1,13 @@
+{
+  "format": 1,
+  "target": "wasm32-wasm-posix",
+  "features": [
+    "posix-core",
+    "unix-stream",
+    "pthreads",
+    "sdl3-vt",
+    "sdl3-ime",
+    "webgpu"
+  ],
+  "legacyRuntime": "2a9cca447a35af0d0d8894ea4b50cb254ce20821753af8ae70a1ad5060da2a0f"
+}
