@@ -5,10 +5,15 @@
   gucos-packages during build or deployment.
 - The packages repository owns application recipes, sources, patches and catalog.
   Only explicit browser package operations consume those remote inputs.
-- Preserve wasm-posix-old and its historical worktrees as references. Retired
+- The user authorized removal of all local wasm-posix* checkouts on 2026-10-11.
+  Local Git history and source changes were preserved in
+  /Users/jku/git/.gucos-retired-backup-2026-10-11 before removal. Retired
   implementation threads are not owners of this fresh repository.
 - Documentation belongs under docs/. Record exact provenance and tested scope.
 - Use machine-job for builds/browser tests. One browser job at a time.
+- Start all new threads and tailcalls with the default account (no account suffix),
+  not pub or another suffixed account. Existing threads may remain on their
+  current accounts.
 - Netguc hosting changes follow its local instructions and independent review.
 - Target graphics boundary: SDL is the only application-facing graphics API in
   core. Each graphical VT owns one presentation surface; terminal VTs remain
