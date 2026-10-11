@@ -1,0 +1,6 @@
+Error: Guest exit 127
+Dynamic loader: JSPI execution contract mismatch: fprintf; relink the consumer against this library
+
+    at Object.command (file:///home/ubuntu/git/gucos-closefrom/tools/browser.mjs:24:29)
+    at async cmd (file:///tmp/gucos-fork-link-contract-8fotmln3/runner.mjs:9:16)
+    at async file:///tmp/gucos-fork-link-contract-8fotmln3/runner.mjs:28:6

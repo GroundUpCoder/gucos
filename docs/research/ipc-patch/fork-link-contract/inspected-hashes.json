@@ -1,0 +1,10 @@
+{
+  "/home/ubuntu/git/gucos-closefrom/src/compiler-driver.js": "8df9ed90d1724588d93c678d07badf0d1f08bb4da3c8ec4c3d0868bacb241d85",
+  "/home/ubuntu/git/gucos-closefrom/src/compile.js": "7f758d12e81ede53f314662404483ca5d2961c5c106f2f53d6a78923ac18c9cc",
+  "/home/ubuntu/git/gucos-closefrom/src/objects.js": "f17e251143ef2d3149f35a5d405dcf447fb7c871e7507e10c188d3283d3152e4",
+  "/home/ubuntu/git/gucos-closefrom/src/trampoline.js": "e53fb23ff67013c371e96a2e909db922363e3e63778e0bec0cb9f80dd0ef56d1",
+  "/home/ubuntu/git/gucos-closefrom/src/dynamic-loader.js": "98f82a1f2e4d2c1faabbfe4106a4149e86b4fcd10e721585504c31df3ef7a33b",
+  "/home/ubuntu/git/gucos-packages-ipc/apps/tmux/build.sh": "92027977c1a2e2c750de3696eb9e3866de5abf3f9ca9dc9b7a671f2f3e386c3b",
+  "/home/ubuntu/git/gucos-packages-ipc/apps/libevent/build.sh": "5f29cbdd380264f3df69f29db6b284ccd9786a50438297b90341ceecd3839cc6",
+  "/home/ubuntu/git/gucos-packages-ipc/apps/ncurses/build.sh": "7de3bd99ee01144f57eeb22bba73969dd3ce88d9f3835ba2bf3a0cd1bec6e68e"
+}

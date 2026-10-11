@@ -1,0 +1,27 @@
+[machine-job] queued: env LD_LIBRARY_PATH=/home/ubuntu/git/gucos-ipc-services/.ipc-browser-deps/root/usr/lib/x86_64-linux-gnu node /tmp/gucos-fork-link-contract-8fotmln3/runner.mjs
+(node:1203051) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[machine-job] running: 9227d299-fb9c-4a1c-be7a-b175b9f84b8a
+prepare
+
+compile
+1 functions, 4092 bytes
+1 functions, 5007 bytes
+3 functions, 5264 bytes
+5 functions, 11162 bytes
+4 functions, 9611 bytes
+4 functions, 9687 bytes
+
+plain-app
+PROVIDER
+PLAIN-42
+
+archive-app
+PROVIDER
+FORK-42
+
+fork-dso-app
+PROVIDER
+FORK-42
+
+FORK-LINK-CONTRACT-PASS

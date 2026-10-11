@@ -1,0 +1,516 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "plain-app",
+      "status": "passed"
+    },
+    {
+      "name": "archive-app",
+      "status": "passed"
+    },
+    {
+      "name": "fork-dso-app",
+      "status": "passed"
+    },
+    {
+      "name": "mixed-app",
+      "status": "expected rejection",
+      "error": "Error: Guest exit 127\nDynamic loader: JSPI execution contract mismatch: fprintf; relink the consumer against this library\n"
+    }
+  ],
+  "identity": {
+    "format": 1,
+    "runtime": "e1a1d35aab446d25eb19126cec01e17e5508b672bc16f73b4cbb5e0a01f3b8a8",
+    "platform": {
+      "format": 1,
+      "target": "wasm32-wasm-posix",
+      "features": [
+        "posix-core",
+        "unix-stream",
+        "pthreads",
+        "sdl3-vt",
+        "sdl3-ime",
+        "webgpu"
+      ],
+      "legacyRuntime": "2a9cca447a35af0d0d8894ea4b50cb254ce20821753af8ae70a1ad5060da2a0f",
+      "version": "1.0.1",
+      "runtimeAbi": 5,
+      "objectAbi": 3
+    },
+    "toolchain": {
+      "version": "0.5.13",
+      "runtimeVersion": "0.5.8",
+      "live": "ed0c29736ebd42f01f5ad4a2f8b49b6e5e096486a8c893c34a0d7ba9cd290378",
+      "id": "529ba3b935c6dbfdefb4a1ee316cde7821f1b7dc34168e09b987b80468433bfd",
+      "abi": {
+        "objects": 3,
+        "runtime": 5
+      },
+      "systemBuild": "e1a1d35aab446d25eb19126cec01e17e5508b672bc16f73b4cbb5e0a01f3b8a8",
+      "libcDigest": "f45a2be27599f654782c341da2a0180c9cd45b62bfe236099b68f16ed376f6a3"
+    },
+    "bootstrap": [
+      "libc",
+      "ash",
+      "busybox",
+      "cc",
+      "ar",
+      "make",
+      "guc-fetch",
+      "gucman"
+    ]
+  },
+  "artifacts": {
+    "provider.o": {
+      "size": 889,
+      "sha256": "8d035365a5105b5497bec9a6eb41ea610c92994f2a4dfe84a1b8c198650da58d"
+    },
+    "libprovider.a": {
+      "size": 958,
+      "sha256": "83dda99ec1dbc88663d1415e5b45c46bc285457eb174747e215621931d8fcc19"
+    },
+    "libplain-provider.so": {
+      "size": 4092,
+      "sha256": "ed6a9fb3133e84a9168c8d819da47dd640a6e29d4cb12f5037ae6556e0910f48",
+      "dylink": {
+        "memoryPolicy": "private-snapshot-v1",
+        "version": 4,
+        "execution": {
+          "clone": false
+        },
+        "nativeImports": [],
+        "engineImports": [
+          "fprintf"
+        ],
+        "shared": true,
+        "runtime": false,
+        "sharedLibc": false,
+        "needed": [],
+        "soname": "libplain-provider.so",
+        "runpath": [],
+        "deferredMain": false,
+        "stack": 16777216,
+        "memorySize": 96,
+        "memoryAlign": 16,
+        "tlsSize": 0,
+        "tlsAlign": 1,
+        "tlsRanges": [],
+        "memoryABIs": {
+          "__fn0": "",
+          "fprintf": "",
+          "__stderr_file": ""
+        },
+        "externalFunctions": {
+          "2": "fprintf"
+        },
+        "symbols": [
+          {
+            "name": "invoke",
+            "kind": "function",
+            "memoryABI": "",
+            "value": 4,
+            "type": 2,
+            "execution": "jspi-v1"
+          }
+        ],
+        "relocations": [],
+        "descriptors": [
+          {
+            "slot": 1,
+            "step": 0,
+            "size": 64,
+            "type": 0,
+            "locals": 0
+          },
+          {
+            "slot": 2,
+            "step": 0,
+            "size": 64,
+            "type": 0,
+            "locals": 0
+          },
+          {
+            "slot": 3,
+            "step": 0,
+            "size": 80,
+            "type": 1,
+            "locals": 1
+          },
+          {
+            "slot": 4,
+            "step": 5,
+            "size": 80,
+            "type": 2,
+            "locals": 2
+          }
+        ],
+        "signatures": [
+          {
+            "params": [],
+            "results": []
+          },
+          {
+            "params": [
+              127
+            ],
+            "results": []
+          },
+          {
+            "params": [
+              127
+            ],
+            "results": [
+              127
+            ]
+          },
+          {
+            "params": [
+              127,
+              127
+            ],
+            "results": []
+          },
+          {
+            "params": [],
+            "results": [
+              127
+            ]
+          },
+          {
+            "params": [
+              127,
+              127,
+              127,
+              127,
+              127,
+              127,
+              127
+            ],
+            "results": [
+              127
+            ]
+          },
+          {
+            "params": [
+              127,
+              127,
+              127
+            ],
+            "results": [
+              127
+            ]
+          },
+          {
+            "params": [],
+            "results": [
+              127,
+              127
+            ]
+          }
+        ],
+        "tags": [
+          {
+            "name": "__LongJump",
+            "index": 0,
+            "params": [
+              127,
+              127
+            ]
+          }
+        ],
+        "imports": [
+          {
+            "importName": "memory_base",
+            "kind": "memoryBase"
+          },
+          {
+            "importName": "table_base",
+            "kind": "tableBase"
+          },
+          {
+            "importName": "stack_pointer",
+            "kind": "stack"
+          },
+          {
+            "importName": "thread_state",
+            "kind": "thread"
+          },
+          {
+            "importName": "tls_base",
+            "kind": "tlsBase"
+          },
+          {
+            "importName": "heap_base",
+            "kind": "heap"
+          },
+          {
+            "importName": "external:__stderr_file",
+            "kind": "external",
+            "name": "__stderr_file",
+            "offset": 0
+          },
+          {
+            "importName": "function:fprintf",
+            "kind": "externalFunction",
+            "nameSymbol": "fprintf"
+          },
+          {
+            "importName": "tag:0",
+            "kind": "tag",
+            "value": 0
+          },
+          {
+            "importName": "control:0",
+            "kind": "control",
+            "value": 0
+          },
+          {
+            "importName": "generation:0",
+            "kind": "generation",
+            "value": 0
+          },
+          {
+            "importName": "registry:0",
+            "kind": "registry",
+            "value": 0
+          },
+          {
+            "importName": "signature:4",
+            "kind": "signature",
+            "value": 4
+          }
+        ],
+        "tableSize": 13
+      }
+    },
+    "libfork-provider.so": {
+      "size": 5007,
+      "sha256": "2a84eef67eb2acd7b179ededa163812a87215754a9a63fb4dd12d7bab7b76311",
+      "dylink": {
+        "memoryPolicy": "private-snapshot-v1",
+        "version": 4,
+        "execution": {
+          "clone": true
+        },
+        "nativeImports": [],
+        "engineImports": [],
+        "shared": true,
+        "runtime": false,
+        "sharedLibc": false,
+        "needed": [],
+        "soname": "libfork-provider.so",
+        "runpath": [],
+        "deferredMain": false,
+        "stack": 16777216,
+        "memorySize": 96,
+        "memoryAlign": 16,
+        "tlsSize": 0,
+        "tlsAlign": 1,
+        "tlsRanges": [],
+        "memoryABIs": {
+          "__fn0": "",
+          "fprintf": "",
+          "__stderr_file": ""
+        },
+        "externalFunctions": {
+          "2": "fprintf"
+        },
+        "symbols": [
+          {
+            "name": "invoke",
+            "kind": "function",
+            "memoryABI": "",
+            "value": 4,
+            "type": 2,
+            "execution": "clone-v1"
+          }
+        ],
+        "relocations": [],
+        "descriptors": [
+          {
+            "slot": 1,
+            "step": 0,
+            "size": 64,
+            "type": 0,
+            "locals": 0
+          },
+          {
+            "slot": 2,
+            "step": 0,
+            "size": 64,
+            "type": 0,
+            "locals": 0
+          },
+          {
+            "slot": 3,
+            "step": 5,
+            "size": 80,
+            "type": 1,
+            "locals": 1
+          },
+          {
+            "slot": 4,
+            "step": 6,
+            "size": 112,
+            "type": 2,
+            "locals": 2
+          }
+        ],
+        "signatures": [
+          {
+            "params": [],
+            "results": []
+          },
+          {
+            "params": [
+              127
+            ],
+            "results": []
+          },
+          {
+            "params": [
+              127
+            ],
+            "results": [
+              127
+            ]
+          },
+          {
+            "params": [
+              127,
+              127
+            ],
+            "results": []
+          },
+          {
+            "params": [],
+            "results": [
+              127
+            ]
+          },
+          {
+            "params": [
+              127,
+              127,
+              127,
+              127,
+              127,
+              127,
+              127
+            ],
+            "results": [
+              127
+            ]
+          },
+          {
+            "params": [
+              127,
+              127,
+              127
+            ],
+            "results": [
+              127
+            ]
+          },
+          {
+            "params": [],
+            "results": [
+              127,
+              127
+            ]
+          }
+        ],
+        "tags": [
+          {
+            "name": "__LongJump",
+            "index": 0,
+            "params": [
+              127,
+              127
+            ]
+          }
+        ],
+        "imports": [
+          {
+            "importName": "memory_base",
+            "kind": "memoryBase"
+          },
+          {
+            "importName": "table_base",
+            "kind": "tableBase"
+          },
+          {
+            "importName": "stack_pointer",
+            "kind": "stack"
+          },
+          {
+            "importName": "thread_state",
+            "kind": "thread"
+          },
+          {
+            "importName": "tls_base",
+            "kind": "tlsBase"
+          },
+          {
+            "importName": "heap_base",
+            "kind": "heap"
+          },
+          {
+            "importName": "tag:0",
+            "kind": "tag",
+            "value": 0
+          },
+          {
+            "importName": "external:__stderr_file",
+            "kind": "external",
+            "name": "__stderr_file",
+            "offset": 0
+          },
+          {
+            "importName": "function:fprintf",
+            "kind": "externalFunction",
+            "nameSymbol": "fprintf"
+          },
+          {
+            "importName": "registry:0",
+            "kind": "registry",
+            "value": 0
+          },
+          {
+            "importName": "signature:4",
+            "kind": "signature",
+            "value": 4
+          },
+          {
+            "importName": "control:0",
+            "kind": "control",
+            "value": 0
+          },
+          {
+            "importName": "generation:0",
+            "kind": "generation",
+            "value": 0
+          }
+        ],
+        "tableSize": 14
+      }
+    },
+    "plain-app": {
+      "size": 5264,
+      "sha256": "955c720e149d4d6eae7186fe798fe2edefb4312733f2a1ed8266e35bd3150467"
+    },
+    "archive-app": {
+      "size": 11162,
+      "sha256": "65d59e482bc7a53c87f9fae917295844a674736b7a25d06fc646bd08d87bd9e6"
+    },
+    "fork-dso-app": {
+      "size": 9611,
+      "sha256": "73806103d98d9c4db5ff77fbb2e44246e505fe2c7d1b0cf2b9dd50a252f92478"
+    },
+    "mixed-app": {
+      "size": 9687,
+      "sha256": "a2cf05f87e2b358a06e4c18af45e5e32a395b6ababc573056ee91044145468fd"
+    }
+  }
+}
