@@ -184,6 +184,7 @@ var OP = {
   TIOCSWINSZ: 0x0105,
   PTY_CREATE: 0x0106,
   PTY_CONTROL: 0x0107,
+  TIOCGWINSZ: 0x0108,
   // 0x02xx pipes. Post-0009 only CREATE is an opcode: the design doc's
   // PIPE_REF/CLOSE/WAIT/NOTIFY are subsumed by the kernel-owned fd layer
   // (OFD refcounts + FS_READ/FS_WRITE/FS_CLOSE + the doorbell).
@@ -2819,6 +2820,17 @@ Kernel.prototype._dispatchRpc = function (pcb) {
     }
     // The master side's resize (0020): winsize words + SIGWINCH to the
     // pty's fg pgroup (Tty.resize, shared with the system tty's bridge).
+    case OP.TIOCGWINSZ: {
+      if (this._brokered && !pcb.fds.has(req.fd | 0)) {
+        this._respond(pcb, { errno: 'EBADF' }); break;
+      }
+      var sizeTty = this._ttyForFd(pcb, req.fd);
+      this._respond(pcb, sizeTty ? {
+        rows: Atomics.load(sizeTty._i32, SI_ROWS),
+        cols: Atomics.load(sizeTty._i32, SI_COLS)
+      } : { errno: 'ENOTTY' });
+      break;
+    }
     case OP.TIOCSWINSZ: {
       var wTty = this._ttyForFd(pcb, req.fd);
       if (!wTty) { this._respond(pcb, { errno: 'ENOTTY' }); break; }
@@ -3567,7 +3579,7 @@ Kernel.prototype._fsRpcBody = function (pcb, op, req) {
         // SIGTTIN (stop class); if it's ignored or blocked, POSIX says the
         // read fails with EIO instead. The read itself returns EINTR — after
         // SIGCONT the libc caller retries, now (typically) in the foreground.
-        if (tty.fgPgid > 0 && pcb.pgid !== tty.fgPgid) {
+        if (pcb.tty === tty && tty.fgPgid > 0 && pcb.pgid !== tty.fgPgid) {
           if (pcb.sigdisp[SIG.TTIN] === DISP_IGN ||
               (Atomics.load(pcb.i32, KP_SIGBLOCK) & (1 << (SIG.TTIN - 1)))) {
             this._respond(pcb, { errno: 'EIO' });
@@ -5006,7 +5018,7 @@ Kernel.prototype._ttyNotify = function (tty) {
     if (!pcb || !pcb.waiter || pcb.waiter.op !== 'ttyread' ||
         pcb.waiter.tty !== tty) { tty.waiters.splice(i, 1); continue; }
     if (pcb.state === STATE_STOPPED) { i++; continue; }  // parked, not a consumer
-    if (tty.fgPgid > 0 && pcb.pgid !== tty.fgPgid) {
+    if (pcb.tty === tty && tty.fgPgid > 0 && pcb.pgid !== tty.fgPgid) {
       // Backgrounded since it parked. _cancelWaiter drops it from this
       // queue, so the loop continues at the same index.
       this._cancelWaiter(pcb);
@@ -6901,6 +6913,10 @@ RemoteFS.prototype.openpty = function () {
 RemoteFS.prototype.ptyControl = function(fd,request) {
   var r=this._ok(this._c.call(OP.PTY_CONTROL,{fd:fd,request:request}));
   return r === null ? null : r.value;
+};
+RemoteFS.prototype.getWinsize = function (fd) {
+  if (this._roFd(fd)) return this._setErr('ENOTTY');
+  return this._ok(this._c.call(OP.TIOCGWINSZ, { fd: fd }));
 };
 RemoteFS.prototype.setWinsize = function (fd, rows, cols) {
   return this._ok(this._c.call(OP.TIOCSWINSZ, { fd: fd, rows: rows, cols: cols })) && 0;

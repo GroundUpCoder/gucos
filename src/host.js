@@ -5361,6 +5361,15 @@ var BLOCK_FS = (function () {
         setErrnoName('ENOSYS'); return -1;
       },
       __ioctl_tiocgwinsz: function (fd, rows_ptr, cols_ptr) {
+        // A received descriptor can name a terminal other than startup stdin.
+        if (typeof self.getWinsize === 'function') {
+          var size = self.getWinsize(fd);
+          if (size === null) { setErrnoName(self._lastError || 'EIO'); return -1; }
+          var output = new DataView(getMemory().buffer);
+          output.setInt32(rows_ptr, size.rows, true);
+          output.setInt32(cols_ptr, size.cols, true);
+          return 0;
+        }
         // Read the real terminal size from the tty SAB header when wired (the
         // bridge keeps COLS/ROWS current); otherwise fall back to 80x24.
         // Guard on _stdinCtrl, NOT _stdinSab: brokered-mode RemoteFS wires
