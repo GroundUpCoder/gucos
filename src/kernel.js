@@ -2615,6 +2615,7 @@ Kernel.prototype._onWorkerMessage = function (pcb, msg) {
         pcb._forkReady({errno:'EAGAIN'});pcb._forkReady=null;
         const parent=this._procs.get(pcb.ppid);if(parent)parent.children.delete(pcb.pid);
         pcb.worker.terminate();pcb.fds.forEach(id=>this._ofdUnref(id,pcb.pid));
+        if(this._ipc)this._ipc.release(pcb.pid);
         if(pcb.trace)this._ofdUnref(pcb.trace.ofdId,0);
         this._procs.delete(pcb.pid);pcb.state=STATE_ZOMBIE;return;
       }

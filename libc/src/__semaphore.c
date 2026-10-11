@@ -1,3 +1,7 @@
+#define __SEM_IMPLEMENTATION 1
+#define __EVENTFD_IMPLEMENTATION 1
+#include <sys/file.h>
+#include <sys/eventfd.h>
 #include <semaphore.h>
 #include <fcntl.h>
 #include <stdlib.h>

@@ -53,3 +53,12 @@ svc.release(2);assert(!svc.sems.has(old));assert(svc.sems.has(fresh));
 svc.sem(p,{action:2,name:'/life'});svc.release(1);
 assert.equal(svc.sems.size,0);assert.equal(svc.names.size,0);assert.equal(svc.handles.size,0);
 console.log('IPC-KERNEL-PASS: in-flight OFDs, cancellation, unlink and handle reclamation');
+
+// A child that crashes before fork-ready must relinquish cloned named handles.
+svc.sem(p,{action:0,name:'/failed-fork',flags:0xc0,mode:0o600,value:0});
+const failed=p.reply.id;svc.clone(1,2);p.children=new Set([2]);q.ppid=1;
+let forkError,terminated=false;q._forkReady=r=>{forkError=r;};q.worker={terminate(){terminated=true;}};
+k._onWorkerMessage(q,{type:'crashed',error:'injected initialization failure'});
+assert.equal(forkError.errno,'EAGAIN');assert(terminated);assert(!k._procs.has(2));assert(!svc.handles.has(2));
+svc.sem(p,{action:2,name:'/failed-fork'});svc.release(1);assert(!svc.sems.has(failed));
+console.log('IPC-FORK-FAILURE-PASS: cloned semaphore handles reclaimed');
