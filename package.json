@@ -1,0 +1,17 @@
+{
+  "name": "wasm-posix",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "serve": "node tools/serve.mjs",
+    "test": "node tests/smoke.mjs",
+    "test:packages": "node tests/runtime-packages.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.63.0"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

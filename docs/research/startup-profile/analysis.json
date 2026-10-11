@@ -1,0 +1,2469 @@
+{
+  "networkRuns": [
+    [
+      {
+        "url": "https://os.groundupcoder.net/",
+        "start": 0.0,
+        "type": "Document",
+        "response": 0.0,
+        "cached": false,
+        "status": 200,
+        "end": 265.9,
+        "bytes": 169892,
+        "label": "https://os.groundupcoder.net/"
+      },
+      {
+        "url": "https://os.groundupcoder.net/cdn-cgi/rum?",
+        "start": 385.3,
+        "type": "Other",
+        "response": 454.6,
+        "cached": false,
+        "status": 204,
+        "end": 454.8,
+        "bytes": 497,
+        "label": "https://os.groundupcoder.net/cdn-cgi/rum?"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/25badaf3427d49a1b3f79b8cb5ab04e7e87292aad5956781ef10492d37e22464.bin",
+        "start": 645.5,
+        "type": "Other",
+        "response": 716.4,
+        "cached": false,
+        "status": 200,
+        "end": 1805.7,
+        "bytes": 1401091,
+        "label": "/usr/lib/libc.a"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/8bad4e3360956b77e0f28709cbeacea69877d14962fefd2c2d547a335d1359f3.bin",
+        "start": 645.6,
+        "type": "Other",
+        "response": 716.6,
+        "cached": false,
+        "status": 200,
+        "end": 1581.2,
+        "bytes": 753770,
+        "label": "/usr/lib/libc.so.1"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/a3bdf8edea7c8fbcfce32a746ac393e8531e8e31240e5b00e41443bc6a950461.bin",
+        "start": 645.7,
+        "type": "Other",
+        "response": 773.4,
+        "cached": false,
+        "status": 200,
+        "end": 1656.4,
+        "bytes": 928961,
+        "label": "/usr/lib/libc-fork.so.1"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/698e721db9807c025685b52866cabfaea708d5ac3ca29a193d5456f6ac7d1f86.bin",
+        "start": 645.7,
+        "type": "Other",
+        "response": 779.3,
+        "cached": false,
+        "status": 200,
+        "end": 779.5,
+        "bytes": 997,
+        "label": "/usr/lib/wasm-posix/libc.json"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/77313022035fa66fd205d1e128f5a494d15bc86b30f5b28d4f57b1f489f25c36.bin",
+        "start": 1807.1,
+        "type": "Other",
+        "response": 1865.3,
+        "cached": false,
+        "status": 200,
+        "end": 2323.4,
+        "bytes": 1390577,
+        "label": "/bin/ash"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/fbd806dd4e574bf2ba5e0496eee95c0b542934b5eb2e776c270ad74d04e9cf87.bin",
+        "start": 2324.7,
+        "type": "Other",
+        "response": 2377.8,
+        "cached": false,
+        "status": 200,
+        "end": 3209.0,
+        "bytes": 2676932,
+        "label": "/bin/busybox"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/6885454c99e5216050bf1c850635a92710b8a9027c5080863d237982daf770ec.bin",
+        "start": 3211.1,
+        "type": "Other",
+        "response": 3265.1,
+        "cached": false,
+        "status": 200,
+        "end": 3523.6,
+        "bytes": 1599322,
+        "label": "/usr/bin/make"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/f9e18ede9cd229fc1a07a96e355ff3ecc08ede27bd36aa817e599d04f4fcd2e9.bin",
+        "start": 3525.2,
+        "type": "Other",
+        "response": 3578.5,
+        "cached": false,
+        "status": 200,
+        "end": 3582.3,
+        "bytes": 28095,
+        "label": "/usr/libexec/guc-lock"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/8069421317348ebb7b1ecbcfa869f01fe66956ee885a802187bf59f7482a29d7.bin",
+        "start": 3582.4,
+        "type": "Other",
+        "response": 3633.8,
+        "cached": false,
+        "status": 200,
+        "end": 3637.2,
+        "bytes": 43694,
+        "label": "/usr/libexec/guc-json"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/3bf36d36fa8239a45079d6bff9ee7eb9dee3f9a5dc389124f1f7864bf8cbb3ac.bin",
+        "start": 3637.3,
+        "type": "Other",
+        "response": 3759.6,
+        "cached": false,
+        "status": 200,
+        "end": 3759.9,
+        "bytes": 34199,
+        "label": "/usr/libexec/guc-repo-fetch"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/a8c3dcf5e54484ac99a7ed48216179141faf899aa93aa7838c2a18e56fbeda5d.bin",
+        "start": 3760.0,
+        "type": "Other",
+        "response": 3811.8,
+        "cached": false,
+        "status": 200,
+        "end": 3814.4,
+        "bytes": 33796,
+        "label": "/usr/libexec/guc-unpack"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/b4030e79f8cd97f1457d7995dda6ffd9dc00714e7196051fee1abc491f8cbcda.bin",
+        "start": 3814.5,
+        "type": "Other",
+        "response": 3867.8,
+        "cached": false,
+        "status": 200,
+        "end": 3870.8,
+        "bytes": 36174,
+        "label": "/usr/libexec/guc-links-v2"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/7eecb9ebfcc0ac3b3177f9d4f9ad43472c4017138f32afd5e25a4fc10b88097a.bin",
+        "start": 3871.6,
+        "type": "Other",
+        "response": 3926.6,
+        "cached": false,
+        "status": 200,
+        "end": 3928.7,
+        "bytes": 27175,
+        "label": "/bin/cc"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/afeafc88f15df843f98b627cbadafbf6ebfe3fe110b5b612d93104fa7fe04e61.bin",
+        "start": 3928.9,
+        "type": "Other",
+        "response": 3984.4,
+        "cached": false,
+        "status": 200,
+        "end": 3987.0,
+        "bytes": 37726,
+        "label": "/usr/bin/ar"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/3bf36d36fa8239a45079d6bff9ee7eb9dee3f9a5dc389124f1f7864bf8cbb3ac.bin",
+        "start": 3987.1,
+        "type": "Other",
+        "response": 3987.3,
+        "cached": true,
+        "status": 200,
+        "end": 3987.5,
+        "bytes": 0,
+        "label": "/usr/libexec/guc-repo-fetch"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/b4030e79f8cd97f1457d7995dda6ffd9dc00714e7196051fee1abc491f8cbcda.bin",
+        "start": 3987.6,
+        "type": "Other",
+        "response": 3987.8,
+        "cached": true,
+        "status": 200,
+        "end": 3987.9,
+        "bytes": 0,
+        "label": "/usr/libexec/guc-links-v2"
+      },
+      {
+        "url": "https://os.groundupcoder.net/cdn-cgi/rum?",
+        "start": 4727.4,
+        "type": "Other",
+        "end": 4727.5,
+        "bytes": 0,
+        "label": "https://os.groundupcoder.net/cdn-cgi/rum?",
+        "response": 4727.4
+      }
+    ],
+    [
+      {
+        "url": "https://os.groundupcoder.net/",
+        "start": 0.0,
+        "type": "Document",
+        "response": 0.0,
+        "cached": false,
+        "status": 200,
+        "end": 2.5,
+        "bytes": 604,
+        "label": "https://os.groundupcoder.net/"
+      },
+      {
+        "url": "https://os.groundupcoder.net/cdn-cgi/rum?",
+        "start": 7.9,
+        "type": "Other",
+        "response": 57.9,
+        "cached": false,
+        "status": 204,
+        "end": 58.0,
+        "bytes": 465,
+        "label": "https://os.groundupcoder.net/cdn-cgi/rum?"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/f9e18ede9cd229fc1a07a96e355ff3ecc08ede27bd36aa817e599d04f4fcd2e9.bin",
+        "start": 60.4,
+        "type": "Other",
+        "response": 60.8,
+        "cached": true,
+        "status": 200,
+        "end": 60.9,
+        "bytes": 0,
+        "label": "/usr/libexec/guc-lock"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/8069421317348ebb7b1ecbcfa869f01fe66956ee885a802187bf59f7482a29d7.bin",
+        "start": 61.0,
+        "type": "Other",
+        "response": 61.2,
+        "cached": true,
+        "status": 200,
+        "end": 61.3,
+        "bytes": 0,
+        "label": "/usr/libexec/guc-json"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/3bf36d36fa8239a45079d6bff9ee7eb9dee3f9a5dc389124f1f7864bf8cbb3ac.bin",
+        "start": 61.4,
+        "type": "Other",
+        "response": 61.6,
+        "cached": true,
+        "status": 200,
+        "end": 61.7,
+        "bytes": 0,
+        "label": "/usr/libexec/guc-repo-fetch"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/a8c3dcf5e54484ac99a7ed48216179141faf899aa93aa7838c2a18e56fbeda5d.bin",
+        "start": 61.7,
+        "type": "Other",
+        "response": 61.9,
+        "cached": true,
+        "status": 200,
+        "end": 62.0,
+        "bytes": 0,
+        "label": "/usr/libexec/guc-unpack"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/b4030e79f8cd97f1457d7995dda6ffd9dc00714e7196051fee1abc491f8cbcda.bin",
+        "start": 62.0,
+        "type": "Other",
+        "response": 62.2,
+        "cached": true,
+        "status": 200,
+        "end": 62.2,
+        "bytes": 0,
+        "label": "/usr/libexec/guc-links-v2"
+      },
+      {
+        "url": "https://os.groundupcoder.net/cdn-cgi/rum?",
+        "start": 208.6,
+        "type": "Other",
+        "label": "https://os.groundupcoder.net/cdn-cgi/rum?",
+        "response": 208.6,
+        "end": 208.6
+      }
+    ],
+    [
+      {
+        "url": "https://os.groundupcoder.net/",
+        "start": 0.0,
+        "type": "Document",
+        "response": 0.0,
+        "cached": false,
+        "status": 200,
+        "end": 268.6,
+        "bytes": 169453,
+        "label": "https://os.groundupcoder.net/"
+      },
+      {
+        "url": "https://os.groundupcoder.net/cdn-cgi/rum?",
+        "start": 350.7,
+        "type": "Other",
+        "response": 420.8,
+        "cached": false,
+        "status": 204,
+        "end": 420.9,
+        "bytes": 463,
+        "label": "https://os.groundupcoder.net/cdn-cgi/rum?"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/25badaf3427d49a1b3f79b8cb5ab04e7e87292aad5956781ef10492d37e22464.bin",
+        "start": 587.3,
+        "type": "Other",
+        "response": 652.2,
+        "cached": false,
+        "status": 200,
+        "end": 1469.1,
+        "bytes": 1401037,
+        "label": "/usr/lib/libc.a"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/8bad4e3360956b77e0f28709cbeacea69877d14962fefd2c2d547a335d1359f3.bin",
+        "start": 587.4,
+        "type": "Other",
+        "response": 710.8,
+        "cached": false,
+        "status": 200,
+        "end": 1288.6,
+        "bytes": 753750,
+        "label": "/usr/lib/libc.so.1"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/a3bdf8edea7c8fbcfce32a746ac393e8531e8e31240e5b00e41443bc6a950461.bin",
+        "start": 587.5,
+        "type": "Other",
+        "response": 716.2,
+        "cached": false,
+        "status": 200,
+        "end": 1412.8,
+        "bytes": 928942,
+        "label": "/usr/lib/libc-fork.so.1"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/698e721db9807c025685b52866cabfaea708d5ac3ca29a193d5456f6ac7d1f86.bin",
+        "start": 587.5,
+        "type": "Other",
+        "response": 717.7,
+        "cached": false,
+        "status": 200,
+        "end": 717.8,
+        "bytes": 999,
+        "label": "/usr/lib/wasm-posix/libc.json"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/77313022035fa66fd205d1e128f5a494d15bc86b30f5b28d4f57b1f489f25c36.bin",
+        "start": 1470.5,
+        "type": "Other",
+        "response": 1527.0,
+        "cached": false,
+        "status": 200,
+        "end": 1946.6,
+        "bytes": 1390616,
+        "label": "/bin/ash"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/fbd806dd4e574bf2ba5e0496eee95c0b542934b5eb2e776c270ad74d04e9cf87.bin",
+        "start": 1948.0,
+        "type": "Other",
+        "response": 2005.1,
+        "cached": false,
+        "status": 200,
+        "end": 2902.0,
+        "bytes": 2677013,
+        "label": "/bin/busybox"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/6885454c99e5216050bf1c850635a92710b8a9027c5080863d237982daf770ec.bin",
+        "start": 2903.7,
+        "type": "Other",
+        "response": 2956.1,
+        "cached": false,
+        "status": 200,
+        "end": 3209.0,
+        "bytes": 1599201,
+        "label": "/usr/bin/make"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/f9e18ede9cd229fc1a07a96e355ff3ecc08ede27bd36aa817e599d04f4fcd2e9.bin",
+        "start": 3210.6,
+        "type": "Other",
+        "response": 3261.9,
+        "cached": false,
+        "status": 200,
+        "end": 3265.8,
+        "bytes": 28095,
+        "label": "/usr/libexec/guc-lock"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/8069421317348ebb7b1ecbcfa869f01fe66956ee885a802187bf59f7482a29d7.bin",
+        "start": 3265.9,
+        "type": "Other",
+        "response": 3317.6,
+        "cached": false,
+        "status": 200,
+        "end": 3321.2,
+        "bytes": 43698,
+        "label": "/usr/libexec/guc-json"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/3bf36d36fa8239a45079d6bff9ee7eb9dee3f9a5dc389124f1f7864bf8cbb3ac.bin",
+        "start": 3321.3,
+        "type": "Other",
+        "response": 3372.5,
+        "cached": false,
+        "status": 200,
+        "end": 3375.0,
+        "bytes": 34195,
+        "label": "/usr/libexec/guc-repo-fetch"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/a8c3dcf5e54484ac99a7ed48216179141faf899aa93aa7838c2a18e56fbeda5d.bin",
+        "start": 3375.0,
+        "type": "Other",
+        "response": 3424.8,
+        "cached": false,
+        "status": 200,
+        "end": 3427.7,
+        "bytes": 33799,
+        "label": "/usr/libexec/guc-unpack"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/b4030e79f8cd97f1457d7995dda6ffd9dc00714e7196051fee1abc491f8cbcda.bin",
+        "start": 3427.8,
+        "type": "Other",
+        "response": 3479.6,
+        "cached": false,
+        "status": 200,
+        "end": 3482.5,
+        "bytes": 36172,
+        "label": "/usr/libexec/guc-links-v2"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/7eecb9ebfcc0ac3b3177f9d4f9ad43472c4017138f32afd5e25a4fc10b88097a.bin",
+        "start": 3483.3,
+        "type": "Other",
+        "response": 3534.7,
+        "cached": false,
+        "status": 200,
+        "end": 3536.8,
+        "bytes": 27172,
+        "label": "/bin/cc"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/afeafc88f15df843f98b627cbadafbf6ebfe3fe110b5b612d93104fa7fe04e61.bin",
+        "start": 3537.0,
+        "type": "Other",
+        "response": 3706.4,
+        "cached": false,
+        "status": 200,
+        "end": 3706.8,
+        "bytes": 37725,
+        "label": "/usr/bin/ar"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/3bf36d36fa8239a45079d6bff9ee7eb9dee3f9a5dc389124f1f7864bf8cbb3ac.bin",
+        "start": 3707.0,
+        "type": "Other",
+        "response": 3707.4,
+        "cached": true,
+        "status": 200,
+        "end": 3708.2,
+        "bytes": 0,
+        "label": "/usr/libexec/guc-repo-fetch"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/b4030e79f8cd97f1457d7995dda6ffd9dc00714e7196051fee1abc491f8cbcda.bin",
+        "start": 3708.4,
+        "type": "Other",
+        "response": 3708.6,
+        "cached": true,
+        "status": 200,
+        "end": 3708.7,
+        "bytes": 0,
+        "label": "/usr/libexec/guc-links-v2"
+      },
+      {
+        "url": "https://os.groundupcoder.net/cdn-cgi/rum?",
+        "start": 4425.7,
+        "type": "Other",
+        "end": 4426.0,
+        "bytes": 0,
+        "label": "https://os.groundupcoder.net/cdn-cgi/rum?",
+        "response": 4425.7
+      }
+    ],
+    [
+      {
+        "url": "https://os.groundupcoder.net/",
+        "start": 0.0,
+        "type": "Document",
+        "response": 0.0,
+        "cached": false,
+        "status": 200,
+        "end": 2.8,
+        "bytes": 602,
+        "label": "https://os.groundupcoder.net/"
+      },
+      {
+        "url": "https://os.groundupcoder.net/cdn-cgi/rum?",
+        "start": 8.2,
+        "type": "Other",
+        "response": 56.2,
+        "cached": false,
+        "status": 204,
+        "end": 56.3,
+        "bytes": 462,
+        "label": "https://os.groundupcoder.net/cdn-cgi/rum?"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/f9e18ede9cd229fc1a07a96e355ff3ecc08ede27bd36aa817e599d04f4fcd2e9.bin",
+        "start": 64.7,
+        "type": "Other",
+        "response": 65.0,
+        "cached": true,
+        "status": 200,
+        "end": 65.2,
+        "bytes": 0,
+        "label": "/usr/libexec/guc-lock"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/8069421317348ebb7b1ecbcfa869f01fe66956ee885a802187bf59f7482a29d7.bin",
+        "start": 65.3,
+        "type": "Other",
+        "response": 65.5,
+        "cached": true,
+        "status": 200,
+        "end": 65.6,
+        "bytes": 0,
+        "label": "/usr/libexec/guc-json"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/3bf36d36fa8239a45079d6bff9ee7eb9dee3f9a5dc389124f1f7864bf8cbb3ac.bin",
+        "start": 65.7,
+        "type": "Other",
+        "response": 65.9,
+        "cached": true,
+        "status": 200,
+        "end": 66.0,
+        "bytes": 0,
+        "label": "/usr/libexec/guc-repo-fetch"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/a8c3dcf5e54484ac99a7ed48216179141faf899aa93aa7838c2a18e56fbeda5d.bin",
+        "start": 66.1,
+        "type": "Other",
+        "response": 66.3,
+        "cached": true,
+        "status": 200,
+        "end": 66.4,
+        "bytes": 0,
+        "label": "/usr/libexec/guc-unpack"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/b4030e79f8cd97f1457d7995dda6ffd9dc00714e7196051fee1abc491f8cbcda.bin",
+        "start": 66.4,
+        "type": "Other",
+        "response": 66.6,
+        "cached": true,
+        "status": 200,
+        "end": 66.8,
+        "bytes": 0,
+        "label": "/usr/libexec/guc-links-v2"
+      },
+      {
+        "url": "https://os.groundupcoder.net/cdn-cgi/rum?",
+        "start": 219.8,
+        "type": "Other",
+        "label": "https://os.groundupcoder.net/cdn-cgi/rum?",
+        "response": 219.8,
+        "end": 219.8
+      }
+    ],
+    [
+      {
+        "url": "https://os.groundupcoder.net/",
+        "start": 0.0,
+        "type": "Document",
+        "response": 0.0,
+        "cached": false,
+        "status": 200,
+        "end": 84.4,
+        "bytes": 169230,
+        "label": "https://os.groundupcoder.net/"
+      },
+      {
+        "url": "https://os.groundupcoder.net/cdn-cgi/rum?",
+        "start": 156.3,
+        "type": "Other",
+        "response": 235.1,
+        "cached": false,
+        "status": 204,
+        "end": 235.2,
+        "bytes": 471,
+        "label": "https://os.groundupcoder.net/cdn-cgi/rum?"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/25badaf3427d49a1b3f79b8cb5ab04e7e87292aad5956781ef10492d37e22464.bin",
+        "start": 346.3,
+        "type": "Other",
+        "response": 479.6,
+        "cached": false,
+        "status": 200,
+        "end": 1256.3,
+        "bytes": 1401041,
+        "label": "/usr/lib/libc.a"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/8bad4e3360956b77e0f28709cbeacea69877d14962fefd2c2d547a335d1359f3.bin",
+        "start": 346.4,
+        "type": "Other",
+        "response": 411.3,
+        "cached": false,
+        "status": 200,
+        "end": 1019.5,
+        "bytes": 753757,
+        "label": "/usr/lib/libc.so.1"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/a3bdf8edea7c8fbcfce32a746ac393e8531e8e31240e5b00e41443bc6a950461.bin",
+        "start": 346.4,
+        "type": "Other",
+        "response": 407.5,
+        "cached": false,
+        "status": 200,
+        "end": 1056.2,
+        "bytes": 928929,
+        "label": "/usr/lib/libc-fork.so.1"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/698e721db9807c025685b52866cabfaea708d5ac3ca29a193d5456f6ac7d1f86.bin",
+        "start": 346.5,
+        "type": "Other",
+        "response": 407.3,
+        "cached": false,
+        "status": 200,
+        "end": 407.6,
+        "bytes": 997,
+        "label": "/usr/lib/wasm-posix/libc.json"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/77313022035fa66fd205d1e128f5a494d15bc86b30f5b28d4f57b1f489f25c36.bin",
+        "start": 1258.3,
+        "type": "Other",
+        "response": 1315.9,
+        "cached": false,
+        "status": 200,
+        "end": 1767.7,
+        "bytes": 1390502,
+        "label": "/bin/ash"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/fbd806dd4e574bf2ba5e0496eee95c0b542934b5eb2e776c270ad74d04e9cf87.bin",
+        "start": 1769.8,
+        "type": "Other",
+        "response": 1825.2,
+        "cached": false,
+        "status": 200,
+        "end": 2689.9,
+        "bytes": 2676973,
+        "label": "/bin/busybox"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/6885454c99e5216050bf1c850635a92710b8a9027c5080863d237982daf770ec.bin",
+        "start": 2691.5,
+        "type": "Other",
+        "response": 2745.4,
+        "cached": false,
+        "status": 200,
+        "end": 2987.8,
+        "bytes": 1599281,
+        "label": "/usr/bin/make"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/f9e18ede9cd229fc1a07a96e355ff3ecc08ede27bd36aa817e599d04f4fcd2e9.bin",
+        "start": 2989.0,
+        "type": "Other",
+        "response": 3041.8,
+        "cached": false,
+        "status": 200,
+        "end": 3043.3,
+        "bytes": 28097,
+        "label": "/usr/libexec/guc-lock"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/8069421317348ebb7b1ecbcfa869f01fe66956ee885a802187bf59f7482a29d7.bin",
+        "start": 3043.4,
+        "type": "Other",
+        "response": 3098.1,
+        "cached": false,
+        "status": 200,
+        "end": 3101.7,
+        "bytes": 43699,
+        "label": "/usr/libexec/guc-json"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/3bf36d36fa8239a45079d6bff9ee7eb9dee3f9a5dc389124f1f7864bf8cbb3ac.bin",
+        "start": 3101.8,
+        "type": "Other",
+        "response": 3155.8,
+        "cached": false,
+        "status": 200,
+        "end": 3158.6,
+        "bytes": 34198,
+        "label": "/usr/libexec/guc-repo-fetch"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/a8c3dcf5e54484ac99a7ed48216179141faf899aa93aa7838c2a18e56fbeda5d.bin",
+        "start": 3158.7,
+        "type": "Other",
+        "response": 3213.3,
+        "cached": false,
+        "status": 200,
+        "end": 3217.6,
+        "bytes": 33806,
+        "label": "/usr/libexec/guc-unpack"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/b4030e79f8cd97f1457d7995dda6ffd9dc00714e7196051fee1abc491f8cbcda.bin",
+        "start": 3217.7,
+        "type": "Other",
+        "response": 3273.2,
+        "cached": false,
+        "status": 200,
+        "end": 3276.1,
+        "bytes": 36176,
+        "label": "/usr/libexec/guc-links-v2"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/7eecb9ebfcc0ac3b3177f9d4f9ad43472c4017138f32afd5e25a4fc10b88097a.bin",
+        "start": 3277.0,
+        "type": "Other",
+        "response": 3329.1,
+        "cached": false,
+        "status": 200,
+        "end": 3331.4,
+        "bytes": 27178,
+        "label": "/bin/cc"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/afeafc88f15df843f98b627cbadafbf6ebfe3fe110b5b612d93104fa7fe04e61.bin",
+        "start": 3331.5,
+        "type": "Other",
+        "response": 3466.7,
+        "cached": false,
+        "status": 200,
+        "end": 3467.6,
+        "bytes": 37724,
+        "label": "/usr/bin/ar"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/3bf36d36fa8239a45079d6bff9ee7eb9dee3f9a5dc389124f1f7864bf8cbb3ac.bin",
+        "start": 3467.8,
+        "type": "Other",
+        "response": 3468.1,
+        "cached": true,
+        "status": 200,
+        "end": 3468.3,
+        "bytes": 0,
+        "label": "/usr/libexec/guc-repo-fetch"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/b4030e79f8cd97f1457d7995dda6ffd9dc00714e7196051fee1abc491f8cbcda.bin",
+        "start": 3468.4,
+        "type": "Other",
+        "response": 3468.6,
+        "cached": true,
+        "status": 200,
+        "end": 3468.7,
+        "bytes": 0,
+        "label": "/usr/libexec/guc-links-v2"
+      },
+      {
+        "url": "https://os.groundupcoder.net/cdn-cgi/rum?",
+        "start": 3912.3,
+        "type": "Other",
+        "end": 3912.5,
+        "bytes": 0,
+        "label": "https://os.groundupcoder.net/cdn-cgi/rum?",
+        "response": 3912.3
+      }
+    ],
+    [
+      {
+        "url": "https://os.groundupcoder.net/",
+        "start": 0.0,
+        "type": "Document",
+        "response": 0.0,
+        "cached": false,
+        "status": 200,
+        "end": 2.3,
+        "bytes": 606,
+        "label": "https://os.groundupcoder.net/"
+      },
+      {
+        "url": "https://os.groundupcoder.net/cdn-cgi/rum?",
+        "start": 7.8,
+        "type": "Other",
+        "response": 57.3,
+        "cached": false,
+        "status": 204,
+        "end": 57.3,
+        "bytes": 462,
+        "label": "https://os.groundupcoder.net/cdn-cgi/rum?"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/f9e18ede9cd229fc1a07a96e355ff3ecc08ede27bd36aa817e599d04f4fcd2e9.bin",
+        "start": 64.1,
+        "type": "Other",
+        "response": 64.4,
+        "cached": true,
+        "status": 200,
+        "end": 64.6,
+        "bytes": 0,
+        "label": "/usr/libexec/guc-lock"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/8069421317348ebb7b1ecbcfa869f01fe66956ee885a802187bf59f7482a29d7.bin",
+        "start": 64.7,
+        "type": "Other",
+        "response": 64.9,
+        "cached": true,
+        "status": 200,
+        "end": 65.0,
+        "bytes": 0,
+        "label": "/usr/libexec/guc-json"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/3bf36d36fa8239a45079d6bff9ee7eb9dee3f9a5dc389124f1f7864bf8cbb3ac.bin",
+        "start": 65.1,
+        "type": "Other",
+        "response": 65.3,
+        "cached": true,
+        "status": 200,
+        "end": 65.4,
+        "bytes": 0,
+        "label": "/usr/libexec/guc-repo-fetch"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/a8c3dcf5e54484ac99a7ed48216179141faf899aa93aa7838c2a18e56fbeda5d.bin",
+        "start": 65.4,
+        "type": "Other",
+        "response": 65.6,
+        "cached": true,
+        "status": 200,
+        "end": 65.7,
+        "bytes": 0,
+        "label": "/usr/libexec/guc-unpack"
+      },
+      {
+        "url": "https://os.groundupcoder.net/assets/b4030e79f8cd97f1457d7995dda6ffd9dc00714e7196051fee1abc491f8cbcda.bin",
+        "start": 65.7,
+        "type": "Other",
+        "response": 65.9,
+        "cached": true,
+        "status": 200,
+        "end": 66.0,
+        "bytes": 0,
+        "label": "/usr/libexec/guc-links-v2"
+      },
+      {
+        "url": "https://os.groundupcoder.net/cdn-cgi/rum?",
+        "start": 210.2,
+        "type": "Other",
+        "label": "https://os.groundupcoder.net/cdn-cgi/rum?",
+        "response": 210.2,
+        "end": 210.2
+      }
+    ]
+  ],
+  "cpuProfiles": [
+    {
+      "pid": 39122,
+      "top": [
+        {
+          "function": "(idle)",
+          "url": "",
+          "sampleMs": 4772.2
+        },
+        {
+          "function": "(program)",
+          "url": "",
+          "sampleMs": 119.7
+        },
+        {
+          "function": "",
+          "url": "https://os.groundupcoder.net/",
+          "sampleMs": 5.9
+        },
+        {
+          "function": "i",
+          "url": "blob:https://os.groundupcoder.net/c34aa263-349e-4093-947c-056e90f270ee",
+          "sampleMs": 4.9
+        },
+        {
+          "function": "i",
+          "url": "blob:https://os.groundupcoder.net/3501a886-505a-4917-955d-1155c2142ae1",
+          "sampleMs": 4.7
+        },
+        {
+          "function": "_measure",
+          "url": "blob:https://os.groundupcoder.net/c34aa263-349e-4093-947c-056e90f270ee",
+          "sampleMs": 2.7
+        },
+        {
+          "function": "_measure",
+          "url": "blob:https://os.groundupcoder.net/3501a886-505a-4917-955d-1155c2142ae1",
+          "sampleMs": 1.9
+        },
+        {
+          "function": "unbase64",
+          "url": "https://os.groundupcoder.net/",
+          "sampleMs": 1.8
+        },
+        {
+          "function": "",
+          "url": "blob:https://os.groundupcoder.net/c34aa263-349e-4093-947c-056e90f270ee",
+          "sampleMs": 1.7
+        },
+        {
+          "function": "(garbage collector)",
+          "url": "",
+          "sampleMs": 1.5
+        },
+        {
+          "function": "",
+          "url": "https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920",
+          "sampleMs": 1.4
+        },
+        {
+          "function": "",
+          "url": "blob:https://os.groundupcoder.net/3501a886-505a-4917-955d-1155c2142ae1",
+          "sampleMs": 1.4
+        },
+        {
+          "function": "d",
+          "url": "blob:https://os.groundupcoder.net/c34aa263-349e-4093-947c-056e90f270ee",
+          "sampleMs": 1.2
+        },
+        {
+          "function": "",
+          "url": "",
+          "sampleMs": 0.8
+        },
+        {
+          "function": "S",
+          "url": "blob:https://os.groundupcoder.net/3501a886-505a-4917-955d-1155c2142ae1",
+          "sampleMs": 0.8
+        },
+        {
+          "function": "InjectedScript",
+          "url": "",
+          "sampleMs": 0.6
+        },
+        {
+          "function": "createInstance",
+          "url": "blob:https://os.groundupcoder.net/c34aa263-349e-4093-947c-056e90f270ee",
+          "sampleMs": 0.6
+        },
+        {
+          "function": "createInstance",
+          "url": "blob:https://os.groundupcoder.net/3501a886-505a-4917-955d-1155c2142ae1",
+          "sampleMs": 0.6
+        },
+        {
+          "function": "_injectCss",
+          "url": "blob:https://os.groundupcoder.net/c34aa263-349e-4093-947c-056e90f270ee",
+          "sampleMs": 0.6
+        },
+        {
+          "function": "createWindow",
+          "url": "https://os.groundupcoder.net/",
+          "sampleMs": 0.6
+        }
+      ]
+    },
+    {
+      "pid": 39122,
+      "top": [
+        {
+          "function": "(idle)",
+          "url": "",
+          "sampleMs": 3808.9
+        },
+        {
+          "function": "writeAll",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 233.0
+        },
+        {
+          "function": "crc",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 18.2
+        },
+        {
+          "function": "(program)",
+          "url": "",
+          "sampleMs": 8.9
+        },
+        {
+          "function": "rawAsset",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 4.9
+        },
+        {
+          "function": "checkpoint",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 4.7
+        },
+        {
+          "function": "",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 3.4
+        },
+        {
+          "function": "(garbage collector)",
+          "url": "",
+          "sampleMs": 2.3
+        },
+        {
+          "function": "BlockFS.read",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 2.0
+        },
+        {
+          "function": "fetch",
+          "url": "",
+          "sampleMs": 1.9
+        },
+        {
+          "function": "setBytes",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 1.1
+        },
+        {
+          "function": "commit",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.8
+        },
+        {
+          "function": "initialize",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.8
+        },
+        {
+          "function": "BlockFS._walkHops",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.5
+        },
+        {
+          "function": "encodeStr",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.5
+        },
+        {
+          "function": "TLSFAllocator.malloc",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.5
+        },
+        {
+          "function": "Kernel._fsRpc",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.5
+        },
+        {
+          "function": "self.onmessage",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.5
+        },
+        {
+          "function": "touch",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.3
+        },
+        {
+          "function": "dirLookup",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.3
+        }
+      ]
+    },
+    {
+      "pid": 39122,
+      "top": [
+        {
+          "function": "(idle)",
+          "url": "",
+          "sampleMs": 614.0
+        },
+        {
+          "function": "(program)",
+          "url": "",
+          "sampleMs": 8.0
+        },
+        {
+          "function": "__trampoline",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 3.0
+        },
+        {
+          "function": "KernelClient._finish",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 2.0
+        },
+        {
+          "function": "__step_readtoken1",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 1.4
+        },
+        {
+          "function": "",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.8
+        },
+        {
+          "function": "Instance",
+          "url": "",
+          "sampleMs": 0.8
+        },
+        {
+          "function": "runModuleImpl",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.6
+        },
+        {
+          "function": "runModule",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.5
+        },
+        {
+          "function": "__step_read_line_input",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 0.3
+        },
+        {
+          "function": "main",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 0.3
+        },
+        {
+          "function": "envImports.<computed>",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.3
+        },
+        {
+          "function": "self.onmessage",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "vsnprintf",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "imports",
+          "url": "",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "(garbage collector)",
+          "url": "",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "js-to-wasm",
+          "url": "",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "__step_init",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "__step_read_line_input_part0",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "decode",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.2
+        }
+      ]
+    },
+    {
+      "pid": 39122,
+      "top": [
+        {
+          "function": "(idle)",
+          "url": "",
+          "sampleMs": 130.4
+        },
+        {
+          "function": "(program)",
+          "url": "",
+          "sampleMs": 9.6
+        },
+        {
+          "function": "JournalStore",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 2.5
+        },
+        {
+          "function": "BlockFS.read",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 1.9
+        },
+        {
+          "function": "",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 1.6
+        },
+        {
+          "function": "crc",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.8
+        },
+        {
+          "function": "initialize",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.8
+        },
+        {
+          "function": "Kernel._fsRpc",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.5
+        },
+        {
+          "function": "self.onmessage",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.3
+        },
+        {
+          "function": "Kernel._onWorkerMessage",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.3
+        },
+        {
+          "function": "fetch",
+          "url": "",
+          "sampleMs": 0.3
+        },
+        {
+          "function": "getUint32",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.3
+        },
+        {
+          "function": "writeAll",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.3
+        },
+        {
+          "function": "BlockFS._resolvePath",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.3
+        },
+        {
+          "function": "RegExp: ^[a-f0-9]{64}$",
+          "url": "",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "dirLookup",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "recover",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "MountFS",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "Kernel",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "imports",
+          "url": "",
+          "sampleMs": 0.2
+        }
+      ]
+    },
+    {
+      "pid": 39122,
+      "top": [
+        {
+          "function": "(idle)",
+          "url": "",
+          "sampleMs": 109.0
+        },
+        {
+          "function": "(program)",
+          "url": "",
+          "sampleMs": 8.1
+        },
+        {
+          "function": "__trampoline",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 2.8
+        },
+        {
+          "function": "KernelClient._finish",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 2.8
+        },
+        {
+          "function": "__step_readtoken1",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 1.2
+        },
+        {
+          "function": "Instance",
+          "url": "",
+          "sampleMs": 1.0
+        },
+        {
+          "function": "",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.8
+        },
+        {
+          "function": "runModule",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.6
+        },
+        {
+          "function": "runModuleImpl",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.3
+        },
+        {
+          "function": "__step_read_line_input",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 0.3
+        },
+        {
+          "function": "js-to-wasm",
+          "url": "",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "validStatIdentity",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "RemoteFS._roFd",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "vsnprintf",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "blockFsFactory",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "atoi",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "wasm-to-js",
+          "url": "",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "__step_xzalloc",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "setsignal",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "RemoteFS.open",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.1
+        }
+      ]
+    },
+    {
+      "pid": 39126,
+      "top": [
+        {
+          "function": "(idle)",
+          "url": "",
+          "sampleMs": 4491.0
+        },
+        {
+          "function": "(program)",
+          "url": "",
+          "sampleMs": 116.1
+        },
+        {
+          "function": "i",
+          "url": "blob:https://os.groundupcoder.net/8e213125-dffb-41d8-adab-63b5f1c73dcd",
+          "sampleMs": 5.5
+        },
+        {
+          "function": "i",
+          "url": "blob:https://os.groundupcoder.net/8c6c5c77-0dd6-4cd7-9128-31aad0a64627",
+          "sampleMs": 5.0
+        },
+        {
+          "function": "",
+          "url": "https://os.groundupcoder.net/",
+          "sampleMs": 4.8
+        },
+        {
+          "function": "_measure",
+          "url": "blob:https://os.groundupcoder.net/8e213125-dffb-41d8-adab-63b5f1c73dcd",
+          "sampleMs": 2.7
+        },
+        {
+          "function": "_measure",
+          "url": "blob:https://os.groundupcoder.net/8c6c5c77-0dd6-4cd7-9128-31aad0a64627",
+          "sampleMs": 1.7
+        },
+        {
+          "function": "",
+          "url": "https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920",
+          "sampleMs": 1.5
+        },
+        {
+          "function": "unbase64",
+          "url": "https://os.groundupcoder.net/",
+          "sampleMs": 1.3
+        },
+        {
+          "function": "d",
+          "url": "blob:https://os.groundupcoder.net/8e213125-dffb-41d8-adab-63b5f1c73dcd",
+          "sampleMs": 1.1
+        },
+        {
+          "function": "",
+          "url": "blob:https://os.groundupcoder.net/8c6c5c77-0dd6-4cd7-9128-31aad0a64627",
+          "sampleMs": 1.0
+        },
+        {
+          "function": "",
+          "url": "",
+          "sampleMs": 1.0
+        },
+        {
+          "function": "",
+          "url": "blob:https://os.groundupcoder.net/8e213125-dffb-41d8-adab-63b5f1c73dcd",
+          "sampleMs": 0.8
+        },
+        {
+          "function": "(garbage collector)",
+          "url": "",
+          "sampleMs": 0.8
+        },
+        {
+          "function": "a",
+          "url": "https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920",
+          "sampleMs": 0.8
+        },
+        {
+          "function": "requestAnimationFrame",
+          "url": "",
+          "sampleMs": 0.6
+        },
+        {
+          "function": "open",
+          "url": "blob:https://os.groundupcoder.net/8e213125-dffb-41d8-adab-63b5f1c73dcd",
+          "sampleMs": 0.6
+        },
+        {
+          "function": "createRow",
+          "url": "blob:https://os.groundupcoder.net/8c6c5c77-0dd6-4cd7-9128-31aad0a64627",
+          "sampleMs": 0.5
+        },
+        {
+          "function": "resize",
+          "url": "blob:https://os.groundupcoder.net/8e213125-dffb-41d8-adab-63b5f1c73dcd",
+          "sampleMs": 0.5
+        },
+        {
+          "function": "start",
+          "url": "https://os.groundupcoder.net/",
+          "sampleMs": 0.5
+        }
+      ]
+    },
+    {
+      "pid": 39126,
+      "top": [
+        {
+          "function": "(idle)",
+          "url": "",
+          "sampleMs": 3572.8
+        },
+        {
+          "function": "writeAll",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 226.3
+        },
+        {
+          "function": "crc",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 18.9
+        },
+        {
+          "function": "(program)",
+          "url": "",
+          "sampleMs": 9.2
+        },
+        {
+          "function": "rawAsset",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 5.5
+        },
+        {
+          "function": "checkpoint",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 3.4
+        },
+        {
+          "function": "",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 3.3
+        },
+        {
+          "function": "(garbage collector)",
+          "url": "",
+          "sampleMs": 3.2
+        },
+        {
+          "function": "BlockFS.read",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 2.0
+        },
+        {
+          "function": "fetch",
+          "url": "",
+          "sampleMs": 1.4
+        },
+        {
+          "function": "initialize",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 1.1
+        },
+        {
+          "function": "setBytes",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.6
+        },
+        {
+          "function": "BlockFS._resolvePath",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.6
+        },
+        {
+          "function": "commit",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.5
+        },
+        {
+          "function": "BlockFS._walkHops",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.4
+        },
+        {
+          "function": "BlockFS.open",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.4
+        },
+        {
+          "function": "Kernel._fsRpc",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.4
+        },
+        {
+          "function": "self.onmessage",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.3
+        },
+        {
+          "function": "MappedFiles",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.3
+        },
+        {
+          "function": "checksum",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.3
+        }
+      ]
+    },
+    {
+      "pid": 39126,
+      "top": [
+        {
+          "function": "(idle)",
+          "url": "",
+          "sampleMs": 597.0
+        },
+        {
+          "function": "(program)",
+          "url": "",
+          "sampleMs": 8.3
+        },
+        {
+          "function": "__trampoline",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 2.8
+        },
+        {
+          "function": "KernelClient._finish",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 2.4
+        },
+        {
+          "function": "__step_readtoken1",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 1.2
+        },
+        {
+          "function": "Instance",
+          "url": "",
+          "sampleMs": 0.9
+        },
+        {
+          "function": "",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.8
+        },
+        {
+          "function": "runModule",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.6
+        },
+        {
+          "function": "runModuleImpl",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.6
+        },
+        {
+          "function": "__step_init",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 0.5
+        },
+        {
+          "function": "__step_read_line_input",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 0.3
+        },
+        {
+          "function": "envImports.<computed>",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "__step_parse_and_put_prompt",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "js-to-wasm",
+          "url": "",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "__step_read_line_input_part0",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "__malloc_unlocked",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "postMessage",
+          "url": "",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "blockFsFactory",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "KernelClient.getppid",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "createSpawn",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.2
+        }
+      ]
+    },
+    {
+      "pid": 39126,
+      "top": [
+        {
+          "function": "(idle)",
+          "url": "",
+          "sampleMs": 136.5
+        },
+        {
+          "function": "(program)",
+          "url": "",
+          "sampleMs": 8.7
+        },
+        {
+          "function": "writeAll",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 4.7
+        },
+        {
+          "function": "JournalStore",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 2.5
+        },
+        {
+          "function": "BlockFS.read",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 1.6
+        },
+        {
+          "function": "crc",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 1.2
+        },
+        {
+          "function": "",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 1.0
+        },
+        {
+          "function": "recover",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.6
+        },
+        {
+          "function": "Kernel._fsRpc",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.5
+        },
+        {
+          "function": "rawAsset",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.5
+        },
+        {
+          "function": "self.onmessage",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.5
+        },
+        {
+          "function": "readFile",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.5
+        },
+        {
+          "function": "installRepositoryManager",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.4
+        },
+        {
+          "function": "Kernel._spawnImage",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.3
+        },
+        {
+          "function": "MappedFiles",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.3
+        },
+        {
+          "function": "writeFile",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.3
+        },
+        {
+          "function": "getUint32",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.3
+        },
+        {
+          "function": "BlockFS._resolvePath",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.3
+        },
+        {
+          "function": "touch",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "BlockFS.mkdir",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.2
+        }
+      ]
+    },
+    {
+      "pid": 39126,
+      "top": [
+        {
+          "function": "(idle)",
+          "url": "",
+          "sampleMs": 109.8
+        },
+        {
+          "function": "(program)",
+          "url": "",
+          "sampleMs": 8.1
+        },
+        {
+          "function": "__trampoline",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 3.3
+        },
+        {
+          "function": "KernelClient._finish",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 2.0
+        },
+        {
+          "function": "",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 1.3
+        },
+        {
+          "function": "__step_readtoken1",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 1.2
+        },
+        {
+          "function": "Instance",
+          "url": "",
+          "sampleMs": 1.0
+        },
+        {
+          "function": "runModule",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.6
+        },
+        {
+          "function": "__step_read_line_input",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 0.3
+        },
+        {
+          "function": "runModuleImpl",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.3
+        },
+        {
+          "function": "printf_core",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "__free_unlocked",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "strtol",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "self.onmessage",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "__on_sigdisp",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "blockFsFactory",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "__step_ash_main",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "decode",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "RemoteFS.write",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "main",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 0.1
+        }
+      ]
+    },
+    {
+      "pid": 39144,
+      "top": [
+        {
+          "function": "(idle)",
+          "url": "",
+          "sampleMs": 3976.3
+        },
+        {
+          "function": "(program)",
+          "url": "",
+          "sampleMs": 109.3
+        },
+        {
+          "function": "",
+          "url": "https://os.groundupcoder.net/",
+          "sampleMs": 5.4
+        },
+        {
+          "function": "i",
+          "url": "blob:https://os.groundupcoder.net/664a1919-c4be-4d3e-8f0a-1f65390ed4d7",
+          "sampleMs": 5.1
+        },
+        {
+          "function": "i",
+          "url": "blob:https://os.groundupcoder.net/429024aa-7221-4a3a-9c39-0aea63860801",
+          "sampleMs": 4.4
+        },
+        {
+          "function": "_measure",
+          "url": "blob:https://os.groundupcoder.net/429024aa-7221-4a3a-9c39-0aea63860801",
+          "sampleMs": 2.5
+        },
+        {
+          "function": "_measure",
+          "url": "blob:https://os.groundupcoder.net/664a1919-c4be-4d3e-8f0a-1f65390ed4d7",
+          "sampleMs": 1.8
+        },
+        {
+          "function": "",
+          "url": "blob:https://os.groundupcoder.net/429024aa-7221-4a3a-9c39-0aea63860801",
+          "sampleMs": 1.7
+        },
+        {
+          "function": "",
+          "url": "https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920",
+          "sampleMs": 1.5
+        },
+        {
+          "function": "unbase64",
+          "url": "https://os.groundupcoder.net/",
+          "sampleMs": 1.4
+        },
+        {
+          "function": "d",
+          "url": "blob:https://os.groundupcoder.net/429024aa-7221-4a3a-9c39-0aea63860801",
+          "sampleMs": 1.1
+        },
+        {
+          "function": "",
+          "url": "blob:https://os.groundupcoder.net/664a1919-c4be-4d3e-8f0a-1f65390ed4d7",
+          "sampleMs": 0.9
+        },
+        {
+          "function": "createInstance",
+          "url": "blob:https://os.groundupcoder.net/664a1919-c4be-4d3e-8f0a-1f65390ed4d7",
+          "sampleMs": 0.9
+        },
+        {
+          "function": "(garbage collector)",
+          "url": "",
+          "sampleMs": 0.8
+        },
+        {
+          "function": "a",
+          "url": "https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920",
+          "sampleMs": 0.8
+        },
+        {
+          "function": "",
+          "url": "",
+          "sampleMs": 0.7
+        },
+        {
+          "function": "m",
+          "url": "blob:https://os.groundupcoder.net/664a1919-c4be-4d3e-8f0a-1f65390ed4d7",
+          "sampleMs": 0.5
+        },
+        {
+          "function": "_injectCss",
+          "url": "blob:https://os.groundupcoder.net/429024aa-7221-4a3a-9c39-0aea63860801",
+          "sampleMs": 0.5
+        },
+        {
+          "function": "createRow",
+          "url": "blob:https://os.groundupcoder.net/429024aa-7221-4a3a-9c39-0aea63860801",
+          "sampleMs": 0.5
+        },
+        {
+          "function": "open",
+          "url": "blob:https://os.groundupcoder.net/429024aa-7221-4a3a-9c39-0aea63860801",
+          "sampleMs": 0.4
+        }
+      ]
+    },
+    {
+      "pid": 39144,
+      "top": [
+        {
+          "function": "(idle)",
+          "url": "",
+          "sampleMs": 3299.5
+        },
+        {
+          "function": "writeAll",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 229.3
+        },
+        {
+          "function": "crc",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 17.9
+        },
+        {
+          "function": "(program)",
+          "url": "",
+          "sampleMs": 9.4
+        },
+        {
+          "function": "rawAsset",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 5.2
+        },
+        {
+          "function": "",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 3.4
+        },
+        {
+          "function": "checkpoint",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 2.8
+        },
+        {
+          "function": "BlockFS.read",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 1.9
+        },
+        {
+          "function": "(garbage collector)",
+          "url": "",
+          "sampleMs": 1.9
+        },
+        {
+          "function": "fetch",
+          "url": "",
+          "sampleMs": 1.5
+        },
+        {
+          "function": "setBytes",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 1.3
+        },
+        {
+          "function": "writeFile",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.8
+        },
+        {
+          "function": "initialize",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.7
+        },
+        {
+          "function": "commit",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.5
+        },
+        {
+          "function": "touch",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.5
+        },
+        {
+          "function": "setUint32",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.5
+        },
+        {
+          "function": "checksum",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.5
+        },
+        {
+          "function": "getUint32",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.4
+        },
+        {
+          "function": "Kernel._fsRpc",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.4
+        },
+        {
+          "function": "BlockFS.open",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.4
+        }
+      ]
+    },
+    {
+      "pid": 39144,
+      "top": [
+        {
+          "function": "(idle)",
+          "url": "",
+          "sampleMs": 321.6
+        },
+        {
+          "function": "(program)",
+          "url": "",
+          "sampleMs": 8.2
+        },
+        {
+          "function": "__trampoline",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 3.1
+        },
+        {
+          "function": "KernelClient._finish",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 2.5
+        },
+        {
+          "function": "__step_readtoken1",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 1.4
+        },
+        {
+          "function": "",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.8
+        },
+        {
+          "function": "Instance",
+          "url": "",
+          "sampleMs": 0.8
+        },
+        {
+          "function": "runModuleImpl",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.6
+        },
+        {
+          "function": "envImports.<computed>",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.5
+        },
+        {
+          "function": "runModule",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.4
+        },
+        {
+          "function": "__step_read_line_input",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 0.3
+        },
+        {
+          "function": "KernelClient.call",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.3
+        },
+        {
+          "function": "js-to-wasm",
+          "url": "",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "KernelClient",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "__malloc_unlocked",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "BlockFS.toWasmEnv",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "customSections",
+          "url": "",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "__step_ash_main",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "poll",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "self.onmessage",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.2
+        }
+      ]
+    },
+    {
+      "pid": 39144,
+      "top": [
+        {
+          "function": "(idle)",
+          "url": "",
+          "sampleMs": 130.1
+        },
+        {
+          "function": "(program)",
+          "url": "",
+          "sampleMs": 9.1
+        },
+        {
+          "function": "writeAll",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 5.2
+        },
+        {
+          "function": "JournalStore",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 2.6
+        },
+        {
+          "function": "BlockFS.read",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 1.9
+        },
+        {
+          "function": "crc",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 1.4
+        },
+        {
+          "function": "",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.8
+        },
+        {
+          "function": "writeFile",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.6
+        },
+        {
+          "function": "rawAsset",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.5
+        },
+        {
+          "function": "Kernel._fsRpc",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.5
+        },
+        {
+          "function": "recover",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.3
+        },
+        {
+          "function": "Kernel._spawnImage",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.3
+        },
+        {
+          "function": "initialize",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.3
+        },
+        {
+          "function": "self.onmessage",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.3
+        },
+        {
+          "function": "MappedFiles",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.3
+        },
+        {
+          "function": "fetch",
+          "url": "",
+          "sampleMs": 0.3
+        },
+        {
+          "function": "(garbage collector)",
+          "url": "",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "readFile",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "getBytes",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "Kernel._fsRpcBody",
+          "url": "https://os.groundupcoder.net/assets/47ac48dac850dc5a6d7b39bfc60e54f3f2b9a66abf4602f680181b45c3ae9b67.js",
+          "sampleMs": 0.2
+        }
+      ]
+    },
+    {
+      "pid": 39144,
+      "top": [
+        {
+          "function": "(idle)",
+          "url": "",
+          "sampleMs": 110.0
+        },
+        {
+          "function": "(program)",
+          "url": "",
+          "sampleMs": 8.1
+        },
+        {
+          "function": "__trampoline",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 3.3
+        },
+        {
+          "function": "KernelClient._finish",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 1.8
+        },
+        {
+          "function": "__step_readtoken1",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 1.2
+        },
+        {
+          "function": "",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 1.0
+        },
+        {
+          "function": "Instance",
+          "url": "",
+          "sampleMs": 0.8
+        },
+        {
+          "function": "runModuleImpl",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.6
+        },
+        {
+          "function": "runModule",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.6
+        },
+        {
+          "function": "__step_read_line_input",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 0.5
+        },
+        {
+          "function": "blockFsFactory",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "__step_init",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "__step_fwrite",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "env.__tty_setattr",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "metadata",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "__malloc_unlocked",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "js-to-wasm",
+          "url": "",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "KernelClient.call",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "__step_number",
+          "url": "wasm://wasm/0054d22a",
+          "sampleMs": 0.2
+        },
+        {
+          "function": "createCanvasGPU",
+          "url": "https://os.groundupcoder.net/assets/8fd7301cc1a6a6e50e788273c4df835426d084dc201edb39202a4a593985f985.js",
+          "sampleMs": 0.1
+        }
+      ]
+    }
+  ]
+}

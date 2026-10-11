@@ -1,0 +1,11 @@
+[machine-job] queued: /Users/jku/Library/pnpm/nodejs/25.8.2/bin/node tests/expansion-jwm.mjs
+[machine-job] running: 8b2be528-8368-4d1e-b3e7-5c4184e1629a
+
+2223 functions, 2233539 bytes
+JWM-DECORATED
+JWM-MOVED
+JWM-HIDDEN-PROGRESS-PASS
+X connection to :1 broken (explicit kill or server shutdown).
+JWM-RUNTIME-PASS
+
+PASS real JWM two clients, decorations, browser drag, hidden progress and cleanup

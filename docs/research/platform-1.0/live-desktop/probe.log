@@ -1,0 +1,4 @@
+[machine-job] queued: /Users/jku/Library/pnpm/nodejs/25.8.2/bin/node tests/compatibility/check.mjs probe
+[machine-job] running: a3b64bf1-ec48-4be9-8583-c0634a505f6a
+COMPATIBILITY-BOOT-PASS
+

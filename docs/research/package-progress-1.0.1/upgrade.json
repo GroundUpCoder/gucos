@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "beforeRuntime": "c4411d720bede49ead5c1de69bfe7b1247656a146b72d991d209883606e300fb",
+  "afterRuntime": "61a87f8861fa6ddaa6052eb25408036a2bcb238ad4b8e48dd91303beb36714d0",
+  "before": "3bf36d36fa8239a45079d6bff9ee7eb9dee3f9a5dc389124f1f7864bf8cbb3ac  /usr/libexec/guc-repo-fetch\n",
+  "after": "49e023f76451cf73b366f9a1009b22ae0a802d61c2958ad76e6c60c75194113d  /usr/libexec/guc-repo-fetch\n",
+  "log": "preserved\n  Connecting; waiting for response…\nguc-fetch: http://127.0.0.1:63736/missing: HTTP 404\n{\"format\":1,\"target\":\"wasm32-wasm-posix\",\"features\":[\"posix-core\",\"unix-stream\",\"pthreads\",\"sdl3-vt\",\"sdl3-ime\",\"webgpu\"],\"legacyRuntime\":\"2a9cca447a35af0d0d8894ea4b50cb254ce20821753af8ae70a1ad5060da2a0f\",\"version\":\"1.0.1\",\"runtimeAbi\":5,\"objectAbi\":3}\n"
+}

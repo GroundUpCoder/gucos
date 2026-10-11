@@ -1,0 +1,10 @@
+[machine-job] queued: /Users/jku/Library/pnpm/nodejs/25.8.2/bin/node tests/expansion-launcher-checks.mjs
+[machine-job] running: d4b13d8e-f04a-44de-b073-504df57ddcbd
+fixed
+_NET_SUPPORTING_WM_CHECK(WINDOW): window id # 0x200001
+JWM-LAUNCHER-PASS
+
+2 functions, 8102 bytes
+Alarm clock
+JWM-READINESS-BOUNDED-PASS
+

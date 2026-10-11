@@ -1,0 +1,81 @@
+{
+  "runtime": "c4411d720bede49ead5c1de69bfe7b1247656a146b72d991d209883606e300fb",
+  "platform": {
+    "format": 1,
+    "target": "wasm32-wasm-posix",
+    "features": [
+      "posix-core",
+      "unix-stream",
+      "pthreads",
+      "sdl3-vt",
+      "sdl3-ime",
+      "webgpu"
+    ],
+    "legacyRuntime": "2a9cca447a35af0d0d8894ea4b50cb254ce20821753af8ae70a1ad5060da2a0f",
+    "version": "1.0.0",
+    "runtimeAbi": 5,
+    "objectAbi": 3
+  },
+  "results": [
+    {
+      "name": "platform-posix",
+      "status": 0,
+      "signal": null,
+      "seconds": 0.891
+    },
+    {
+      "name": "platform-ime",
+      "status": 0,
+      "signal": null,
+      "seconds": 1.018
+    },
+    {
+      "name": "startup-progress",
+      "status": 0,
+      "signal": null,
+      "seconds": 2.565
+    },
+    {
+      "name": "platform-upgrade",
+      "status": 0,
+      "signal": null,
+      "seconds": 1.768
+    },
+    {
+      "name": "smoke",
+      "status": 0,
+      "signal": null,
+      "seconds": 1.333
+    },
+    {
+      "name": "runtime-packages",
+      "status": 0,
+      "signal": null,
+      "seconds": 34.083
+    },
+    {
+      "name": "storage-boundary",
+      "status": 0,
+      "signal": null,
+      "seconds": 0.887
+    },
+    {
+      "name": "virtual-terminals",
+      "status": 0,
+      "signal": null,
+      "seconds": 5.582
+    },
+    {
+      "name": "webgpu-vt",
+      "status": 0,
+      "signal": null,
+      "seconds": 3.118
+    },
+    {
+      "name": "vt-host-regressions",
+      "status": 0,
+      "signal": null,
+      "seconds": 0.036
+    }
+  ]
+}
