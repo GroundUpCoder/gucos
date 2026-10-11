@@ -14,6 +14,8 @@
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <unistd.h>
+__import int __closefrom(int lowfd);
+void closefrom(int lowfd) { (void)__closefrom(lowfd < 0 ? 0 : lowfd); }
 int setsid(void) { return __spawn_setsid(); }
 #include <stdarg.h>
 #include <stdio.h>    /* rename() */

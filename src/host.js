@@ -1210,6 +1210,13 @@ function createFileSystem({ fs, ctx }) {
     return origClose(fd);
   };
 
+  result[ENV_KEY].__closefrom = function (lowfd) {
+    var failed = false;
+    for (var fd of Object.keys(fdTable))
+      if (+fd >= Math.max(0, lowfd | 0) && fdTable[fd])
+        if (result[ENV_KEY].close(+fd) < 0) failed = true;
+    return failed ? -1 : 0;
+  };
   return result;
 }
 
@@ -3347,6 +3354,14 @@ var BLOCK_FS = (function () {
     return fd;
   };
 
+  BlockFS.prototype.closefrom = function (lowfd) {
+    lowfd = Math.max(0, lowfd | 0);
+    for (var fd of Object.keys(this._fdTable)) if (+fd >= lowfd && this._fdTable[fd]) {
+      // close() historically preserves console slots; closefrom must remove them.
+      this._releaseEntry(this._fdTable[fd]); this._fdTable[fd] = null;
+    }
+    return 0;
+  };
   BlockFS.prototype.close = function (fd) {
     if (fd < 0 || fd >= this._fdTable.length || !this._fdTable[fd])
       return this._setErr('EBADF');
@@ -4895,6 +4910,7 @@ var BLOCK_FS = (function () {
         if (!path.length) return this._setErr('ENOENT');
         return this.open(path, flags, mode);
       }),
+      __closefrom: wrap(function (lowfd) { return this.closefrom(lowfd); }),
       close: wrap(function (fd) { return this.close(fd); }),
       read: wrap(function (fd, buf_ptr, count) {
         var memory = getMemory();
@@ -6203,6 +6219,13 @@ var BLOCK_FS = (function () {
   };
   MountFS.prototype.fsync = function (fd) {
     return this._fdOp(fd, function (vol, vfd) { return vol.fsync(vfd); });
+  };
+  MountFS.prototype.closefrom = function (lowfd) {
+    var failed = null;
+    for (var fd of Object.keys(this._fdTable))
+      if (+fd >= Math.max(0, lowfd | 0) && this._fdTable[fd])
+        if (this.close(+fd) === null) failed = this._lastError;
+    return failed ? this._setErr(failed) : 0;
   };
   MountFS.prototype.close = function (fd) {
     var e = this._fdEntry(fd);

@@ -24,7 +24,7 @@ self.onmessage=async({data})=>{
   if(data.type!=='start')return;
   let wd=data.spec;
   const client=new KERNEL.KernelClient(wd.kernelPage,(msg,transfers)=>postMessage(msg,transfers));
-  let rfs=new KERNEL.RemoteFS(client,{fileReadCache:wd.fileReadCache});
+  let rfs=new KERNEL.RemoteFS(client,{fileReadCache:wd.fileReadCache,fdEpoch:wd.fdEpoch});
   if(wd.forkSnapshot?.fsState){rfs._fdTable=wd.forkSnapshot.fsState.fds;rfs._dirs=wd.forkSnapshot.fsState.dirs;}
   for(const p of wd.pipeRings||[])rfs.registerPipeRing(p.fd,p.end,p.sab);
   let env={};for(const entry of wd.envp||[]){const i=entry.indexOf('=');if(i>0)env[entry.slice(0,i)]=entry.slice(i+1);}
@@ -80,7 +80,7 @@ self.onmessage=async({data})=>{
       if(wd.sharedChild)await control('shared-exec-ready',{});
       wd={...wd,module:next.module,image:null,argv:next.argv,envp:next.envp,path:next.path,forkSnapshot:null,sharedChild:null,execState:next,vm:next.vm||null};
       env={};for(const entry of wd.envp){const i=entry.indexOf('=');if(i>0)env[entry.slice(0,i)]=entry.slice(i+1);}
-      rfs=new KERNEL.RemoteFS(client,{fileReadCache:wd.fileReadCache});
+      rfs=new KERNEL.RemoteFS(client,{fileReadCache:wd.fileReadCache,fdEpoch:wd.fdEpoch});
       for(const p of next.pipeRings)rfs.registerPipeRing(p.fd,p.end,p.sab);
       canvasReady=new Promise(resolve=>canvasResolve=resolve);sdl=null;instance=null;
       postMessage({type:'image-replaced',path:wd.path});
