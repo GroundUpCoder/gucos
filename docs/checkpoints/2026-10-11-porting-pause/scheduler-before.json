@@ -1,0 +1,56 @@
+{
+  "format": 1,
+  "limits": {
+    "cpu": 2,
+    "memoryMiB": 8192
+  },
+  "jobs": [
+    {
+      "pid": 72953,
+      "birth": "Sun Oct 11 12:53:42 2026",
+      "id": "ececb1b4-91d7-4c20-8fe3-865accdd4392",
+      "name": "/Users/jku/git/wasm-posix-packages: sh -eu -c export COMPAT_RUN_DIR=/Users/jku/git/wasm-posix-packages/test-results/migration/tcl-tk-gpt-61a87f88; node tests/migration/stage.mjs dependencies x11-server > \"$COMPAT_RUN_DIR/dependencies.log\" 2>&1; node tests/migration/stage.mjs build tcl > \"$COMPAT_RUN_DIR/build-tcl.log\" 2>&1; node tests/migration/stage.mjs build tk > \"$COMPAT_RUN_DIR/build-tk.log\" 2>&1",
+      "cpu": 2,
+      "memoryMiB": 8192,
+      "kind": "browser",
+      "reservation": "browser",
+      "status": "running",
+      "children": [
+        {
+          "pid": 72962,
+          "birth": "Sun Oct 11 12:53:42 2026"
+        }
+      ]
+    },
+    {
+      "pid": 77110,
+      "birth": "Sun Oct 11 12:54:53 2026",
+      "id": "df3464c5-27c8-4c63-bb17-ad6a7edd5b12",
+      "name": "/Users/jku/git/wasm-posix-packages-snake: sh -eu -c export COMPAT_RUN_DIR=/Users/jku/git/wasm-posix-packages-snake/test-results/migration/desktop-binary-1 MIGRATION_ATTEMPT=3; node tests/desktop/play.mjs > \"$COMPAT_RUN_DIR/desktop-console-3.log\" 2>&1",
+      "cpu": 2,
+      "memoryMiB": 8192,
+      "kind": "browser",
+      "reservation": "browser",
+      "status": "queued"
+    },
+    {
+      "pid": 77248,
+      "birth": "Sun Oct 11 12:54:54 2026",
+      "id": "7b81e31a-00ef-470e-a093-9c705b8f9a0d",
+      "name": "/Users/jku/git/wasm-posix-generations: sh -eu -c node tests/runtime-packages.mjs > /tmp/wasm-posix-generations-runtime-1.log 2>&1",
+      "cpu": 2,
+      "memoryMiB": 8192,
+      "kind": "browser",
+      "reservation": "browser",
+      "status": "queued"
+    }
+  ],
+  "lanePolicy": {
+    "browser": 1,
+    "build": {
+      "general": 1,
+      "small": 1,
+      "wasm-posix": 1
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "format": 1,
+  "limits": {
+    "cpu": 2,
+    "memoryMiB": 8192
+  },
+  "jobs": [],
+  "lanePolicy": {
+    "browser": 1,
+    "build": {
+      "general": 1,
+      "small": 1,
+      "wasm-posix": 1
+    }
+  }
+}

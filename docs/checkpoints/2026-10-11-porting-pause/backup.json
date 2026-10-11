@@ -1,0 +1,70 @@
+{
+  "directory": "/Users/jku/git/.gucos-migration-checkpoints/2026-10-11-porting-pause",
+  "files": [
+    {
+      "name": "wasm-posix.bundle",
+      "bytes": 41627818,
+      "sha256": "0be689bd6c13e4cb1a230ea5ce8a21b0675ed0ca003670afded2edf87045b428"
+    },
+    {
+      "name": "wasm-posix-packages.bundle",
+      "bytes": 174969510,
+      "sha256": "2d2909ad14368ce2231894a9f143d2ee5ba8b55482dd34dc958d839daa59fc2c"
+    },
+    {
+      "name": "snake-coordination.md",
+      "bytes": 2485,
+      "sha256": "6246b5419911e43bb3f62d9f55b52fd5345c198b9c66297d08fc39e3394bb28e"
+    },
+    {
+      "name": "temporary-evidence/wasm-posix-packaging-progress.log",
+      "bytes": 135,
+      "sha256": "e0562eaf18dcda9224a76b0c19a198097e0abe9e755ed04434c69f88af54ce6a"
+    },
+    {
+      "name": "temporary-evidence/wasm-posix-package-copy-benchmark.json",
+      "bytes": 6753,
+      "sha256": "6e64a7980c9638d50fceeec23adec334ed0875cfeb0e42df01120dec3644684b"
+    },
+    {
+      "name": "temporary-evidence/wasm-posix-packaging-runtime-packages.log",
+      "bytes": 148,
+      "sha256": "1b7c60e946c646226edd2ba8fdc913c7ad077a1e1aa01cdd9b478f653dd135cb"
+    },
+    {
+      "name": "temporary-evidence/wasm-posix-package-copy-benchmark.log",
+      "bytes": 779,
+      "sha256": "313b446212009d004a6a498842eb67f726fe0d1ccbf60872f713f5edd8218e8b"
+    },
+    {
+      "name": "temporary-evidence/wasm-posix-packaging-progress-2.log",
+      "bytes": 135,
+      "sha256": "e0562eaf18dcda9224a76b0c19a198097e0abe9e755ed04434c69f88af54ce6a"
+    },
+    {
+      "name": "temporary-evidence/wasm-posix-packaging-build-2.log",
+      "bytes": 800,
+      "sha256": "9df7f2de53b6655788ca221f8ace17df53bf288fddc3ced924f328599f72c339"
+    },
+    {
+      "name": "temporary-evidence/wasm-posix-packaging-build-3.log",
+      "bytes": 799,
+      "sha256": "b8983c9bdcf6e2e329ffd1ba09fe18417a34dea2952c4c9a53caaea363017da6"
+    },
+    {
+      "name": "temporary-evidence/wasm-posix-packaging-build.log",
+      "bytes": 962,
+      "sha256": "64492792e278e2649b8d87d8d422fe493442132a1a91a2ef2671317d4bfe731c"
+    },
+    {
+      "name": "temporary-evidence/wasm-posix-generations-build-1.log",
+      "bytes": 799,
+      "sha256": "52bcdb378b0b5c271489f0a00e1c4fa59bfe6a417037c8924bec04ff1d01ed2c"
+    }
+  ],
+  "retainedInPlace": [
+    "/Users/jku/git/wasm-posix-packages/test-results",
+    "/Users/jku/git/wasm-posix-packages-snake/test-results"
+  ],
+  "createdAt": "2026-10-11T03:57:38.643785+00:00"
+}
