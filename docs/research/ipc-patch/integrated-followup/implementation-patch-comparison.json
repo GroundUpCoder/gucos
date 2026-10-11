@@ -1,0 +1,106 @@
+{
+  "libc/include/semaphore.h": {
+    "sameChangeBlocks": true
+  },
+  "libc/include/sys/eventfd.h": {
+    "sameChangeBlocks": true
+  },
+  "libc/include/sys/file.h": {
+    "sameChangeBlocks": true
+  },
+  "libc/manifest.json": {
+    "sameChangeBlocks": false,
+    "authorChanges": [
+      [
+        "replace",
+        [
+          "    \"twalk.c\""
+        ],
+        [
+          "    \"twalk.c\",",
+          "    \"__semaphore.c\""
+        ]
+      ],
+      [
+        "replace",
+        [
+          "    \"tsearch.h\""
+        ],
+        [
+          "    \"tsearch.h\",",
+          "    \"sys/eventfd.h\""
+        ]
+      ],
+      [
+        "replace",
+        [
+          "  \"digest\": \"e374f45b0683ac89b21030e57c09eb1898a17d5d530a02cddbda949ea89e90bf\","
+        ],
+        [
+          "  \"digest\": \"df1ef4a58c60b835fb5ebe4dec0a2fd69b155566612d9fad4caeac2a6d970fa6\","
+        ]
+      ]
+    ],
+    "integrationChanges": [
+      [
+        "replace",
+        [
+          "    \"twalk.c\""
+        ],
+        [
+          "    \"twalk.c\",",
+          "    \"__semaphore.c\""
+        ]
+      ],
+      [
+        "replace",
+        [
+          "    \"tsearch.h\""
+        ],
+        [
+          "    \"tsearch.h\",",
+          "    \"sys/eventfd.h\""
+        ]
+      ],
+      [
+        "replace",
+        [
+          "  \"digest\": \"6545614f094d49e6367c2debc5eb5eb3a99ef0c5c8121dfb1697a4d735bf9225\","
+        ],
+        [
+          "  \"digest\": \"dd65a6d84bcd4cc1e9f9ddc563b0d6d91847ee3e0e663dd92a4890e6fd3dd67c\","
+        ]
+      ]
+    ]
+  },
+  "libc/src/__fork.c": {
+    "sameChangeBlocks": true
+  },
+  "libc/src/__semaphore.c": {
+    "sameChangeBlocks": true
+  },
+  "src/host.js": {
+    "sameChangeBlocks": true
+  },
+  "src/ipc-services.js": {
+    "sameChangeBlocks": true
+  },
+  "src/kernel.js": {
+    "sameChangeBlocks": true
+  },
+  "src/system-process.js": {
+    "sameChangeBlocks": true
+  },
+  "tests/fixtures/ipc-services.c": {
+    "sameChangeBlocks": true
+  },
+  "tests/ipc-services-kernel.mjs": {
+    "sameChangeBlocks": true
+  },
+  "tests/ipc-services.mjs": {
+    "sameChangeBlocks": true
+  },
+  "tools/build.mjs": {
+    "sameChangeBlocks": true
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "format": 1,
+  "runtime": "baae3b7591a51a357d4fba3fc8e96135790025d61a6c98453e28100ea99f1aad",
+  "platform": {
+    "format": 1,
+    "target": "wasm32-wasm-posix",
+    "features": [
+      "posix-core",
+      "unix-stream",
+      "pthreads",
+      "sdl3-vt",
+      "sdl3-ime",
+      "webgpu"
+    ],
+    "legacyRuntime": "2a9cca447a35af0d0d8894ea4b50cb254ce20821753af8ae70a1ad5060da2a0f",
+    "version": "1.0.1",
+    "runtimeAbi": 5,
+    "objectAbi": 3
+  },
+  "toolchain": {
+    "version": "0.5.13",
+    "runtimeVersion": "0.5.8",
+    "live": "ed0c29736ebd42f01f5ad4a2f8b49b6e5e096486a8c893c34a0d7ba9cd290378",
+    "id": "529ba3b935c6dbfdefb4a1ee316cde7821f1b7dc34168e09b987b80468433bfd",
+    "abi": {
+      "objects": 3,
+      "runtime": 5
+    },
+    "systemBuild": "baae3b7591a51a357d4fba3fc8e96135790025d61a6c98453e28100ea99f1aad",
+    "libcDigest": "61237619ad7d38ffac491a022946272a2e49c5eaf2fe1a273a91714f28baf9b7"
+  },
+  "bootstrap": [
+    "libc",
+    "ash",
+    "busybox",
+    "cc",
+    "ar",
+    "make",
+    "guc-fetch",
+    "gucman"
+  ]
+}

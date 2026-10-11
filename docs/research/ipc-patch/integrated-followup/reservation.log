@@ -1,0 +1,24 @@
+[machine-job] queued: env LD_LIBRARY_PATH=/home/ubuntu/git/gucos-ipc-services/.ipc-browser-deps/root/usr/lib/x86_64-linux-gnu python3 /tmp/gucos-ipc-followup-mcakrp7r/run.py
+(node:1164744) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[machine-job] running: c7586598-55d5-4a39-8854-4103fbb4d66d
+START ipc-symbols 2026-10-11T07:46:37.407435+00:00
+2 functions, 6449 bytes
+IPC-SYMBOLS-PASS
+
+
+END ipc-symbols exit 0
+START ipc-adapted 2026-10-11T07:46:42.483354+00:00
+IPC-ADAPTED-RUNTIME baae3b7591a51a357d4fba3fc8e96135790025d61a6c98453e28100ea99f1aad
+5 functions, 18695 bytes
+IPC-UPSTREAM-ADAPTATIONS-PASS: 15 graph variants + 3 FreeBSD cases
+
+
+END ipc-adapted exit 0
+START platform-posix 2026-10-11T07:46:48.333641+00:00
+5 functions, 23087 bytes
+PLATFORM-POSIX-PASS
+
+
+END platform-posix exit 0
+UNCHANGED {"head": true, "status": true, "dist": true}
