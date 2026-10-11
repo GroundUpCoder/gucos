@@ -1,15 +1,18 @@
 {
-  "name": "wasm-posix",
+  "name": "gucos",
   "private": true,
   "type": "module",
   "scripts": {
     "build": "node tools/build.mjs",
     "serve": "node tools/serve.mjs",
     "test": "node tests/smoke.mjs",
-    "test:packages": "node tests/runtime-packages.mjs"
+    "test:packages": "node tests/runtime-packages.mjs",
+    "export:pages": "node tools/export-pages.mjs",
+    "deploy": "node tools/deploy-pages.mjs"
   },
   "devDependencies": {
-    "playwright": "1.63.0"
+    "playwright": "1.63.0",
+    "wrangler": "4.149.0"
   },
   "engines": {
     "node": ">=22"

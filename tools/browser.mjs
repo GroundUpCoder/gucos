@@ -7,7 +7,12 @@ export async function browserSession(options={}){
   browser=await chromium.launch({channel:'chromium',headless:true,args:options.gpu?['--enable-unsafe-webgpu']:[]});
   const context=await browser.newContext();
   const errors=[];
-  await context.route('**/*',route=>[site.url,...(options.allowedOrigins||[])].includes(new URL(route.request().url()).origin)?route.continue():route.abort());
+  const blocked=[];
+  await context.route('**/*',route=>{
+   const url=route.request().url();
+   if(options.blockedURLPattern?.test(url)){blocked.push(url);return route.abort();}
+   return [site.url,...(options.allowedOrigins||[])].includes(new URL(url).origin)?route.continue():route.abort();
+  });
   const page=await context.newPage();page.setDefaultTimeout(180000);page.on('pageerror',e=>errors.push(e.message));
   const timer=setTimeout(()=>void browser.close(),options.timeout||600000);
   const close=async()=>{clearTimeout(timer);await browser.close();await site.close();};
@@ -20,6 +25,6 @@ export async function browserSession(options={}){
    if(errors.length)throw Error(errors.join('\n'));
    return log;
   }
-  return {page,command,url:site.url,close,errors};
+  return {page,command,url:site.url,close,errors,blocked};
  }catch(e){if(browser)await browser.close();await site.close();throw e;}
 }

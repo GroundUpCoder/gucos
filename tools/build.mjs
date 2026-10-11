@@ -31,7 +31,7 @@ await mkdir(out,{recursive:true});
 const host=await join(['src/dynamic-loader.js','src/host.js']),kernel=await read('src/kernel.js');
 const runtime=buildId;
 const platform={...JSON.parse(await read('tools/platform.json')),version:versions.platform,runtimeAbi:versions.abi.runtime,objectAbi:versions.abi.objects};
-const repository={format:1,url:process.env.PACKAGE_REPOSITORY||'https://raw.githubusercontent.com/GroundUpCoder/wasm-posix-packages/main/catalog.json',runtime,platform};
+const repository={format:1,url:process.env.PACKAGE_REPOSITORY||'https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/main/catalog.json',runtime,platform};
 const notices={platform:{},packages:{},trees:{}};
 for(const name of ['COMPILER-LICENSE','MUSL-LICENSE','CORE-MATH-LICENSE','UNICODE-LICENSE.txt'])notices.platform[name]=await read('vendor/'+name);
 for(const name of ['XTERM-LICENSE','FIT-LICENSE'])notices.platform[name]=await read('vendor/terminal/'+name);

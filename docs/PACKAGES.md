@@ -5,7 +5,7 @@ The browser reads configured catalogs only for explicit package operations.
 `gucman repo add NAME URL`, `repo remove NAME`, and `repo list` manage persistent
 sources. URLs are HTTPS (loopback HTTP is allowed for development). Catalogs and
 objects are fetched without credentials. The default raw GitHub catalog is
-`https://raw.githubusercontent.com/GroundUpCoder/wasm-posix-packages/main/catalog.json`.
+`https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/main/catalog.json`.
 
 A catalog has `format:1` and `packages`, an object mapping names to refs with
 `url`, `sha256`, and `size`. Publishers should use immutable commit-addressed URLs.

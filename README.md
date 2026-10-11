@@ -1,4 +1,4 @@
-# wasm-posix
+# gucos
 
 A standalone browser OS with a persistent filesystem, BusyBox shell, C compiler,
 libc, GNU Make, archive tools and HTTP downloads. Applications are discovered,
@@ -31,7 +31,7 @@ gucman search editor
 gucman installed
 ```
 
-The default is GroundUpCoder/wasm-posix-packages on raw GitHub. Anonymous delivery
+The default is GroundUpCoder/gucos-packages on raw GitHub. Anonymous delivery
 requires that repository to be public. A missing repository does not prevent core
 boot or execution of installed programs. `install` requires an explicitly published
 compatible binary; `build` executes trusted source recipes with access to guest
@@ -49,6 +49,6 @@ machine-job run --kind browser --timeout 1800 -- node tests/runtime-packages.mjs
 machine-job run --kind browser --timeout 1800 -- node tests/storage-boundary.mjs
 ```
 
-`tools/export-release.mjs DIST NEW_DIRECTORY` exports a checked core-only release
-for static hosting. Netguc deployment consumes that artifact, never the packages
-checkout. Historical core and package history remain in wasm-posix-old.
+Deployment uses a dedicated Cloudflare Pages project. See
+[deployment and rollback](docs/DEPLOYMENT.md) and the
+[migration record](docs/MIGRATION.md). Package publication is independent.

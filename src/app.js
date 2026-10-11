@@ -234,7 +234,7 @@ $('export-file').onclick=async()=>{
 };
 
 $('reset-install').onclick=()=>{const url=new URL(location.href);url.searchParams.set('reset','1');location.assign(url);};
-print('\x1b[1;38;5;78mwasm-posix\x1b[0m  C in your browser\n\n');
+print('\x1b[1;38;5;78mgucos\x1b[0m  C in your browser\n\n');
 print('vi hello.c              edit a file  (:wq saves and exits)\ncc hello.c -o hello      compile\n./hello                 run\npwd · cd · ls            navigate files\nhelp                    commands and keys\n\n');
 $('status').textContent = `${typeof WebAssembly.Suspending === 'function' ? 'JSPI' : 'JSPI unavailable'} · ${navigator.gpu ? 'WebGPU' : 'WebGPU unavailable'}`;
 window.shell = { command, build, run, kill, files, executables, processes, terminal, ui, get cwd(){return cwd;}, packageKeys:payload.packageKeys||{}, toolchain:payload.toolchain, ready:true };
