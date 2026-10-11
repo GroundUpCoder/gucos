@@ -1,0 +1,14 @@
+# Terminal fixes source re-review
+
+Exact commit: 7d49a484c97f5d6b966c441bb5d746b8e2d217f9 in agentone /home/ubuntu/git/gucos-ipc-integration. Parent: ef5a4506f1d968e80154e74515a8f4f949c2c4d1; history confirms ee68a97 socket implementation beneath that evidence commit. Scope is original findings 1 and 2 only. Reviewer thread metadata again confirmed codex/gpt-6-astra.
+
+No remaining defect identified in these two fixes. Findings 1 and 2 can be closed at the source-review level; this is not guest or tmux acceptance.
+
+- Finding 1: src/kernel.js:3582 and :5021 guard immediate and parked TTIN handling with pcb.tty === tty. A detached receiver retains the transferred OFD's terminal while pcb.tty is null, so it bypasses these background controlling-terminal checks. Callers that still own the controlling terminal retain the foreground-group check. Thread channels forward tty to the process record.
+- Finding 2: src/host.js:5363-5372 now invokes the RemoteFS descriptor method. src/kernel.js:6917-6920 sends TIOCGWINSZ 0x0108, and :2823-2833 validates the fd and resolves the terminal through _ttyForFd. PTY masters and tty/slave descriptors reach their own terminal dimensions, stored in the same SI_ROWS/SI_COLS words updated by Tty.resize. Missing brokered descriptors return EBADF, nonterminal descriptors ENOTTY. The method is installed through the actual RemoteFS instance in src/system-process.js:37-38. The public __ioctl_tiocgwinsz(fd, rows_ptr, cols_ptr) signature is unchanged; host code without getWinsize retains the prior fallback.
+
+Tests were read, not run. tests/ipc-terminal-kernel.mjs covers immediate and parked detached reads, continued job-control enforcement for an owning process, distinct terminal sizes, invalid fds and nonterminal descriptors using actual kernel methods and simulated process state. Its pass is coordinator-reported and recorded in the commit's development log, not independently reproduced here. The guest fixture covers setsid plus SCM_RIGHTS terminal transfer/read and descriptor-specific sizes, but remains unexecuted. The guest handshake does not deterministically force the read to park; the separate kernel regression explicitly covers that branch. This is a coverage boundary, not a remaining implementation defect.
+
+Read-only committed file-content snapshots and the exact diff are retained on agentone at /tmp/gucos-terminal-rereview-3pd6joqb/ with per-file SHA256SUMS. All copied snapshot hashes were verified locally. Diff SHA256: 15ac64112c8b68900a5fe381d0c830a307c6f8a4df9c8ecfbe50fa14d5192407. Kernel SHA256: 7509a8697baa48e15af70061d5708c499f00ddbcaa4d064d4fb7de37e001564d. Host SHA256: cded48bbf7f2b049f1df737bcaa86a81077cc811cdbe378c921b58fcc675fe5c.
+
+No tests, builds, author edits, deployment or publication performed. Original findings 3 and 4 remain open and were not re-reviewed; the services author's uncommitted work was not inspected or changed.
