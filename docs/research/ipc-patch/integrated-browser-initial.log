@@ -1,0 +1,35 @@
+[machine-job] queued: sh -eu -c node tests/ipc-sockets.mjs && node tests/ipc-services.mjs && node tests/ipc-terminal.mjs && node tests/ipc-symbols.mjs && node docs/research/unix-socket-ipc/run-probes.mjs && node tests/platform-posix.mjs
+(node:1156300) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[machine-job] running: c5532f48-48dd-4751-b47a-f82c88b30bd5
+IPC-SOCKET-RUNTIME baae3b7591a51a357d4fba3fc8e96135790025d61a6c98453e28100ea99f1aad
+10 functions, 128369 bytes
+IPC-SOCKET-PTY-PASS
+IPC-SOCKET-PASS
+
+18 functions, 201456 bytes
+flock ownership/conversion/fork PASS
+eventfd counter/readiness/blocking/signal/fork PASS
+named semaphore identity/unlink/fork/exec/timeout PASS
+IPC-SERVICES-PASS
+
+8 functions, 45912 bytes
+
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: The input did not match the regular expression /IPC-TERMINAL-PASS/. Input:
+
+'8 functions, 45912 bytes\n'
+
+    at file:///home/ubuntu/git/gucos-ipc-integration/tests/ipc-terminal.mjs:9:26 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: '8 functions, 45912 bytes\n',
+  expected: /IPC-TERMINAL-PASS/,
+  operator: 'match',
+  diff: 'simple'
+}
+
+Node.js v22.23.2

@@ -1,0 +1,7 @@
+[machine-job] queued: node tests/ipc-terminal.mjs
+(node:1162810) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[machine-job] running: 309f9b70-2071-4edd-9a2c-9d24e8d57e4b
+8 functions, 46093 bytes
+IPC-TERMINAL-PASS
+
