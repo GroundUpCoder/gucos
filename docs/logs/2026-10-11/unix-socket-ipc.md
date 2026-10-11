@@ -50,8 +50,9 @@ Passed:
 - node tools/libc-manifest.mjs and node tools/build.mjs completed. The
   pre-dead-peer-fix candidate runtime was
   15362529a44d83b3100c2acc2841a5c241160c18037802f18d554980e4a0fe2d.
-  A rebuild after the final datagram error correction is running at this
-  checkpoint; that prior runtime is not the final candidate identity.
+  Final rebuild after the datagram correction passed at runtime
+  67433230c8e563573492201318ed15f8de0e6e68ea668cca2bf66a4a7e81e5d6.
+  The prior runtime is retained here only as historical evidence.
 - git diff --check.
 
 Native edge probe observed: datagram peer close gives ECONNREFUSED (111),
@@ -92,3 +93,18 @@ IPC probe. The existing platform POSIX test retains its own timeout.
 Integration with flock/eventfd/named semaphores and tmux lifecycle acceptance
 remain separate, unverified work. No internal sub-agent work was used.
 
+
+## Committed checkpoint
+
+Implementation commit: ee68a97179be5bc6e9c28035818715b6ee579081 on
+ipc/unix-sockets. Final source build passed. Native host is Linux
+6.17.0-1019-aws on Ubuntu 24.04.4.
+
+A follow-up native datagram probe installed a SIGPIPE handler and sent after
+peer SHUT_RD: errno 32, zero SIGPIPE deliveries. Sending from a fresh AF_UNIX
+datagram socket returned errno 107. The implementation suppresses datagram
+SIGPIPE and reports ENOTCONN for a missing destination.
+
+Browser job 8eb14db7-b48e-4377-a7cd-d769f52950e2 remains queued. Its result
+must be collected before any browser acceptance claim. The coordinator
+received the implementation commit and was told this limitation explicitly.
