@@ -1,9 +1,12 @@
 {
-  "status": "prepared-and-tested",
+  "status": "deployed-and-accepted",
   "runtime": "cc3227370c2ccfb2a5ed7ea97627dbd512ec19abfacd7bf2f5ca8dc27421f309",
   "platform": "1.0.2",
   "releaseDirectory": "/Users/jku/git/gucos/releases/terminal-echo-1.0.2-final",
   "releaseManifestSha256": "2596fd8728b450704e3c9b4fa66493f0f0bfd08ac4f5c51d8c3699c9c581f2ed",
   "pagesManifestSha256": "cff15e91cdbb3d7feeebf5db872e43bdadf4d8006c79bbd7e9e5e3fc6d2dcb41",
-  "productionDeployment": "not performed: Cloudflare credentials unavailable in current environment"
+  "productionDeployment": "efa1c19e-1f9c-4ee3-86b7-d1045e7dc4f5",
+  "previewDeployment": "1bfdb591-0975-4877-a553-71d05f04a8c4",
+  "productionURL": "https://os.groundupcoder.com/",
+  "implementationCommit": "ff3cfd67b399df31d51ec88eaf0d0868bb39aa02"
 }

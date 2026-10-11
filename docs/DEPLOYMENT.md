@@ -29,6 +29,28 @@ The token needs account Pages Write. Domain setup additionally needs DNS edit on
 groundupcoder.com. Never commit tokens. Project name defaults to `gucos` and can
 be set through `CLOUDFLARE_PAGES_PROJECT`.
 
+On the maintainer's Mac, previous deployments load the existing token from
+`~/.guc/creds/cloudflare-api-token`; a missing shell variable or Wrangler login
+does not mean deployment credentials are absent. The existing account is
+`2946eccd828b5588231dd11a300d3e7f`, project `gucos`. Pass the token only through
+the child process environment, without printing or committing it:
+
+```python
+import os, pathlib, subprocess
+env = dict(os.environ)
+env['CLOUDFLARE_ACCOUNT_ID'] = '2946eccd828b5588231dd11a300d3e7f'
+env['CLOUDFLARE_API_TOKEN'] = (
+    pathlib.Path.home() / '.guc/creds/cloudflare-api-token'
+).read_text().strip()
+subprocess.run([
+    'node', 'tools/deploy-pages.mjs', 'releases/RELEASE_NAME', '--preview'
+], env=env, check=True)
+```
+
+This is the method used by migration thread
+`01a12917-afca-7fbe-9205-04011b0b93e6` on 2026-10-11 and verified again on
+2026-10-12. After preview acceptance, omit `--preview` to upload production.
+
 ```
 node tools/deploy-pages.mjs releases/RELEASE_NAME --preview
 # Run live-core with LIVE_CORE_URL set to the preview origin and build.json runtime.

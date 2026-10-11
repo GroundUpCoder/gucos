@@ -1,0 +1,98 @@
+[machine-job] queued: sh -c node tests/terminal-echo.mjs && node tests/terminal-gucode.mjs && node tests/live-core.mjs "$EXPECTED_RUNTIME"
+[machine-job] running: 659593e4-c139-4b3a-b71a-4368f68550e1
+9 functions, 18173 bytes
+PTY-ECHO-PASS
+
+PASS guest PTY termios and real VT keyboard: visible controls, unchanged input bytes, normal shell afterward; runtime cc3227370c2ccfb2a5ed7ea97627dbd512ec19abfacd7bf2f5ca8dc27421f309
+gucman: install groundupcoder:gucode: reading catalogs and resolving dependencies
+gucman: Reading catalog: groundupcoder
+  Connecting; waiting for response…
+  Downloaded 26770 bytes; transfer finished
+gucman: Resolving: groundupcoder:gucode
+gucman: Downloading manifest for groundupcoder:gucode (1990 bytes)
+  Connecting; waiting for response…
+  Downloaded 1990 / 1990 bytes (100%); transfer finished
+gucman: Verifying download: manifest for groundupcoder:gucode
+gucman: Checking cached object: manifest for groundupcoder:gucode
+gucman: Resolving: groundupcoder:libcurl
+gucman: Downloading manifest for groundupcoder:libcurl (3045 bytes)
+  Connecting; waiting for response…
+  Downloaded 3045 / 3045 bytes (100%); transfer finished
+gucman: Verifying download: manifest for groundupcoder:libcurl
+gucman: Checking cached object: manifest for groundupcoder:libcurl
+gucman: Plan: 2 packages (including dependencies); checking compatibility
+gucman: Checking file ownership for 2 packages
+gucman: Package 1/2: libcurl (1 remaining after this)
+gucman: Downloading libcurl archive (23040 bytes)
+  Connecting; waiting for response…
+  Downloaded 23040 / 23040 bytes (100%); transfer finished
+gucman: Verifying download: libcurl archive
+gucman: Checking cached object: libcurl archive
+gucman: Unpacking: libcurl
+gucman: Installing libcurl: 0/3 files
+gucman: Installing libcurl: 3/3 files
+gucman: Preparing checksums: libcurl
+gucman: Checksummed libcurl: 3/3 files
+gucman: Saving transaction: libcurl
+gucman: Verifying staged files: libcurl
+gucman: Activating: libcurl
+Installed groundupcoder:libcurl 0.1.0
+gucman: Package 2/2: gucode (0 remaining after this)
+gucman: Downloading gucode archive (179712 bytes)
+  Connecting; waiting for response…
+  Downloaded 179712 / 179712 bytes (100%); transfer finished
+gucman: Verifying download: gucode archive
+gucman: Checking cached object: gucode archive
+gucman: Unpacking: gucode
+gucman: Installing gucode: 0/3 files
+gucman: Installing gucode: 3/3 files
+gucman: Preparing checksums: gucode
+gucman: Checksummed gucode: 3/3 files
+gucman: Saving transaction: gucode
+gucman: Verifying staged files: gucode
+gucman: Activating: gucode
+Installed groundupcoder:gucode 0.1.2
+gucode 0.1.2
+
+PASS public gucode 0.1.2 install/reload, Ctrl+A/E edits /exit, normal shell afterward; runtime cc3227370c2ccfb2a5ed7ea97627dbd512ec19abfacd7bf2f5ca8dc27421f309
+gucman: install groundupcoder:jsmn: reading catalogs and resolving dependencies
+gucman: Reading catalog: groundupcoder
+  Connecting; waiting for response…
+  Downloaded 26770 bytes; transfer finished
+gucman: Resolving: groundupcoder:jsmn
+gucman: Downloading manifest for groundupcoder:jsmn (2336 bytes)
+  Connecting; waiting for response…
+  Downloaded 2336 / 2336 bytes (100%); transfer finished
+gucman: Verifying download: manifest for groundupcoder:jsmn
+gucman: Checking cached object: manifest for groundupcoder:jsmn
+gucman: Plan: 1 packages (including dependencies); checking compatibility
+gucman: Checking file ownership for 1 packages
+gucman: Package 1/1: jsmn (0 remaining after this)
+gucman: Downloading jsmn archive (28160 bytes)
+  Connecting; waiting for response…
+  Downloaded 28160 / 28160 bytes (100%); transfer finished
+gucman: Verifying download: jsmn archive
+gucman: Checking cached object: jsmn archive
+gucman: Unpacking: jsmn
+gucman: Installing jsmn: 0/3 files
+gucman: Installing jsmn: 3/3 files
+gucman: Preparing checksums: jsmn
+gucman: Checksummed jsmn: 3/3 files
+gucman: Saving transaction: jsmn
+gucman: Verifying staged files: jsmn
+gucman: Activating: jsmn
+Installed groundupcoder:jsmn 1.1.0-1
+- User: johndoe
+- Admin: false
+- UID: 1000
+- Groups:
+  * users
+  * wheel
+  * audio
+  * video
+LIVE-BINARY-PASS
+
+620 functions, 586677 bytes
+GPU-DEVICE-live-one
+
+PASS LIVE core cc3227370c2ccfb2a5ed7ea97627dbd512ec19abfacd7bf2f5ca8dc27421f309: fresh boot/compiler, terminal/two GPU VTs, public binary compatibility check and source build, persistence/reload

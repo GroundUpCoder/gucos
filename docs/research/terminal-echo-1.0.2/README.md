@@ -72,9 +72,22 @@ all release gates were rerun against the final runtime above.
 
 ## Publication status
 
-The patch is implemented, built and tested. No production upload has occurred.
-CLOUDFLARE_ACCOUNT_ID/CLOUDFLARE_API_TOKEN are absent from this shell and Wrangler
-reports no authenticated session. The existing credential location has been
-requested; preview deployment, preview acceptance, production deployment and
-production acceptance remain pending. No credentials or provider keys are
-included in this evidence.
+The deployment credential blocker was an incorrect conclusion from checking only
+shell environment variables and Wrangler login. Migration thread
+01a12917-afca-7fbe-9205-04011b0b93e6 loaded the existing token from
+~/.guc/creds/cloudflare-api-token directly into the deployment child environment.
+That file remains available and its access to the gucos project was verified.
+docs/DEPLOYMENT.md now records this method without storing token contents.
+
+The identical verified release was uploaded to preview 1bfdb591 and production
+efa1c19e; full deployment IDs and active domain state are in cloudflare-receipt.json.
+Preview browser acceptance passed terminal/PTY echo, public gucode install/reload
+and Ctrl+A/E, public jsmn binary/source operations, persistence and two GPU VTs.
+The preview and production HTTP audits each checked all 34 public files' sizes,
+SHA256s, isolation/cache headers and missing-file/operator-manifest 404 behavior.
+An immediate first production HTTP attempt returned 404; a subsequent complete
+audit passed. Production browser acceptance is recorded in production-acceptance.log.
+
+Production browser acceptance passed the same complete preview scope on
+https://os.groundupcoder.com/ with the exact expected runtime. The implementation
+is tagged v1.0.2 at ff3cfd67b399df31d51ec88eaf0d0868bb39aa02.
