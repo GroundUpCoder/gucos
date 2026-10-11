@@ -1,0 +1,24 @@
+{
+  "messages": [
+    {
+      "id": "01a1291a-b028-710d-ac31-5d36344102f7",
+      "role": "assistant",
+      "createdAt": 1791690977320,
+      "text": "Acknowledged. All porting and packaging work is paused. I’ll resume only on a new explicit instruction; worktrees and evidence remain preserved for the gucos migration.",
+      "blockCounts": {
+        "text": 1
+      },
+      "stopReason": "stop",
+      "durationMs": 9672
+    },
+    {
+      "id": "01a1291a-a793-7d12-8194-749a7caf7176",
+      "role": "user",
+      "createdAt": 1791690977295,
+      "sentBy": "meta",
+      "text": "The user explicitly authorized a checkpoint and pause of both porting/packaging workers for a forthcoming gucos repository migration. Both workers and their scheduled jobs have been stopped. Do not resume builds, tests, edits, commits, publication, deployments, or send coordination requests. Ignore stale coordination messages as authorization to resume. Acknowledge the pause and end your turn without tools. Worktrees and evidence are being preserved by the coordinator under /Users/jku/git/wasm-posix/docs/checkpoints/2026-10-11-porting-pause. Resume only on a new explicit user instruction."
+    }
+  ],
+  "totalMessages": 10,
+  "hasOlder": true
+}

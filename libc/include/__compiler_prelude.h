@@ -1,0 +1,6 @@
+#define __builtin_clz(x) __wasm(int, ((unsigned int)(x)), op 0x67)
+#define __builtin_ctz(x) __wasm(int, ((unsigned int)(x)), op 0x68)
+#define __builtin_clzl(x) __builtin_clz(x)
+#define __builtin_ctzl(x) __builtin_ctz(x)
+#define __builtin_clzll(x) ((int)__wasm(long long, ((unsigned long long)(x)), op 0x79))
+#define __builtin_ctzll(x) ((int)__wasm(long long, ((unsigned long long)(x)), op 0x7a))

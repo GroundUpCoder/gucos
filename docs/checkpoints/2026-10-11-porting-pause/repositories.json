@@ -1,0 +1,42 @@
+[
+  {
+    "path": "/Users/jku/git/wasm-posix",
+    "head": "8311e115d80665a409f64dc0de52404dde5b0fed",
+    "branch": "main",
+    "checkpointRef": "refs/checkpoints/2026-10-11-porting-pause/wasm-posix",
+    "status": "?? docs/checkpoints/",
+    "recent": "8311e11 Record live package progress timings and 1.0.1 deployment\n2721a05 Show package download bytes and installation stages in 1.0.1\nd5e2bb0 Measure live platform boot and package feedback with recorded replay\n7cf44cb Preserve exact terminal-log bytes for release evidence hashes\ne4ab686 Record 1.0.0 package compatibility and live deployment acceptance\nf0fa450 Define platform 1.0 contract and preserve baseline package compatibility"
+  },
+  {
+    "path": "/Users/jku/git/wasm-posix-packages",
+    "head": "123f6d5f9631d887b1dce8fecd8cda1ded43fd2a",
+    "branch": "main",
+    "checkpointRef": "refs/checkpoints/2026-10-11-porting-pause/wasm-posix-packages",
+    "status": "?? docs/logs/2026-10-11/snake-coordination.md",
+    "recent": "123f6d5 Move MicroPython executable out of reserved core state\n5d6099c Retain public GTK GUI and SDL binary media acceptance\nf53f328 Record public evidence approval and concurrent ownership boundary\n34aa45c Prepare retained MicroPython project and upstream acceptance corpus\n2dffb44 Record five public migration passes and SDL addon source exports\na7e16e0 Stage reviewed GTK X11 catalog publication"
+  },
+  {
+    "path": "/Users/jku/git/wasm-posix-packages-snake",
+    "head": "82ab4db720261b291f08cc3fd3eefce12f2476d0",
+    "branch": "snake-packaging",
+    "checkpointRef": "refs/checkpoints/2026-10-11-porting-pause/wasm-posix-packages-snake",
+    "status": "",
+    "recent": "82ab4db Click Snake using the live JWM menu window geometry\nbe54a93 Target the JWM tray button and retain distinct acceptance attempts\n8cd06d6 Test actual JWM menu selection and Snake rendering in xterm\n87e8691 Merge remote-tracking branch 'origin/main' into snake-packaging\n184bdfc Validate desktop UTF-8 and test ownership and both launch argument vectors\necb0652 Add bounded package desktop launcher and optional JWM discovery hook"
+  },
+  {
+    "path": "/Users/jku/git/wasm-posix-packaging",
+    "head": "a2544c2df7d9c1319b62df290024d40484ebf297",
+    "branch": "packaging-evolution",
+    "checkpointRef": "refs/checkpoints/2026-10-11-porting-pause/wasm-posix-packaging",
+    "status": "?? node_modules",
+    "recent": "a2544c2 Fail closed on cache test assertions and missing benchmark phases\nea53eef Reject nonregular cache destinations and measure bulk installation phases\nbde67fa Batch staged package copies and checksum preparation\nf776f0a Define incremental packaging contracts and review constraints\n8311e11 Record live package progress timings and 1.0.1 deployment\n2721a05 Show package download bytes and installation stages in 1.0.1"
+  },
+  {
+    "path": "/Users/jku/git/wasm-posix-generations",
+    "head": "2f14f7dd0f040b5223569380d93834e65ca82137",
+    "branch": "packaging-generations",
+    "checkpointRef": "refs/checkpoints/2026-10-11-porting-pause/wasm-posix-generations",
+    "status": "?? node_modules",
+    "recent": "2f14f7d Stage binary closures behind one package generation selector\n837087e Fail closed on cache test assertions and missing benchmark phases\nea53eef Reject nonregular cache destinations and measure bulk installation phases\nbde67fa Batch staged package copies and checksum preparation\nf776f0a Define incremental packaging contracts and review constraints\n8311e11 Record live package progress timings and 1.0.1 deployment"
+  }
+]

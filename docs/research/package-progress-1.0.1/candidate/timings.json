@@ -1,0 +1,38 @@
+{
+  "firstVisibleMs": 135.3550000190735,
+  "totalSeconds": 125.82764999997616,
+  "packages": [
+    {
+      "name": "x11-server",
+      "downloadSeconds": 2.83302999997139,
+      "archiveVerificationSeconds": 7.184895000100136,
+      "unpackSeconds": 1.0818849999904632,
+      "fileCopySeconds": 52.13105999994278,
+      "checksumPreparationSeconds": 10.947705000042916
+    },
+    {
+      "name": "x11-toolkit",
+      "downloadSeconds": 0.4827700001001358,
+      "archiveVerificationSeconds": 0.8167749999761581,
+      "unpackSeconds": 0.2802949999570847,
+      "fileCopySeconds": 15.36822000002861,
+      "checksumPreparationSeconds": 3.148225000023842
+    },
+    {
+      "name": "x11-widgets",
+      "downloadSeconds": 0.38229500007629397,
+      "archiveVerificationSeconds": 0.565539999961853,
+      "unpackSeconds": 0.1005349999666214,
+      "fileCopySeconds": 1.7521449999809264,
+      "checksumPreparationSeconds": 0.331
+    },
+    {
+      "name": "jwm",
+      "downloadSeconds": 2.2143050000667572,
+      "archiveVerificationSeconds": 2.834469999909401,
+      "unpackSeconds": 0.2993000000715256,
+      "fileCopySeconds": 1.6352450000047685,
+      "checksumPreparationSeconds": 0.21782999992370605
+    }
+  ]
+}

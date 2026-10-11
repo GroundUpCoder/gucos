@@ -1,0 +1,16 @@
+[machine-job] queued: /Users/jku/Library/pnpm/nodejs/25.8.2/bin/node tests/compatibility/check.mjs libraries
+[machine-job] running: e16a5396-96fc-4733-9e9f-c6ffb6a058bb
+LEGACY-LUA-RUN-PASS
+LEGACY-LUAC-PASS
+1047 functions, 577146 bytes
+RETAINED-LUA-RELINK-PASS
+1330 functions, 727351 bytes
+1024+0 records in
+1024+0 records out
+/tmp/compatibility.zst: 1048576 bytes 
+zstd: /tmp/compatibility-invalid.zst: unsupported format 
+RETAINED-ZSTD-RUN-RELINK-PASS
+4598 functions, 4289094 bytes
+RETAINED-XAW-XPM-RELINK-PASS
+LEGACY-LIBRARY-ACCEPTANCE-PASS
+
