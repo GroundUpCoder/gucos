@@ -1,0 +1,13 @@
+OLD-ANSWER-42
+OLD-DSO-42
+
+keep-me
+OLD-ANSWER-42
+OLD-DSO-42
+3 functions, 5133 bytes
+OLD-ANSWER-42
+3 functions, 5137 bytes
+OLD-ANSWER-42
+{"format":1,"target":"wasm32-wasm-posix","features":["posix-core","unix-stream","unix-rights","unix-dgram","unix-seqpacket","flock","eventfd","posix-named-semaphores","closefrom","pthreads","sdl3-vt","sdl3-ime","webgpu"],"legacyRuntime":"2a9cca447a35af0d0d8894ea4b50cb254ce20821753af8ae70a1ad5060da2a0f","version":"1.0.2","runtimeAbi":5,"objectAbi":3}
+
+PASS 1.0.1 disk upgrade, retained ABI and reload

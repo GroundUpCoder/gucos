@@ -1,0 +1,9 @@
+[machine-job] queued: sh -c for t in terminal-echo-kernel ipc-terminal-kernel ipc-socket-kernel ipc-services-kernel closefrom-kernel platform-metadata; do node tests/$t.mjs || exit; done
+[machine-job] running: 14d5ff3e-c53d-4f36-a00e-84e61d57b237
+PASS terminal control echo, byte preservation, erase/kill widths, signal echo, raw/echo-off modes
+PASS: detached terminal immediate/deferred reads, controlling-terminal guard, per-fd winsize
+IPC-SOCKET-KERNEL-PASS
+IPC-KERNEL-PASS: in-flight OFDs, cancellation, unlink and handle reclamation
+IPC-FORK-FAILURE-PASS: cloned semaphore handles reclaimed
+CLOSEFROM-KERNEL-PASS: sparse maps, shared tables/cache invalidation, sealed-local keys, queued rights, console slots
+PASS stable SemVer, target/feature/ABI rejection, legacy baseline, dependency bounds and exact pins

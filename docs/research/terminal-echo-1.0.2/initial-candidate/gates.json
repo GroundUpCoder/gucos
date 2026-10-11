@@ -1,0 +1,71 @@
+{
+  "runtime": "33d3a0e46084791437a09a1778fde63b69771032dc5f0d8398e50d4707e0f717",
+  "results": [
+    {
+      "name": "ipc-sockets",
+      "status": 0,
+      "signal": null,
+      "seconds": 0.969
+    },
+    {
+      "name": "ipc-services",
+      "status": 0,
+      "signal": null,
+      "seconds": 4.153
+    },
+    {
+      "name": "ipc-terminal",
+      "status": 0,
+      "signal": null,
+      "seconds": 0.745
+    },
+    {
+      "name": "ipc-symbols",
+      "status": 0,
+      "signal": null,
+      "seconds": 0.685
+    },
+    {
+      "name": "closefrom",
+      "status": 0,
+      "signal": null,
+      "seconds": 0.866
+    },
+    {
+      "name": "platform-posix",
+      "status": 0,
+      "signal": null,
+      "seconds": 0.738
+    },
+    {
+      "name": "smoke",
+      "status": 0,
+      "signal": null,
+      "seconds": 1.312
+    },
+    {
+      "name": "runtime-packages",
+      "status": 0,
+      "signal": null,
+      "seconds": 33.368
+    },
+    {
+      "name": "storage-boundary",
+      "status": 0,
+      "signal": null,
+      "seconds": 0.767
+    },
+    {
+      "name": "virtual-terminals",
+      "status": 0,
+      "signal": null,
+      "seconds": 5.47
+    },
+    {
+      "name": "webgpu-vt",
+      "status": 0,
+      "signal": null,
+      "seconds": 3.134
+    }
+  ]
+}

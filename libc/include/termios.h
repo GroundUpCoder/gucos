@@ -56,6 +56,7 @@ struct termios {
 #define ECHONL  0x00010
 #define ISIG    0x00080
 #define ICANON  0x00100
+#define ECHOCTL 0x00200
 #define IEXTEN  0x00400
 #define TOSTOP  0x00800
 #define NOFLSH  0x80000000
@@ -200,4 +201,3 @@ static inline int tcflush(int fd, int queue_selector) {
   }
   return __tty_probe_fd(fd);
 }
-  

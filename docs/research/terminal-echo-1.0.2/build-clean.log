@@ -1,0 +1,13 @@
+[machine-job] queued: node tools/build.mjs
+[machine-job] running: 17429578-0ea7-4254-9bd0-e5b40ce93df6
+Prebuilt /usr/bin/make: 648 functions, 1598599 bytes, 1940 ms
+Prebuilt /bin/ash: 757 functions, 1389951 bytes, 3165 ms
+Prebuilt /bin/busybox: 1320 functions, 2677319 bytes, 7854 ms
+Prebuilt /bin/cc: 73 functions, 26551 bytes, 405 ms
+Prebuilt /usr/bin/ar: 108 functions, 37104 bytes, 401 ms
+Prebuilt /usr/bin/guc-fetch: 96 functions, 35331 bytes, 393 ms
+Prebuilt /usr/bin/guc-links: 104 functions, 35551 bytes, 423 ms
+Prebuilt /usr/libexec/guc-lock: 77 functions, 27476 bytes, 379 ms
+Prebuilt /usr/libexec/guc-json: 123 functions, 46649 bytes, 404 ms
+Prebuilt /usr/libexec/guc-unpack: 92 functions, 33176 bytes, 376 ms
+Built self-contained dist/; runtime cc3227370c2ccfb2a5ed7ea97627dbd512ec19abfacd7bf2f5ca8dc27421f309; package source is configured only at runtime.

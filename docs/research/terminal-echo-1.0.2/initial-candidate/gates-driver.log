@@ -1,0 +1,24 @@
+[machine-job] queued: node /tmp/gucos-terminal-release-gates.mjs
+[machine-job] running: cd579d58-f89b-4e80-a2a8-c59a1bba4905
+Running ipc-sockets
+{"name":"ipc-sockets","status":0,"signal":null,"seconds":0.969}
+Running ipc-services
+{"name":"ipc-services","status":0,"signal":null,"seconds":4.153}
+Running ipc-terminal
+{"name":"ipc-terminal","status":0,"signal":null,"seconds":0.745}
+Running ipc-symbols
+{"name":"ipc-symbols","status":0,"signal":null,"seconds":0.685}
+Running closefrom
+{"name":"closefrom","status":0,"signal":null,"seconds":0.866}
+Running platform-posix
+{"name":"platform-posix","status":0,"signal":null,"seconds":0.738}
+Running smoke
+{"name":"smoke","status":0,"signal":null,"seconds":1.312}
+Running runtime-packages
+{"name":"runtime-packages","status":0,"signal":null,"seconds":33.368}
+Running storage-boundary
+{"name":"storage-boundary","status":0,"signal":null,"seconds":0.767}
+Running virtual-terminals
+{"name":"virtual-terminals","status":0,"signal":null,"seconds":5.47}
+Running webgpu-vt
+{"name":"webgpu-vt","status":0,"signal":null,"seconds":3.134}

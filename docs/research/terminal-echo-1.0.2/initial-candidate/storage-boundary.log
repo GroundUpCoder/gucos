@@ -1,0 +1,1 @@
+PASS new-core reset preserves all historical disk, journal and editor namespaces

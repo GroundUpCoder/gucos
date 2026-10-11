@@ -1,0 +1,4 @@
+545 functions, 504751 bytes
+READY-first
+
+PASS: two SDL VTs, single visible surface, terminal switching, key release, resize, bounded hidden progress, crash and exit recovery; no WM socket

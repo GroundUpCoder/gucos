@@ -1,0 +1,3 @@
+[machine-job] queued: node tests/terminal-echo-kernel.mjs
+[machine-job] running: 279265ba-1c58-499d-8262-ecfc3c419230
+PASS terminal control echo, byte preservation, erase/kill widths, signal echo, raw/echo-off modes

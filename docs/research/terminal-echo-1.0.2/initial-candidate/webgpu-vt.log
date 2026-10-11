@@ -1,0 +1,3 @@
+620 functions, 586677 bytes
+
+PASS: two direct WebGPU applications through SDL bridge, resize, independent crash/continued device progress and terminal recovery

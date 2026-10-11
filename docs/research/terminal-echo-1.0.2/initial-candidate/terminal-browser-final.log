@@ -1,0 +1,20 @@
+[machine-job] queued: node tests/terminal-echo.mjs
+[machine-job] running: 61eeadf7-1562-4361-ae90-8b92df80011f
+9 functions, 18173 bytes
+PTY-ECHO-PASS
+
+Debugger listening on ws://127.0.0.1:9229/869a35fd-c51e-4bbf-9348-ec24fed7dabe
+For help, see: https://nodejs.org/en/docs/inspector
+Debugger attached.
+Debugger ending on ws://127.0.0.1:9229/869a35fd-c51e-4bbf-9348-ec24fed7dabe
+For help, see: https://nodejs.org/en/docs/inspector
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+page.waitForFunction: Target page, context or browser has been closed
+    at /Users/jku/git/gucos/tests/terminal-echo.mjs:13:15 {
+  log: []
+}
+
+Node.js v25.8.2

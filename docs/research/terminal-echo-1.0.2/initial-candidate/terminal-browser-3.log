@@ -1,0 +1,28 @@
+[machine-job] queued: node tests/terminal-echo.mjs
+[machine-job] running: fd63e9db-9a58-4fee-bfc4-253ba09a62ea
+9 functions, 18173 bytes
+PTY-ECHO-PASS
+
+{
+  log: '9 functions, 18173 bytes\n' +
+    'PTY-ECHO-PASS\n' +
+    '\n' +
+    '\n' +
+    'BusyBox v1.37.0-wasm (2026-07-09 14:38:25 KST) built-in shell (ash)\n' +
+    "Enter 'help' for a list of built-in commands.\n" +
+    '\n' +
+    '~ $ ',
+  active: '<button id="terminal-focus" title="Focus terminal">›_ terminal</button>',
+  result: null
+}
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+page.waitForFunction: Timeout 30000ms exceeded.
+    at /Users/jku/git/gucos/tests/terminal-echo.mjs:16:15 {
+  log: [],
+  name: 'TimeoutError'
+}
+
+Node.js v25.8.2

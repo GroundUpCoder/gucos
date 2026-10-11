@@ -1,0 +1,15 @@
+[machine-job] queued: node tests/terminal-echo.mjs
+[machine-job] running: 74b84cf6-83f8-43f9-b870-79440623771d
+9 functions, 18173 bytes
+PTY-ECHO-PASS
+
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+page.waitForFunction: Target page, context or browser has been closed
+    at /Users/jku/git/gucos/tests/terminal-echo.mjs:11:15 {
+  log: []
+}
+
+Node.js v25.8.2

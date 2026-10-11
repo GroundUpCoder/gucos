@@ -1,0 +1,10 @@
+RUNTIME cc3227370c2ccfb2a5ed7ea97627dbd512ec19abfacd7bf2f5ca8dc27421f309
+2 functions, 5669 bytes
+CLOSEFROM-SYMBOL-PASS
+
+5 functions, 58362 bytes
+CLOSEFROM sparse/fork/flock PASS
+CLOSEFROM pipe EOF PASS
+CLOSEFROM thread/negative PASS
+CLOSEFROM-PASS
+

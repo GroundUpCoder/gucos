@@ -1,0 +1,28 @@
+[machine-job] queued: node tests/terminal-patch-gates.mjs
+[machine-job] running: b15a31d1-6e8e-4ecb-a6a9-8cb779aff9de
+Running terminal-echo
+{"name":"terminal-echo","status":0,"signal":null,"seconds":1.116}
+Running terminal-patch-upgrade
+{"name":"terminal-patch-upgrade","status":0,"signal":null,"seconds":1.649}
+Running ipc-sockets
+{"name":"ipc-sockets","status":0,"signal":null,"seconds":0.831}
+Running ipc-services
+{"name":"ipc-services","status":0,"signal":null,"seconds":4.168}
+Running ipc-terminal
+{"name":"ipc-terminal","status":0,"signal":null,"seconds":0.763}
+Running ipc-symbols
+{"name":"ipc-symbols","status":0,"signal":null,"seconds":0.685}
+Running closefrom
+{"name":"closefrom","status":0,"signal":null,"seconds":0.866}
+Running platform-posix
+{"name":"platform-posix","status":0,"signal":null,"seconds":0.736}
+Running smoke
+{"name":"smoke","status":0,"signal":null,"seconds":1.296}
+Running runtime-packages
+{"name":"runtime-packages","status":0,"signal":null,"seconds":33.634}
+Running storage-boundary
+{"name":"storage-boundary","status":0,"signal":null,"seconds":0.75}
+Running virtual-terminals
+{"name":"virtual-terminals","status":0,"signal":null,"seconds":5.47}
+Running webgpu-vt
+{"name":"webgpu-vt","status":0,"signal":null,"seconds":3.117}

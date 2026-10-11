@@ -1070,7 +1070,8 @@ var T_ICRNL = 0x100, T_INLCR = 0x40, T_IGNCR = 0x80,
     T_IUTF8 = 0x4000;                                          // c_iflag
 var T_OPOST = 0x1, T_ONLCR = 0x2;                              // c_oflag
 var T_ECHOE = 0x2, T_ECHOK = 0x4, T_ECHO = 0x8, T_ECHONL = 0x10,
-    T_ISIG = 0x80, T_ICANON = 0x100, T_NOFLSH = 0x80000000;    // c_lflag
+    T_ISIG = 0x80, T_ICANON = 0x100, T_ECHOCTL = 0x200,
+    T_NOFLSH = 0x80000000;                                    // c_lflag
 var V_EOF = 0, V_ERASE = 3, V_KILL = 5, V_INTR = 8, V_QUIT = 9,
     V_SUSP = 10, V_START = 12, V_STOP = 13, V_MIN = 16, V_TIME = 17;
 var NCCS = 20;
@@ -1118,7 +1119,7 @@ function Tty(kernel, opts) {
     iflag: T_ICRNL | T_IUTF8,
     oflag: T_OPOST | T_ONLCR,
     cflag: 0xB00,               // CS8|CREAD (matches the legacy canned value)
-    lflag: T_ISIG | T_ICANON | T_ECHO | T_ECHOE | T_ECHOK,
+    lflag: T_ISIG | T_ICANON | T_ECHO | T_ECHOE | T_ECHOK | T_ECHOCTL,
     cc: defaultCc(),
   };
   this._publishModeWord();
@@ -1164,6 +1165,18 @@ Tty.prototype._echo = function (bytes) {
   if (bytes.length) this._output(Uint8Array.from(bytes));
 };
 
+/* Echo input controls visibly instead of executing them in the terminal.
+ * This changes only presentation: applications receive the original bytes.
+ * Tabs and newlines retain their layout behavior. ECHOCTL is opt-out. */
+function echoControl(t, b) {
+  return (t.lflag & T_ECHOCTL) && ((b < 32 && b !== 9 && b !== 10) || b === 127);
+}
+Tty.prototype._echoInput = function (b) {
+  if (echoControl(this.termios, b)) this._echo([94, b ^ 64]);
+  else if (b === 10) this._echoNl();
+  else this._echo([b]);
+};
+
 /* Terminal display width of a code point: 2 for East-Asian Wide/Fullwidth
  * blocks, 1 for everything else INCLUDING combining marks (the D5 ruling:
  * a combining mark renders as its own spacing cell, so its erase is one
@@ -1190,12 +1203,12 @@ function wcwidthCp(cp) {
  * IUTF8 set (Linux semantics; gucOS default) trailing UTF-8 continuation
  * bytes fall with their lead byte, so one ERASE deletes a whole multi-byte
  * character; with it clear the pop stays byte-wise (the historical mode).
- * Returns the DISPLAY width of what fell (1 or 2 cells): the caller echoes
+ * Returns the DISPLAY width of what fell (including two-cell ^X echo): the caller echoes
  * one [BS SP BS] triple per cell, so a double-width CJK char visually
  * erases both of its cells (Unicode Phase D; both term.c and xterm.js
- * render such chars across 2 cells). Byte-wise mode always reports 1. */
+ * render such chars across 2 cells). */
 Tty.prototype._popChar = function (t) {
-  if (!(t.iflag & T_IUTF8)) { this._line.pop(); return 1; }
+  if (!(t.iflag & T_IUTF8)) return echoControl(t, this._line.pop()) ? 2 : 1;
   var tail = [];
   while (this._line.length > 1 && (this._line[this._line.length - 1] & 0xC0) === 0x80)
     tail.unshift(this._line.pop());
@@ -1209,7 +1222,7 @@ Tty.prototype._popChar = function (t) {
   else if ((lead & 0xF8) === 0xF0 && tail.length === 3) cp = lead & 0x07;
   else return 1;
   for (var i = 0; i < tail.length; i++) cp = (cp << 6) | (tail[i] & 0x3F);
-  return wcwidthCp(cp);
+  return echoControl(t, cp) ? 2 : wcwidthCp(cp);
 };
 
 Tty.prototype._echoNl = function () {
@@ -1275,7 +1288,7 @@ Tty.prototype.input = function (data) {
           this._line.length = 0;
           this._flushInput();
         }
-        if (t.lflag & T_ECHO) { this._echo([94, 64 + (b & 31)]); this._echoNl(); } // ^C style
+        if (t.lflag & T_ECHO) { this._echoInput(b); this._echoNl(); }
         this._signalFg(sig);
         continue;
       }
@@ -1313,10 +1326,10 @@ Tty.prototype.input = function (data) {
         continue;
       }
       this._line.push(b);
-      if (t.lflag & T_ECHO) this._echo([b]);
+      if (t.lflag & T_ECHO) this._echoInput(b);
     } else {
       raw.push(b);
-      if (t.lflag & T_ECHO) this._echo([b]);
+      if (t.lflag & T_ECHO) this._echoInput(b);
     }
   }
   if (raw.length) this._push(raw);

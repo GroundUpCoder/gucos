@@ -1,0 +1,6 @@
+[machine-job] queued: node tests/terminal-echo.mjs
+[machine-job] running: c9965985-f21e-4b4a-954b-dce1d26b043f
+9 functions, 18173 bytes
+PTY-ECHO-PASS
+
+PASS guest PTY termios and real VT keyboard: visible controls, unchanged input bytes, normal shell afterward; runtime cc3227370c2ccfb2a5ed7ea97627dbd512ec19abfacd7bf2f5ca8dc27421f309

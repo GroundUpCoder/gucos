@@ -1,0 +1,38 @@
+import assert from 'node:assert/strict';
+import vm from 'node:vm';
+import {readFile} from 'node:fs/promises';
+const ctx=vm.createContext({TextEncoder,TextDecoder,performance,setTimeout,clearTimeout,SharedArrayBuffer,Atomics,Uint8Array,DataView});
+vm.runInContext(await readFile(new URL('../src/kernel.js',import.meta.url),'utf8'),ctx);
+const {Tty}=vm.runInContext('({Tty})',ctx);
+const ECHO=8, ECHOCTL=0x200, ICANON=0x100, ISIG=0x80;
+let output=[],signals=[];
+const tty=new Tty({_ttyNotify(){},_killPgid(pg,s){signals.push(s);}}, {output:b=>output.push(...b)});
+tty._brokered=true;tty.fgPgid=2;
+const bytes=s=>Array.from(new TextEncoder().encode(s));
+const expect=s=>{assert.deepEqual(output,bytes(s));output=[];};
+assert.ok(tty.getattr().lflag&ECHOCTL);
+tty.input('ab\x1b[D\x01\x05\n');
+expect('ab^[[D^A^E\r\n');
+assert.deepEqual(Array.from(tty.take(100)),bytes('ab\x1b[D\x01\x05\n'));
+tty.input('\x1b\x7fZ\n');expect('^[\b \b\b \bZ\r\n');
+assert.deepEqual(Array.from(tty.take(100)),bytes('Z\n'));
+tty.input('界\x01\x15');expect('界^A'+'\b \b'.repeat(4));
+assert.equal(tty._line.length,0);
+tty.input('\x03');expect('^C\r\n');assert.equal(signals.length,1);
+let t=tty.getattr();t.iflag&=~0x4000;tty.setattr(0,t);
+tty.input('\x02\x7f');expect('^B'+'\b \b'.repeat(2));
+// Flags are application-controlled; raw readers still receive original bytes.
+t.lflag&=~(ICANON|ISIG);tty.setattr(0,t);
+tty.input('\x01\x1b\x7f\t\n');expect('^A^[^?\t\r\n');
+assert.deepEqual(Array.from(tty.take(100)),bytes('\x01\x1b\x7f\t\n'));
+t.lflag&=~ECHOCTL;tty.setattr(0,t);
+tty.input('\x01\x1b\x7f');expect('\x01\x1b\x7f');tty.take(100);
+t.lflag=(t.lflag|ECHOCTL)&~ECHO;tty.setattr(0,t);
+tty.input('\x01\x1b[D');expect('');
+assert.deepEqual(Array.from(tty.take(100)),bytes('\x01\x1b[D'));
+// Standalone ring consumers use the same line discipline as brokered PTYs.
+const ring=new Tty({_log(){throw Error('unexpected overflow');}}, {output:b=>output.push(...b)});
+ring.input('\x1b[D\n');expect('^[[D\r\n');
+assert.equal(Atomics.load(ring._i32,1),4);
+assert.deepEqual(Array.from(ring._ring.slice(0,4)),bytes('\x1b[D\n'));
+console.log('PASS terminal control echo, byte preservation, erase/kill widths, signal echo, raw/echo-off modes');

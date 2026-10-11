@@ -1,0 +1,9 @@
+{
+  "status": "prepared-and-tested",
+  "runtime": "cc3227370c2ccfb2a5ed7ea97627dbd512ec19abfacd7bf2f5ca8dc27421f309",
+  "platform": "1.0.2",
+  "releaseDirectory": "/Users/jku/git/gucos/releases/terminal-echo-1.0.2-final",
+  "releaseManifestSha256": "2596fd8728b450704e3c9b4fa66493f0f0bfd08ac4f5c51d8c3699c9c581f2ed",
+  "pagesManifestSha256": "cff15e91cdbb3d7feeebf5db872e43bdadf4d8006c79bbd7e9e5e3fc6d2dcb41",
+  "productionDeployment": "not performed: Cloudflare credentials unavailable in current environment"
+}
