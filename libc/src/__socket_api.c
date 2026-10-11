@@ -10,7 +10,7 @@ int socket(int domain, int type, int protocol) {
   int flags=type;
   type &= ~(SOCK_CLOEXEC | SOCK_NONBLOCK);
   if (domain != AF_UNIX) { errno = EAFNOSUPPORT; return -1; }
-  if (type != SOCK_STREAM || protocol != 0) { errno = EPROTONOSUPPORT; return -1; }
+  if ((type != SOCK_STREAM && type != SOCK_DGRAM && type != SOCK_SEQPACKET) || protocol != 0) { errno = EPROTONOSUPPORT; return -1; }
   int fd=__sock_socket(domain,type,protocol);
   if(fd>=0){if(flags&SOCK_CLOEXEC)fcntl(fd,F_SETFD,FD_CLOEXEC);if(flags&SOCK_NONBLOCK)fcntl(fd,F_SETFL,O_NONBLOCK);}
   return fd;
@@ -19,8 +19,8 @@ int socketpair(int domain, int type, int protocol, int sv[2]) {
   int flags=type;
   type &= ~(SOCK_CLOEXEC | SOCK_NONBLOCK);
   if (domain != AF_UNIX) { errno = EAFNOSUPPORT; return -1; }
-  if (type != SOCK_STREAM || protocol != 0) { errno = EPROTONOSUPPORT; return -1; }
-  int result=__sock_pair(sv);
+  if ((type != SOCK_STREAM && type != SOCK_DGRAM && type != SOCK_SEQPACKET) || protocol != 0) { errno = EPROTONOSUPPORT; return -1; }
+  int result=type==SOCK_STREAM?__sock_pair(sv):__sock_pair_type(sv,type);
   if(!result)for(int i=0;i<2;i++){if(flags&SOCK_CLOEXEC)fcntl(sv[i],F_SETFD,FD_CLOEXEC);if(flags&SOCK_NONBLOCK)fcntl(sv[i],F_SETFL,O_NONBLOCK);}
   return result;
 }
@@ -51,13 +51,14 @@ long recv(int fd, void *buf, size_t n, int flags) {
 }
 long sendto(int fd, const void *buf, size_t n, int flags,
                           const struct sockaddr *addr, socklen_t len) {
-  if (addr || len) { errno = EISCONN; return -1; }  /* stream: no per-msg dest */
-  return send(fd, buf, n, flags);
+  struct iovec iov={(void *)buf,n};struct msghdr m={(void *)addr,len,&iov,1,0,0,0};
+  return sendmsg(fd,&m,flags);
 }
 long recvfrom(int fd, void *buf, size_t n, int flags,
                             struct sockaddr *addr, socklen_t *len) {
-  if (len) *len = 0;
-  return recv(fd, buf, n, flags);
+  if(addr&&!len){errno=EFAULT;return -1;}
+  struct iovec iov={buf,n};struct msghdr m={addr,len?*len:0,&iov,1,0,0,0};
+  long result=recvmsg(fd,&m,flags);if(result>=0&&len)*len=m.msg_namelen;return result;
 }
 int setsockopt(int fd, int level, int opt, const void *v, socklen_t l) {
   return __sock_option(fd, level, opt, 1);
