@@ -1,0 +1,39 @@
+[machine-job] queued: sh -c corepack pnpm install --frozen-lockfile && node tests/platform-metadata.mjs && node tests/ipc-socket-kernel.mjs && node tests/ipc-services-kernel.mjs && node tests/ipc-terminal-kernel.mjs && node tests/closefrom-kernel.mjs && node tools/build.mjs
+(node:1209408) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[machine-job] running: 68637765-3c62-4ba2-b52c-a251346862d5
+Lockfile is up to date, resolution step is skipped
+Progress: resolved 1, reused 0, downloaded 0, added 0
+Packages: +37
++++++++++++++++++++++++++++++++++++++
+Progress: resolved 37, reused 37, downloaded 0, added 37, done
+
+devDependencies:
++ playwright 1.63.0
++ wrangler 4.149.0
+
+╭ Warning ─────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│   Ignored build scripts: esbuild@0.28.2, workerd@1.20261006.1.               │
+│   Run "pnpm approve-builds" to pick which dependencies should be allowed     │
+│   to run scripts.                                                            │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+Done in 940ms using pnpm v10.33.0
+PASS stable SemVer, target/feature/ABI rejection, legacy baseline, dependency bounds and exact pins
+IPC-SOCKET-KERNEL-PASS
+IPC-KERNEL-PASS: in-flight OFDs, cancellation, unlink and handle reclamation
+IPC-FORK-FAILURE-PASS: cloned semaphore handles reclaimed
+PASS: detached terminal immediate/deferred reads, controlling-terminal guard, per-fd winsize
+CLOSEFROM-KERNEL-PASS: sparse maps, shared tables/cache invalidation, sealed-local keys, queued rights, console slots
+Prebuilt /usr/bin/make: 648 functions, 1598599 bytes, 15879 ms
+Prebuilt /bin/ash: 757 functions, 1389951 bytes, 24816 ms
+Prebuilt /bin/busybox: 1320 functions, 2677319 bytes, 41433 ms
+Prebuilt /bin/cc: 73 functions, 26551 bytes, 2200 ms
+Prebuilt /usr/bin/ar: 108 functions, 37104 bytes, 2165 ms
+Prebuilt /usr/bin/guc-fetch: 96 functions, 35331 bytes, 2306 ms
+Prebuilt /usr/bin/guc-links: 104 functions, 35551 bytes, 1822 ms
+Prebuilt /usr/libexec/guc-lock: 77 functions, 27476 bytes, 1739 ms
+Prebuilt /usr/libexec/guc-json: 123 functions, 46649 bytes, 1917 ms
+Prebuilt /usr/libexec/guc-unpack: 92 functions, 33176 bytes, 2115 ms
+Built self-contained dist/; runtime 9f99c457c486e327d156d1419c14eaa1e0735311b15053dba64df1d3be64f13e; package source is configured only at runtime.

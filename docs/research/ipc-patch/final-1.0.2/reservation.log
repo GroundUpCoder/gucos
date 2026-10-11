@@ -1,0 +1,136 @@
+[machine-job] queued: env LD_LIBRARY_PATH=/home/ubuntu/git/gucos-ipc-services/.ipc-browser-deps/root/usr/lib/x86_64-linux-gnu python3 /tmp/gucos-ipc-final-acceptance-0vjl204x/run.py
+(node:1213104) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[machine-job] running: 4ccb5c98-a7e6-405e-bcb4-af67b6f71e9b
+START ipc-sockets
+VERIFIED-FINAL-RUNTIME be3a9ce7817c876e8d9bc900556fea1fbaeb4f0d5d4e03003ab24a7ad3b600bb
+IPC-SOCKET-RUNTIME be3a9ce7817c876e8d9bc900556fea1fbaeb4f0d5d4e03003ab24a7ad3b600bb
+10 functions, 128369 bytes
+IPC-SOCKET-PTY-PASS
+IPC-SOCKET-PASS
+
+
+START ipc-services
+VERIFIED-FINAL-RUNTIME be3a9ce7817c876e8d9bc900556fea1fbaeb4f0d5d4e03003ab24a7ad3b600bb
+18 functions, 201456 bytes
+flock ownership/conversion/fork PASS
+eventfd counter/readiness/blocking/signal/fork PASS
+named semaphore identity/unlink/fork/exec/timeout PASS
+IPC-SERVICES-PASS
+
+
+START ipc-terminal
+VERIFIED-FINAL-RUNTIME be3a9ce7817c876e8d9bc900556fea1fbaeb4f0d5d4e03003ab24a7ad3b600bb
+8 functions, 46093 bytes
+IPC-TERMINAL-PASS
+
+
+START ipc-symbols
+VERIFIED-FINAL-RUNTIME be3a9ce7817c876e8d9bc900556fea1fbaeb4f0d5d4e03003ab24a7ad3b600bb
+2 functions, 6449 bytes
+IPC-SYMBOLS-PASS
+
+
+START closefrom
+VERIFIED-FINAL-RUNTIME be3a9ce7817c876e8d9bc900556fea1fbaeb4f0d5d4e03003ab24a7ad3b600bb
+RUNTIME be3a9ce7817c876e8d9bc900556fea1fbaeb4f0d5d4e03003ab24a7ad3b600bb
+2 functions, 5669 bytes
+CLOSEFROM-SYMBOL-PASS
+
+5 functions, 58362 bytes
+CLOSEFROM sparse/fork/flock PASS
+CLOSEFROM pipe EOF PASS
+CLOSEFROM thread/negative PASS
+CLOSEFROM-PASS
+
+
+START platform-posix
+VERIFIED-FINAL-RUNTIME be3a9ce7817c876e8d9bc900556fea1fbaeb4f0d5d4e03003ab24a7ad3b600bb
+5 functions, 23087 bytes
+PLATFORM-POSIX-PASS
+
+
+START retained-abi
+HOST-PROVENANCE-PASS
+prepare
+
+installed-hashes PASS
+unchanged-old-app
+OLD-ANSWER-42
+
+unchanged-old-dynamic
+OLD-DSO-42
+
+relink-old-archive
+3 functions, 5133 bytes
+OLD-ANSWER-42
+
+relink-old-object
+3 functions, 5137 bytes
+OLD-ANSWER-42
+
+post-run-hashes PASS
+reload-old-dynamic
+OLD-DSO-42
+
+reload-hashes PASS
+RETAINED-ARTIFACT-ABI-PASS
+
+START published-jsmn
+repositories
+groundupcoder	https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/main/catalog.json
+
+fresh-profile
+
+install
+gucman: install groundupcoder:jsmn: reading catalogs and resolving dependencies
+gucman: Reading catalog: groundupcoder
+  Connecting; waiting for response…
+  Downloaded 24883 bytes; transfer finished
+gucman: Resolving: groundupcoder:jsmn
+gucman: Downloading manifest for groundupcoder:jsmn (2336 bytes)
+  Connecting; waiting for response…
+  Downloaded 2336 / 2336 bytes (100%); transfer finished
+gucman: Verifying download: manifest for groundupcoder:jsmn
+gucman: Checking cached object: manifest for groundupcoder:jsmn
+gucman: Plan: 1 packages (including dependencies); checking compatibility
+gucman: Checking file ownership for 1 packages
+gucman: Package 1/1: jsmn (0 remaining after this)
+gucman: Downloading jsmn archive (28160 bytes)
+  Connecting; waiting for response…
+  Downloaded 28160 / 28160 bytes (100%); transfer finished
+gucman: Verifying download: jsmn archive
+gucman: Checking cached object: jsmn archive
+gucman: Unpacking: jsmn
+gucman: Installing jsmn: 0/3 files
+gucman: Installing jsmn: 3/3 files
+gucman: Preparing checksums: jsmn
+gucman: Checksummed jsmn: 3/3 files
+gucman: Saving transaction: jsmn
+gucman: Verifying staged files: jsmn
+gucman: Activating: jsmn
+Installed groundupcoder:jsmn 1.1.0-1
+
+first-run
+- User: johndoe
+- Admin: false
+- UID: 1000
+- Groups:
+  * users
+  * wheel
+  * audio
+  * video
+
+reload-run
+- User: johndoe
+- Admin: false
+- UID: 1000
+- Groups:
+  * users
+  * wheel
+  * audio
+  * video
+
+PUBLISHED-JSMN-BINARY-PASS
+
+SNAPSHOT-UNCHANGED True

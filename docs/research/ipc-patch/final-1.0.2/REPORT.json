@@ -1,0 +1,75 @@
+{
+  "snapshot": "/home/ubuntu/git/gucos-core-snapshots/ipc-1.0.2-be3a9ce7",
+  "evidence": "/tmp/gucos-ipc-final-acceptance-0vjl204x",
+  "runtime": "be3a9ce7817c876e8d9bc900556fea1fbaeb4f0d5d4e03003ab24a7ad3b600bb",
+  "files": 65,
+  "sha256": {
+    "build.json": "9c79b607023e413a42158b56c9e1a24a9f70c8e2bc106410c0098ec8d535ebda",
+    "index.html": "b6c9ded8be3d6b242d266c45190add39328e9d0a319efcba048daa61ad1bae71",
+    "SHA256SUMS": "fb28d465482889f9308af15d600610aceef4dbe40f88e7ab6d3a13f84a7fef3c"
+  },
+  "status": "passed",
+  "metadataCommit": "68df0b3e2603aa0149555fa98950ab210422a796",
+  "parentMetadataCommit": "2057b5709f4736952b87d77bf7993bdd5233d37e",
+  "browserReservation": "4ccb5c98-a7e6-405e-bcb4-af67b6f71e9b",
+  "finalBuildReservation": "5d3ae2e3-8c3c-44de-a8d7-0c0f8538e825",
+  "kernelReservation": "68637765-3c62-4ba2-b52c-a251346862d5",
+  "tests": [
+    {
+      "test": "ipc-sockets",
+      "exitCode": 0,
+      "startedUTC": "2026-10-11T09:23:30.050333+00:00",
+      "completedUTC": "2026-10-11T09:23:37.650642+00:00"
+    },
+    {
+      "test": "ipc-services",
+      "exitCode": 0,
+      "startedUTC": "2026-10-11T09:23:37.650874+00:00",
+      "completedUTC": "2026-10-11T09:23:47.328771+00:00"
+    },
+    {
+      "test": "ipc-terminal",
+      "exitCode": 0,
+      "startedUTC": "2026-10-11T09:23:47.328986+00:00",
+      "completedUTC": "2026-10-11T09:23:52.912792+00:00"
+    },
+    {
+      "test": "ipc-symbols",
+      "exitCode": 0,
+      "startedUTC": "2026-10-11T09:23:52.913008+00:00",
+      "completedUTC": "2026-10-11T09:23:57.758940+00:00"
+    },
+    {
+      "test": "closefrom",
+      "exitCode": 0,
+      "startedUTC": "2026-10-11T09:23:57.759159+00:00",
+      "completedUTC": "2026-10-11T09:24:03.968065+00:00"
+    },
+    {
+      "test": "platform-posix",
+      "exitCode": 0,
+      "startedUTC": "2026-10-11T09:24:03.968285+00:00",
+      "completedUTC": "2026-10-11T09:24:09.750213+00:00"
+    },
+    {
+      "test": "retained-abi",
+      "exitCode": 0,
+      "startedUTC": "2026-10-11T09:24:09.750436+00:00",
+      "completedUTC": "2026-10-11T09:24:16.911689+00:00"
+    },
+    {
+      "test": "published-jsmn",
+      "exitCode": 0,
+      "startedUTC": "2026-10-11T09:24:16.911971+00:00",
+      "completedUTC": "2026-10-11T09:24:37.571996+00:00"
+    }
+  ],
+  "snapshotUnchanged": true,
+  "limitations": [
+    "Retained artifacts do not test old-disk migration.",
+    "Published-binary acceptance covers jsmn only; no broad package coverage.",
+    "No graphics tests or broad upstream repeats.",
+    "Worker-local sealed descriptor tables in sibling workers are not invalidated by the fd epoch; shipped browser workers disable this path.",
+    "Final-runtime tmux lifecycle retest belongs to package worker; earlier e1a1d35a PASS was reported by coordinator, not executed here."
+  ]
+}

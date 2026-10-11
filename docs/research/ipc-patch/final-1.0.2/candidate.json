@@ -1,0 +1,11 @@
+{
+  "snapshot": "/home/ubuntu/git/gucos-core-snapshots/ipc-1.0.2-be3a9ce7",
+  "evidence": "/tmp/gucos-ipc-final-acceptance-0vjl204x",
+  "runtime": "be3a9ce7817c876e8d9bc900556fea1fbaeb4f0d5d4e03003ab24a7ad3b600bb",
+  "files": 65,
+  "sha256": {
+    "build.json": "9c79b607023e413a42158b56c9e1a24a9f70c8e2bc106410c0098ec8d535ebda",
+    "index.html": "b6c9ded8be3d6b242d266c45190add39328e9d0a319efcba048daa61ad1bae71",
+    "SHA256SUMS": "fb28d465482889f9308af15d600610aceef4dbe40f88e7ab6d3a13f84a7fef3c"
+  }
+}

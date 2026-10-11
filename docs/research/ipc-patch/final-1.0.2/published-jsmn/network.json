@@ -1,0 +1,47 @@
+[
+  {
+    "index": 0,
+    "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/main/catalog.json",
+    "method": "GET",
+    "startedUTC": "2026-10-11T09:24:22.935Z",
+    "status": 200,
+    "responseURL": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/main/catalog.json",
+    "sha256": "2e985f731fddd7a03abb48c7b57d4ef94ce998f2e28c8b50a2a4f51a95a980c7",
+    "size": 24883,
+    "file": "response-000.bin",
+    "headers": {
+      "etag": "W/\"161e50617b7e2415ba51247160a314ca61dcc5d6f394840a700e110a18ce8557\"",
+      "contentType": "text/plain; charset=utf-8"
+    }
+  },
+  {
+    "index": 1,
+    "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/jsmn/package.json",
+    "method": "GET",
+    "startedUTC": "2026-10-11T09:24:24.482Z",
+    "status": 200,
+    "responseURL": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/jsmn/package.json",
+    "sha256": "aa46ef646bbf3907c5e2fc2091f87d32926b43c3c32cdc6c3c6c2f8c89dda79e",
+    "size": 2336,
+    "file": "response-001.bin",
+    "headers": {
+      "etag": "W/\"e92e6bc54f60d1be7a570abe3c865504efba2ccdd69f2102755ca3b545fc8689\"",
+      "contentType": "text/plain; charset=utf-8"
+    }
+  },
+  {
+    "index": 2,
+    "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9a9b1dd86716ec3b754bc335a011b8604fce67d5/apps/jsmn/binaries/62a4b0e98744881284d52d278abb06ff2feec6794baa067a3cfa047638a3d4af.tar",
+    "method": "GET",
+    "startedUTC": "2026-10-11T09:24:30.817Z",
+    "status": 200,
+    "responseURL": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9a9b1dd86716ec3b754bc335a011b8604fce67d5/apps/jsmn/binaries/62a4b0e98744881284d52d278abb06ff2feec6794baa067a3cfa047638a3d4af.tar",
+    "sha256": "62a4b0e98744881284d52d278abb06ff2feec6794baa067a3cfa047638a3d4af",
+    "size": 28160,
+    "file": "response-002.bin",
+    "headers": {
+      "etag": "W/\"8ee7d552059d297872d3887cfa3a35ce83dbc8ba5400a97395dfb5798a804b84\"",
+      "contentType": "application/octet-stream"
+    }
+  }
+]
