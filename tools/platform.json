@@ -4,6 +4,13 @@
   "features": [
     "posix-core",
     "unix-stream",
+    "unix-rights",
+    "unix-dgram",
+    "unix-seqpacket",
+    "flock",
+    "eventfd",
+    "posix-named-semaphores",
+    "closefrom",
     "pthreads",
     "sdl3-vt",
     "sdl3-ime",

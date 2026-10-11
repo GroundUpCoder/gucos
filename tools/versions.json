@@ -1,9 +1,9 @@
 {
   "compiler": "0.5.13",
-  "runtime": "0.5.8",
+  "runtime": "0.5.9",
   "abi": {
     "objects": 3,
     "runtime": 5
   },
-  "platform": "1.0.1"
+  "platform": "1.0.2"
 }
