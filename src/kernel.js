@@ -226,6 +226,7 @@ var OP = {
   // embedder hook — egress without a host is meaningless, fail loud).
   EGRESS: 0x0304,
   // 0x04xx — the brokered filesystem (KERNEL.md "fd/data-plane amendment").
+  IPC_FLOCK: 0x0440, IPC_EVENTFD: 0x0441, IPC_SEM: 0x0442,
   FS_AT: 0x0430,
   FS_OPEN: 0x0401, FS_CLOSE: 0x0402, FS_READ: 0x0403, FS_WRITE: 0x0404,
   FS_LSEEK: 0x0405, FS_STAT: 0x0406, FS_LSTAT: 0x0407, FS_FSTAT: 0x0408,
@@ -1521,6 +1522,7 @@ function Kernel(opts) {
   // Record locks and shared mappings (docs/MAPPINGS.md). The classes live in
   // file-locks.js and mapped-files.js; a kernel loaded without them (unit
   // tests of other subsystems) reports ENOSYS for those requests.
+  this._ipc = typeof IPCServices !== 'undefined' ? new IPCServices(this) : null;
   this._locks = typeof FileLocks !== 'undefined' ? new FileLocks() : null;
   this._mapped = (opts.fs && typeof MappedFiles !== 'undefined') ? new MappedFiles(opts.fs) : null;
   this._procs = new Map();   // pid -> PCB
@@ -1712,6 +1714,7 @@ Kernel.prototype._ofdUnref = function (id, pid) {
   }
   if (--o.refs > 0) { this._sockCollect(); return; }
   this._ofds.delete(id);
+  if (this._ipc) this._ipc.releaseOfd(o);
   if (o.kind === 'file') {
     // FS_WATCH settled write: a dirty open file description's LAST release
     // means the writer is done with it — write-then-close settles exactly
@@ -2347,6 +2350,7 @@ Kernel.prototype._spawnImage = function (parent, spec, image, module) {
       else if (module && moduleUsesMappings(module)) { self._mapped.owner(pid); pcb.vm = true; }
     }
     procSpec.vm = pcb.vm ? self._mapped.state(pid) : null;
+    if(self._ipc && parent && (spec.forkSnapshot || spec.sharedChild))self._ipc.clone(parent.pid,pid);
     pcb.worker = self._createWorker(procSpec);
   } catch (e) {
     self._procs.delete(pid);
@@ -2354,6 +2358,7 @@ Kernel.prototype._spawnImage = function (parent, spec, image, module) {
     pcb.fds.forEach(function(id){self._ofdUnref(id,pid);});
     if(pcb.trace)self._ofdUnref(pcb.trace.ofdId,0);
     if (self._mapped) self._mapped.release(pid);
+    if(self._ipc)self._ipc.release(pid);
     self._log('spawn: createWorker failed: ' + (e && e.message));
     return { errno: e.errno || 'EAGAIN' };
   }
@@ -2469,6 +2474,7 @@ Kernel.prototype._processControl = async function(pcb,op,data,caller=pcb) {
       else pcb.sigdisp[s]=0;
     }
     this._killThreads(pcb);pcb.threaded=false;
+    if(this._ipc)this._ipc.release(pcb.pid);
     pcb.path=image.path;pcb.argv=image.argv.slice();pcb.envp=image.envp.slice();pcb.module=image.module;pcb.image=null;
     // Mappings do not survive exec; the new image gets a fresh table if it maps.
     if(this._mapped){this._mapped.release(pcb.pid);pcb.vm=null;if(moduleUsesMappings(image.module)){this._mapped.owner(pcb.pid);pcb.vm=true;}}
@@ -3442,6 +3448,14 @@ Kernel.prototype._fsRpcBody = function (pcb, op, req) {
     req={path:p,from,to:q,target:q,flags:req.a,mode:req.action===0?req.b:req.a,atime:req.a,mtime:req.b};
   }
   switch (op) {
+    case OP.IPC_FLOCK:
+    case OP.IPC_EVENTFD:
+    case OP.IPC_SEM:
+      if(!this._ipc){this._respond(pcb,{errno:'ENOSYS'});return;}
+      if(op===OP.IPC_FLOCK)this._ipc.flock(pcb,req.fd,req.flags);
+      else if(op===OP.IPC_EVENTFD)this._ipc.eventCreate(pcb,req.value,req.flags);
+      else this._ipc.sem(pcb,req);
+      return;
     case OP.FS_OPEN: {
       // FS_WATCH bookkeeping: record the path on every file OFD (cheap —
       // a string; the settle emit canonicalizes lazily, gated on live
@@ -3510,6 +3524,7 @@ Kernel.prototype._fsRpcBody = function (pcb, op, req) {
       var o1 = ofdOf(req.fd);
       if (!o1) { this._respond(pcb, { errno: 'EBADF' }); return; }
       var count = Math.min(req.count | 0, KP_PAYLOAD_CAP);
+      if (o1.kind === 'eventfd') { this._ipc.eventIO(pcb,o1,null,count); return; }
       if (o1.kind === 'file') {
         // Access mode (docs/archive/0376): O_WRONLY can't read. Belt-and-braces
         // with the same check in BlockFS — the kernel OFD is the layer a
@@ -3607,6 +3622,7 @@ Kernel.prototype._fsRpcBody = function (pcb, op, req) {
       var data = rawq.subarray(4);
       var o2 = ofdOf(wfd);
       if (!o2) { this._respond(pcb, { errno: 'EBADF' }); return; }
+      if (o2.kind === 'eventfd') { this._ipc.eventIO(pcb,o2,data,data.length); return; }
       if (o2.kind === 'file') {
         // Access mode (docs/archive/0376): O_RDONLY can't write — the corruption
         // half; a read-only fd used to silently mutate the file.
@@ -3704,6 +3720,8 @@ Kernel.prototype._fsRpcBody = function (pcb, op, req) {
       // Explicit metadata keeps serializers strict; this does not repair identity.
       } else if (o4.kind === 'pipe') {
         this._respond(pcb, { st: { dev: 0, ino: 0, mode: 0x1000 | 0o600, nlink: 1, size: this._pipeAvail(o4.pipe), atime: 0, mtime: 0, ctime: 0, rdev: 0 } });
+      } else if (o4.kind === 'eventfd') {
+        this._respond(pcb,{st:{dev:0,ino:o4.id,mode:0o600,nlink:1,size:0,atime:0,mtime:0,ctime:0,rdev:0}});
       } else if (o4.kind === 'socket') {
         this._respond(pcb, { st: { dev: 0, ino: 0, mode: S_IFSOCK_MODE | 0o777, nlink: 1, size: o4.st === 'conn' ? o4.rx.buf.length : 0, atime: 0, mtime: 0, ctime: 0, rdev: 0 } });
       } else {
@@ -3789,6 +3807,7 @@ Kernel.prototype._fsRpcBody = function (pcb, op, req) {
       // harmless 0, matching the in-process env's no-validation behavior.
       var oSync = ofdOf(req.fd);
       if (!oSync) { this._respond(pcb, { errno: 'EBADF' }); return; }
+      if (oSync.kind === 'eventfd') { this._respond(pcb,{errno:'EINVAL'}); return; }
       if (oSync.kind === 'file' && this._mapped) this._mapped.beforeIO(oSync.ino);
       if (oSync.kind === 'file' && fs.fsync(oSync.bfsFd) === null) {
         this._respond(pcb, eFs());
@@ -4931,6 +4950,7 @@ Kernel.prototype.setScreen = function(w,h) {
 Kernel.prototype._pollState = function (pcb, fd) {
   var id = pcb.fds.get(fd | 0), o = id === undefined ? null : this._ofds.get(id);
   if (!o) return 0x20; // POLLNVAL
+  if (o.kind === 'eventfd') return this._ipc.eventReady(o);
   var readable = false, writable = false, extra = 0;
   if (o.kind === 'pipe') {
     if (o.end === 'read') {
@@ -5773,6 +5793,7 @@ Kernel.prototype._cancelWaiter = function (pcb) {
   if (!w) return;
   if(w.socketHold)this._ofdUnref(w.socketHold.id,0);
   if(w.rights)for(var held of w.rights)this._ofdUnref(held.id,0);
+  if (w.op === 'ipc' && this._ipc) this._ipc.cancel(w);
   if (w.abort) w.abort.abort();
   if (w.timer) clearTimeout(w.timer);
   // SPSC rings (docs/archive/0181): drop the parked-peer flags this wait raised.
@@ -5821,6 +5842,7 @@ Kernel.prototype._exitProcess = function (pcb, status) {
   pcb.worker = null;
   this._releaseSharedChild(pcb);
   this._killThreads(pcb);
+  if(this._ipc)this._ipc.release(pcb.pid);
   // Release every fd — this is what makes SIGKILL leak-free under the
   // brokered fs: the kernel, not the dead worker, owns the descriptions,
   // so unlink-while-open lifetimes complete even on a hard kill.
