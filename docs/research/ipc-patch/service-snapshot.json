@@ -1,0 +1,23 @@
+{
+  "source": "/home/ubuntu/git/gucos-ipc-services",
+  "base": "cdf19e035e08f77d2e4246d879a53fbe04a6a101",
+  "authorThread": "01a129b7-d01e-7062-ad28-bcdca22c4b54",
+  "capturedBy": "coordinating thread; author checkout unchanged",
+  "sha256": {
+    "docs/logs/2026-10-11/ipc-services.md": "ed0b892dba838c4ddf06a005a4350b15d620772ea340f1da9d1c531990923d60",
+    "libc/include/semaphore.h": "9a11ffdadc629c99bf6f5e71b875086efbba3a1e9ff5eafee822e16c54cfb5ac",
+    "libc/include/sys/eventfd.h": "46df3f78a075784c88c9593ecf7379cbbb008dc110dbb53258b2267244fb011a",
+    "libc/include/sys/file.h": "4d3e1514003617f4a4bccb7ead269eba8862f566b034d9733a2d50e5fc4c6cfe",
+    "libc/manifest.json": "34419e11cdfd676ae4507e55653a5303707022065ade2cee46133f3f257fa9fe",
+    "libc/src/__fork.c": "7662516d7fa9149f761872e0bf5131667f6f3fb2d7f03ed8260f6707b9831c41",
+    "libc/src/__semaphore.c": "3d341d5e367695ec0e8f80d43fb098ec39adad70d9f3c76b26811ee5ea18afa7",
+    "src/host.js": "c21ffbe5095ba31cbe903493a9f538fe5a2db2b84346e5e9e7d4897d1fe62e9d",
+    "src/ipc-services.js": "0f11ede4cf8b352132d1acaa9b91a51725de578fe87bc3ce1855d3b27e03b383",
+    "src/kernel.js": "59ef8ca9551fd59689e9ff5eaf0b2d2ac48517f1e090412f9261816dee03f517",
+    "src/system-process.js": "70b27a83742bbcb5fca3e2e02b3ecd674f65fe0f828065381e7e66ca9037fc79",
+    "tests/fixtures/ipc-services.c": "a113ea5d0fab67604ee952bde4d55e279524ca754da82168436d794b87bd5578",
+    "tests/ipc-services-kernel.mjs": "257c72110b62e33260edc6de9c3e0db2742ba820c3b89ee7ba318d47050d8bba",
+    "tests/ipc-services.mjs": "01080f8868f0cab93b3de704c935b7641768bf4104d15615dbcf85ec0df584e7",
+    "tools/build.mjs": "15ab9a692807262276f06c6a0552ce6d61596b18f2421c1cc078106641a2db66"
+  }
+}

@@ -16,6 +16,8 @@ struct __fork_handler {
 };
 static struct __fork_handler *__fork_first, *__fork_last;
 static __lock_t __fork_lock = __LOCK_INIT;
+/* The named semaphore list must be consistent before siblings are parked. */
+__lock_t __named_sem_lock = __LOCK_INIT;
 int pthread_atfork(void (*prepare)(void), void (*parent)(void), void (*child)(void)) {
   struct __fork_handler *h = malloc(sizeof(*h));
   if (!h) return ENOMEM;
@@ -34,11 +36,13 @@ int fork(void) {
   /* Acquire libc locks before parking siblings, in their normal lock order. */
   __stdio_fork_lock(1);
   __pthread_fork_lock(1);
+  __lock_acquire(&__named_sem_lock);
   __malloc_fork_lock(1);
   int pid = __fork_impl();
   int saved_errno = errno;
   if (pid == 0) __pthread_fork_child();
   __malloc_fork_lock(0);
+  __lock_release(&__named_sem_lock);
   __pthread_fork_lock(0);
   __stdio_fork_lock(0);
   if (last) for (struct __fork_handler *h = __fork_first; h; h = h->next) {

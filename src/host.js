@@ -6656,6 +6656,7 @@ function createNullSpawn(ctx) {
     __sig_pause: enosys, __compile: enosys, __compile_chunk: enosys,
     __setitimer: enosys, __getitimer: enosys,   // timers live in the kernel (0044)
     __mmap: function () { ctx.setErrnoName('ENOSYS'); return 0; },   // mappings live in the kernel (docs/MAPPINGS.md)
+    flock: enosys, eventfd: enosys, __sem_open: enosys, __sem_op: enosys, __sem_unlink: enosys,
     __munmap: enosys, __mprotect: enosys, __msync: enosys, __fcntl_lock: enosys,
   } };
 }
@@ -11632,7 +11633,7 @@ async function runModuleImpl({
     'EEXIST': 17, 'EXDEV': 18, 'ENODEV': 19, 'ENOTDIR': 20, 'EISDIR': 21,
     'EINVAL': 22, 'ENFILE': 23, 'EMFILE': 24, 'ENOTTY': 25, 'EFBIG': 27,
     'ENOSPC': 28, 'ESPIPE': 29, 'EROFS': 30, 'EPIPE': 32, 'EDOM': 33,
-    'ERANGE': 34, 'EDEADLK': 35, 'ENAMETOOLONG': 36, 'ENOSYS': 38, 'ENOTEMPTY': 39,
+    'EOVERFLOW': 75, 'ERANGE': 34, 'EDEADLK': 35, 'ENAMETOOLONG': 36, 'ENOSYS': 38, 'ENOTEMPTY': 39,
     'ELOOP': 40,   // symlink cycle — realpathPhysical (docs/archive/0263) is the first setter
     // Socket family (docs/archive/0008) — numbers match <errno.h> in the libc.
     'ENOTSOCK': 88, 'EDESTADDRREQ': 89, 'EMSGSIZE': 90, 'EPROTOTYPE': 91, 'ENOPROTOOPT': 92, 'EPROTONOSUPPORT': 93,

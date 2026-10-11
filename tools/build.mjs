@@ -40,8 +40,8 @@ notices.packages.make=notices.trees.make+='\n'+await read('vendor/make/COPYING.L
 const payload={buildId,toolchain,versions,prebuilt,repository,
  repositoryScripts:{manager:await read('tools/guest-repository/manager.sh')},
  systemCompiler:await compilerJoin(['src/path.js','src/compiler.js','src/trampoline.js','src/objects.js','src/compile.js','src/compiler-fs.js','src/compiler-driver.js','src/compiler-worker.js']),
- systemOwner:[host,kernel,await join(['src/path.js','src/file-locks.js','src/mapped-files.js','src/compiler-fs.js','src/compiler-jobs.js','src/system-files.js','src/journal.js','src/layout.js','src/packages.js','src/repository-boot.js','src/system-owner.js'])].join('\n'),
- systemProcess:[host,kernel,await join(['src/virtual-memory.js','src/system-process.js'])].join('\n'),
+ systemOwner:[host,kernel,await join(['src/path.js','src/file-locks.js','src/ipc-services.js','src/mapped-files.js','src/compiler-fs.js','src/compiler-jobs.js','src/system-files.js','src/journal.js','src/layout.js','src/packages.js','src/repository-boot.js','src/system-owner.js'])].join('\n'),
+ systemProcess:[host,kernel,await join(['src/virtual-memory.js','src/ipc-services.js','src/system-process.js'])].join('\n'),
  worker:await compilerJoin(['src/path.js','src/compiler.js','src/trampoline.js','src/objects.js','src/dynamic-loader.js','src/host.js','src/compile.js','src/worker.js']),
  applets:[...(await read('vendor/busybox/port/multicall_main.c')).matchAll(/\{\s*"([a-zA-Z0-9_[\]-]+)"\s*,/g)].map(m=>m[1]),
  terminalJS:await join(['vendor/terminal/xterm.js','vendor/terminal/addon-fit.js']),terminalCSS:await read('vendor/terminal/xterm.css'),files,binaryFiles:{},licenseNotices:notices};

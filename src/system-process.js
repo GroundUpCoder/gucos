@@ -50,6 +50,7 @@ self.onmessage=async({data})=>{
           if(cmd===5){const v=new DataView(ctx.getMemory().buffer);v.setInt16(ptr,r.type,true);if(r.type!==2){v.setInt16(ptr+2,0,true);v.setBigInt64(ptr+8,BigInt(r.start),true);v.setBigInt64(ptr+16,BigInt(r.len),true);v.setInt32(ptr+24,r.pid,true);}}
           return 0;
         };
+        self.installIPCImports(imports,ctx,client);
         return {c:imports};
       },
       dynamicReadFile:(path,requester,runpath=[])=>{

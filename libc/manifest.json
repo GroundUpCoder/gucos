@@ -111,7 +111,8 @@
     "tfind.c",
     "tre-mem.c",
     "tsearch.c",
-    "twalk.c"
+    "twalk.c",
+    "__semaphore.c"
   ],
   "headers": [
     "__core_math_tint.h",
@@ -250,7 +251,8 @@
     "regex.h",
     "search.h",
     "tre.h",
-    "tsearch.h"
+    "tsearch.h",
+    "sys/eventfd.h"
   ],
   "skip": [
     "__guc.c",
@@ -263,6 +265,6 @@
     "sse",
     "sse2"
   ],
-  "digest": "6545614f094d49e6367c2debc5eb5eb3a99ef0c5c8121dfb1697a4d735bf9225",
+  "digest": "dd65a6d84bcd4cc1e9f9ddc563b0d6d91847ee3e0e663dd92a4890e6fd3dd67c",
   "prelude": "include/__compiler_prelude.h"
 }
