@@ -1,0 +1,20 @@
+[machine-job] queued: sh -eu -c node tests/smoke.mjs; node tests/runtime-packages.mjs; node tests/storage-boundary.mjs; node tests/virtual-terminals.mjs; node tests/webgpu-vt.mjs
+[machine-job] running: 991ab7c6-7c72-4bfd-95ab-1f1882c80164
+/bin/sh
+cc -c hello.c -o hello.o
+cc hello.o -o hello
+2 functions, 4558 bytes
+MINIMAL-COMPILER-PASS
+hello.o
+groundupcoder	https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/main/catalog.json
+
+PASS: fresh boot, Make parallel recipe, compiler, archive, repository listing, persistence and reload
+PASS incompatible platform/dependency graphs preserve installed manifest and executable
+PASS runtime repositories, guest builds and binary installs
+PASS new-core reset preserves all historical disk, journal and editor namespaces
+545 functions, 504751 bytes
+
+PASS: two SDL VTs, single visible surface, terminal switching, key release, resize, bounded hidden progress, crash and exit recovery; no WM socket
+620 functions, 586677 bytes
+
+PASS: two direct WebGPU applications through SDL bridge, resize, independent crash/continued device progress and terminal recovery

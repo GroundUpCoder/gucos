@@ -1,6 +1,8 @@
 # wasm-posix application platform
 
-Status: 1.0.0, released 2026-10-10 at https://os.groundupcoder.net/.
+Status: 1.0.0, originally released 2026-10-10 at https://os.groundupcoder.net/.
+Current hosting and repository ownership: https://os.groundupcoder.com/ and
+GroundUpCoder/gucos. The migration preserves this platform contract.
 The compatibility, package, upgrade and live-browser gates passed; exact evidence
 and deployment identity are recorded in `docs/logs/2026-10-10/platform-1.0.md`.
 

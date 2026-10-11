@@ -2,7 +2,7 @@
 
 - This checkout owns the browser runtime, compiler/libc, fixed bootstrap, generic
   package client and core-only build/release tools. Do not discover or read sibling
-  wasm-posix-packages during build or deployment.
+  gucos-packages during build or deployment.
 - The packages repository owns application recipes, sources, patches and catalog.
   Only explicit browser package operations consume those remote inputs.
 - Preserve wasm-posix-old and its historical worktrees as references. Retired
