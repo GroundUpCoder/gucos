@@ -1,6 +1,9 @@
 #include <sys/socket.h>
 #include <sys/un.h>
 #include <sys/wait.h>
+#include <pty.h>
+#include <termios.h>
+#include <sys/ioctl.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdio.h>
@@ -50,7 +53,29 @@ int main(int argc,char **argv){
  child=fork();CHECK(child>=0);
  if(!child){close(s[1]);int fd=open("ipc-offset",O_RDONLY);CHECK(fd>=0);CHECK(put(s[0],&fd,1,"f",1)==1);close(fd);_exit(0);}
  CHECK(get(s[1],got,1,buf,1,0,&flags)==1);CHECK(read(got[0],buf,6)==6&&!memcmp(buf,"abcdef",6));close(got[0]);
- CHECK(waitpid(child,&status,0)==child&&WEXITSTATUS(status)==0);close(s[0]);close(s[1]);unlink("ipc-offset");
+ CHECK(waitpid(child,&status,0)==child&&WEXITSTATUS(status)==0);unlink("ipc-offset");
+ // Transfer both PTY ends from another process. After sender exit, only
+ // received descriptors own the terminal; ioctl/termios and both data
+ // directions must still work (the tmux descriptor-transfer use case).
+ int terminal[2];CHECK(openpty(&terminal[0],&terminal[1],0,0,0)==0);
+ child=fork();CHECK(child>=0);
+ if(!child){
+  close(s[1]);CHECK(put(s[0],terminal,2,"p",1)==1);
+  close(terminal[0]);close(terminal[1]);_exit(0);
+ }
+ close(terminal[0]);close(terminal[1]);
+ CHECK(get(s[1],got,2,buf,1,MSG_CMSG_CLOEXEC,&flags)==1);
+ CHECK(waitpid(child,&status,0)==child&&WIFEXITED(status)&&WEXITSTATUS(status)==0);
+ CHECK(isatty(got[1])==1);
+ CHECK(fcntl(got[0],F_GETFD)==FD_CLOEXEC&&fcntl(got[1],F_GETFD)==FD_CLOEXEC);
+ struct termios term;CHECK(tcgetattr(got[1],&term)==0);cfmakeraw(&term);CHECK(tcsetattr(got[1],TCSANOW,&term)==0);
+ struct winsize size_out={31,97,0,0},size_in={0};
+ CHECK(ioctl(got[0],TIOCSWINSZ,&size_out)==0);CHECK(ioctl(got[1],TIOCGWINSZ,&size_in)==0);
+ CHECK(size_in.ws_row==31&&size_in.ws_col==97);
+ CHECK(write(got[0],"i",1)==1);CHECK(read(got[1],buf,1)==1&&buf[0]=='i');
+ CHECK(write(got[1],"o",1)==1);CHECK(read(got[0],buf,1)==1&&buf[0]=='o');
+ close(got[0]);close(got[1]);close(s[0]);close(s[1]);
+ puts("IPC-SOCKET-PTY-PASS");
  for(int type=2;type<=5;type+=3){
   CHECK(socketpair(AF_UNIX,type|SOCK_NONBLOCK,0,s)==0);
   CHECK(send(s[0],"abc",3,0)==3);CHECK(send(s[0],"de",2,0)==2);
