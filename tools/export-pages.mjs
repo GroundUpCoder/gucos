@@ -2,6 +2,7 @@
 import {readFile,writeFile,mkdir,copyFile} from 'node:fs/promises';
 import {resolve,join,dirname} from 'node:path';
 import {spawnSync} from 'node:child_process';
+import {createHash} from 'node:crypto';
 const [input='dist',output]=process.argv.slice(2);
 if(!output)throw Error('usage: node tools/export-pages.mjs DIST NEW_RELEASE_DIRECTORY');
 const out=resolve(output);await mkdir(dirname(out),{recursive:true});
@@ -25,4 +26,9 @@ await writeFile(join(site,'_headers'),`/*
 `);
 // Disable Pages' implicit SPA fallback: missing objects must return 404.
 await writeFile(join(site,'404.html'),'<!doctype html><meta charset="utf-8"><title>Not found</title><h1>Not found</h1>\n');
+const uploadFiles={...manifest.files};
+for(const path of ['_headers','404.html']){
+ const b=await readFile(join(site,path));uploadFiles[path]={size:b.length,sha256:createHash('sha256').update(b).digest('hex')};
+}
+await writeFile(join(out,'pages-release.json'),JSON.stringify({format:1,files:uploadFiles},null,2)+'\n');
 console.log('Pages upload directory: '+site);
