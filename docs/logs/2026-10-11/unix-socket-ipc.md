@@ -108,3 +108,30 @@ SIGPIPE and reports ENOTCONN for a missing destination.
 Browser job 8eb14db7-b48e-4377-a7cd-d769f52950e2 remains queued. Its result
 must be collected before any browser acceptance claim. The coordinator
 received the implementation commit and was told this limitation explicitly.
+
+## Terminal descriptor acceptance addition
+
+Coordinator integrated through ef5a450 into the separate integration checkout.
+The original implementation snapshot remains unchanged for independent review.
+
+Added to the existing queued guest test: a forked process transfers both PTY
+master and slave using SCM_RIGHTS; all original descriptors are closed and
+the sender exits. The receiver verifies isatty, CLOEXEC, termios, shared
+window size, and byte transfer in both directions. IPC-SOCKET-PTY-PASS is now
+required by the browser runner. The runner also logs the runtime identity
+fetched from the same test server's build.json.
+
+This is an acceptance-fixture addition, not a kernel/runtime change.
+The existing browser reservation and continuation remain in place.
+Browser results remain pending at the time of this edit.
+
+The expanded fixture passed native Linux execution with
+IPC-SOCKET-PTY-PASS and IPC-SOCKET-PASS, and compiled/validated 173916 Wasm
+bytes with enableFork. This is not browser execution evidence.
+
+Both IPC browser runners now persist their outcome, actual served runtime,
+fixture SHA-256 and output/error under test-results/ipc-sockets.json and
+test-results/ipc-adapted.json. The earlier tool session ID is not accessible
+from the new turn; the remote scheduler reservation remains queued and was
+not replaced. These result artifacts let the continuation collect the actual
+guest outcome without starting a duplicate reservation.
