@@ -1,0 +1,7 @@
+[machine-job] queued: python3 -c import os; f=os.eventfd(0,os.EFD_NONBLOCK); n=os.write(f,(1).to_bytes(8,"little")+b"extrabit"); b=os.read(f,16); os.close(f); print("native Linux eventfd write16:",n,"read16:",b.hex())
+(node:1126830) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[machine-job] running: fd509775-c760-49a7-b3fa-712a131390e9
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+OSError: [Errno 22] Invalid argument
