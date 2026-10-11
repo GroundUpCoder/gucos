@@ -45,10 +45,16 @@ DSO, relinking against an old object and archive, hash preservation, and a
 successful dynamic consumer after reload. This tests retained ABI artifacts;
 it is not old-browser-disk migration or proof about every published package.
 
+`published-jsmn/` records a fresh-profile binary installation of
+`groundupcoder:jsmn` version `1.1.0-1` on the integrated candidate. Its manifest
+declares legacy runtime `2a9cca…`; the unchanged executable passed before and
+after reload. Exact fetched catalog, manifest and archive bytes are retained.
+The catalog was read from mutable main, not a verified commit pin. Coverage is
+one published package, not the entire catalog.
+
 Tmux is the intended integration demo. Its dependency consumer checks pass
 with exported bootstrap artifacts on the integrated runtime, but tmux build
-and interactive lifecycle acceptance remain pending. Published-package
-acceptance is also tracked separately. No release or deployment is established
+and interactive lifecycle acceptance remain pending. No release or deployment is established
 by these candidate results.
 
 The adapted upstream probes remain one-off research evidence. They are not

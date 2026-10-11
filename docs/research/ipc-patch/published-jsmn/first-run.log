@@ -1,0 +1,8 @@
+- User: johndoe
+- Admin: false
+- UID: 1000
+- Groups:
+  * users
+  * wheel
+  * audio
+  * video
