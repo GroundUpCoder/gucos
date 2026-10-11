@@ -40,6 +40,8 @@ verified() (
  url=$1; hash=$2; size=$3
  url_ok "$url" && hash_ok "$hash" && size_ok "$size" || fail 'invalid object reference'
  dest=$cache/objects/$hash
+ [ ! -L "$dest" ] || fail 'symlink cache object'
+ if [ -e "$dest" ]; then [ -f "$dest" ] || fail 'nonregular cache object'; fi
  if [ ! -f "$dest" ]; then
   part=$(mktemp "$cache/objects/.fetch.XXXXXX"); trap 'rm -f "$part"' EXIT
   progress "Downloading ${4:-object} ($size bytes)"
@@ -47,9 +49,9 @@ verified() (
   progress "Verifying download: ${4:-object}"
   actual=$(sha256sum "$part"); [ "${actual%% *}" = "$hash" ] || fail 'object checksum mismatch'
   [ "$(wc -c < "$part")" -eq "$size" ] || fail 'object size mismatch'
-  mv "$part" "$dest"
+  mv -T "$part" "$dest"
+  [ -f "$dest" ] && [ ! -L "$dest" ] || fail 'invalid published cache object'
  else
-  [ ! -L "$dest" ] || fail 'symlink cache object'
   progress "Checking cached object: ${4:-object}"
   actual=$(sha256sum "$dest"); [ "${actual%% *}" = "$hash" ] || fail 'cached checksum mismatch'
   [ "$(wc -c < "$dest")" -eq "$size" ] || fail 'cached size mismatch'
