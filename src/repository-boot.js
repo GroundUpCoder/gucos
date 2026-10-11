@@ -31,8 +31,10 @@ async function installRepositoryManager(data,rawAsset,writeFile,readFile) {
     prepared.push([path,entry.url?await rawAsset(entry.url):entry.bytes]);
   }
   if(typeof data.repositoryScripts?.manager!=='string'||!data.repositoryScripts.manager.startsWith('#!/bin/sh\n'))throw Error('Missing package manager');
+  if(typeof data.repositoryScripts?.generations!=='string'||!data.repositoryScripts.generations.startsWith('#!/bin/sh\n'))throw Error('Missing package generation manager');
   for(const [path,bytes] of prepared)writeFile(path,bytes,0o755);
   writeFile('/usr/libexec/guc-manager',data.repositoryScripts.manager,0o755);
+  writeFile('/usr/libexec/guc-generations.sh',data.repositoryScripts.generations,0o644);
   writeFile('/usr/bin/gucman','#!/bin/sh\nset -eu\nmkdir -p /usr/local/lib/gucman\nexec /usr/libexec/guc-lock /usr/local/lib/gucman/transaction.lock /bin/sh /usr/libexec/guc-manager "$@"\n',0o755);
   writeFile('/etc/gucman/runtime',config.runtime+'\n',0o644);
   if(config.platform)writeFile('/etc/gucman/platform.json',JSON.stringify(config.platform)+'\n',0o644);

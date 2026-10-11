@@ -204,13 +204,14 @@ int main(int argc, char **argv) {
   if (argc == 4 && !strcmp(argv[1], "move-noreplace"))
     return __rename_noreplace(argv[2], argv[3]) ?
       problem("cannot move source without replacing destination", argv[3]) : 0;
-  if (argc != 5 || (strcmp(argv[1], "check") && strcmp(argv[1], "link")) ||
+  if (argc != 5 || (strcmp(argv[1], "check") && strcmp(argv[1], "link") && strcmp(argv[1], "unlink")) ||
       argv[2][0] != '/' || argv[3][0] != '/') {
-    fputs("usage: guc-links check|link PREFIX PACKAGE_ROOT FILE_LIST\n",
+    fputs("usage: guc-links check|link|unlink PREFIX PACKAGE_ROOT FILE_LIST\n",
           stderr);
     return 2;
   }
   int create = !strcmp(argv[1], "link"), result = 0;
+  int remove = !strcmp(argv[1], "unlink");
   FILE *list = fopen(argv[4], "r");
   if (!list)
     return problem("cannot open package file list", argv[4]);
@@ -244,6 +245,9 @@ int main(int argc, char **argv) {
         (parents(path, strlen(argv[2]), 1) || symlink(target, path))) {
       result = problem("cannot publish package link", path);
       break;
+    }
+    if(remove && exists && unlink(path)) {
+      result=problem("cannot remove owned package link",path);break;
     }
   }
   if (ferror(list))

@@ -80,6 +80,7 @@ finish_publication() {
  sync
  rm -rf "$state/pending"
 }
+. /usr/libexec/guc-generations.sh
 mkdir -p "$config" "$cache/objects" "$state/packages"
 printf '%s\n' "$$" > "$state/transaction-owner"
 action=${1:-help}; [ "$#" -eq 0 ] || shift
@@ -91,13 +92,15 @@ case "$action" in
   [ ! -e "$output" ] && [ ! -L "$output" ] || fail 'archive destination exists'
   root=$state/packages/$name/current
   [ -f "$root/manifest.json" ] || fail 'package not installed'
-  [ ! -e "$state/pending" ] || fail 'unfinished publication; recover first'
+  if v2_active; then [ ! -e "$vstate/pending" ] || fail 'unfinished publication; recover first'; else [ ! -e "$state/pending" ] || fail 'unfinished publication; recover first'; fi
   tar -cf "$output" -C "$root" -T "$root/paths"
   sha256sum "$output"; wc -c < "$output"; cat "$root/runtime"
   exit;;
  recover)
   [ "$#" -eq 0 ] || fail 'usage: gucman recover'
-  if [ -d "$state/pending" ]; then finish_publication; echo 'Recovered package transaction'; else echo 'No interrupted transaction'; fi
+  if [ -d "$vstate/converting" ]; then v2_ensure; echo 'Recovered package conversion'
+  elif v2_active; then if [ -d "$vstate/pending" ]; then v2_finish; echo 'Recovered package generation'; else echo 'No interrupted transaction'; fi
+  elif [ -d "$state/pending" ]; then finish_publication; echo 'Recovered package transaction'; else echo 'No interrupted transaction'; fi
   exit;;
  repo)
   sub=${1:-list}; [ "$#" -eq 0 ] || shift
@@ -108,12 +111,42 @@ case "$action" in
    *) fail 'usage: gucman repo add|remove|list';;
   esac
   exit;;
+ generations) [ "$#" -eq 0 ] || fail 'usage: gucman generations'; v2_list; exit;;
+ rollback)
+  [ "$#" -eq 1 ] || fail 'usage: gucman rollback GENERATION'
+  v2_ensure
+  case "$1" in g.*) ;; *) fail 'invalid generation id';; esac
+  target=$vstate/generations/$1; v2_validate "$target"
+  v2_publish "$target"; echo "Selected generation $1"; exit;;
+ forget-generation)
+  [ "$#" -eq 1 ] || fail 'usage: gucman forget-generation GENERATION'
+  v2_ensure
+  [ ! -e "$vstate/pending" ] || fail 'recover before forgetting a generation'
+  target=$vstate/generations/$1; v2_generation_ok "$target" || fail 'invalid generation'
+  [ "$target" != "$(readlink "$vstate/current")" ] || fail 'cannot forget current generation'
+  rm -rf "$target"; echo "Forgot generation $1; run gucman gc to collect unreferenced releases"; exit;;
+ gc) [ "$#" -eq 0 ] || fail 'usage: gucman gc'; v2_gc; exit;;
+ remove)
+  [ "$#" -eq 1 ] && name_ok "$1" || fail 'usage: gucman remove NAME'
+  name=$1; v2_ensure
+  [ ! -e "$vstate/pending" ] || fail 'recover before removal'
+  [ -f "$state/packages/$name/current/manifest.json" ] || fail 'package not installed'
+  work=$(mktemp -d /tmp/gucman.XXXXXX)
+  for installed in "$state/packages"/*/current/manifest.json; do
+   [ -f "$installed" ] || continue
+   owner=$(text "$installed" name); [ "$owner" != "$name" ] || continue
+   "$json" strings "$installed" dependencies > "$work/dependencies"
+   while IFS= read -r dep; do [ "${dep#*:}" != "$name" ] || fail "installed dependent prevents removal: $owner"; done < "$work/dependencies"
+  done
+  cp "$vstate/current/selection" "$work/selection"
+  v2_map_replace "$work/selection" "$name" ''
+  target=$(v2_new "$work/selection"); v2_publish "$target"; echo "Removed $name; retained generations still own its old release"; exit;;
  installed) for p in "$state/packages"/*/current/manifest.json; do [ -f "$p" ] || continue; printf '%s\t%s\t%s\n' "$(text "$p" name)" "$(text "$p" version)" "$(cat "${p%/manifest.json}/origin")"; done; exit;;
  list|refresh) [ "$#" -eq 0 ] || fail 'unexpected arguments';;
  search|info|build|install|upgrade) [ "$#" -eq 1 ] || fail "usage: gucman $action [SOURCE:]NAME";;
  *) echo 'usage: gucman platform; repo add|remove|list; list; search TERM; info|build|install|upgrade [SOURCE:]NAME; installed'; exit 1;;
 esac
-case "$action" in install|build|upgrade) reporting=1; progress "$action $1: reading catalogs and resolving dependencies"; [ ! -e "$state/pending" ] || fail 'unfinished publication; run gucman recover';; esac
+case "$action" in install|build|upgrade) reporting=1; progress "$action $1: reading catalogs and resolving dependencies"; v2_ensure; [ ! -e "$vstate/pending" ] || fail 'unfinished publication; run gucman recover';; esac
 work=$(mktemp -d /tmp/gucman.XXXXXX)
 mkdir "$work/catalogs" "$work/plan" "$work/builds" "$work/sources"
 cp "$config"/*.url "$work/sources/" 2>/dev/null || :
@@ -234,15 +267,15 @@ progress "Checking file ownership for $total packages"
 while IFS= read -r name; do
  plan=$work/plan/$name; root=$state/packages/$name
  mkdir -p "$root"
- if [ -L "$root/current" ]; then
+ if [ -f "$root/current/manifest.json" ]; then
   [ "$(cat "$root/current/origin")" = "$(cat "$plan/origin")" ] || fail 'installed package belongs to another source URL'
-  sort "$plan/paths" > "$plan/sorted"; sort "$root/current/paths" > "$plan/old-sorted"
-  cmp -s "$plan/sorted" "$plan/old-sorted" || fail 'v1 updates must preserve installed path set'
  fi
  "$links" check /usr/local "$root" "$plan/paths" || fail 'package file ownership conflict'
 done < "$work/order"
 "$links" closure "$work"/plan/*/paths || fail 'dependency output ownership conflict'
 
+cp "$vstate/current/selection" "$work/selection"
+changed=0
 index=0
 while IFS= read -r name; do
  index=$((index + 1)); progress "Package $index/$total: $name ($((total - index)) remaining after this)"
@@ -269,6 +302,7 @@ while IFS= read -r name; do
   "$unpack" "$object" "$stage"
  fi
  release=$(mktemp -d "$root/release.XXXXXX")
+ printf '2\n' > "$release/managed-format"
  output_count=$(wc -l < "$plan/outputs")
  "$links" copy "$stage" "$release" "$plan/outputs" "$name"
  : > "$release/dependency-hashes"
@@ -278,25 +312,21 @@ while IFS= read -r name; do
  done < "$plan/dependencies"
  cp "$manifest" "$release/manifest.json"; cp "$plan/origin" "$release/origin"; cp "$plan/paths" "$release/paths"
  printf '%s\n' "$runtime" > "$release/runtime"
- # No public files change before all output checks. Existing links refer through
- # current; the rename changes the installed release as a unit.
- publishing=1
- mkdir "$state/pending"
- printf '%s\n' "$name" > "$state/pending/name"
- printf '%s\n' "$release" > "$state/pending/release"
- if [ -L "$root/current" ]; then readlink "$root/current" > "$state/pending/old"; else echo none > "$state/pending/old"; fi
- sha256sum "$release/manifest.json" "$release/paths" "$release/origin" "$release/runtime" "$release/dependency-hashes" > "$state/pending/checksums"
  progress "Preparing checksums: $name"
- # Paths contain no whitespace/metacharacters; bound each verifier invocation.
- # Keep this independent of the copier and retain recovery-time verification.
- sed "s|^|$release/|" "$release/paths" > "$plan/checksum-paths"
- xargs -r -n 100 sha256sum < "$plan/checksum-paths" >> "$state/pending/checksums"
+ v2_receipt "$release"
  progress "Checksummed $name: $output_count/$output_count files"
- progress "Saving transaction: $name"
- sync
- : > "$state/pending/ready"
- sync
- finish_publication
- publishing=
- echo "Installed $(cat "$plan/source"):$name $(text "$manifest" version)"
+ v2_map_replace "$work/selection" "$name" "$release"
+ changed=1
+ if [ "$action" = build ]; then
+  # Recipes use /usr/local. Source builds deliberately activate each dependency
+  # before building consumers; only binary closure activation is atomic.
+  target=$(v2_new "$work/selection"); v2_publish "$target"
+  echo "Built and installed $(cat "$plan/source"):$name $(text "$manifest" version)"
+ else
+  echo "Staged $(cat "$plan/source"):$name $(text "$manifest" version)"
+ fi
 done < "$work/order"
+if [ "$action" != build ] && [ "$changed" -eq 1 ]; then
+ target=$(v2_new "$work/selection"); v2_publish "$target"
+ while IFS= read -r name; do echo "Installed $(cat "$work/plan/$name/source"):$name $(text "$work/plan/$name/manifest.json" version)"; done < "$work/order"
+fi

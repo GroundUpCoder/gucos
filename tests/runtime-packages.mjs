@@ -93,8 +93,8 @@ exec /tmp/original-links "$@"
 FAULT
 chmod 755 /usr/libexec/guc-links-v2`);
  try{await s.command('gucman upgrade hello');}catch(error){console.log('Interrupted command:',error.message);}
- await s.command('set -eu\ntest -f /usr/local/lib/gucman/pending/ready\ntest "$(/usr/libexec/guc-json string /usr/local/lib/gucman/packages/hello/current/manifest.json version)" = 1\nif kill -0 "$(cat /usr/local/lib/gucman/transaction-owner)" 2>/dev/null; then exit 99; fi');
- await s.command('set -eu\nmv /tmp/original-links /usr/libexec/guc-links-v2\ngucman recover\ntest ! -e /usr/local/lib/gucman/pending\ntest "$(/usr/libexec/guc-json string /usr/local/lib/gucman/packages/hello/current/manifest.json version)" = 3');
+ await s.command('set -eu\ntest -f /usr/local/lib/gucman/v2/pending/ready\ntest "$(/usr/libexec/guc-json string /usr/local/lib/gucman/packages/hello/current/manifest.json version)" = 1\nif kill -0 "$(cat /usr/local/lib/gucman/transaction-owner)" 2>/dev/null; then exit 99; fi');
+ await s.command('set -eu\nmv /tmp/original-links /usr/libexec/guc-links-v2\ngucman recover\ntest ! -e /usr/local/lib/gucman/v2/pending\ntest "$(/usr/libexec/guc-json string /usr/local/lib/gucman/packages/hello/current/manifest.json version)" = 3');
  assert.match(await s.command('hello'),/HELLO-A/);
  // Package outage cannot prevent core reload or installed command execution.
  a.files.delete('/catalog.json');

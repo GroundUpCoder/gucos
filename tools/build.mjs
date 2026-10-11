@@ -23,7 +23,7 @@ await collect('vendor/make','/usr/src/make');
 for(const name of ['ar.c','cc-driver.c','fetch.c','guc-links.c'])files['/usr/libexec/'+name]=await read('examples/'+name);
 for(const name of ['json','unpack','lock'])files['/usr/libexec/guc-repo-'+name+'.c']=await read('tools/guest-repository/'+name+'.c');
 const srcNames=(await readdir(new URL('src/',root))).sort();
-const buildId=sha(libc.manifest.digest+'\n'+await join(srcNames.map(n=>'src/'+n))+'\n'+JSON.stringify(files)+'\n'+await read('tools/versions.json')+'\n'+await read('tools/platform.json')+'\n'+await read('tools/guest-repository/manager.sh'));
+const buildId=sha(libc.manifest.digest+'\n'+await join(srcNames.map(n=>'src/'+n))+'\n'+JSON.stringify(files)+'\n'+await read('tools/versions.json')+'\n'+await read('tools/platform.json')+'\n'+await read('tools/guest-repository/manager.sh')+'\n'+await read('tools/guest-repository/generations.sh'));
 const versions=JSON.parse(await read('tools/versions.json'));
 const toolchain={...buildIdentity(versions,await join(['src/compiler.js','src/trampoline.js','src/objects.js','src/compile.js','src/compiler-driver.js','src/path.js'])),systemBuild:buildId,libcDigest:libc.manifest.digest};
 const prebuilt=await buildPrebuilt({sources:files,buildId,toolchain,root,log:console.log});
@@ -38,7 +38,7 @@ for(const name of ['XTERM-LICENSE','FIT-LICENSE'])notices.platform[name]=await r
 for(const [tree,name] of [['busybox','LICENSE'],['make','COPYING']])notices.packages[tree]=notices.trees[tree]=await read('vendor/'+tree+'/'+name);
 notices.packages.make=notices.trees.make+='\n'+await read('vendor/make/COPYING.LIB');
 const payload={buildId,toolchain,versions,prebuilt,repository,
- repositoryScripts:{manager:await read('tools/guest-repository/manager.sh')},
+ repositoryScripts:{manager:await read('tools/guest-repository/manager.sh'),generations:await read('tools/guest-repository/generations.sh')},
  systemCompiler:await compilerJoin(['src/path.js','src/compiler.js','src/trampoline.js','src/objects.js','src/compile.js','src/compiler-fs.js','src/compiler-driver.js','src/compiler-worker.js']),
  systemOwner:[host,kernel,await join(['src/path.js','src/file-locks.js','src/mapped-files.js','src/compiler-fs.js','src/compiler-jobs.js','src/system-files.js','src/journal.js','src/layout.js','src/packages.js','src/repository-boot.js','src/system-owner.js'])].join('\n'),
  systemProcess:[host,kernel,await join(['src/virtual-memory.js','src/system-process.js'])].join('\n'),
