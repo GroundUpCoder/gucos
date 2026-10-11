@@ -1,0 +1,34 @@
+{
+  "runtime": "be3a9ce7817c876e8d9bc900556fea1fbaeb4f0d5d4e03003ab24a7ad3b600bb",
+  "status": "passed",
+  "scope": "Actual gucman install, unchanged retained artifacts, no source build",
+  "steps": [
+    {
+      "step": "actual-checker-rejects-1.0.1-metadata",
+      "status": "passed",
+      "scope": "Compatibility checker invocation with old version; not a boot of old runtime"
+    },
+    {
+      "step": "installed-and-byte-verified",
+      "name": "libevent",
+      "version": "2.1.12-1",
+      "artifactSha256": "295f06ac0d3e6e02774eb3f60ba68a136b7f93b00b665e37555a2385e33ee594",
+      "originalBuildRuntime": "19609f47c28f9d81c12ad6525d65347057ad5ad2ddec5eb48f5762a922d72441"
+    },
+    {
+      "step": "installed-and-byte-verified",
+      "name": "ncurses",
+      "version": "6.5.0-2",
+      "artifactSha256": "4771ab00e7086c2be9815c4be1181551ec4ed455489b0ff4256effaad4570617",
+      "originalBuildRuntime": "19609f47c28f9d81c12ad6525d65347057ad5ad2ddec5eb48f5762a922d72441"
+    },
+    {
+      "step": "installed-and-byte-verified",
+      "name": "tmux",
+      "version": "3.5a-1",
+      "artifactSha256": "08efddf8191d41b41299ce8df494c981bb1e0bf216152dfccdc618f0190bd879",
+      "originalBuildRuntime": "e1a1d35aab446d25eb19126cec01e17e5508b672bc16f73b4cbb5e0a01f3b8a8"
+    }
+  ],
+  "finishedAt": "2026-10-11T10:34:11.147Z"
+}

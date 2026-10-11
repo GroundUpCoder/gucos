@@ -1,9 +1,9 @@
 # Additive IPC patch candidate
 
-This work targets a patch release after acceptance, not a claim of full POSIX
-or Linux IPC support. The tested integrated candidate still reports 1.0.1.
-Its runtime is
-`baae3b7591a51a357d4fba3fc8e96135790025d61a6c98453e28100ea99f1aad`.
+This work prepares platform 1.0.2, not a claim of full POSIX or Linux IPC
+support. The final accepted runtime is
+`be3a9ce7817c876e8d9bc900556fea1fbaeb4f0d5d4e03003ab24a7ad3b600bb`.
+Earlier candidate results retain their original identities below.
 
 ## Supported subset and boundaries
 
@@ -117,4 +117,26 @@ Core metadata now prepares platform 1.0.2 and runtime 0.5.9, preserving compiler
 unix-dgram, unix-seqpacket, flock, eventfd, posix-named-semaphores and closefrom,
 alongside all existing features. These describe the bounded contracts above,
 not complete POSIX or Linux IPC compatibility. The final metadata-bearing build
-and acceptance are pending; nothing has been published or deployed.
+and acceptance passed; nothing has been published or deployed.
+
+## Final 1.0.2 acceptance
+
+`final-1.0.2/` records metadata/build and focused kernel checks plus eight
+sequential browser stages on be3a9ce7: sockets, services, terminal, symbols,
+closefrom, platform-posix, retained ABI, and published jsmn. Local src/libc/tools/
+tests match the tested remote source. Runtime and object ABI epochs remain 5/3.
+
+Tmux's metadata review found two install blockers, both corrected at package
+`7cf0b1b` and independently source-closed: minimum platform/capabilities and
+exact dependency-version requirements. The final private-catalog test used
+the actual package client, not direct extraction. It installed tmux with
+libevent 2.1.12-1 and ncurses 6.5.0-2, verified all 2,963 output hashes and exact
+installed manifests, rejected 1.0.1 eligibility, then passed the interactive
+lifecycle on be3a9ce7. Reservation `a4001b8a-1c3f-499e-a8b1-90e455c687d5`
+ended normally at 10:34:27 UTC. The earlier 20-minute install timeout is
+preserved separately; no validation was bypassed in the longer fresh retry.
+
+Package evidence commit `902362b` retains the complete logs, private fixture,
+checksums and unchanged original payloads. Selected machine results and the
+report are copied in `tmux-final-acceptance/`. The package remains unpublished;
+test-catalog acceptance is not production catalog installation or deployment.
