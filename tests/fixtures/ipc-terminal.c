@@ -32,5 +32,8 @@ int main(void){
  struct cmsghdr *c=CMSG_FIRSTHDR(&h);c->cmsg_level=SOL_SOCKET;c->cmsg_type=SCM_RIGHTS;c->cmsg_len=CMSG_LEN(sizeof(int));memcpy(CMSG_DATA(c),&t,sizeof t);
  C(sendmsg(s[0],&h,0)==1);C(read(s[0],&b,1)==1&&b=='R');C(write(m,"X\n",2)==2);
  int status;C(waitpid(pid,&status,0)==pid&&WIFEXITED(status)&&WEXITSTATUS(status)==0);
+ /* This fixture assigned our own process group to the test PTY. Closing
+    its final master signals that group; ignore HUP only during cleanup. */
+ signal(SIGHUP,SIG_IGN);
  close(m);close(t);close(m2);close(t2);close(s[0]);puts("IPC-TERMINAL-PASS");return 0;
 }
