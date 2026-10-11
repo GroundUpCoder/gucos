@@ -1,0 +1,28 @@
+[machine-job] queued: env LD_LIBRARY_PATH=/home/ubuntu/git/gucos-ipc-services/.ipc-browser-deps/root/usr/lib/x86_64-linux-gnu node /tmp/gucos-retained-abi-b749m2_r/runner.mjs
+(node:1168037) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[machine-job] running: 0d775c01-e8e5-4fda-aa6e-03f1ad0a665f
+HOST-PROVENANCE-PASS
+prepare
+
+installed-hashes PASS
+unchanged-old-app
+OLD-ANSWER-42
+
+unchanged-old-dynamic
+OLD-DSO-42
+
+relink-old-archive
+3 functions, 5133 bytes
+OLD-ANSWER-42
+
+relink-old-object
+3 functions, 5137 bytes
+OLD-ANSWER-42
+
+post-run-hashes PASS
+reload-old-dynamic
+OLD-DSO-42
+
+reload-hashes PASS
+RETAINED-ARTIFACT-ABI-PASS

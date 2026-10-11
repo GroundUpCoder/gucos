@@ -1,0 +1,16 @@
+Retained-artifact ABI acceptance PASS.
+Executed on agentone in machine-job browser reservation 0d775c01-e8e5-4fda-aa6e-03f1ad0a665f.
+Runtime baae3b7591a51a357d4fba3fc8e96135790025d61a6c98453e28100ea99f1aad verified before boot, from served build identity, and after reload.
+All five retained files matched baseline 2a9cca provenance hashes before installation, after installation, after app execution and relinks, and after reload.
+Unchanged old-app: OLD-ANSWER-42.
+Unchanged old-dynamic and old libanswer.so: OLD-DSO-42.
+New consumer relinked separately with old libanswer.a and old answer.o: both OLD-ANSWER-42.
+Unchanged dynamic executable rerun after reload: OLD-DSO-42.
+No old baseline dist boot or old disk migration was tested. No published package binary was executed.
+No integrated source/dist, package/catalog, version or author checkout edits; no core build.
+The only compilation was the two requested guest consumer relinks.
+Runner, per-stage logs, complete reservation log, guest hash results and distribution hashes are retained here.
+
+Test HEAD: 4c5e33f812295ce12fdb67a50e6f4ec230bf0d5f
+Dist files hashed: 63
+State checks: {"status": "passed", "distUnchanged": true, "headUnchanged": true, "statusUnchanged": true}

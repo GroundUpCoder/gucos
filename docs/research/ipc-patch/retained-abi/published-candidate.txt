@@ -1,0 +1,4 @@
+Candidate: groundupcoder:jsmn, installed binary /usr/local/bin/jsmn-example.
+Existing fixture: tests/live-core.mjs uses gucman install groundupcoder:jsmn and executes it before and after reload.
+Default explicit catalog URL in tools/build.mjs: https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/main/catalog.json
+Current network accessibility, exact binary URL/hash, and compatibility on this runtime were not verified in this bounded task. No published binary acceptance claimed. tests/github-package.mjs instead builds from source.

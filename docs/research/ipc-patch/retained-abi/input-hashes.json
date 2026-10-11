@@ -1,0 +1,9 @@
+{
+  "tests/platform-upgrade.mjs": "bb5e771f2a4ca020fde92d8079b3aee9df1daf96eeaf40e2383028414329fe83",
+  "tests/live-core.mjs": "5298ce6c39f84af35ed5e5211b550cb0a2578672152eb188dbd6c7d529ad41c3",
+  "tests/github-package.mjs": "9169f1af64256c4e14f3f505191d7d2c83fb25cbd0bc1b72f32eb5b5eac7b3f6",
+  "tools/browser.mjs": "0ffa49301b5f3e19bdf1eca34448e1a986fe46c6a1b778a8af3cb5493dc19a57",
+  "tools/serve.mjs": "f479fc7cc4b6b6ca2c2a5b36c6e3f72442f2e0444357db93c05619822771c834",
+  "tools/build.mjs": "15ab9a692807262276f06c6a0552ce6d61596b18f2421c1cc078106641a2db66",
+  "docs/research/platform-1.0/retained-artifacts/provenance.json": "0882690fbd1f5a3e21bbfa0a4f47e8b381833e621fd8ebedfd5f961f5176b26a"
+}
