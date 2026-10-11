@@ -48,11 +48,12 @@ verified() (
   actual=$(sha256sum "$part"); [ "${actual%% *}" = "$hash" ] || fail 'object checksum mismatch'
   [ "$(wc -c < "$part")" -eq "$size" ] || fail 'object size mismatch'
   mv "$part" "$dest"
+ else
+  [ ! -L "$dest" ] || fail 'symlink cache object'
+  progress "Checking cached object: ${4:-object}"
+  actual=$(sha256sum "$dest"); [ "${actual%% *}" = "$hash" ] || fail 'cached checksum mismatch'
+  [ "$(wc -c < "$dest")" -eq "$size" ] || fail 'cached size mismatch'
  fi
- [ ! -L "$dest" ] || fail 'symlink cache object'
- progress "Checking cached object: ${4:-object}"
- actual=$(sha256sum "$dest"); [ "${actual%% *}" = "$hash" ] || fail 'cached checksum mismatch'
- [ "$(wc -c < "$dest")" -eq "$size" ] || fail 'cached size mismatch'
  printf '%s\n' "$dest"
 )
 finish_publication() {
@@ -266,17 +267,8 @@ while IFS= read -r name; do
   "$unpack" "$object" "$stage"
  fi
  release=$(mktemp -d "$root/release.XXXXXX")
- output_count=$(wc -l < "$plan/outputs"); copied=0
- progress "Installing $name: 0/$output_count files"
- while IFS="$(printf '\t')" read -r path mode; do
-  [ -f "$stage/$path" ] && [ ! -L "$stage/$path" ] || fail "missing or nonregular output: $path"
-  # Reject any symlink parent before copying staged bytes.
-  parent=${path%/*}; while [ "$parent" != . ]; do [ ! -L "$stage/$parent" ] || fail 'symlink output parent'; case "$parent" in */*) parent=${parent%/*};; *) parent=.;; esac; done
-  mkdir -p "$(dirname "$release/$path")"; cp "$stage/$path" "$release/$path"
-  copied=$((copied + 1))
-  if [ $((copied % 25)) -eq 0 ] || [ "$copied" -eq "$output_count" ]; then progress "Installing $name: $copied/$output_count files"; fi
-  case "$mode" in 493) chmod 755 "$release/$path";; *) chmod 644 "$release/$path";; esac
- done < "$plan/outputs"
+ output_count=$(wc -l < "$plan/outputs")
+ "$links" copy "$stage" "$release" "$plan/outputs" "$name"
  : > "$release/dependency-hashes"
  while IFS= read -r dep; do
   depname=${dep#*:}; dephash=$(sha256sum "$work/plan/$depname/manifest.json"); dephash=${dephash%% *}
@@ -293,12 +285,11 @@ while IFS= read -r name; do
  if [ -L "$root/current" ]; then readlink "$root/current" > "$state/pending/old"; else echo none > "$state/pending/old"; fi
  sha256sum "$release/manifest.json" "$release/paths" "$release/origin" "$release/runtime" "$release/dependency-hashes" > "$state/pending/checksums"
  progress "Preparing checksums: $name"
- checked=0
- while IFS= read -r path; do
-  sha256sum "$release/$path" >> "$state/pending/checksums"
-  checked=$((checked + 1))
-  if [ $((checked % 25)) -eq 0 ] || [ "$checked" -eq "$output_count" ]; then progress "Checksummed $name: $checked/$output_count files"; fi
- done < "$release/paths"
+ # Paths contain no whitespace/metacharacters; bound each verifier invocation.
+ # Keep this independent of the copier and retain recovery-time verification.
+ sed "s|^|$release/|" "$release/paths" > "$plan/checksum-paths"
+ xargs -r -n 100 sha256sum < "$plan/checksum-paths" >> "$state/pending/checksums"
+ progress "Checksummed $name: $output_count/$output_count files"
  progress "Saving transaction: $name"
  sync
  : > "$state/pending/ready"

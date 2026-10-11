@@ -12,6 +12,11 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+struct output { char *name; mode_t mode; };
+static int output_compare(const void *a,const void *b) {
+  return strcmp(((const struct output *)a)->name,((const struct output *)b)->name);
+}
+
 /* The guest owner performs the existence check and rename in one operation.
  * Native probes use their platform's atomic exclusive-rename interface. */
 #ifdef __wasm_posix__
@@ -71,6 +76,71 @@ static int parents(char *path, size_t prefix_length, int create) {
     }
   return 0;
 }
+/* A failed copy leaves an unpublished release, never changes public links.
+ * Revalidate path/mode/ownership boundaries even though the shell preflights.
+ * No shell processes per output; checksums still use the independent verifier. */
+static int copy_outputs(const char *source,const char *release,const char *list,const char *package) {
+  struct stat st;
+  if(lstat(source,&st)||!S_ISDIR(st.st_mode)||lstat(release,&st)||!S_ISDIR(st.st_mode))
+    return problem("copy roots must be real directories",release);
+  FILE *f=fopen(list,"r");if(!f)return problem("cannot read outputs",list);
+  if(fstat(fileno(f),&st)||!S_ISREG(st.st_mode)||st.st_size>64*1024*1024){fclose(f);return problem("invalid output list",list);}
+  struct output *items=NULL;size_t count=0,capacity=0,total=0;int result=1;
+  char line[PATH_MAX+16];
+  for(;;) {
+    size_t length=0;int c;
+    while((c=fgetc(f))!=EOF){if(!c||length==sizeof line-1)goto done;line[length++]=(char)c;if(c=='\n')break;}
+    if(!length)break;line[length]=0;
+    if(count>=100000)goto done;
+    if(length&&line[length-1]=='\n')line[--length]=0;
+    char *tab=strchr(line,'\t');if(!tab)goto done;*tab++=0;
+    mode_t mode;if(!strcmp(tab,"420"))mode=0644;else if(!strcmp(tab,"493"))mode=0755;else goto done;
+    if(!relative_name(line))goto done;
+    for(char *p=line;*p;p++)if(!strchr("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_./+-",*p))goto done;
+    if(strncmp(line,"bin/",4)&&strncmp(line,"sbin/",5)&&strncmp(line,"include/",8)&&
+       strncmp(line,"share/",6)&&strncmp(line,"libexec/",8)&&strncmp(line,"lib/",4))goto done;
+    if(!strcmp(line,"lib/gucman")||!strncmp(line,"lib/gucman/",11)||
+       !strcmp(line,"lib/wasm-posix")||!strncmp(line,"lib/wasm-posix/",15))goto done;
+    total+=strlen(line)+1;if(total>64*1024*1024)goto done;
+    if(count==capacity){size_t next=capacity?capacity*2:64;void *p=realloc(items,next*sizeof *items);if(!p)goto done;items=p;capacity=next;}
+    items[count].name=strdup(line);if(!items[count].name)goto done;items[count++].mode=mode;
+  }
+  if(ferror(f)||!count)goto done;
+  qsort(items,count,sizeof *items,output_compare);
+  for(size_t i=0;i<count;i++) {
+    if(i&&!strcmp(items[i-1].name,items[i].name))goto done;
+    char prefix[PATH_MAX];snprintf(prefix,sizeof prefix,"%s",items[i].name);
+    for(char *p=prefix;*p;p++)if(*p=='/'){
+      *p=0;struct output key={prefix,0};int conflict=bsearch(&key,items,count,sizeof *items,output_compare)!=NULL;*p='/';if(conflict)goto done;
+    }
+    char from[PATH_MAX],to[PATH_MAX];
+    if(snprintf(from,sizeof from,"%s/%s",source,items[i].name)>=(int)sizeof from||
+       snprintf(to,sizeof to,"%s/%s",release,items[i].name)>=(int)sizeof to)goto done;
+    if(parents(from,strlen(source),0)||lstat(from,&st)||!S_ISREG(st.st_mode)||
+       parents(to,strlen(release),0)||!lstat(to,&st)||errno!=ENOENT)goto done;
+  }
+  fprintf(stderr,"gucman: Installing %s: 0/%zu files\n",package,count);
+  for(size_t i=0;i<count;i++) {
+    char from[PATH_MAX],to[PATH_MAX];snprintf(from,sizeof from,"%s/%s",source,items[i].name);snprintf(to,sizeof to,"%s/%s",release,items[i].name);
+    if(parents(from,strlen(source),0)||parents(to,strlen(release),1))goto done;
+    int input=open(from,O_RDONLY|O_NOFOLLOW);if(input<0)goto done;
+    if(fstat(input,&st)||!S_ISREG(st.st_mode)){close(input);goto done;}
+    int output=open(to,O_WRONLY|O_CREAT|O_EXCL|O_NOFOLLOW,0600);if(output<0){close(input);goto done;}
+    char buffer[65536];int failed=0;
+    for(;;){
+      ssize_t n=read(input,buffer,sizeof buffer);if(n<0){if(errno==EINTR)continue;failed=1;break;}if(!n)break;
+      ssize_t offset=0;while(offset<n){ssize_t wrote=write(output,buffer+offset,(size_t)(n-offset));if(wrote<0&&errno==EINTR)continue;if(wrote<=0){failed=1;break;}offset+=wrote;}if(failed)break;
+    }
+    if(!failed&&fchmod(output,items[i].mode))failed=1;
+    if(close(input))failed=1;if(close(output))failed=1;
+    if(failed){unlink(to);goto done;}
+    if((i+1)%25==0||i+1==count)fprintf(stderr,"gucman: Installing %s: %zu/%zu files\n",package,i+1,count);
+  }
+  result=0;
+done:
+  if(result)problem("invalid outputs or failed staged copy",list);
+  fclose(f);for(size_t i=0;i<count;i++)free(items[i].name);free(items);return result;
+}
 static int owned(const char *path, const char *target, int *exists) {
   struct stat st;
   *exists = 0;
@@ -129,6 +199,7 @@ static int closure(int count, char **lists) {
   for(size_t i=0;i<used;i++)free(paths[i]);free(paths);return 0;
 }
 int main(int argc, char **argv) {
+  if(argc==6&&!strcmp(argv[1],"copy"))return copy_outputs(argv[2],argv[3],argv[4],argv[5]);
   if(argc>=3 && !strcmp(argv[1],"closure"))return closure(argc-2,argv+2);
   if (argc == 4 && !strcmp(argv[1], "move-noreplace"))
     return __rename_noreplace(argv[2], argv[3]) ?
