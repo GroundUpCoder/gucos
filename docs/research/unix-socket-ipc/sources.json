@@ -1,0 +1,15 @@
+{
+  "retrievedUTC": "2026-10-11T07:04:54.064077+00:00",
+  "sources": [
+    {
+      "file": "linux-scm_rights.c",
+      "url": "https://raw.githubusercontent.com/torvalds/linux/master/tools/testing/selftests/net/af_unix/scm_rights.c",
+      "sha256": "ae7af070400c56e17ceb6a4854b23574117ade25359209417d2b473e068d2962"
+    },
+    {
+      "file": "freebsd-unix_passfd_test.c",
+      "url": "https://raw.githubusercontent.com/freebsd/freebsd-src/main/tests/sys/kern/unix_passfd_test.c",
+      "sha256": "c3cd51aa530834ef5c94231b146d57413e16bf6c86d9a1627d35ebb0a88a8574"
+    }
+  ]
+}

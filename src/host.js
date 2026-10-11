@@ -896,9 +896,12 @@ function createFileSystem({ fs, ctx }) {
       __sock_listen: function () { setErrnoName('ENOSYS'); return -1; },
       __sock_accept: function () { setErrnoName('ENOSYS'); return -1; },
       __sock_connect: function () { setErrnoName('ENOSYS'); return -1; },
+      __sock_pair_type: function () { setErrnoName('ENOSYS'); return -1; },
       __sock_pair: function () { setErrnoName('ENOSYS'); return -1; },
       __sock_send: function () { setErrnoName('ENOSYS'); return -1; },
       __sock_recv: function () { setErrnoName('ENOSYS'); return -1; },
+      __sock_send_control: function () { setErrnoName('ENOSYS'); return -1; },
+      __sock_recv_control: function () { setErrnoName('ENOSYS'); return -1; },
       __sock_peercred: function () { setErrnoName('ENOSYS'); return -1; },
       __sock_name: function () { setErrnoName('ENOSYS'); return -1; },
       __sock_option: function () { setErrnoName('ENOSYS'); return -1; },
@@ -4220,6 +4223,8 @@ var BLOCK_FS = (function () {
   BlockFS.prototype.sockAccept = function () { return this._setErr('ENOSYS'); };
   BlockFS.prototype.sockConnect = function () { return this._setErr('ENOSYS'); };
   BlockFS.prototype.sockPair = function () { return this._setErr('ENOSYS'); };
+  BlockFS.prototype.sockSendControl = function () { return this._setErr('ENOSYS'); };
+  BlockFS.prototype.sockRecvControl = function () { return this._setErr('ENOSYS'); };
   BlockFS.prototype.sockSend = function () { return this._setErr('ENOSYS'); };
   BlockFS.prototype.sockRecv = function () { return this._setErr('ENOSYS'); };
   BlockFS.prototype.sockQuery = function () { return this._setErr('ENOSYS'); };
@@ -5088,6 +5093,10 @@ var BLOCK_FS = (function () {
         sview.setInt32(sv_ptr + 4, sfds[1], true);
         return 0;
       }),
+      __sock_pair_type: wrap(function(ptr,type) {
+        var fds=this.sockPair(type);if(fds===null)return null;
+        var v=new DataView(getMemory().buffer);v.setInt32(ptr,fds[0],true);v.setInt32(ptr+4,fds[1],true);return 0;
+      }),
       __sock_send: wrap(function (fd, ptr, count, flags) {
         return this.sockSend(fd, ctx.vm && (ptr >>> 0) >= 0xF0000000 ? ctx.vm.read(ptr,count) : new Uint8Array(getMemory().buffer,ptr,count),count,flags);
       }, true),
@@ -5099,6 +5108,21 @@ var BLOCK_FS = (function () {
         }
         return this.sockRecv(fd, new Uint8Array(getMemory().buffer,ptr,count),count,flags);
       }, true),
+      __sock_send_control: wrap(function(fd,ptr,count,flags,fptr,nfds,path) {
+        var v=new DataView(getMemory().buffer),fds=[];
+        for(var i=0;i<nfds;i++)fds.push(v.getInt32(fptr+i*4,true));
+        return this.sockSendControl(fd,new Uint8Array(getMemory().buffer,ptr,count),count,flags,fds,path?readString(path):'');
+      },true),
+      __sock_recv_control: wrap(function(fd,ptr,count,flags,fptr,cap,info,name) {
+        var r=this.sockRecvControl(fd,new Uint8Array(getMemory().buffer,ptr,count),count,flags,cap);
+        if(r===null)return null;
+        var v=new DataView(getMemory().buffer);
+        r.fds.forEach(function(fd,i){v.setInt32(fptr+i*4,fd,true);});
+        var bytes=encodeStr(r.name||'');
+        new Uint8Array(getMemory().buffer,name,bytes.length+1).set(bytes);
+        new Uint8Array(getMemory().buffer)[name+bytes.length]=0;
+        v.setInt32(info,r.flags,true);v.setInt32(info+4,r.fds.length,true);return r.n;
+      },true),
       __sock_peercred: wrap(function (fd, ptr) {
         var r = this.sockQuery(fd, 'credentials', true, 0, 0, false);
         if (r === null) return null;
