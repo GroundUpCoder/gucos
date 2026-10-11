@@ -31,6 +31,10 @@ try{
    await s.page.evaluate(()=>{window.copyTimes={start:performance.now(),marks:{}};window.copyTimer=setInterval(()=>{for(const marker of ['Installing copy-probe: 0/529 files','Preparing checksums: copy-probe','Saving transaction: copy-probe','Activating: copy-probe'])if(!copyTimes.marks[marker]&&shell.busybox.log.includes(marker))copyTimes.marks[marker]=performance.now();},10);});
    const start=performance.now();const log=await s.command('gucman install copy-probe');const totalMs=performance.now()-start;
    const marks=await s.page.evaluate(()=>{clearInterval(copyTimer);return copyTimes.marks;});
+   let last=0;
+   for(const marker of ['Installing copy-probe: 0/529 files','Preparing checksums: copy-probe','Saving transaction: copy-probe','Activating: copy-probe']){
+    assert(Number.isFinite(marks[marker])&&marks[marker]>=last,'Missing or unordered sampled phase: '+marker);last=marks[marker];
+   }
    assert.match(log,/Installing copy-probe: 529\/529 files/);assert.match(log,/Checksummed copy-probe: 529\/529 files/);
    assert.match(await s.command('copy-probe'),/COPY-PROBE-PASS/);
    const sums=entries.map(([path,b])=>sha(b)+'  /usr/local/'+path).join('\n')+'\n';

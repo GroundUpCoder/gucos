@@ -48,11 +48,11 @@ try{
  assert.doesNotMatch(cached,/Downloading progress-demo archive/);
  version='3';
  const object='/var/cache/gucman/v1/objects/'+sha(archive);
- await s.command(`mv '${object}' /tmp/progress-cached-archive\nmkdir '${object}'`);
+ await s.command(`set -eu\nmv '${object}' /tmp/progress-cached-archive\nmkdir '${object}'`);
  await assert.rejects(()=>s.command('gucman upgrade progress-demo'),/nonregular cache object/);
- await s.command(`test -z "$(ls -A '${object}')"\nrmdir '${object}'\nmkdir /tmp/progress-cache-directory\nln -s /tmp/progress-cache-directory '${object}'`);
+ await s.command(`set -eu\ntest -z "$(ls -A '${object}')"\nrmdir '${object}'\nmkdir /tmp/progress-cache-directory\nln -s /tmp/progress-cache-directory '${object}'`);
  await assert.rejects(()=>s.command('gucman upgrade progress-demo'),/symlink cache object/);
- await s.command(`test -z "$(ls -A /tmp/progress-cache-directory)"\nrm '${object}'\nmv /tmp/progress-cached-archive '${object}'`);
+ await s.command(`set -eu\ntest -z "$(ls -A /tmp/progress-cache-directory)"\nrm '${object}'\nmv /tmp/progress-cached-archive '${object}'`);
  version='4';bad=true;
  await assert.rejects(()=>s.command('gucman upgrade progress-demo'),/object checksum mismatch/);
  assert.match(await s.command('progress-demo'),/PROGRESS-DEMO-PASS/);
