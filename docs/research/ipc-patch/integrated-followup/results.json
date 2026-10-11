@@ -1,0 +1,32 @@
+[
+  {
+    "test": "ipc-symbols",
+    "command": [
+      "node",
+      "tests/ipc-symbols.mjs"
+    ],
+    "exitCode": 0,
+    "startUTC": "2026-10-11T07:46:37.407435+00:00",
+    "endUTC": "2026-10-11T07:46:42.483001+00:00"
+  },
+  {
+    "test": "ipc-adapted",
+    "command": [
+      "node",
+      "/tmp/gucos-ipc-followup-mcakrp7r/run-probes.mjs"
+    ],
+    "exitCode": 0,
+    "startUTC": "2026-10-11T07:46:42.483354+00:00",
+    "endUTC": "2026-10-11T07:46:48.333280+00:00"
+  },
+  {
+    "test": "platform-posix",
+    "command": [
+      "node",
+      "tests/platform-posix.mjs"
+    ],
+    "exitCode": 0,
+    "startUTC": "2026-10-11T07:46:48.333641+00:00",
+    "endUTC": "2026-10-11T07:46:53.615094+00:00"
+  }
+]

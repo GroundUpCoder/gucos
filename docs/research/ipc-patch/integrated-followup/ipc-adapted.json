@@ -1,0 +1,8 @@
+{
+  "test": "ipc-adapted",
+  "fixtureSHA256": "81049f5ed976847956e2bb452b0c9081d66ec1f94c20140414cbbff8977c2cd6",
+  "status": "passed",
+  "runtime": "baae3b7591a51a357d4fba3fc8e96135790025d61a6c98453e28100ea99f1aad",
+  "log": "5 functions, 18695 bytes\nIPC-UPSTREAM-ADAPTATIONS-PASS: 15 graph variants + 3 FreeBSD cases\n",
+  "completedUTC": "2026-10-11T07:46:48.315Z"
+}

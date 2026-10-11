@@ -1,0 +1,184 @@
+commit 8c62bfbc0108d131bb941daa48468212a6ab816b
+Author: gucOS IPC coordinator <ipc-coordinator@localhost>
+Date:   Sun Oct 11 07:31:55 2026 +0000
+
+    Expose IPC libc symbols and reclaim failed-fork semaphore handles
+
+diff --git a/docs/logs/2026-10-11/ipc-service-review-fixes.md b/docs/logs/2026-10-11/ipc-service-review-fixes.md
+new file mode 100644
+index 0000000..5680ebc
+--- /dev/null
++++ b/docs/logs/2026-10-11/ipc-service-review-fixes.md
+@@ -0,0 +1,21 @@
++# Integrated services and independent review fixes
++
++Coordinator captured services worker source without changing its checkout;
++per-file hashes and attribution are in docs/research/ipc-patch/service-snapshot.json.
++Snapshot commit 6cd7972 was integrated as 516ff02 after socket and terminal fixes.
++Cancellation retains both socket-held references and IPC service cleanup.
++
++Review finding 3: canonical __semaphore.c now includes flock/eventfd declarations
++and emits external definitions of semaphore and eventfd convenience APIs while
++consumer headers retain their existing inline implementations and sem_t layout.
++Added a guest dlsym probe that does not include the API headers itself, so it
++cannot accidentally supply the missing names through its own direct imports.
++
++Review finding 4: fork-child initialization crash path releases cloned semaphore
++handles. Focused injected-crash kernel regression passes on combined source.
++
++Remote machine-job build reservation f7e3547d-f541-4e29-878e-cc6e15495a2a passed
++socket lifecycle, service lifecycle, failed-fork cleanup and terminal kernel
++regressions. These are actual kernel methods with simulated process records,
++not guest execution. Full build was running at this checkpoint; guest dynamic
++lookup, terminal regression and combined runtime acceptance remain pending.
+diff --git a/libc/include/semaphore.h b/libc/include/semaphore.h
+index e5d30f7..600ab59 100644
+--- a/libc/include/semaphore.h
++++ b/libc/include/semaphore.h
+@@ -6,24 +6,29 @@ __require_source("__semaphore.c");
+ #include <limits.h>
+ #include <time.h>
+ #include <__thread.h>
++#ifdef __SEM_IMPLEMENTATION
++#define __SEM_INLINE
++#else
++#define __SEM_INLINE static inline
++#endif
+ typedef struct { int value; } sem_t;
+ #define SEM_VALUE_MAX INT_MAX
+ #define SEM_FAILED ((sem_t *)0)
+ sem_t *sem_open(const char *name,int flags,...);
+ int sem_close(sem_t *s);
+ __import int __sem_unlink(const char *name);
+-static inline int sem_unlink(const char *name){return __sem_unlink(name);}
++__SEM_INLINE int sem_unlink(const char *name){return __sem_unlink(name);}
+ __import int __sem_op(int id,int action,long long sec,int nsec);
+-static inline int sem_init(sem_t *s,int shared,unsigned value){if(shared){errno=ENOSYS;return -1;}if(value>SEM_VALUE_MAX){errno=EINVAL;return -1;}s->value=value;return 0;}
+-static inline int sem_destroy(sem_t *s){(void)s;return 0;}
+-static inline int sem_post(sem_t *s){if(s->value<0)return __sem_op(-s->value,3,0,0);int v;do{v=__builtin(atomic_load32,&s->value);if(v==SEM_VALUE_MAX){errno=EOVERFLOW;return -1;}}while(__builtin(atomic_cmpxchg32,&s->value,v,v+1)!=v);__builtin(atomic_notify,&s->value,1);return 0;}
+-static inline int sem_trywait(sem_t *s){if(s->value<0)return __sem_op(-s->value,5,0,0);int v;do{v=__builtin(atomic_load32,&s->value);if(v==0){errno=EAGAIN;return -1;}}while(__builtin(atomic_cmpxchg32,&s->value,v,v-1)!=v);return 0;}
+-static inline int sem_wait(sem_t *s){if(s->value<0)return __sem_op(-s->value,4,0,0);while(sem_trywait(s))__thread_wait(&s->value,0,-1LL);return 0;}
+-static inline int sem_getvalue(sem_t *s,int *v){if(s->value<0){int n=__sem_op(-s->value,7,0,0);if(n<0)return -1;*v=n;return 0;}*v=__builtin(atomic_load32,&s->value);return 0;}
++__SEM_INLINE int sem_init(sem_t *s,int shared,unsigned value){if(shared){errno=ENOSYS;return -1;}if(value>SEM_VALUE_MAX){errno=EINVAL;return -1;}s->value=value;return 0;}
++__SEM_INLINE int sem_destroy(sem_t *s){(void)s;return 0;}
++__SEM_INLINE int sem_post(sem_t *s){if(s->value<0)return __sem_op(-s->value,3,0,0);int v;do{v=__builtin(atomic_load32,&s->value);if(v==SEM_VALUE_MAX){errno=EOVERFLOW;return -1;}}while(__builtin(atomic_cmpxchg32,&s->value,v,v+1)!=v);__builtin(atomic_notify,&s->value,1);return 0;}
++__SEM_INLINE int sem_trywait(sem_t *s){if(s->value<0)return __sem_op(-s->value,5,0,0);int v;do{v=__builtin(atomic_load32,&s->value);if(v==0){errno=EAGAIN;return -1;}}while(__builtin(atomic_cmpxchg32,&s->value,v,v-1)!=v);return 0;}
++__SEM_INLINE int sem_wait(sem_t *s){if(s->value<0)return __sem_op(-s->value,4,0,0);while(sem_trywait(s))__thread_wait(&s->value,0,-1LL);return 0;}
++__SEM_INLINE int sem_getvalue(sem_t *s,int *v){if(s->value<0){int n=__sem_op(-s->value,7,0,0);if(n<0)return -1;*v=n;return 0;}*v=__builtin(atomic_load32,&s->value);return 0;}
+ 
+ /* Absolute CLOCK_REALTIME deadline; an immediately available token wins even
+    with an expired deadline. The original unnamed atomic paths stay intact. */
+-static inline int sem_timedwait(sem_t *s,const struct timespec *deadline){
++__SEM_INLINE int sem_timedwait(sem_t *s,const struct timespec *deadline){
+   if(!sem_trywait(s))return 0;
+   if(errno!=EAGAIN)return -1;
+   if(deadline->tv_nsec<0||deadline->tv_nsec>=1000000000L){errno=EINVAL;return -1;}
+@@ -41,3 +46,5 @@ static inline int sem_timedwait(sem_t *s,const struct timespec *deadline){
+     if(errno!=EAGAIN)return -1;
+   }
+ }
++
++#undef __SEM_INLINE
+diff --git a/libc/include/sys/eventfd.h b/libc/include/sys/eventfd.h
+index 3af1604..0d448c6 100644
+--- a/libc/include/sys/eventfd.h
++++ b/libc/include/sys/eventfd.h
+@@ -4,7 +4,14 @@
+ #define EFD_SEMAPHORE 1
+ #define EFD_NONBLOCK 0x800
+ #define EFD_CLOEXEC 0x80000
++#ifdef __EVENTFD_IMPLEMENTATION
++#define __EVENTFD_INLINE
++#else
++#define __EVENTFD_INLINE static inline
++#endif
+ typedef uint64_t eventfd_t;
+ __import int eventfd(unsigned int initval, int flags);
+-static inline int eventfd_read(int fd,eventfd_t *value){return read(fd,value,8)==8?0:-1;}
+-static inline int eventfd_write(int fd,eventfd_t value){return write(fd,&value,8)==8?0:-1;}
++__EVENTFD_INLINE int eventfd_read(int fd,eventfd_t *value){return read(fd,value,8)==8?0:-1;}
++__EVENTFD_INLINE int eventfd_write(int fd,eventfd_t value){return write(fd,&value,8)==8?0:-1;}
++
++#undef __EVENTFD_INLINE
+diff --git a/libc/manifest.json b/libc/manifest.json
+index 5f5207b..be08d27 100644
+--- a/libc/manifest.json
++++ b/libc/manifest.json
+@@ -265,6 +265,6 @@
+     "sse",
+     "sse2"
+   ],
+-  "digest": "dd65a6d84bcd4cc1e9f9ddc563b0d6d91847ee3e0e663dd92a4890e6fd3dd67c",
++  "digest": "61237619ad7d38ffac491a022946272a2e49c5eaf2fe1a273a91714f28baf9b7",
+   "prelude": "include/__compiler_prelude.h"
+ }
+diff --git a/libc/src/__semaphore.c b/libc/src/__semaphore.c
+index 4a6ab6d..5ed8238 100644
+--- a/libc/src/__semaphore.c
++++ b/libc/src/__semaphore.c
+@@ -1,3 +1,7 @@
++#define __SEM_IMPLEMENTATION 1
++#define __EVENTFD_IMPLEMENTATION 1
++#include <sys/file.h>
++#include <sys/eventfd.h>
+ #include <semaphore.h>
+ #include <fcntl.h>
+ #include <stdlib.h>
+diff --git a/src/kernel.js b/src/kernel.js
+index d163959..4463d6a 100644
+--- a/src/kernel.js
++++ b/src/kernel.js
+@@ -2615,6 +2615,7 @@ Kernel.prototype._onWorkerMessage = function (pcb, msg) {
+         pcb._forkReady({errno:'EAGAIN'});pcb._forkReady=null;
+         const parent=this._procs.get(pcb.ppid);if(parent)parent.children.delete(pcb.pid);
+         pcb.worker.terminate();pcb.fds.forEach(id=>this._ofdUnref(id,pcb.pid));
++        if(this._ipc)this._ipc.release(pcb.pid);
+         if(pcb.trace)this._ofdUnref(pcb.trace.ofdId,0);
+         this._procs.delete(pcb.pid);pcb.state=STATE_ZOMBIE;return;
+       }
+diff --git a/tests/fixtures/ipc-symbols.c b/tests/fixtures/ipc-symbols.c
+new file mode 100644
+index 0000000..1f760ed
+--- /dev/null
++++ b/tests/fixtures/ipc-symbols.c
+@@ -0,0 +1,8 @@
++#include <dlfcn.h>
++#include <stdio.h>
++int main(void){
++ const char *names[]={"flock","eventfd","eventfd_read","eventfd_write","sem_open","sem_close","sem_unlink","sem_timedwait","sem_wait","sem_post",0};
++ void *lib=dlopen("libc.so.1",RTLD_NOW);if(!lib){puts(dlerror());return 1;}
++ for(int i=0;names[i];i++)if(!dlsym(lib,names[i])){printf("missing %s: %s\n",names[i],dlerror());return 2;}
++ puts("IPC-SYMBOLS-PASS");return 0;
++}
+diff --git a/tests/ipc-services-kernel.mjs b/tests/ipc-services-kernel.mjs
+index 7195dbe..c6dcff4 100644
+--- a/tests/ipc-services-kernel.mjs
++++ b/tests/ipc-services-kernel.mjs
+@@ -53,3 +53,12 @@ svc.release(2);assert(!svc.sems.has(old));assert(svc.sems.has(fresh));
+ svc.sem(p,{action:2,name:'/life'});svc.release(1);
+ assert.equal(svc.sems.size,0);assert.equal(svc.names.size,0);assert.equal(svc.handles.size,0);
+ console.log('IPC-KERNEL-PASS: in-flight OFDs, cancellation, unlink and handle reclamation');
++
++// A child that crashes before fork-ready must relinquish cloned named handles.
++svc.sem(p,{action:0,name:'/failed-fork',flags:0xc0,mode:0o600,value:0});
++const failed=p.reply.id;svc.clone(1,2);p.children=new Set([2]);q.ppid=1;
++let forkError,terminated=false;q._forkReady=r=>{forkError=r;};q.worker={terminate(){terminated=true;}};
++k._onWorkerMessage(q,{type:'crashed',error:'injected initialization failure'});
++assert.equal(forkError.errno,'EAGAIN');assert(terminated);assert(!k._procs.has(2));assert(!svc.handles.has(2));
++svc.sem(p,{action:2,name:'/failed-fork'});svc.release(1);assert(!svc.sems.has(failed));
++console.log('IPC-FORK-FAILURE-PASS: cloned semaphore handles reclaimed');
+diff --git a/tests/ipc-symbols.mjs b/tests/ipc-symbols.mjs
+new file mode 100644
+index 0000000..c91314c
+--- /dev/null
++++ b/tests/ipc-symbols.mjs
+@@ -0,0 +1,9 @@
++import assert from 'node:assert/strict';
++import {readFile} from 'node:fs/promises';
++import {browserSession} from '../tools/browser.mjs';
++const s=await browserSession({timeout:180000});
++try{
++ await s.command('true');
++ await s.page.evaluate(source=>shell.busybox.write('/tmp/ipc-symbols.c',new TextEncoder().encode(source)),await readFile(new URL('fixtures/ipc-symbols.c',import.meta.url),'utf8'));
++ const log=await s.command('set -eu\ncc /tmp/ipc-symbols.c -o /tmp/ipc-symbols\n/tmp/ipc-symbols');console.log(log);assert.match(log,/IPC-SYMBOLS-PASS/);
++}finally{await s.close();}

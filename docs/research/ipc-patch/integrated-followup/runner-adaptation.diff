@@ -1,0 +1,22 @@
+--- repository/run-probes.mjs
++++ tmp/run-probes.mjs
+@@ -1,8 +1,8 @@
+ import assert from 'node:assert/strict';
+ import {createHash} from 'node:crypto';
+ import {mkdir,readFile,writeFile} from 'node:fs/promises';
+-import {browserSession} from '../../../tools/browser.mjs';
+-const source=await readFile(new URL('adapted-probes.c',import.meta.url),'utf8');
++import {browserSession} from 'file:///home/ubuntu/git/gucos-ipc-integration/tools/browser.mjs';
++const source=await readFile(new URL('file:///home/ubuntu/git/gucos-ipc-integration/docs/research/unix-socket-ipc/adapted-probes.c'),'utf8');
+ const result={test:'ipc-adapted',fixtureSHA256:createHash('sha256').update(source).digest('hex'),status:'failed'};
+ let s;
+ try{
+@@ -17,7 +17,7 @@
+ }catch(error){result.error=String(error.stack||error);throw error;
+ }finally{
+  if(s)await s.close();
+- const directory=new URL('../../../test-results/',import.meta.url);await mkdir(directory,{recursive:true});
++ const directory=new URL('file:///tmp/gucos-ipc-followup-mcakrp7r/');await mkdir(directory,{recursive:true});
+  result.completedUTC=new Date().toISOString();
+  await writeFile(new URL('ipc-adapted.json',directory),JSON.stringify(result,null,2)+'\n');
+ }

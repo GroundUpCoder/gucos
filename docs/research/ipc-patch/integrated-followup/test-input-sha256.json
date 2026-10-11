@@ -1,0 +1,10 @@
+{
+  "tests/ipc-symbols.mjs": "ed3913f44523bdd44bf8ce076ace4990be3a0e0e76e80047fd5a35e55370bbcd",
+  "tests/fixtures/ipc-symbols.c": "973651aa6ac492bd7183cf294e4ef7e2a588a17644d390718e526d46e0bd29b7",
+  "docs/research/unix-socket-ipc/run-probes.mjs": "86b1417f4664c825c01f1d5bc996c92921fddd8fafea195e3b7e5b4548ba589a",
+  "docs/research/unix-socket-ipc/adapted-probes.c": "81049f5ed976847956e2bb452b0c9081d66ec1f94c20140414cbbff8977c2cd6",
+  "tests/platform-posix.mjs": "c023eeb5800fec54d17892be0c8070483d849df2bd62b1d1e2b1c5ff6b0d899a",
+  "tests/fixtures/platform-posix.c": "d390d752755b1778e701490ad703bb85779f2a5d7be47104db5ec3460ec3807a",
+  "tools/browser.mjs": "0ffa49301b5f3e19bdf1eca34448e1a986fe46c6a1b778a8af3cb5493dc19a57",
+  "tools/serve.mjs": "f479fc7cc4b6b6ca2c2a5b36c6e3f72442f2e0444357db93c05619822771c834"
+}

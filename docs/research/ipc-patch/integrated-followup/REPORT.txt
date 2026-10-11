@@ -1,0 +1,15 @@
+All three requested browser tests passed, sequentially, in machine-job browser reservation c7586598-55d5-4a39-8854-4103fbb4d66d.
+Runtime baae3b7591a51a357d4fba3fc8e96135790025d61a6c98453e28100ea99f1aad.
+HEAD, git status and every regular dist file hash were unchanged across the reservation.
+No core build, source edit, cherry-pick, commit or terminal investigation was performed.
+The adapted probe ran from a temporary copy with absolute input/import paths and /tmp result output; the exact diff is retained.
+
+All 14 non-documentation files in snapshot provenance match e356eba author bytes.
+Only the author journal differs from provenance: e356eba adds seven lines recording pending browser validation.
+Comparing integrated 516ff02 trees to e356eba shows differences in the journal, libc digest, src/host.js and src/kernel.js.
+Comparing each implementation patch against its own parent shows identical change blocks for all code and tests; only libc manifest digest values differ.
+Thus no author service implementation change was found at snapshot integration. Whole-file host/kernel differences are pre-existing socket/terminal integration.
+Later coordinator review changes are recorded separately in review-fixes.diff (8c62bfb), not attributed to the author snapshot.
+
+Test HEAD: 245fa8b1ae78a095cf2dcf2dcb7b0c6e7c36d07d
+Preexisting status: '?? node_modules\n'
