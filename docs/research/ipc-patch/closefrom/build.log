@@ -1,0 +1,35 @@
+[machine-job] queued: sh -c corepack pnpm install --frozen-lockfile && node tools/libc-manifest.mjs && node tests/closefrom-kernel.mjs && node tools/build.mjs
+(node:1185096) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[machine-job] running: cfd313c0-decb-40b0-8417-c46494a4993d
+Lockfile is up to date, resolution step is skipped
+Progress: resolved 1, reused 0, downloaded 0, added 0
+Packages: +37
++++++++++++++++++++++++++++++++++++++
+Progress: resolved 37, reused 37, downloaded 0, added 37, done
+
+devDependencies:
++ playwright 1.63.0
++ wrangler 4.149.0
+
+╭ Warning ─────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│   Ignored build scripts: esbuild@0.28.2, workerd@1.20261006.1.               │
+│   Run "pnpm approve-builds" to pick which dependencies should be allowed     │
+│   to run scripts.                                                            │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+Done in 1s using pnpm v10.33.0
+f45a2be27599f654782c341da2a0180c9cd45b62bfe236099b68f16ed376f6a3
+CLOSEFROM-KERNEL-PASS: sparse maps, shared tables/cache invalidation, sealed-local keys, queued rights, console slots
+Prebuilt /usr/bin/make: 648 functions, 1598599 bytes, 13528 ms
+Prebuilt /bin/ash: 757 functions, 1389951 bytes, 18294 ms
+Prebuilt /bin/busybox: 1320 functions, 2677319 bytes, 43513 ms
+Prebuilt /bin/cc: 73 functions, 26551 bytes, 2258 ms
+Prebuilt /usr/bin/ar: 108 functions, 37104 bytes, 2860 ms
+Prebuilt /usr/bin/guc-fetch: 96 functions, 35331 bytes, 1892 ms
+Prebuilt /usr/bin/guc-links: 104 functions, 35551 bytes, 1855 ms
+Prebuilt /usr/libexec/guc-lock: 77 functions, 27476 bytes, 2129 ms
+Prebuilt /usr/libexec/guc-json: 123 functions, 46649 bytes, 1970 ms
+Prebuilt /usr/libexec/guc-unpack: 92 functions, 33176 bytes, 1851 ms
+Built self-contained dist/; runtime e1a1d35aab446d25eb19126cec01e17e5508b672bc16f73b4cbb5e0a01f3b8a8; package source is configured only at runtime.

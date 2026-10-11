@@ -1,0 +1,14 @@
+[machine-job] queued: env LD_LIBRARY_PATH=/home/ubuntu/git/gucos-ipc-services/.ipc-browser-deps/root/usr/lib/x86_64-linux-gnu node tests/closefrom.mjs
+(node:1186648) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[machine-job] running: e4d453f6-87b1-4586-be31-241253fa1a66
+RUNTIME e1a1d35aab446d25eb19126cec01e17e5508b672bc16f73b4cbb5e0a01f3b8a8
+2 functions, 5669 bytes
+CLOSEFROM-SYMBOL-PASS
+
+5 functions, 58362 bytes
+CLOSEFROM sparse/fork/flock PASS
+CLOSEFROM pipe EOF PASS
+CLOSEFROM thread/negative PASS
+CLOSEFROM-PASS
+

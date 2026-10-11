@@ -16,6 +16,7 @@ typedef long long off_t;
 #define W_OK 2
 #define X_OK 1
 __import int close(int fd);
+void closefrom(int lowfd);
 __import long read(int fd, void *buf, long count);
 __import long write(int fd, const void *buf, long count);
 __import long long lseek(int fd, long long offset, int whence);

@@ -243,7 +243,7 @@ var OP = {
   // final page carries no `more` and closes the handle. 0x0421 because
   // FS_WAIT below predates it at 0x0420.
   FS_READDIR: 0x0421,
-  FS_FDFLAGS: 0x0423,
+  FS_FDFLAGS: 0x0423, FS_CLOSEFROM: 0x0443,
   FS_PREAD: 0x042E, FS_PWRITE: 0x042F,
   FS_GETFL: 0x042B, FS_SETFL: 0x042C, FS_POLL: 0x042D,
   // Mapped memory and record locks (docs/MAPPINGS.md): mmap/munmap/mprotect/
@@ -1785,6 +1785,17 @@ Kernel.prototype._ofdUnref = function (id, pid) {
   }
 };
 
+// Enumerate occupied descriptors, never a guessed open-file limit. Remove
+// ownership before unref so socket-cycle collection sees the updated roots.
+Kernel.prototype._closeFrom = function (pcb, lowfd) {
+  lowfd = Math.max(0, lowfd | 0);
+  for (var [fd, id] of Array.from(pcb.fds)) if (fd >= lowfd) {
+    pcb.fds.delete(fd); pcb.fdFlags.delete(fd);
+    this._ofdUnref(id, pcb.pid);
+  }
+  for (var fd of pcb.fdFlags.keys()) if (fd >= lowfd) pcb.fdFlags.delete(fd);
+  if (pcb.fdEpoch) Atomics.add(pcb.fdEpoch, 0, 1);
+};
 Kernel.prototype._stdOfds = function () {
   var interactive = !!(this._tty && this._tty.interactiveOut);
   if (!this._std || this._stdInteractive !== interactive ||
@@ -2127,6 +2138,7 @@ Kernel.prototype._spawnImage = function (parent, spec, image, module) {
     // | {op:'piperead',pipe,count} | {op:'pipewrite',pipe,data}
     // | {op:'clipget'} (the clipboard seam: parked on onClipRead's done)
     waiter: null,
+    fdEpoch: new Int32Array(new SharedArrayBuffer(4)),
     fdFlags: new Map(),
     module: module || null, image: module ? null : image,
     fds: new Map(),                // procFd -> ofdId (brokered mode)
@@ -2258,12 +2270,7 @@ Kernel.prototype._spawnImage = function (parent, spec, image, module) {
         // the caller does NOT know which fds are open — only the fd-table
         // owner does, which is exactly this side. Enumerate first, then
         // mutate: pcb.fds is being edited underneath the walk.
-        var cfDrop = [];
-        pcb.fds.forEach(function (id, fd) { if (fd >= a.fd) cfDrop.push(fd); });
-        for (var cfi = 0; cfi < cfDrop.length; cfi++) {
-          self._ofdUnref(pcb.fds.get(cfDrop[cfi]), pid);
-          pcb.fds.delete(cfDrop[cfi]);
-        }
+        self._closeFrom(pcb, a.fd);
       }
       if (a.op === 4) {
         const path=self._pathFor(pcb,a.path),st=self._fs.stat(path);
@@ -2339,6 +2346,7 @@ Kernel.prototype._spawnImage = function (parent, spec, image, module) {
     kernelPage: sab,
     ttySab: pcb.tty ? pcb.tty.sab : null,
     brokered: self._brokered,
+    fdEpoch: pcb.fdEpoch.buffer,
     fileReadCache: self._readCache?self._readCache.v.sab:null,
     ro: self._roImage,   // process-side read-only volume (docs/archive/0180)
     pipeRings: pipeRings,   // SPSC pipe rings for inherited fds (docs/archive/0181)
@@ -2518,7 +2526,7 @@ Kernel.prototype._createThread = function (pcb, data, caller) {
     vm: pcb.vm ? self._mapped.state(pcb.pid) : null,
     pid: pcb.pid, tid: tid, ppid: pcb.ppid, pgid: pcb.pgid, path: pcb.path, argv: pcb.argv, envp: pcb.envp, cwd: pcb.cwd,
     module: data.module, image: null, kernelPage: sab, ttySab: pcb.tty ? pcb.tty.sab : null,
-    brokered: self._brokered, ro: self._roImage, fileReadCache:self._readCache?self._readCache.v.sab:null, pipeRings: [], flags: 0, actions: [],
+    brokered: self._brokered, ro: self._roImage, fdEpoch:pcb.fdEpoch.buffer, fileReadCache:self._readCache?self._readCache.v.sab:null, pipeRings: [], flags: 0, actions: [],
   };
   try { th.worker = self._createWorker(spec); }
   catch (e) { self._log('thread: createWorker failed: ' + (e && e.message)); return { errno: 'EAGAIN' }; }
@@ -3512,6 +3520,10 @@ Kernel.prototype._fsRpcBody = function (pcb, op, req) {
       if(this._readCache)this._readCache.resume();
       this._respond(pcb, { fd: fd, readCache: readCache });
       return;
+    }
+    case OP.FS_CLOSEFROM: {
+      this._closeFrom(pcb, req.lowfd);
+      this._respond(pcb, {}); return;
     }
     case OP.FS_CLOSE: {
       var id = pcb.fds.get(req.fd | 0);
@@ -6313,6 +6325,8 @@ function remoteReadCacheSeek(remote,fd,offset,whence){
 
 function RemoteFS(client, opts) {
   this._c = client;
+  this._fdEpoch = opts && opts.fdEpoch ? new Int32Array(opts.fdEpoch) : null;
+  this._seenFdEpoch = this._fdEpoch ? Atomics.load(this._fdEpoch,0) : 0;
   this._readCache=opts && opts.fileReadCache?readCacheViews(opts.fileReadCache):null;
   this._lastError = null;
   // Presence markers for kernel fds ({type:'remote'}, set as fds are handed
@@ -6368,7 +6382,15 @@ RemoteFS.prototype._roRel = function (path) {
   return this._ro.owns(roNormalize(path));
 };
 
+RemoteFS.prototype._syncFdEpoch = function () {
+  if (!this._fdEpoch) return;
+  var epoch = Atomics.load(this._fdEpoch,0);
+  if (epoch === this._seenFdEpoch) return;
+  // Caches are worker-local; descriptor ownership belongs to the shared PCB.
+  this._fdTable = []; this._pipes.clear(); this._seenFdEpoch = epoch;
+};
 RemoteFS.prototype._roFd = function (fd) {
+  this._syncFdEpoch();
   return this._ro !== null && this._ro.fds.has(fd);
 };
 
@@ -6492,6 +6514,18 @@ RemoteFS.prototype._openBrokered = function (path, flags, mode) {
   this._fdTable[r.fd] = { type: 'remote', readCache:r.readCache||null };
   return r.fd;
 };
+RemoteFS.prototype.closefrom = function (lowfd) {
+  lowfd = Math.max(0, lowfd | 0);
+  // Sealed-image descriptors are process-local and absent from the broker map.
+  var failed = null;
+  if (this._ro) for (var fd of Array.from(this._ro.fds.keys()))
+    if (fd >= lowfd && this.close(fd) === null) failed = this._lastError;
+  var r = this._ok(this._c.call(OP.FS_CLOSEFROM, {lowfd:lowfd}));
+  for (var fd of Object.keys(this._fdTable)) if (+fd >= lowfd) delete this._fdTable[fd];
+  for (var fd of this._pipes.keys()) if (fd >= lowfd) this._pipes.delete(fd);
+  this._syncFdEpoch();
+  return r === null ? null : failed ? this._setErr(failed) : 0;
+};
 RemoteFS.prototype.close = function (fd) {
   if (this._roFd(fd)) {
     this._ro.fds.delete(fd);
@@ -6506,6 +6540,7 @@ RemoteFS.prototype.close = function (fd) {
   return 0;
 };
 RemoteFS.prototype.read = function (fd, buf, count) {
+  this._syncFdEpoch();
   var cached=remoteReadCacheRead(this,fd,buf,count);if(cached!==undefined)return cached;
   if (this._roFd(fd)) {
     // Local regular-file read: whole count in one shot (no RPC chunk cap),
@@ -6581,6 +6616,7 @@ RemoteFS.prototype._isRegularFd = function (fd) {
   return !!(r && r.st && (r.st.mode & 0xF000) === 0x8000);
 };
 RemoteFS.prototype.write = function (fd, buf, count) {
+  this._syncFdEpoch();
   if(count>KP_FS_CHUNK){
     var st=this.fstat(fd);if(st===null)return null;
     if((st.mode&0xf000)===S_IFSOCK_MODE){
@@ -6652,6 +6688,7 @@ RemoteFS.prototype.pwrite = function(fd,buf,count,offset) {
   return r===null?null:r.n;
 };
 RemoteFS.prototype.lseek = function (fd, offset, whence) {
+  this._syncFdEpoch();
   var cached=remoteReadCacheSeek(this,fd,offset,whence);if(cached!==undefined)return cached;
   if (this._roFd(fd)) {
     var lr = this._ro.fs.lseek(fd - RO_FD_BASE, offset, whence);
@@ -7144,7 +7181,7 @@ var BOOT_SOURCE = [
   "  var roFs = wd.ro",
   "    ? BLOCK_FS.createV4(new BLOCK_FS.SabByteStore(wd.ro.sab), { readonly: true })",
   "    : null;",
-  "  rfs = new K.RemoteFS(client, Object.assign({fileReadCache:wd.fileReadCache}, roFs ? { roFs: roFs, roPrefix: wd.ro.prefix, roDev: wd.ro.dev, roLeaf: wd.ro.leaf } : {}));",
+  "  rfs = new K.RemoteFS(client, Object.assign({fileReadCache:wd.fileReadCache,fdEpoch:wd.fdEpoch}, roFs ? { roFs: roFs, roPrefix: wd.ro.prefix, roDev: wd.ro.dev, roLeaf: wd.ro.leaf } : {}));",
   "  // SPSC pipe rings for inherited fds (docs/archive/0181): fast ops gate on the",
   "  // ring's PR_MODE word, so registering a still-brokered ring is free.",
   "  (wd.pipeRings || []).forEach(function (p) { rfs.registerPipeRing(p.fd, p.end, p.sab); });",
@@ -7229,6 +7266,7 @@ function nodeCreateWorker(config) {
         ro: procSpec.ro || null,
         // SPSC pipe rings (docs/archive/0181): [{fd, end, sab}] — the SABs share.
         pipeRings: procSpec.pipeRings || null,
+        fdEpoch: procSpec.fdEpoch || null,
         fileReadCache: procSpec.fileReadCache || null,
       },
       // Program stdout/stderr flow through {type:'out'} messages (writeOut/
