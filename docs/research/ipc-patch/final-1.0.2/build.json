@@ -1,0 +1,49 @@
+{
+  "format": 1,
+  "runtime": "be3a9ce7817c876e8d9bc900556fea1fbaeb4f0d5d4e03003ab24a7ad3b600bb",
+  "platform": {
+    "format": 1,
+    "target": "wasm32-wasm-posix",
+    "features": [
+      "posix-core",
+      "unix-stream",
+      "unix-rights",
+      "unix-dgram",
+      "unix-seqpacket",
+      "flock",
+      "eventfd",
+      "posix-named-semaphores",
+      "closefrom",
+      "pthreads",
+      "sdl3-vt",
+      "sdl3-ime",
+      "webgpu"
+    ],
+    "legacyRuntime": "2a9cca447a35af0d0d8894ea4b50cb254ce20821753af8ae70a1ad5060da2a0f",
+    "version": "1.0.2",
+    "runtimeAbi": 5,
+    "objectAbi": 3
+  },
+  "toolchain": {
+    "version": "0.5.13",
+    "runtimeVersion": "0.5.9",
+    "live": "ed0c29736ebd42f01f5ad4a2f8b49b6e5e096486a8c893c34a0d7ba9cd290378",
+    "id": "529ba3b935c6dbfdefb4a1ee316cde7821f1b7dc34168e09b987b80468433bfd",
+    "abi": {
+      "objects": 3,
+      "runtime": 5
+    },
+    "systemBuild": "be3a9ce7817c876e8d9bc900556fea1fbaeb4f0d5d4e03003ab24a7ad3b600bb",
+    "libcDigest": "f45a2be27599f654782c341da2a0180c9cd45b62bfe236099b68f16ed376f6a3"
+  },
+  "bootstrap": [
+    "libc",
+    "ash",
+    "busybox",
+    "cc",
+    "ar",
+    "make",
+    "guc-fetch",
+    "gucman"
+  ]
+}

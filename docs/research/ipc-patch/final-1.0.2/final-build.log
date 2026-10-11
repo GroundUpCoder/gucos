@@ -1,0 +1,16 @@
+[machine-job] queued: sh -c node tests/platform-metadata.mjs && node tools/build.mjs
+(node:1211160) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[machine-job] running: 5d3ae2e3-8c3c-44de-a8d7-0c0f8538e825
+PASS stable SemVer, target/feature/ABI rejection, legacy baseline, dependency bounds and exact pins
+Prebuilt /usr/bin/make: 648 functions, 1598599 bytes, 12961 ms
+Prebuilt /bin/ash: 757 functions, 1389951 bytes, 21221 ms
+Prebuilt /bin/busybox: 1320 functions, 2677319 bytes, 40925 ms
+Prebuilt /bin/cc: 73 functions, 26551 bytes, 4469 ms
+Prebuilt /usr/bin/ar: 108 functions, 37104 bytes, 2494 ms
+Prebuilt /usr/bin/guc-fetch: 96 functions, 35331 bytes, 1777 ms
+Prebuilt /usr/bin/guc-links: 104 functions, 35551 bytes, 2097 ms
+Prebuilt /usr/libexec/guc-lock: 77 functions, 27476 bytes, 1849 ms
+Prebuilt /usr/libexec/guc-json: 123 functions, 46649 bytes, 2565 ms
+Prebuilt /usr/libexec/guc-unpack: 92 functions, 33176 bytes, 1803 ms
+Built self-contained dist/; runtime be3a9ce7817c876e8d9bc900556fea1fbaeb4f0d5d4e03003ab24a7ad3b600bb; package source is configured only at runtime.

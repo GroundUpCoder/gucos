@@ -1,0 +1,50 @@
+[
+  {
+    "test": "ipc-sockets",
+    "exitCode": 0,
+    "startedUTC": "2026-10-11T09:23:30.050333+00:00",
+    "completedUTC": "2026-10-11T09:23:37.650642+00:00"
+  },
+  {
+    "test": "ipc-services",
+    "exitCode": 0,
+    "startedUTC": "2026-10-11T09:23:37.650874+00:00",
+    "completedUTC": "2026-10-11T09:23:47.328771+00:00"
+  },
+  {
+    "test": "ipc-terminal",
+    "exitCode": 0,
+    "startedUTC": "2026-10-11T09:23:47.328986+00:00",
+    "completedUTC": "2026-10-11T09:23:52.912792+00:00"
+  },
+  {
+    "test": "ipc-symbols",
+    "exitCode": 0,
+    "startedUTC": "2026-10-11T09:23:52.913008+00:00",
+    "completedUTC": "2026-10-11T09:23:57.758940+00:00"
+  },
+  {
+    "test": "closefrom",
+    "exitCode": 0,
+    "startedUTC": "2026-10-11T09:23:57.759159+00:00",
+    "completedUTC": "2026-10-11T09:24:03.968065+00:00"
+  },
+  {
+    "test": "platform-posix",
+    "exitCode": 0,
+    "startedUTC": "2026-10-11T09:24:03.968285+00:00",
+    "completedUTC": "2026-10-11T09:24:09.750213+00:00"
+  },
+  {
+    "test": "retained-abi",
+    "exitCode": 0,
+    "startedUTC": "2026-10-11T09:24:09.750436+00:00",
+    "completedUTC": "2026-10-11T09:24:16.911689+00:00"
+  },
+  {
+    "test": "published-jsmn",
+    "exitCode": 0,
+    "startedUTC": "2026-10-11T09:24:16.911971+00:00",
+    "completedUTC": "2026-10-11T09:24:37.571996+00:00"
+  }
+]

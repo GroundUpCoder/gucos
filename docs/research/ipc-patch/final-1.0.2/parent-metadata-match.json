@@ -1,0 +1,8 @@
+{
+  "parentCommit": "2057b5709f4736952b87d77bf7993bdd5233d37e",
+  "comparison": "read-only SHA256 of local parent files and remote final files; both match",
+  "sha256": {
+    "tools/versions.json": "4937c740f9366f10900712e9d2ae4f65632ec2ac8c658a5b91682fac88b15ce5",
+    "tools/platform.json": "cf9f87f2beeb2edd7d3183209ffc5fd4b9f97163c1735988d4ab71968e0f5d52"
+  }
+}

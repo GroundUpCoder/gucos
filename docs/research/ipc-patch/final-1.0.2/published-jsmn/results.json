@@ -1,0 +1,171 @@
+{
+  "status": "passed",
+  "startedUTC": "2026-10-11T09:24:17.558Z",
+  "operation": "gucman install groundupcoder:jsmn",
+  "scope": "published binary install and execution; no source build or GPU test",
+  "network": [
+    {
+      "index": 0,
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/main/catalog.json",
+      "method": "GET",
+      "startedUTC": "2026-10-11T09:24:22.935Z",
+      "status": 200,
+      "responseURL": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/main/catalog.json",
+      "sha256": "2e985f731fddd7a03abb48c7b57d4ef94ce998f2e28c8b50a2a4f51a95a980c7",
+      "size": 24883,
+      "file": "response-000.bin",
+      "headers": {
+        "etag": "W/\"161e50617b7e2415ba51247160a314ca61dcc5d6f394840a700e110a18ce8557\"",
+        "contentType": "text/plain; charset=utf-8"
+      }
+    },
+    {
+      "index": 1,
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/jsmn/package.json",
+      "method": "GET",
+      "startedUTC": "2026-10-11T09:24:24.482Z",
+      "status": 200,
+      "responseURL": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/jsmn/package.json",
+      "sha256": "aa46ef646bbf3907c5e2fc2091f87d32926b43c3c32cdc6c3c6c2f8c89dda79e",
+      "size": 2336,
+      "file": "response-001.bin",
+      "headers": {
+        "etag": "W/\"e92e6bc54f60d1be7a570abe3c865504efba2ccdd69f2102755ca3b545fc8689\"",
+        "contentType": "text/plain; charset=utf-8"
+      }
+    },
+    {
+      "index": 2,
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9a9b1dd86716ec3b754bc335a011b8604fce67d5/apps/jsmn/binaries/62a4b0e98744881284d52d278abb06ff2feec6794baa067a3cfa047638a3d4af.tar",
+      "method": "GET",
+      "startedUTC": "2026-10-11T09:24:30.817Z",
+      "status": 200,
+      "responseURL": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9a9b1dd86716ec3b754bc335a011b8604fce67d5/apps/jsmn/binaries/62a4b0e98744881284d52d278abb06ff2feec6794baa067a3cfa047638a3d4af.tar",
+      "sha256": "62a4b0e98744881284d52d278abb06ff2feec6794baa067a3cfa047638a3d4af",
+      "size": 28160,
+      "file": "response-002.bin",
+      "headers": {
+        "etag": "W/\"8ee7d552059d297872d3887cfa3a35ce83dbc8ba5400a97395dfb5798a804b84\"",
+        "contentType": "application/octet-stream"
+      }
+    }
+  ],
+  "identity": {
+    "build": {
+      "format": 1,
+      "runtime": "be3a9ce7817c876e8d9bc900556fea1fbaeb4f0d5d4e03003ab24a7ad3b600bb",
+      "platform": {
+        "format": 1,
+        "target": "wasm32-wasm-posix",
+        "features": [
+          "posix-core",
+          "unix-stream",
+          "unix-rights",
+          "unix-dgram",
+          "unix-seqpacket",
+          "flock",
+          "eventfd",
+          "posix-named-semaphores",
+          "closefrom",
+          "pthreads",
+          "sdl3-vt",
+          "sdl3-ime",
+          "webgpu"
+        ],
+        "legacyRuntime": "2a9cca447a35af0d0d8894ea4b50cb254ce20821753af8ae70a1ad5060da2a0f",
+        "version": "1.0.2",
+        "runtimeAbi": 5,
+        "objectAbi": 3
+      },
+      "toolchain": {
+        "version": "0.5.13",
+        "runtimeVersion": "0.5.9",
+        "live": "ed0c29736ebd42f01f5ad4a2f8b49b6e5e096486a8c893c34a0d7ba9cd290378",
+        "id": "529ba3b935c6dbfdefb4a1ee316cde7821f1b7dc34168e09b987b80468433bfd",
+        "abi": {
+          "objects": 3,
+          "runtime": 5
+        },
+        "systemBuild": "be3a9ce7817c876e8d9bc900556fea1fbaeb4f0d5d4e03003ab24a7ad3b600bb",
+        "libcDigest": "f45a2be27599f654782c341da2a0180c9cd45b62bfe236099b68f16ed376f6a3"
+      },
+      "bootstrap": [
+        "libc",
+        "ash",
+        "busybox",
+        "cc",
+        "ar",
+        "make",
+        "guc-fetch",
+        "gucman"
+      ]
+    },
+    "systemBuild": "be3a9ce7817c876e8d9bc900556fea1fbaeb4f0d5d4e03003ab24a7ad3b600bb"
+  },
+  "installed": {
+    "path": "/usr/local/bin/jsmn-example",
+    "size": 11346,
+    "sha256": "a9c7a4a06264b1f10e7aae2d7cd6dac2bdaa9a11d8eb2364d78cfa2bfcf2197d"
+  },
+  "reloadIdentity": {
+    "build": {
+      "format": 1,
+      "runtime": "be3a9ce7817c876e8d9bc900556fea1fbaeb4f0d5d4e03003ab24a7ad3b600bb",
+      "platform": {
+        "format": 1,
+        "target": "wasm32-wasm-posix",
+        "features": [
+          "posix-core",
+          "unix-stream",
+          "unix-rights",
+          "unix-dgram",
+          "unix-seqpacket",
+          "flock",
+          "eventfd",
+          "posix-named-semaphores",
+          "closefrom",
+          "pthreads",
+          "sdl3-vt",
+          "sdl3-ime",
+          "webgpu"
+        ],
+        "legacyRuntime": "2a9cca447a35af0d0d8894ea4b50cb254ce20821753af8ae70a1ad5060da2a0f",
+        "version": "1.0.2",
+        "runtimeAbi": 5,
+        "objectAbi": 3
+      },
+      "toolchain": {
+        "version": "0.5.13",
+        "runtimeVersion": "0.5.9",
+        "live": "ed0c29736ebd42f01f5ad4a2f8b49b6e5e096486a8c893c34a0d7ba9cd290378",
+        "id": "529ba3b935c6dbfdefb4a1ee316cde7821f1b7dc34168e09b987b80468433bfd",
+        "abi": {
+          "objects": 3,
+          "runtime": 5
+        },
+        "systemBuild": "be3a9ce7817c876e8d9bc900556fea1fbaeb4f0d5d4e03003ab24a7ad3b600bb",
+        "libcDigest": "f45a2be27599f654782c341da2a0180c9cd45b62bfe236099b68f16ed376f6a3"
+      },
+      "bootstrap": [
+        "libc",
+        "ash",
+        "busybox",
+        "cc",
+        "ar",
+        "make",
+        "guc-fetch",
+        "gucman"
+      ]
+    },
+    "systemBuild": "be3a9ce7817c876e8d9bc900556fea1fbaeb4f0d5d4e03003ab24a7ad3b600bb"
+  },
+  "reloaded": {
+    "path": "/usr/local/bin/jsmn-example",
+    "size": 11346,
+    "sha256": "a9c7a4a06264b1f10e7aae2d7cd6dac2bdaa9a11d8eb2364d78cfa2bfcf2197d"
+  },
+  "distUnchanged": true,
+  "headUnchanged": true,
+  "statusUnchanged": true,
+  "completedUTC": "2026-10-11T09:24:37.549Z"
+}

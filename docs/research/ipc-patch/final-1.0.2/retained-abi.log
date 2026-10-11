@@ -1,0 +1,24 @@
+HOST-PROVENANCE-PASS
+prepare
+
+installed-hashes PASS
+unchanged-old-app
+OLD-ANSWER-42
+
+unchanged-old-dynamic
+OLD-DSO-42
+
+relink-old-archive
+3 functions, 5133 bytes
+OLD-ANSWER-42
+
+relink-old-object
+3 functions, 5137 bytes
+OLD-ANSWER-42
+
+post-run-hashes PASS
+reload-old-dynamic
+OLD-DSO-42
+
+reload-hashes PASS
+RETAINED-ARTIFACT-ABI-PASS

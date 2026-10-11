@@ -1,0 +1,69 @@
+{
+  "format": 1,
+  "name": "jsmn",
+  "version": "1.1.0-1",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "jsmn.h",
+      "url": "https://raw.githubusercontent.com/zserge/jsmn/v1.1.0/jsmn.h",
+      "size": 12023,
+      "sha256": "1ed6154dedf009212a08a397e9c4ed50a0ce31d5a8301bb294e137ae3188c13b"
+    },
+    {
+      "path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/zserge/jsmn/v1.1.0/LICENSE",
+      "size": 1061,
+      "sha256": "4675b94a50d2afe811c52785463c854f1156056632cce17cc7133939eac8ed55"
+    },
+    {
+      "path": "example/simple.c",
+      "url": "https://raw.githubusercontent.com/zserge/jsmn/v1.1.0/example/simple.c",
+      "size": 2410,
+      "sha256": "c2edd18970e7c1bb900a22fcf49e6f02ec2fa82bcbdc79ae576130174b0689c6"
+    },
+    {
+      "path": "Makefile",
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/7957e76bf1b80eb9976982d7ca55c8a249aab42c/apps/jsmn/Makefile",
+      "sha256": "3ce0834fa12de87b86f3e6e8b2e83bf4f6cd1d7b2cf4edb7963b6fb92bd72507",
+      "size": 293
+    },
+    {
+      "path": "build.sh",
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/7957e76bf1b80eb9976982d7ca55c8a249aab42c/apps/jsmn/build.sh",
+      "sha256": "561d84edf4b8ab484bd0a25eab357de228bdbbd5775ff91acac60934df0d9f3e",
+      "size": 139
+    },
+    {
+      "path": "test.sh",
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/7957e76bf1b80eb9976982d7ca55c8a249aab42c/apps/jsmn/test.sh",
+      "sha256": "4eae192a754e7ec985db65300be5c19b63adbec9b3bb7d5aa75d02093e33ccb1",
+      "size": 210
+    }
+  ],
+  "build": "build.sh",
+  "test": "test.sh",
+  "outputs": [
+    {
+      "path": "bin/jsmn-example",
+      "mode": 493
+    },
+    {
+      "path": "include/jsmn.h",
+      "mode": 420
+    },
+    {
+      "path": "share/licenses/jsmn/LICENSE",
+      "mode": 420
+    }
+  ],
+  "licenses": [
+    "share/licenses/jsmn/LICENSE"
+  ],
+  "runtime": "2a9cca447a35af0d0d8894ea4b50cb254ce20821753af8ae70a1ad5060da2a0f",
+  "binary": {
+    "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9a9b1dd86716ec3b754bc335a011b8604fce67d5/apps/jsmn/binaries/62a4b0e98744881284d52d278abb06ff2feec6794baa067a3cfa047638a3d4af.tar",
+    "sha256": "62a4b0e98744881284d52d278abb06ff2feec6794baa067a3cfa047638a3d4af",
+    "size": 28160
+  }
+}

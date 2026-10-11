@@ -1,0 +1,460 @@
+{
+  "format": 1,
+  "packages": {
+    "jsmn": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/jsmn/package.json",
+      "sha256": "aa46ef646bbf3907c5e2fc2091f87d32926b43c3c32cdc6c3c6c2f8c89dda79e",
+      "size": 2336
+    },
+    "x11-server": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/x11-server/package.json",
+      "sha256": "41b84289ec9ca12c50c0927b5c2ebcb65196d82f9cc0f261b9eba2a78db51bee",
+      "size": 47963
+    },
+    "x11-toolkit": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/x11-toolkit/package.json",
+      "sha256": "f88463fac530ec1c25338011e10c6e9987bc2f8065695dd3e07556546d9c880b",
+      "size": 13770
+    },
+    "twm": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/twm/package.json",
+      "sha256": "7fb9ba31dbc28a894e2f0831858fcc996c97a154f258d0fc3f88d3a7f8f8b08b",
+      "size": 1360
+    },
+    "jwm": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/c1ca6febf8ac7262a2322ea11afe5f668e7249be/apps/jwm/package.json",
+      "sha256": "9ed55295dbafac39bcbce7c394008283bf031f2dd26f0abbaae277dc8e4d5f77",
+      "size": 3074
+    },
+    "lua": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/lua/package.json",
+      "sha256": "2a21862132f9f7aa3b8ed92e012cd716a549726a551d5b9f5ee3c860602de160",
+      "size": 2038
+    },
+    "x11-widgets": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/x11-widgets/package.json",
+      "sha256": "b2448c890c401d6405499d62b055480d93197968a949929e00cc683f3a88f406",
+      "size": 3420
+    },
+    "xcalc": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/xcalc/package.json",
+      "sha256": "454593374c2248b01370b58d32590e54edce275d275412ca584c59a197c26d24",
+      "size": 2072
+    },
+    "xclock": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/xclock/package.json",
+      "sha256": "7895e267c66c89dd88aa4ad69a60bd9fbcfc4bc24cba35f51ae11cc599f9ac39",
+      "size": 2257
+    },
+    "xev": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/xev/package.json",
+      "sha256": "cf7b7a1eabf0b7492fced1192bcc2bd34c104df02382d0d28090b2271634df83",
+      "size": 3105
+    },
+    "xeyes": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/xeyes/package.json",
+      "sha256": "a9d0ae965163732e47433d3880a4d07c91e49ebba68fb5ecf11fa1879b119955",
+      "size": 2191
+    },
+    "xkill": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/xkill/package.json",
+      "sha256": "cde06dfe1994b76368dbbedccec07fd7cac81cb77dc7e38d448a0dd9914ba199",
+      "size": 1912
+    },
+    "xlogo": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/xlogo/package.json",
+      "sha256": "8e5c00b455b28c3621a7c3c6d55bc04745abfc508c5fb299521c8862896d7e20",
+      "size": 2072
+    },
+    "xlsfonts": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/xlsfonts/package.json",
+      "sha256": "4ec46ba7b49e126c6f1d1f84d405078c3f50fcbafdf5cd7915b18ad752707830",
+      "size": 1939
+    },
+    "xmessage": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/xmessage/package.json",
+      "sha256": "7f3547209f88a1f0db912e65dc0115ec66ec65e3df3fcace9c3afdb92b4d0b08",
+      "size": 3267
+    },
+    "xprop": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/xprop/package.json",
+      "sha256": "07b80ea5fc6cac296d6ee81f99caed74a7cfaa4df276a93c514fe91129a4ed46",
+      "size": 3170
+    },
+    "xrefresh": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/xrefresh/package.json",
+      "sha256": "46707690d1e3cbcdac414f30c1f659cfefc164252d86acac476ff0d9337f2255",
+      "size": 1939
+    },
+    "xterm": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/xterm/package.json",
+      "sha256": "a7b83cb17c95f72786e106f350880406be2b1724aecbb14b39f196a57df933be",
+      "size": 3315
+    },
+    "zstd": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/zstd/package.json",
+      "sha256": "57bfba56c050ba9057c42e53d04fceb70c832c65b670367c37d5b11637554df4",
+      "size": 2047
+    },
+    "zlib": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/zlib/package.json",
+      "sha256": "685d5e7418bbe30165f3a7bb76ccd9874aef7d10755cdffd42aeed02a3bb7e9a",
+      "size": 2061
+    },
+    "cjson": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/cjson/package.json",
+      "sha256": "76d4b23ee54604e0656248909975d1ee539e5e7dbe8e2593a4e81c5072133063",
+      "size": 1949
+    },
+    "pkgconf": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/pkgconf/package.json",
+      "sha256": "7a872b80cd517ddecdf22b37f5365965f8a2012bcab70ed41cee08ae03d1c8c8",
+      "size": 1868
+    },
+    "bzip2": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/bzip2/package.json",
+      "sha256": "24a900108d412d508cef8ada2a148b727e402029b81f600311f4315a2a2a80f5",
+      "size": 1907
+    },
+    "bzip2recover": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/bzip2recover/package.json",
+      "sha256": "25658793f133b8a4292f8593552b3dffe391a48e74e73131bad0ceb7a9b04daf",
+      "size": 1844
+    },
+    "expat": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/expat/package.json",
+      "sha256": "16d90ab08c6975d299258338f7f9caf5cf073f7efff4375aec0be033aa5d14ba",
+      "size": 2087
+    },
+    "xfontsel": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/xfontsel/package.json",
+      "sha256": "3900df632357bac53ec2dd0fc46d8fe50b47295c94c9cff950753eb80f0354dc",
+      "size": 2274
+    },
+    "xclipboard": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/xclipboard/package.json",
+      "sha256": "44cdad574d42606665b0bdaf8efe90047b434938a50a6bc1b37abd4e626fd07d",
+      "size": 2294
+    },
+    "xcutsel": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/xcutsel/package.json",
+      "sha256": "c71bfb8fe1e006d934a1614c3af141a08b0cfbb8303ecd40d36b8898b16a121c",
+      "size": 2185
+    },
+    "oclock": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/oclock/package.json",
+      "sha256": "448c26b37f51db9ad88558afc99093397a70512167bdef1ec11a2c36519ee401",
+      "size": 2259
+    },
+    "xedit": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/xedit/package.json",
+      "sha256": "45d13e41f7894e7f83e3db0d3ca684dfafa5ba0f7b2dc53124ef11e964dea9bc",
+      "size": 5337
+    },
+    "libiconv": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/libiconv/package.json",
+      "sha256": "4a2bd95cd074758f7de2b04215fc6a908cb4d01fa62b0e18c83ff8e5df0d44d2",
+      "size": 2119
+    },
+    "pcre2": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/pcre2/package.json",
+      "sha256": "61c6dc37ad3a3cf70f03d63810ba4de17d7362a5022c9131ffe85e0d6caabf21",
+      "size": 2031
+    },
+    "libffi": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/libffi/package.json",
+      "sha256": "7190d821bc38a3b95b976a40b5432fb5e918db1c53abe503e4373be855fbaf94",
+      "size": 2081
+    },
+    "libintl": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/libintl/package.json",
+      "sha256": "7f84237875a542732114705b27f7ee67a8ab4e86bcb0c6598141b41209748634",
+      "size": 2246
+    },
+    "glib": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/glib/package.json",
+      "sha256": "ecd79d865a5bd52de81d9ae3cb40214d0be9371935ff5329e8c5a0b6aa34fc37",
+      "size": 13467
+    },
+    "gobject": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/gobject/package.json",
+      "sha256": "8f2c24522432cb4086488c091b4b4d66c2ae386ae49dabe7e756fd6a1110b64b",
+      "size": 4558
+    },
+    "pixman": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/pixman/package.json",
+      "sha256": "5de572e03927191cefb25569f525df8a78aec01d933a7d39cf693bb1852cdb71",
+      "size": 2143
+    },
+    "libpng": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/libpng/package.json",
+      "sha256": "5d6d516e4478bae2745ec81bc58340575a8f42570b54e97afeaff7e4aa88e0ad",
+      "size": 2222
+    },
+    "freetype": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/freetype/package.json",
+      "sha256": "744b24b8eecd9a854a0a2b925605073aef7308c3150a83ebb411cf4cd89e8606",
+      "size": 6862
+    },
+    "fontconfig": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/fontconfig/package.json",
+      "sha256": "32cd63833c06ba50fa56a8356069560728c5f04718c00c464caeb6d044f12ca6",
+      "size": 3509
+    },
+    "x11-shared": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/x11-shared/package.json",
+      "sha256": "d0f8882b0c29b7bef305c82f1e49d3da453ab8116e09d38e5fdeaeb7758fab94",
+      "size": 3519
+    },
+    "cairo": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/cairo/package.json",
+      "sha256": "8a56b59ddef323d47934fd9908759ddb97a97c9d96efdf2205afa609f8d27815",
+      "size": 4546
+    },
+    "gio-listmodel": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/gio-listmodel/package.json",
+      "sha256": "fffeb0a1d986741f2e0ae7a730b4fc8ec368b877bf842845822176be5c3d2335",
+      "size": 2811
+    },
+    "atk": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/atk/package.json",
+      "sha256": "2d88e52c8d47123cc06a9322605bfa8c36a71da498ff88009d183f2bff7fb6b7",
+      "size": 4981
+    },
+    "fribidi": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/fribidi/package.json",
+      "sha256": "2972067c8f57f9f090c88bce0920d0aecf9e7270d2a3e1ad4a0d920eafe1b6a2",
+      "size": 4735
+    },
+    "gio-core": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/gio-core/package.json",
+      "sha256": "e73ce4847fa3b8427db69c259562665f1a8a20e547e76ea52db3a5ddab66212d",
+      "size": 16515
+    },
+    "ed": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/ed/package.json",
+      "sha256": "ce0b4a81c41238f7ce09027d6ac3d362d5d2e97882a6830e0a9e0f6d774e7cbc",
+      "size": 1822
+    },
+    "jq": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/jq/package.json",
+      "sha256": "3bee99a6e0570c66549d2a7a09b5289f2293c3b2e021e0d65297888691cbf09c",
+      "size": 1913
+    },
+    "libjpeg": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/libjpeg/package.json",
+      "sha256": "53053e633530b517f2bc7fd48540b67618c1ed2ee174185175444ebe61b2f182",
+      "size": 2228
+    },
+    "libjpeg-turbo": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/libjpeg-turbo/package.json",
+      "sha256": "9efa2bc3f016ecf2002201e494f9c8d4a81ee81f5ca7f3dd4e6e6b792f5a0200",
+      "size": 2477
+    },
+    "gdk-pixbuf": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/gdk-pixbuf/package.json",
+      "sha256": "b82ae8212db092a30d9e30dfb445d974ac1017f4df35f743aff467f130ced4ac",
+      "size": 4134
+    },
+    "minihb": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/minihb/package.json",
+      "sha256": "5eab7c3a3681dafa16e9a59f3da51830cb54e4eae7b6d5ff35754abcb54f7a97",
+      "size": 5525
+    },
+    "cairo-gobject": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/cairo-gobject/package.json",
+      "sha256": "e1cd72d0808df13527a9045a3089af0c371343acccaaffeba4ba92604fbd1865",
+      "size": 2487
+    },
+    "gtk3-schemas": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/gtk3-schemas/package.json",
+      "sha256": "07fad8b204ff474e285e0ad34a3213dab9f10b6af282c1a223fc5dd3e470f94a",
+      "size": 3822
+    },
+    "libevent": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/libevent/package.json",
+      "sha256": "ef7d914212c861097f27b0ed7dc8059e154c0a55a0b80ef2a6cf5fd8534fc254",
+      "size": 4025
+    },
+    "libuv": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/libuv/package.json",
+      "sha256": "f7ecd54c04cf195cac1db041cbb8bd60f7243399e1a355b2a1f0ab10448b0ee4",
+      "size": 3313
+    },
+    "pigz": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/pigz/package.json",
+      "sha256": "4a3dd9691ba927acf26aa2d5d782851518a0225594983e2f1c67153583c3284d",
+      "size": 1918
+    },
+    "nyancat": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/nyancat/package.json",
+      "sha256": "3a19e68aaa1d5eedf945652a71ece60a3bdc8dc5e7e9faf90c6ca91b86fe3416",
+      "size": 2038
+    },
+    "sqlite3": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/sqlite3/package.json",
+      "sha256": "caa22a834d529ab36719fd6c10fdff00a085f734f18cdaea834f57cb225aef02",
+      "size": 1840
+    },
+    "qjs": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/qjs/package.json",
+      "sha256": "f8b62357d7089d718396fc46aad5bea50ddc48b629ac2017e871a53005ccd1d1",
+      "size": 1799
+    },
+    "harfbuzz-static": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/harfbuzz-static/package.json",
+      "sha256": "33385a951092bdeb92551cda55a39268b42a581e0b04e53827604f6e5343740d",
+      "size": 2832
+    },
+    "harfbuzz": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/harfbuzz/package.json",
+      "sha256": "3d8639405a71d85f5e17dc350f4ddc9ce77e7f64af94b0830f56db737feab4ab",
+      "size": 6431
+    },
+    "pango": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/pango/package.json",
+      "sha256": "73f178930e89540b863c17fb7bc7a6b8f7e9e62ba7f5116961401d4e454bc8c6",
+      "size": 6443
+    },
+    "snake": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/fe7234e26d5913fdeede1266220e3bf79409f434/apps/snake/package.json",
+      "sha256": "1ff119577c14240d69a186303f472bc86fd46ff9c290fece11833594e6269974",
+      "size": 3751
+    },
+    "lua55": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/lua55/package.json",
+      "sha256": "1f582aa256e4ae93a341589d5167ee6a583f39ccddbc3b1553bbd739684ddb46",
+      "size": 2158
+    },
+    "lpeg": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/lpeg/package.json",
+      "sha256": "6a6192492c75290fa2a305bad8e5a9fcf2d969e377866a67017d1de5a4851154",
+      "size": 2071
+    },
+    "2048": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/2048/package.json",
+      "sha256": "ede778fc40ab4a8b45c820e3c539779500dcd13dd5259964fc7ff4cefcb21592",
+      "size": 1929
+    },
+    "sqlite-series": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/sqlite-series/package.json",
+      "sha256": "55d6341ad9e2935cf3871725931e0c669194f7d57a08ea45ddb34e6a9cd4003d",
+      "size": 1932
+    },
+    "pcg32": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/pcg32/package.json",
+      "sha256": "0e2838ae5bb77a7abf2007e5351b162eba84c55afb8beb9f273425c8718b8be1",
+      "size": 2393
+    },
+    "gtk3-x11": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/9474fca194c5e2f23b321a50a8ba08227888d10f/apps/gtk3-x11/package.json",
+      "sha256": "0b370341dec3e4a11305eaa07e6669c03ead38c3280492fd3c14d1d80a4c7835",
+      "size": 69181
+    },
+    "desktop-entries": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/c1ca6febf8ac7262a2322ea11afe5f668e7249be/apps/desktop-entries/package.json",
+      "sha256": "42a6ff667b0007f906030df686980797af6c6601ad30d382f14f349ffc5de5bb",
+      "size": 2813
+    },
+    "sdl3-gfx": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/523d1fedf9ba61d3b03e1ff2f059cf1f0e5e3f78/apps/sdl3-gfx/package.json",
+      "sha256": "1910011e5fb53c7734f58c581dbbc824dcc9f2ee9cac37b25d821c1b1e40d32d",
+      "size": 2082
+    },
+    "sdl3-image": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/523d1fedf9ba61d3b03e1ff2f059cf1f0e5e3f78/apps/sdl3-image/package.json",
+      "sha256": "931a2e73a7d8aaff21a77730017ebaafa4f1030cadacd75682e5425eaa18cbec",
+      "size": 2104
+    },
+    "sdl3-mixer": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/523d1fedf9ba61d3b03e1ff2f059cf1f0e5e3f78/apps/sdl3-mixer/package.json",
+      "sha256": "4ab7fa51a571ab3e3e83d77ff8c9d17b324778468c9ab01c123a1c0f4129a2bb",
+      "size": 2123
+    },
+    "micropython": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/02d2bfed5e2b717a9bb198a507b8ee2b6a60b898/apps/micropython/package.json",
+      "sha256": "e20b2168af8ba33d50f086255b2bf88d940a1bf691376f5e237dfcf4e165c698",
+      "size": 1967
+    },
+    "gameboy": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/cbd6f3a5d85541b7763f75778594f01c463095b9/apps/gameboy/package.json",
+      "sha256": "b79f39335e6b0ac90a82d5cbb3695916544bbce6641f401a33904bff57d4d7e5",
+      "size": 2227
+    },
+    "m4": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/109d929464bcd880c564ad234b0779aae80f6814/apps/m4/package.json",
+      "sha256": "83f202c1a470ca6e1f75354635eab0005e0137fe85e412ca4d469e6c07ed0d73",
+      "size": 2114
+    },
+    "pcre2test": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/109d929464bcd880c564ad234b0779aae80f6814/apps/pcre2test/package.json",
+      "sha256": "a710952e44c302ac9978d18894d922ef18498b1f1b730bc92cf51daf03a798a0",
+      "size": 2135
+    },
+    "pcre2grep": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/109d929464bcd880c564ad234b0779aae80f6814/apps/pcre2grep/package.json",
+      "sha256": "5edc1a3da336fd388ba1dbd93d5f33c42bcbb229a6fa601c812cc9d6a1c96fbd",
+      "size": 2209
+    },
+    "libxfce4util": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/109d929464bcd880c564ad234b0779aae80f6814/apps/libxfce4util/package.json",
+      "sha256": "d3fff17f750020e95e9672526e5d24bbbb3b6e31488ef841c2bd94cb2b6fade6",
+      "size": 4356
+    },
+    "bitmap": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/109d929464bcd880c564ad234b0779aae80f6814/apps/bitmap/package.json",
+      "sha256": "b8d2ff2df6b2c3a5ea8580c0010ce6054312ca3cf7bf9e325ffe05f04d41a951",
+      "size": 3676
+    },
+    "xmag": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/109d929464bcd880c564ad234b0779aae80f6814/apps/xmag/package.json",
+      "sha256": "e3cb83ab8b047a9a130038b5eefe1d2eea37a091dd1928352a937e582e1b11fc",
+      "size": 2171
+    },
+    "sdl3-ttf": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/109d929464bcd880c564ad234b0779aae80f6814/apps/sdl3-ttf/package.json",
+      "sha256": "2ed3c441343685bbaa48ef755e86def0a907b416b6d4df7c629e67ac26720b48",
+      "size": 2778
+    },
+    "tcl": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/95e9bbcac6b8d437d8d2591f7253f2a219f29cd7/apps/tcl/package.json",
+      "sha256": "c0eb80d0a1853db381ea55a18385985bf0add8695d3ad13c00b025094de53530",
+      "size": 68744
+    },
+    "tk": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/95e9bbcac6b8d437d8d2591f7253f2a219f29cd7/apps/tk/package.json",
+      "sha256": "b73e5bd33e94f2b5956a6a6789849609e9a0c5d2fc9aacac3e10e2d285b18d07",
+      "size": 15916
+    },
+    "l3afpad": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/882f308737123246612bf428774bb4af7e1c1f48/apps/l3afpad/package.json",
+      "sha256": "1d69e96ace2f94370a67b4dc77e80f8532146c37351c6269c4fa9e68e51114f9",
+      "size": 3061
+    },
+    "desktop-apps": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/f1690a45a32223ee5e2dcdbed3ef858b0dfedcbb/apps/desktop-apps/package.json",
+      "sha256": "4ce26eb853baeda9fbefceb2d2b79b9319fb95784e1259863267552f1dea3803",
+      "size": 4392
+    },
+    "libcurl": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/ab2a7f6eed3bdf98b4477e707289f4be457c5e66/apps/libcurl/package.json",
+      "sha256": "d38bbfd35a83d679940a0a6ce881ce3b5b3055141e2b1f7aee4dc0c02d250c41",
+      "size": 3045
+    },
+    "gucode": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/ab2a7f6eed3bdf98b4477e707289f4be457c5e66/apps/gucode/package.json",
+      "sha256": "18b80fdd06c809090c88623a45f9a0d000ea287d1150bc349d8e1890897d2bb4",
+      "size": 1990
+    },
+    "xmahjongg": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/6369573f28d5421366f4a6fa016964b1a6f22589/apps/xmahjongg/package.json",
+      "sha256": "9361f5880fee4789aed13702a58075b7623eca8ff28b2d16a045553976be7751",
+      "size": 3295
+    },
+    "puzzles": {
+      "url": "https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/5dc7e9ce57794316a454e969419a0e720953a6dc/apps/puzzles/package.json",
+      "sha256": "87fde4d8a5c66d6a4857916c287a3b0edf03c94c58e16a004af0ecdb61d23be4",
+      "size": 13501
+    }
+  }
+}
