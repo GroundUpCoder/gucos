@@ -60,3 +60,19 @@ by these candidate results.
 The adapted upstream probes remain one-off research evidence. They are not
 added to the recurring core test gates; selected handwritten regressions live
 under tests/.
+
+## Tmux integration blocker: closing inherited descriptors
+
+The package worker reports that integrated-07 compiled all tmux C translation
+units, then failed linking getdtablesize from upstream's closefrom fallback.
+The current core reports no finite open-descriptor limit and does not expose
+descriptor enumeration through procfs. A guessed scan bound would leave high
+inherited descriptors open. Existing spawn closefrom actions already enumerate
+the kernel fd map, but do not provide a callable API in forked processes.
+
+A standalone closefrom API is being implemented in an isolated remote checkout.
+It must cover both broker descriptors and sealed process-local descriptors,
+preserve descriptors below the threshold, and perform normal ownership cleanup.
+The tested baae3b75 candidate does not contain this addition. Tmux lifecycle is
+blocked pending the new implementation, review, and guest validation. No finite
+descriptor limit or descriptor-count result is fabricated for the package.
