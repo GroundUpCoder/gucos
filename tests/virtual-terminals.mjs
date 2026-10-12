@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import {browserSession} from '../tools/browser.mjs';
 const s=await browserSession({gpu:true});
+s.page.setDefaultTimeout(30000);
 try {
  await s.command('true');
  await s.page.evaluate(async()=>shell.busybox.write('/tmp/vt.c',new TextEncoder().encode(`

@@ -1,7 +1,9 @@
 # gucos
 
 A standalone browser OS with a persistent filesystem, BusyBox shell, C compiler,
-libc, GNU Make, archive tools and HTTP downloads. Applications are discovered,
+libc, GNU Make, archive tools and HTTP downloads. New terminal VTs and persistent
+DeepSeek agent conversations are available from the bottom bar; see
+[agent setup and persistence](docs/AGENT.md). Applications are discovered,
 built and installed by the browser from configured package repositories.
 
 The application boundary and compatibility rules are documented in
@@ -10,11 +12,13 @@ The application boundary and compatibility rules are documented in
 Build and serve with Node (tested with 25.8.2):
 
 ```sh
+pnpm install --frozen-lockfile
 node tools/build.mjs
 node tools/serve.mjs
 ```
 
-No npm install, package checkout or network access is required by the core build.
+Install the pinned frontend/build dependencies once with pnpm. After installation,
+the core build requires no network access or application-package checkout.
 Open the printed local URL in a Chromium browser supporting JSPI and shared memory.
 The server supplies the required isolation headers. The generated `dist/` contains
 the OS, bootstrap source offers and license notices.

@@ -1,0 +1,10 @@
+{
+  "runtime": "89250c7b2d43fbb9845431a61e01f7a06cb5b7a1da6c026193a60c578bd6cf9d",
+  "platform": "1.0.3",
+  "release": "releases/agent-vt-1.0.3",
+  "manifest_sha256": "bff1a3f6e7490524e2d37a690b8eb3950b9d2d709f46ab194c24d0c6ca7da0d2",
+  "pages_manifest_sha256": "ea1e7c232db66d0df80882ee5f3f8a1eaa0d047d8df5f5c22ddbfa4b7a3d627c",
+  "credential_scan": "No operator DeepSeek or Cloudflare credential matched public release bytes.",
+  "previous_release": "releases/terminal-echo-1.0.2-final",
+  "previous_production": "https://efa1c19e.gucos.pages.dev"
+}

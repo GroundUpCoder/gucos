@@ -27,6 +27,7 @@ export async function hostedPayload(payload,root){
     await ensureGzip(file);assetURLs.add(url);identities[url]={sha256:hash,size:bytes.length};return url;
   };
   const p={...payload,hosted:true,files:{},binaryFiles:{},prebuilt:{},sourceArchives:{},dataFiles:{}};
+  if(payload.agentHTML){p.agentHTMLURL=await asset(Buffer.from(payload.agentHTML),'html');delete p.agentHTML;}
   const trees=new Map();
   for(const [path,value] of [...Object.entries(payload.files),...Object.entries(payload.binaryFiles)]){
     const bytes=Object.hasOwn(payload.binaryFiles,path)?Buffer.from(value,'base64'):Buffer.from(value);

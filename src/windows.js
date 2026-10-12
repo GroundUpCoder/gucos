@@ -9,13 +9,14 @@ class VirtualTerminal {
     if (document.pointerLockElement) document.exitPointerLock();
     this.active = vt;
     document.getElementById('terminal').hidden = !!vt;
+    document.getElementById('terminal-focus').setAttribute('aria-selected',String(!vt));
     for (const item of this.terminals) {
       const active = item === vt && !item.programHidden;
       item.element.hidden = !active;
       item.task.setAttribute('aria-selected', String(active));
       item.visibility?.(active && !document.hidden);
     }
-    if (vt) vt.canvas.focus();
+    if (vt) {vt.canvas.focus();vt.task.scrollIntoView({block:'nearest',inline:'nearest'});}
     else window.shell?.terminal.focus();
   }
   constructor(canvas, close, resize, focusTerminal) {

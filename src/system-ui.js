@@ -82,7 +82,7 @@ function bindCanvasInput(canvas,send,textInput=false,graphicsText=false){
 }
 class BusyBoxSession {
   constructor(payload, ui, terminal) {
-    Object.assign(this,{payload,ui,terminal});this.windows=new Map();this.surfaceWindows=new Map();this.log='';this.ready=false;this.requests=new Map();this.nextId=1;this.compilations=new Map();
+    Object.assign(this,{payload,ui,terminal});this.windows=new Map();this.surfaceWindows=new Map();this.log='';this.ready=false;this.requests=new Map();this.nextId=1;this.compilations=new Map();this.terminals=new Map();this.rpcRequests=new Map();
     // Chromium can target BODY for native paste even while a canvas has focus.
     // Route that event to the focused surface; leave terminal/DOM inputs alone.
     this.nativePaste=event=>{
@@ -106,9 +106,13 @@ class BusyBoxSession {
     this.worker=new Worker(this.ownerURL,{name:'busybox-filesystem-owner'});
     this.done=new Promise((resolve,reject)=>{this.resolve=resolve;this.reject=reject;});
     this.worker.onmessage=({data})=>{
+      if(data.type==='request-error'){const r=this.requests.get(data.id);this.requests.delete(data.id);r?.reject?.(Error(data.error));}
+      if(data.type==='rpc-result'){const r=this.rpcRequests.get(data.id);if(r){this.rpcRequests.delete(data.id);data.error?r.reject(Error(data.error)):r.resolve(data.value);}}
+      if(data.type==='terminal-output')this.terminals.get(data.terminalId)?.terminal.write(data.text);
+      if(data.type==='terminal-exit'){const r=this.terminals.get(data.terminalId);if(r){r.exited=true;r.terminal.write('\r\n[Shell exited. Close this VT or open a new terminal.]\r\n');}}
       if(data.type==='boot-progress')startup.update(data);
       if(data.type==='output'){this.log+=data.text;this.ui.print(data.text);}
-      if(data.type==='ready'){startup.finish();if(this.payload.hosted){for(const path of Object.keys(edited))delete edited[path];try{localStorage.removeItem(storageNames.edits);}catch{}}this.ready=true;this.persistence=data.persistence;$('status').textContent='BusyBox · '+data.persistence;}
+      if(data.type==='ready'){startup.finish();if(this.payload.hosted){for(const path of Object.keys(edited))delete edited[path];try{localStorage.removeItem(storageNames.edits);}catch{}}this.ready=true;this.persistence=data.persistence;window.dispatchEvent(new Event('gucos-ready'));$('status').textContent='BusyBox · '+data.persistence;}
       if(data.type==='compilation'){if(data.active)this.compilations.set(data.id,data);else this.compilations.delete(data.id);}
       if(data.type==='built'){this.ui.print(`${data.name}: ${data.stats.functions} functions, ${data.stats.bytes} bytes\n`);}
       if(data.type==='clipboard')navigator.clipboard?.writeText(data.text).catch(()=>{});
@@ -183,11 +187,35 @@ class BusyBoxSession {
     bindCanvasInput(canvas,send,false,true);
     const offscreen=canvas.transferControlToOffscreen();this.worker.postMessage({type:'canvas',pid,canvas:offscreen},[offscreen]);
   }
-  metadata(path){return new Promise(resolve=>{const id=this.nextId++;this.requests.set(id,resolve);this.worker.postMessage({type:'metadata',path,id});});}
-  read(path){return new Promise(resolve=>{const id=this.nextId++;this.requests.set(id,resolve);this.worker.postMessage({type:'read-file',path,id});});}
+  rpc(op,args={}){
+    if(!this.ready)return Promise.reject(Error('Wait for gucOS to finish starting.'));
+    const id=this.nextId++;
+    const promise=new Promise((resolve,reject)=>{this.rpcRequests.set(id,{resolve,reject});this.worker.postMessage({type:'rpc',op,args,id});});
+    promise.requestId=id;return promise;
+  }
+  async newTerminal(){
+    const id=crypto.randomUUID(),element=document.createElement('div');element.className='terminal-vt';element.tabIndex=-1;
+    const terminal=new window.Terminal({...this.terminal.options}),fit=new window.FitAddon.FitAddon();terminal.loadAddon(fit);
+    const win=new VirtualTerminal(element,()=>{},()=>fit.fit(),()=>terminal.focus());
+    win.title.textContent='›_ terminal '+(++BusyBoxSession.terminalNumber);
+    terminal.open(element);element.focus=()=>terminal.focus();
+    const record={terminal,win,exited:false};this.terminals.set(id,record);
+    terminal.onData(text=>{if(!record.exited)this.worker.postMessage({type:'terminal-input',terminalId:id,text});});
+    terminal.onResize(({cols,rows})=>this.worker.postMessage({type:'terminal-resize',terminalId:id,cols,rows}));
+    win.show({resizable:true});fit.fit();
+    const close=document.createElement('button');close.className='vt-close';close.textContent='Close terminal';
+    close.onclick=async()=>{await this.rpc('terminal-close',{terminalId:id});this.terminals.delete(id);terminal.dispose();win.destroy();};win.element.append(close);
+    try{await this.rpc('terminal-open',{terminalId:id,cols:terminal.cols,rows:terminal.rows});}catch(e){this.terminals.delete(id);terminal.dispose();win.destroy();throw e;}
+    return id;
+  }
+  metadata(path){return new Promise((resolve,reject)=>{resolve.reject=reject;const id=this.nextId++;this.requests.set(id,resolve);this.worker.postMessage({type:'metadata',path,id});});}
+  read(path){return new Promise((resolve,reject)=>{resolve.reject=reject;const id=this.nextId++;this.requests.set(id,resolve);this.worker.postMessage({type:'read-file',path,id});});}
   // Host harnesses seed disk files (cached package artifacts) into a running session.
-  write(path,bytes){return new Promise(resolve=>{const id=this.nextId++;this.requests.set(id,resolve);this.worker.postMessage({type:'write-file',path,bytes,id});});}
+  write(path,bytes){return new Promise((resolve,reject)=>{resolve.reject=reject;const id=this.nextId++;this.requests.set(id,resolve);this.worker.postMessage({type:'write-file',path,bytes,id});});}
   close(){
+    for(const r of this.requests.values())r.reject?.(Error('OS session closed'));this.requests.clear();
+    for(const r of this.rpcRequests.values())r.reject(Error('OS session closed'));this.rpcRequests.clear();
+    for(const r of this.terminals.values()){r.terminal.dispose();r.win.destroy();}this.terminals.clear();
     this.audioPlayer?.close();this.audioPlayer=null;
     document.removeEventListener('paste',this.nativePaste);
     window.removeEventListener('resize',this.screenSize);this.resizeSubscription?.dispose();for(const win of this.windows.values())win.destroy();this.windows.clear();for(const record of this.surfaceWindows.values())record.win.destroy();this.surfaceWindows.clear();
@@ -196,3 +224,5 @@ class BusyBoxSession {
     $('status').textContent='Bootstrap shell';
   }
 }
+
+BusyBoxSession.terminalNumber=1;

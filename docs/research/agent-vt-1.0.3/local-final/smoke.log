@@ -1,0 +1,9 @@
+/bin/sh
+cc -c hello.c -o hello.o
+cc hello.o -o hello
+2 functions, 4558 bytes
+MINIMAL-COMPILER-PASS
+hello.o
+groundupcoder	https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/main/catalog.json
+
+PASS: fresh boot, Make parallel recipe, compiler, archive, repository listing, persistence and reload

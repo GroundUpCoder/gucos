@@ -1,0 +1,3 @@
+[sdl-gpu] device lost: reason=destroyed msg=injected
+SDL_GetWGPUSurface: no such window 999
+PASS function probes: lost device blocks submissions, configure preserves visibility, invalid/stale SDL surface refused, relative movement retained

@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "baseline": "cc3227370c2ccfb2a5ed7ea97627dbd512ec19abfacd7bf2f5ca8dc27421f309",
+  "runtime": "89250c7b2d43fbb9845431a61e01f7a06cb5b7a1da6c026193a60c578bd6cf9d",
+  "retainedArtifactProvenance": {
+    "baseline": "2a9cca447a35af0d0d8894ea4b50cb254ce20821753af8ae70a1ad5060da2a0f",
+    "hashes": {
+      "answer.o": "bf2114660bc5c9fd72174182d534009dd68081b5603963a29327bb0bcb56647f",
+      "libanswer.a": "899f5d3e870bf6e774d69c300e1efdffdd77ee009743a39c7d4a6310eca27c0d",
+      "old-app": "59a8f4a1994062f613b18b438e770ba8b7cdaf94d615e61148436ff7158da55b",
+      "libanswer.so": "2cda7c9f20df4183852ee8f8831d94a3735a9c9dcb8c34f61904550f44725b5e",
+      "old-dynamic": "350f679c418b2bbe6a94cd8b775c7c5fd588345fd433695f4b0f8cc8e1baaac9"
+    },
+    "sources": {
+      "/tmp/answer.c": "int answer(void){return 42;}\n",
+      "/tmp/consumer.c": "#include <stdio.h>\nint answer(void);int main(void){printf(\"OLD-ANSWER-%d\\n\",answer());return answer()!=42;}\n",
+      "/tmp/dynamic.c": "#include <dlfcn.h>\n#include <stdio.h>\nint main(void){void *p=dlopen(\"/home/user/abi/libanswer.so\",RTLD_NOW);if(!p){puts(dlerror());return 1;}int(*fn)(void)=dlsym(p,\"answer\");if(!fn)return 2;printf(\"OLD-DSO-%d\\n\",fn());return fn()!=42;}\n"
+    }
+  },
+  "checks": [
+    "existing 1.0.2 disk upgrade",
+    "user marker preserved",
+    "unchanged executable and DSO run",
+    "unchanged object/archive relink",
+    "artifact hashes preserved",
+    "second reload"
+  ]
+}

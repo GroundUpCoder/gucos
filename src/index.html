@@ -8,9 +8,11 @@
 :root { color-scheme:dark; font:13px/1.4 ui-monospace,SFMono-Regular,Consolas,monospace; background:#0b1018; color:#d6e1ef; }
 * { box-sizing:border-box; } body { margin:0; overflow:hidden; } [hidden] { display:none !important; }
 #terminal { position:absolute; inset:12px 12px 42px; } .xterm { height:100%; } .xterm-viewport { scrollbar-width:thin; }
-#taskbar { position:fixed; inset:auto 0 0; height:32px; display:flex; align-items:center; gap:8px; padding:0 10px; background:#121b29; border-top:1px solid #29364a; z-index:2147483647; }
-button { font:inherit; color:#b9c9df; background:transparent; border:0; cursor:pointer; } button:hover { background:#27384d; color:#fff; } button:focus-visible { outline:1px solid #70ddb2; }
-#tasks { display:flex; gap:4px; min-width:0; overflow:auto; } #tasks button { max-width:190px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; padding:4px 10px; background:#202e40; }
+#taskbar { position:fixed; inset:auto 0 0; height:32px; display:flex; align-items:center; gap:8px; padding:0 10px; overflow-x:auto;scrollbar-width:none; background:#121b29; border-top:1px solid #29364a; z-index:2147483647; }
+button { font:inherit; color:#b9c9df; background:transparent; border:0; cursor:pointer; } button:disabled {opacity:.45;cursor:wait;} button:hover { background:#27384d; color:#fff; } button:focus-visible { outline:1px solid #70ddb2; }
+.terminal-vt {position:absolute;inset:12px 12px 36px;} .vt-close {position:absolute;right:12px;bottom:4px;} .agent-frame {width:100%;height:100%;border:0;display:block;}
+#taskbar>* {flex-shrink:0;white-space:nowrap;}
+#tasks { flex:1 0 auto;display:flex; gap:4px; } #tasks button { flex-shrink:0; max-width:190px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; padding:4px 10px; background:#202e40; }
 #status { margin-left:auto; font-size:11px; color:#7c93b0; white-space:nowrap; }
 .vt { position:fixed; inset:0 0 32px; background:#030508; }
 canvas { width:100%; height:100%; object-fit:contain; display:block; image-rendering:pixelated; outline:none; }
@@ -37,7 +39,7 @@ canvas { width:100%; height:100%; object-fit:contain; display:block; image-rende
 </section>
 <div id="terminal" aria-label="Terminal"></div>
 <div id="screens"></div>
-<footer id="taskbar"><button id="terminal-focus" title="Focus terminal">›_ terminal</button><button id="startup-toggle" aria-controls="startup" aria-expanded="true">Starting…</button><button id="import-files" title="Copy files into ~/Downloads">Import files</button><button id="export-file" title="Download a file">Export file…</button><input id="import-picker" type="file" multiple hidden><div id="tasks" role="tablist" aria-label="Virtual terminals"></div><a id="license-link" target="_blank" rel="noopener">Licenses</a><span id="status">Unpacking…</span><button id="reset-install" title="Delete this installation’s files and start fresh">Reset…</button></footer>
+<footer id="taskbar"><button id="terminal-focus" title="Focus terminal">›_ terminal</button><button id="new-terminal" disabled title="Open a new terminal VT">+ Terminal</button><button id="new-agent" disabled title="Open agent conversations">+ Agent</button><button id="startup-toggle" aria-controls="startup" aria-expanded="true">Starting…</button><button id="import-files" title="Copy files into ~/Downloads">Import files</button><button id="export-file" title="Download a file">Export file…</button><input id="import-picker" type="file" multiple hidden><div id="tasks" role="tablist" aria-label="Virtual terminals"></div><a id="license-link" target="_blank" rel="noopener">Licenses</a><span id="status">Unpacking…</span><button id="reset-install" title="Delete this installation’s files and start fresh">Reset…</button></footer>
 <script id="bundle" type="application/octet-stream">PAYLOAD</script>
 <script type="module">
 /* APP */

@@ -1,0 +1,75 @@
+{
+  "passed": true,
+  "runtime": "82783787536e8baacb7be345b0f2c34f2840b409f73366fa35cf7cf308c845cb",
+  "model": "deepseek-flash",
+  "blocks": [
+    {
+      "type": "text"
+    },
+    {
+      "type": "thinking",
+      "state": "complete"
+    },
+    {
+      "type": "toolUse",
+      "name": "Bash",
+      "state": "complete"
+    },
+    {
+      "type": "usage"
+    },
+    {
+      "type": "toolResult"
+    },
+    {
+      "type": "text",
+      "state": "complete"
+    },
+    {
+      "type": "usage"
+    }
+  ],
+  "usage": [
+    {
+      "id": "0c028b5c-0c4a-4e87-9737-6f3731aa84c3",
+      "createdAt": 1791767299232,
+      "turnId": "c3198e93-6021-4858-a438-da202fccd1ec",
+      "role": "system",
+      "type": "usage",
+      "messageId": "2652ee0d-209d-41f9-86ee-5b2d31f44ec5",
+      "model": "deepseek-flash",
+      "prompt_tokens": 695,
+      "completion_tokens": 72,
+      "total_tokens": 767,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 12
+      },
+      "prompt_cache_hit_tokens": 0,
+      "prompt_cache_miss_tokens": 695
+    },
+    {
+      "id": "52195ae5-69b5-4146-acc5-0e6147ede702",
+      "createdAt": 1791767300149,
+      "turnId": "c3198e93-6021-4858-a438-da202fccd1ec",
+      "role": "system",
+      "type": "usage",
+      "messageId": "cf05d4fd-ca6b-4ece-a667-be56e445dda3",
+      "model": "deepseek-flash",
+      "prompt_tokens": 790,
+      "completion_tokens": 54,
+      "total_tokens": 844,
+      "prompt_tokens_details": {
+        "cached_tokens": 640
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "prompt_cache_hit_tokens": 640,
+      "prompt_cache_miss_tokens": 150
+    }
+  ],
+  "scope": "Authenticated browser-to-DeepSeek SSE, real Bash tool writes and reads shared gucOS disk, assistant completion. Temporary guest credential never exported."
+}

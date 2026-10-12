@@ -30,3 +30,9 @@
   any later compositing work must fit the generic core interface.
 - Never silently migrate historical browser disks. New core uses wasm-posix-core-v1,
   its .journal and wasm-posix.core.files. Preserve os2, minimal and legacy namespaces.
+
+# OS version policy
+
+- OS upgrades default to patch version updates. Minor and major version updates
+  require explicit user approval, including seemingly small minor updates.
+- Flag possible backward compatibility issues before proceeding.

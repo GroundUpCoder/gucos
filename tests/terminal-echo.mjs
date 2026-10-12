@@ -21,8 +21,9 @@ try{
  await s.page.waitForFunction(()=>shell.busybox.log.includes('ab^[[D^A^EZ'));
  await s.page.waitForFunction(()=>{const b=shell.terminal.buffer.active;return Array.from({length:b.length},(_,i)=>b.getLine(i)?.translateToString(true)).includes('ab^[[D^A^EZ');});
  await s.page.locator('#startup').waitFor({state:'hidden'});
- await mkdir('docs/research/terminal-echo-1.0.2',{recursive:true});
- await s.page.screenshot({path:'docs/research/terminal-echo-1.0.2/'+(process.env.LIVE_CORE_URL?'public':'local')+'-echo.png'});
+ const evidence=process.env.AGENT_EVIDENCE||'docs/research/terminal-echo-1.0.2';
+ await mkdir(evidence,{recursive:true});
+ await s.page.screenshot({path:evidence+'/' +(process.env.LIVE_CORE_URL?'public':'local')+'-echo.png'});
  await s.page.keyboard.press('Enter');
  await s.page.waitForFunction(()=>shell.busybox.log.includes('ECHO-KEYBOARD-PASS'));
  await s.page.keyboard.type('exit');await s.page.keyboard.press('Enter');

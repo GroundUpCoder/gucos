@@ -1,0 +1,4 @@
+PASS two independent terminal VTs, shared disk and terminal cleanup
+Opened agent library
+Opened conversation
+PASS cc block grouping, real shell tool, flat persistence, restored draft/history and continuation

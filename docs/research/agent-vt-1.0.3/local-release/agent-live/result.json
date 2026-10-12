@@ -1,0 +1,69 @@
+{
+  "passed": true,
+  "runtime": "e96f1153dd1e0fb20690ad039bbb0d4db321253d2725be83a32f4b45bca443b0",
+  "model": "deepseek-flash",
+  "blocks": [
+    {
+      "type": "text"
+    },
+    {
+      "type": "thinking",
+      "state": "complete"
+    },
+    {
+      "type": "toolUse",
+      "name": "Bash",
+      "state": "complete"
+    },
+    {
+      "type": "usage"
+    },
+    {
+      "type": "toolResult"
+    },
+    {
+      "type": "thinking",
+      "state": "complete"
+    },
+    {
+      "type": "text",
+      "state": "complete"
+    },
+    {
+      "type": "usage"
+    }
+  ],
+  "usage": [
+    {
+      "id": "ff420315-1c8d-42da-81cc-38ceb34f20b5",
+      "createdAt": 1791768194561,
+      "turnId": "cb0bf62a-597a-4cd0-91a0-95eda31a63a9",
+      "role": "system",
+      "type": "usage",
+      "messageId": "3a542532-d2c4-4fdd-b1d8-9fb9b229fe55",
+      "model": "deepseek-flash",
+      "prompt_tokens": 695,
+      "completion_tokens": 175,
+      "total_tokens": 870,
+      "cached_tokens": 512,
+      "reasoning_tokens": 114,
+      "provider_usage": "{\"prompt_tokens\":695,\"completion_tokens\":175,\"total_tokens\":870,\"prompt_tokens_details\":{\"cached_tokens\":512},\"completion_tokens_details\":{\"reasoning_tokens\":114},\"prompt_cache_hit_tokens\":512,\"prompt_cache_miss_tokens\":183}"
+    },
+    {
+      "id": "aabd9afe-df8e-43af-a003-5b0b819c4882",
+      "createdAt": 1791768195904,
+      "turnId": "cb0bf62a-597a-4cd0-91a0-95eda31a63a9",
+      "role": "system",
+      "type": "usage",
+      "messageId": "17f91ca4-e867-44df-ab3e-f100133f8e10",
+      "model": "deepseek-flash",
+      "prompt_tokens": 903,
+      "completion_tokens": 145,
+      "total_tokens": 1048,
+      "cached_tokens": 768,
+      "reasoning_tokens": 25,
+      "provider_usage": "{\"prompt_tokens\":903,\"completion_tokens\":145,\"total_tokens\":1048,\"prompt_tokens_details\":{\"cached_tokens\":768},\"completion_tokens_details\":{\"reasoning_tokens\":25},\"prompt_cache_hit_tokens\":768,\"prompt_cache_miss_tokens\":135}"
+    }
+  ],
+  "scope": "Authenticated browser-to-DeepSeek SSE, real Bash tool writes and reads shared gucOS disk, assistant completion. Temporary guest credential never exported."
+}

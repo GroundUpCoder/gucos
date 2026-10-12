@@ -5,6 +5,7 @@ import {loadLibc,libcModule} from '../src/libc-sources.js';
 import {buildPrebuilt} from './prebuilt.mjs';
 import {buildIdentity} from './build-identity.mjs';
 import {hostedPayload} from './hosted-assets.mjs';
+import {buildAgentUI} from './build-agent-ui.mjs';
 import {packBundle} from './bundle.mjs';
 const root=new URL('../',import.meta.url),out=new URL('dist/',root);
 const read=p=>readFile(new URL(p,root),'utf8');
@@ -12,6 +13,7 @@ const sha=b=>createHash('sha256').update(b).digest('hex');
 const libc=loadLibc(),libcAsset=libcModule(libc);
 const join=async names=>(await Promise.all(names.map(read))).join('\n');
 const compilerJoin=async names=>(await Promise.all(names.map(async p=>(await read(p))+(p==='src/compiler.js'?'\n'+libcAsset:'')))).join('\n');
+const agent=await buildAgentUI(),agentHTML=agent.html;
 const files={};
 async function collect(dir,prefix){for(const e of (await readdir(new URL(dir,root),{withFileTypes:true})).sort((a,b)=>a.name.localeCompare(b.name))){
  const p=dir+'/'+e.name,target=prefix+'/'+e.name;
@@ -23,7 +25,7 @@ await collect('vendor/make','/usr/src/make');
 for(const name of ['ar.c','cc-driver.c','fetch.c','guc-links.c'])files['/usr/libexec/'+name]=await read('examples/'+name);
 for(const name of ['json','unpack','lock'])files['/usr/libexec/guc-repo-'+name+'.c']=await read('tools/guest-repository/'+name+'.c');
 const srcNames=(await readdir(new URL('src/',root))).sort();
-const buildId=sha(libc.manifest.digest+'\n'+await join(srcNames.map(n=>'src/'+n))+'\n'+JSON.stringify(files)+'\n'+await read('tools/versions.json')+'\n'+await read('tools/platform.json')+'\n'+await read('tools/guest-repository/manager.sh'));
+const buildId=sha(agentHTML+libc.manifest.digest+'\n'+await join(srcNames.map(n=>'src/'+n))+'\n'+JSON.stringify(files)+'\n'+await read('tools/versions.json')+'\n'+await read('tools/platform.json')+'\n'+await read('tools/guest-repository/manager.sh'));
 const versions=JSON.parse(await read('tools/versions.json'));
 const toolchain={...buildIdentity(versions,await join(['src/compiler.js','src/trampoline.js','src/objects.js','src/compile.js','src/compiler-driver.js','src/path.js'])),systemBuild:buildId,libcDigest:libc.manifest.digest};
 const prebuilt=await buildPrebuilt({sources:files,buildId,toolchain,root,log:console.log});
@@ -32,12 +34,12 @@ const host=await join(['src/dynamic-loader.js','src/host.js']),kernel=await read
 const runtime=buildId;
 const platform={...JSON.parse(await read('tools/platform.json')),version:versions.platform,runtimeAbi:versions.abi.runtime,objectAbi:versions.abi.objects};
 const repository={format:1,url:process.env.PACKAGE_REPOSITORY||'https://raw.githubusercontent.com/GroundUpCoder/gucos-packages/main/catalog.json',runtime,platform};
-const notices={platform:{},packages:{},trees:{}};
+const notices={platform:{'AGENT-UI-LICENSES.txt':agent.notices},packages:{},trees:{}};
 for(const name of ['COMPILER-LICENSE','MUSL-LICENSE','CORE-MATH-LICENSE','UNICODE-LICENSE.txt'])notices.platform[name]=await read('vendor/'+name);
 for(const name of ['XTERM-LICENSE','FIT-LICENSE'])notices.platform[name]=await read('vendor/terminal/'+name);
 for(const [tree,name] of [['busybox','LICENSE'],['make','COPYING']])notices.packages[tree]=notices.trees[tree]=await read('vendor/'+tree+'/'+name);
 notices.packages.make=notices.trees.make+='\n'+await read('vendor/make/COPYING.LIB');
-const payload={buildId,toolchain,versions,prebuilt,repository,
+const payload={agentHTML,buildId,toolchain,versions,prebuilt,repository,
  repositoryScripts:{manager:await read('tools/guest-repository/manager.sh')},
  systemCompiler:await compilerJoin(['src/path.js','src/compiler.js','src/trampoline.js','src/objects.js','src/compile.js','src/compiler-fs.js','src/compiler-driver.js','src/compiler-worker.js']),
  systemOwner:[host,kernel,await join(['src/path.js','src/file-locks.js','src/ipc-services.js','src/mapped-files.js','src/compiler-fs.js','src/compiler-jobs.js','src/system-files.js','src/journal.js','src/layout.js','src/packages.js','src/repository-boot.js','src/system-owner.js'])].join('\n'),

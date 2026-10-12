@@ -200,6 +200,9 @@ async function command(line, echo = true, interactive = false) {
   } else return run(cmd, args, interactive&&!background?null:'').pid;
 }
 ui = new ShellTerminal(terminal, command, save);
+window.addEventListener('gucos-ready',()=>{$('new-terminal').disabled=false;$('new-agent').disabled=false;});
+$('new-terminal').onclick=()=>busybox?.newTerminal().catch(error=>{$('status').textContent=error.message;});
+$('new-agent').onclick=()=>openAgentVT();
 $('terminal-focus').onclick=()=>VirtualTerminal.select(null);
 $('import-files').onclick=()=>{
   if(!busybox?.worker){print('Start the shell before importing files.\n');return;}
@@ -244,3 +247,21 @@ if(crossOriginIsolated&&new URLSearchParams(location.search).get('shell')!=='boo
   const requestedApp=new URLSearchParams(location.search).get('app');
   command(typeof distributionStartupCommand==='function'?distributionStartupCommand(requestedApp):'sh',false,true).catch(error=>print(`BusyBox: ${error.message}\n`)).finally(()=>{ui.busy=false;ui.prompt();});
 }else{startup.hide();print('Bootstrap fallback shell (private process snapshots).\n');ui.prompt();}
+
+const agentViews=new Map();
+function openAgentVT(threadId=''){
+  if(!busybox?.ready){$('status').textContent='Wait for gucOS to finish starting.';return;}
+  if(agentViews.has(threadId)){agentViews.get(threadId).focus();return;}
+  const frame=document.createElement('iframe');frame.className='agent-frame';frame.title='Agent conversations';
+  frame.src=new URL(payload.agentHTMLURL,location.href).href+(threadId?'#'+encodeURIComponent(threadId):'');
+  const win=new VirtualTerminal(frame,()=>{},()=>{},()=>terminal.focus());win.title.textContent=threadId?'Agent '+threadId.slice(0,6):'Agents';win.show();agentViews.set(threadId,win);
+  frame.addEventListener('load',()=>{frame.contentWindow.addEventListener('keydown',e=>{if(e.altKey&&/^Digit[1-9]$/.test(e.code)){e.preventDefault();window.dispatchEvent(new KeyboardEvent('keydown',{code:e.code,altKey:true}));}});});
+  return win;
+}
+window.shell.openAgent=openAgentVT;
+window.shell.agentBridge={
+  session:()=>busybox,
+  open:openAgentVT,
+  title:(id,title)=>{const vt=agentViews.get(id);if(vt)vt.title.textContent=title;},
+  close:id=>{const vt=agentViews.get(id);if(vt){vt.destroy();agentViews.delete(id);}},
+};

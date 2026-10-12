@@ -1,0 +1,4 @@
+9 functions, 18173 bytes
+PTY-ECHO-PASS
+
+PASS guest PTY termios and real VT keyboard: visible controls, unchanged input bytes, normal shell afterward; runtime e96f1153dd1e0fb20690ad039bbb0d4db321253d2725be83a32f4b45bca443b0

@@ -1809,25 +1809,27 @@ Kernel.prototype._closeFrom = function (pcb, lowfd) {
   for (var fd of pcb.fdFlags.keys()) if (fd >= lowfd) pcb.fdFlags.delete(fd);
   if (pcb.fdEpoch) Atomics.add(pcb.fdEpoch, 0, 1);
 };
-Kernel.prototype._stdOfds = function () {
-  var interactive = !!(this._tty && this._tty.interactiveOut);
-  if (!this._std || this._stdInteractive !== interactive ||
-      !this._ofds.has(this._std.in_.id) || !this._ofds.has(this._std.out.id) || !this._ofds.has(this._std.err.id)) {
-    this._stdInteractive = interactive;
+Kernel.prototype._stdOfds = function (tty) {
+  if (tty === undefined) tty = this._tty;
+  var owner = tty || this;
+  var interactive = !!(tty && tty.interactiveOut);
+  if (!owner._std || owner._stdInteractive !== interactive ||
+      !this._ofds.has(owner._std.in_.id) || !this._ofds.has(owner._std.out.id) || !this._ofds.has(owner._std.err.id)) {
+    owner._stdInteractive = interactive;
     // interactiveOut (a createTty opt, set by the UI bridge): fd 1/2 are
     // THE TTY, like a real login terminal — isatty(1) turns true and
     // shells go interactive (prompts, line editing, job control). Without
     // it (piped/CI runs) stdout stays a plain output channel and program
     // output is byte-clean. Writes route identically either way; only the
     // OFD kind (and thus isatty) differs.
-    var ttyStd = this._tty && this._tty.interactiveOut;
-    this._std = {
-      in_: this._makeOfd(this._tty ? 'tty' : 'null', { ch: 0, tty: this._tty }),
-      out: this._makeOfd(ttyStd ? 'tty' : 'out', { ch: 1, tty: this._tty }),
-      err: this._makeOfd(ttyStd ? 'tty' : 'out', { ch: 2, tty: this._tty }),
+    var ttyStd = tty && tty.interactiveOut;
+    owner._std = {
+      in_: this._makeOfd(tty ? 'tty' : 'null', { ch: 0, tty: tty }),
+      out: this._makeOfd(ttyStd ? 'tty' : 'out', { ch: 1, tty: tty }),
+      err: this._makeOfd(ttyStd ? 'tty' : 'out', { ch: 2, tty: tty }),
     };
   }
-  return this._std;
+  return owner._std;
 };
 
 /* Absolute path in `pcb`'s working directory (BlockFS normalizes . and ..
@@ -1838,21 +1840,24 @@ Kernel.prototype._pathFor = function (pcb, p) {
   return (pcb.cwd === '/' ? '' : pcb.cwd) + '/' + p;
 };
 
-/* Create the system tty (call BEFORE boot; v1: one tty, attached to every
- * process). opts: { cols, rows, ringSize, output(bytes) } — output receives
+/* Create a tty. makeDefault:false leaves the existing default unchanged.
+ * opts: { cols, rows, ringSize, output(bytes), makeDefault } — output receives
  * echo/control bytes for the UI bridge to render; process stdout still
  * flows through onOutput. Returns the Tty (input/resize/eof/sab). */
 Kernel.prototype.createTty = function (opts) {
-  this._tty = new Tty(this, opts || {});
-  this._tty._brokered = this._brokered;
-  return this._tty;
+  var tty = new Tty(this, opts || {});
+  tty._brokered = this._brokered;
+  if (!opts || opts.makeDefault !== false) this._tty = tty;
+  return tty;
 };
 
 /* Boot the system: spawn pid 1 (init). spec: {path, argv, envp, cwd}.
  * Resolves to init's pid (1); rejects if the image can't be loaded. */
 Kernel.prototype.boot = function (spec) {
   var self = this;
+  var tty = spec.tty || this._tty;
   return this._spawn(null, {
+    tty: tty,
     path: spec.path,
     argv: spec.argv || [spec.path],
     envp: spec.envp || [],
@@ -1862,9 +1867,9 @@ Kernel.prototype.boot = function (spec) {
     pgid: 0,
   }).then(function (r) {
     if (r.errno) throw new Error('boot: ' + r.errno);
-    if (self._tty && !self._tty.fgPgid) {
+    if (tty && !tty.fgPgid) {
       var init = self._procs.get(r.pid);
-      self._tty.fgPgid = init ? init.pgid : r.pid;
+      tty.fgPgid = init ? init.pgid : r.pid;
     }
     return r.pid;
   });
@@ -1878,7 +1883,9 @@ Kernel.prototype.processCount = function () { return this._procs.size; };
  * kernel never waits). Resolves to the pid, or 0 on failure (a missing
  * /bin/wm must not break boot: kernel-chrome is the fallback policy). */
 Kernel.prototype.service = function (spec) {
+  var tty = spec.tty || this._tty;
   return this._spawn(null, {
+    tty: tty,
     path: spec.path,
     argv: spec.argv || [spec.path],
     envp: spec.envp || [],
@@ -2160,7 +2167,8 @@ Kernel.prototype._spawnImage = function (parent, spec, image, module) {
     dirRpcNext: 1,
     page: null, i32: null, u8: null,
     worker: null,
-    tty: parent ? parent.tty : self._tty, // inherited controlling terminal
+    tty: parent ? parent.tty : (spec.tty || self._tty), // inherited controlling terminal
+    launchTty: parent ? parent.launchTty : (spec.tty || self._tty), // host session lifetime, even after setsid
     audios: new Set(),             // aids owned by this process (docs/archive/0017)
     _audioPendingSab: null,        // SAB from 'audio-sab' awaiting AUDIO_OPEN
     _httpStage: null,              // staged request body awaiting HTTP_OPEN
@@ -2214,7 +2222,7 @@ Kernel.prototype._spawnImage = function (parent, spec, image, module) {
         if (o) { self._ofdRef(o, pid); pcb.fds.set(fd, ofdId); if(parent.fdFlags.has(fd))pcb.fdFlags.set(fd,parent.fdFlags.get(fd)); }
       });
     } else {
-      var std = self._stdOfds();
+      var std = self._stdOfds(pcb.tty);
       std.in_.refs++; pcb.fds.set(0, std.in_.id);
       std.out.refs++; pcb.fds.set(1, std.out.id);
       std.err.refs++; pcb.fds.set(2, std.err.id);

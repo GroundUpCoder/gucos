@@ -1,0 +1,18 @@
+HTTP/2 200 
+content-length: 0
+date: Mon, 12 Oct 2026 01:23:34 GMT
+server: elb
+access-control-allow-credentials: true
+vary: origin, access-control-request-method, access-control-request-headers
+access-control-allow-methods: POST
+access-control-allow-headers: authorization,content-type
+access-control-allow-origin: https://os.groundupcoder.com
+allow: POST
+x-ds-trace-id: c34c8cfbf1b676b102f3597f045ea7c7
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+x-content-type-options: nosniff
+x-cache: Miss from cloudfront
+via: 1.1 a71024b510c3f0867cb691ef84b49ab0.cloudfront.net (CloudFront)
+x-amz-cf-pop: ICN57-P4
+x-amz-cf-id: OT2qQs_loxQnouPZRh1tACaLdalEQoJwX_rovpuw2vh4p9jCBhctfA==
+

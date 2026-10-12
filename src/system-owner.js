@@ -2,6 +2,10 @@
 let systemFS, kernel, tty, processURL, compilerJobs, closeDisk=()=>{}, commitSoon=()=>{}, diskSize=()=>0;
 const workerHandles=new Map();
 let commandPid=0;
+const terminalSessions=new Map(), execSessions=new Map();
+const shellEnvironment=()=>['PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin','HOME='+HOME_DIRECTORY,'USER=user','LOGNAME=user','PWD='+HOME_DIRECTORY,'TERM=xterm-256color','PS1=\\w $ '];
+function stopTty(terminal){for(const p of kernel._procs.values())if((p.launchTty||p.tty)===terminal)kernel.kill(p.pid,9,0);}
+
 let bootDownloads=new Map();
 const bootStatus=phase=>postMessage({type:'boot-progress',phase});
 function needsCoreLibc(data){
@@ -179,6 +183,8 @@ async function initialize(data){
   bootStatus('Starting your shell…');
   systemFS._s.flush();
   kernel=new KERNEL.Kernel({onClipboard:clip=>postMessage({type:"clipboard",text:clip?.fmt===1?decoder.decode(clip.bytes):""}),keepAlive:data.hosted,onProcessExit:(pid,status)=>{
+    for(const [id,r] of terminalSessions)if(r.pid===pid){postMessage({type:'terminal-exit',terminalId:id,status});}
+    for(const [id,r] of execSessions)if(r.pid===pid){clearTimeout(r.timer);execSessions.delete(id);stopTty(r.tty);systemFS._s.flush();postMessage({type:'rpc-result',id,value:{code:status>>>8,signal:status&127,output:r.output}});}
     if(data.hosted&&pid===commandPid){commandPid=0;systemFS._s.flush();postMessage({type:'command-exit',status,diskBytes:diskSize()});}
   },fs:new BLOCK_FS.MountFS({'/':systemFS,'/proc':new KERNEL.ProcFS()}),
     createWorker:spec=>{
@@ -200,7 +206,12 @@ async function initialize(data){
     },
     loadImage:path=>readFile(path),compile:(argv,cwd,context)=>compilerJobs.run({kind:'command',argv,cwd},context),
     commit:()=>commitSoon(),
-    onOutput:(pid,fd,bytes)=>output(decoder.decode(bytes)),
+    onOutput:(pid,fd,bytes)=>{
+      const process=kernel.process(pid),terminal=process?.launchTty||process?.tty;
+      for(const [id,r] of terminalSessions)if(r.tty===terminal){postMessage({type:'terminal-output',terminalId:id,text:r.decoder.decode(bytes,{stream:true})});return;}
+      for(const r of execSessions.values())if(r.tty===terminal){r.output+=r.decoder.decode(bytes,{stream:true});if(r.output.length>1000000){r.output=r.output.slice(0,1000000)+'\n[Output limit reached]';stopTty(terminal);}return;}
+      output(decoder.decode(bytes));
+    },
     onAudioStream:scheduleAudio,
     onHalt:status=>{clearInterval(audioTimer);audioTimer=null;compilerJobs.close();const current=snapshot();const changed=Object.fromEntries(Object.entries(current).filter(([path,text])=>data.files[path]!==text));const deleted=Object.keys(data.files).filter(path=>!systemFS.lstat(path));closeDisk();postMessage({type:'halt',status,files:changed,deleted,diskBytes:diskSize()});},
     log:text=>output(text+'\n')
@@ -214,6 +225,43 @@ self.onmessage=async({data})=>{
   try{
     if(data.type==='boot')await initialize(data);
     else if(data.type==='run')await runCommand(data.args);
+    else if(data.type==='rpc'){
+      try{
+        let value;
+        const a=data.args||{};
+        if(data.op==='terminal-open'){
+          if(terminalSessions.has(a.terminalId))throw Error('Terminal already exists');
+          const id=a.terminalId;
+          const r={decoder:new TextDecoder()};
+          r.tty=kernel.createTty({makeDefault:false,cols:a.cols,rows:a.rows,interactiveOut:true,output:bytes=>postMessage({type:'terminal-output',terminalId:id,text:r.decoder.decode(bytes,{stream:true})})});
+          terminalSessions.set(id,r);
+          try{r.pid=await kernel.boot({path:'/bin/sh',argv:['/bin/sh'],cwd:HOME_DIRECTORY,envp:shellEnvironment(),tty:r.tty});}catch(e){terminalSessions.delete(id);throw e;}
+          value={pid:r.pid};
+        }else if(data.op==='terminal-close'){
+          const r=terminalSessions.get(a.terminalId);if(r){stopTty(r.tty);terminalSessions.delete(a.terminalId);}
+        }else if(data.op==='exec'){
+          const r={output:'',decoder:new TextDecoder()};
+          r.tty=kernel.createTty({makeDefault:false,interactiveOut:false});execSessions.set(data.id,r);
+          try{r.pid=await kernel.boot({path:'/bin/sh',argv:['/bin/sh','-c',a.command],cwd:a.cwd||HOME_DIRECTORY,envp:shellEnvironment(),tty:r.tty});}
+          catch(e){execSessions.delete(data.id);throw e;}
+          r.tty.eof(true);
+          r.timer=setTimeout(()=>stopTty(r.tty),Math.min(Math.max(a.timeout||120000,100),600000));
+          return;
+        }else if(data.op==='exec-stop'){
+          const r=execSessions.get(a.id);if(r)stopTty(r.tty);
+        }else if(data.op==='list-directory'){
+          value=[];const h=systemFS.opendir(a.path);
+          if(h!=null)try{let e;while((e=systemFS.readdir(h))!==null)if(e.name!=='.'&&e.name!=='..')value.push(e.name);}finally{systemFS.closedir(h);}
+        }else if(data.op==='atomic-write'){
+          const tmp=a.path+'.tmp';writeFile(tmp,a.bytes,a.mode||0o600);
+          if(systemFS.rename(tmp,a.path)!==0)throw Error('Cannot save '+a.path);
+          systemFS._s.flush();
+        }else throw Error('Unknown operation');
+        postMessage({type:'rpc-result',id:data.id,value});
+      }catch(e){postMessage({type:'rpc-result',id:data.id,error:e.message});}
+    }
+    else if(data.type==='terminal-input')terminalSessions.get(data.terminalId)?.tty.input(encoder.encode(data.text));
+    else if(data.type==='terminal-resize')terminalSessions.get(data.terminalId)?.tty.resize(data.cols,data.rows);
     else if(data.type==='input')tty?.input(encoder.encode(data.text));
     else if(data.type==='screen-size')kernel?.setScreen(data.width,data.height);
     else if(data.type==='terminal-size')tty?.resize(data.cols,data.rows);
@@ -237,5 +285,5 @@ self.onmessage=async({data})=>{
     else if(data.type==='read-file'){const bytes=readFile(data.path);postMessage({type:'file',id:data.id,bytes});}
     else if(data.type==='write-file'){writeFile(data.path,data.bytes);systemFS._s.flush();postMessage({type:'written',id:data.id});}
     else if(data.type==='sync'){systemFS?._s.flush();postMessage({type:'synced',id:data.id});}
-  }catch(error){try{closeDisk();}catch{}postMessage({type:'error',text:error.stack||String(error)});}
+  }catch(error){if(data.id!=null){postMessage({type:'request-error',id:data.id,error:error.message});return;}try{closeDisk();}catch{}postMessage({type:'error',text:error.stack||String(error)});}
 };
