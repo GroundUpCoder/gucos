@@ -1,0 +1,26 @@
+{
+  "project": "gucos",
+  "canonicalDeployment": "00021b47-9818-4094-ad25-1768f3f6569e",
+  "deployments": [
+    {
+      "id": "00021b47-9818-4094-ad25-1768f3f6569e",
+      "environment": "production",
+      "url": "https://00021b47.gucos.pages.dev",
+      "created_on": "2026-10-12T01:27:58.373475Z",
+      "status": "success"
+    },
+    {
+      "id": "8a05d8dd-4e75-4dd0-8c24-4e1ea12fc82a",
+      "environment": "preview",
+      "url": "https://8a05d8dd.gucos.pages.dev",
+      "created_on": "2026-10-12T01:26:11.304421Z",
+      "status": "success"
+    }
+  ],
+  "domains": [
+    {
+      "name": "os.groundupcoder.com",
+      "status": "active"
+    }
+  ]
+}

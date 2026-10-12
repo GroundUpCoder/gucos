@@ -50,5 +50,16 @@ flagged to the user. Browser disk and application ABI compatibility are unchange
 
 Final local acceptance passed for runtime
 `89250c7b2d43fbb9845431a61e01f7a06cb5b7a1da6c026193a60c578bd6cf9d`.
-The retained candidate is `releases/agent-vt-1.0.3`. Preview and production
-acceptance are pending at this source-commit revision.
+The retained candidate is `releases/agent-vt-1.0.3`. Source commit `0d0cfd0`
+was pushed before deployment. Exact preview `8a05d8dd.gucos.pages.dev` passed
+HTTP and full browser acceptance. The identical directory was uploaded as
+production `00021b47-9818-4094-ad25-1768f3f6569e`, then the same checks passed on
+https://os.groundupcoder.com. Authenticated DeepSeek tool execution was verified
+at both URLs. The Cloudflare API confirms the canonical deployment and active
+domain. A follow-up production resource audit identified console failures as
+analytics URLs intentionally denied by the test harness; application checks
+passed. The release remains a patch with no ABI epoch or disk namespace change.
+
+The original credential decision was updated with the user's exact direct
+answer and cancelled as redundant, so it does not remain a stale pending
+question. No delegated decision answer was substituted.

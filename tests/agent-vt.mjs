@@ -5,6 +5,7 @@ import {browserSession} from '../tools/browser.mjs';
 const s=await browserSession({...(process.env.LIVE_CORE_URL?{url:process.env.LIVE_CORE_URL}:{}),timeout:240000});
 const evidence=process.env.AGENT_EVIDENCE||'docs/research/agent-vt-1.0.3/local';
 await mkdir(evidence,{recursive:true});s.page.setDefaultTimeout(30000);
+const failedRequests=[];s.page.on('requestfailed',r=>{const u=new URL(r.url());failedRequests.push({url:u.origin+u.pathname,error:r.failure()?.errorText});});
 s.page.on('console',m=>{if(m.type()==='error')console.error('PAGE',m.text());});
 try{
  if(process.env.EXPECTED_RUNTIME)assert.equal(await s.page.evaluate(()=>shell.toolchain.systemBuild),process.env.EXPECTED_RUNTIME);
@@ -76,7 +77,8 @@ try{
  assert.equal(await s.page.frameLocator('iframe').last().getByLabel('Conversation title').inputValue(),persisted.title+' (imported)');
  const importedId=await s.page.locator('iframe').last().evaluate(f=>new URL(f.src).hash.slice(1));assert.notEqual(importedId,id);
  assert.deepEqual(s.errors,[]);
- await writeFile(evidence+'/result.json',JSON.stringify({runtime:await s.page.evaluate(()=>shell.toolchain.systemBuild),threadId:id,requests:requests.length,provider:'deterministic intercepted SSE; actual gucOS tools and disk',passed:true},null,2)+'\n');
+ await writeFile(evidence+'/result.json',JSON.stringify({runtime:await s.page.evaluate(()=>shell.toolchain.systemBuild),threadId:id,requests:requests.length,provider:'deterministic intercepted SSE; actual gucOS tools and disk',failedRequests,passed:true},null,2)+'\n');
+ if(failedRequests.length)console.log('Resource diagnostics '+JSON.stringify(failedRequests));
  console.log('PASS cc block grouping, real shell tool, flat persistence, restored draft/history and continuation');
 }catch(e){console.error('Browser errors',s.errors);for(const f of s.page.frames())console.error(f.url(),(await f.locator('#root').innerText().catch(()=>'' )).slice(-4000));console.error(await s.page.evaluate(()=>({status:document.getElementById('status').textContent,log:shell.busybox?.log?.slice(-2500)})));throw e;}
 finally{await s.close();}

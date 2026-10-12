@@ -39,6 +39,30 @@ Earlier candidate evidence is deliberately retained under `local/`,
 records the taskbar interception failure repaired before final acceptance.
 These earlier artifacts are not evidence for the shipped runtime.
 
-Preview and production validation have not yet been recorded at this source
-commit. Deployment will upload the same retained directory after exact-preview
-HTTP and browser acceptance; subsequent evidence commits record the receipts.
+Source implementation commit: `0d0cfd040ef800a26e5dd28eb57c81289397c284`.
+
+Deployment and acceptance are complete:
+
+- Exact preview: https://8a05d8dd.gucos.pages.dev
+- Production deployment: https://00021b47.gucos.pages.dev
+- Verified custom domain: https://os.groundupcoder.com
+- Both environments passed `tests/agent-acceptance.mjs` with the expected
+  retained runtime and `tools/verify-pages.py` with all 36 delivered files.
+- `preview/` and `production/` retain controlled SSE, cancellation/recovery,
+  authenticated DeepSeek, public package binary/source, two GPU VT and reload
+  results. `*-http.json` retains hash/header/cache/404 audits.
+- `cloudflare-receipt.json` verifies the canonical production deployment and
+  active custom domain through the Cloudflare API.
+- Production's controlled-provider test logged failed resource requests.
+  The separate `production-resource-audit/result.json` identifies every one
+  as `static.cloudflareinsights.com/beacon.min.js`, which the harness's
+  restricted-origin routing intentionally aborts. That diagnostic run also
+  passed; no application request failure was found in its recorded failures.
+
+The exact same retained release directory was uploaded to preview and then
+production, without rebuilding. Previous accepted deployment
+`efa1c19e-1f9c-4ee3-86b7-d1045e7dc4f5` and
+`releases/terminal-echo-1.0.2-final` remain available for rollback.
+No guest disks, credentials or browser profiles are committed. `SHA256SUMS`
+identifies this retained evidence; the preflight text follows Git's normalized
+line endings.

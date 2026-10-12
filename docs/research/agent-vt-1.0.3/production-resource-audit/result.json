@@ -1,0 +1,29 @@
+{
+  "runtime": "89250c7b2d43fbb9845431a61e01f7a06cb5b7a1da6c026193a60c578bd6cf9d",
+  "threadId": "ecf1d97c-8598-41bc-8861-e2e52e4e9894",
+  "requests": 3,
+  "provider": "deterministic intercepted SSE; actual gucOS tools and disk",
+  "failedRequests": [
+    {
+      "url": "https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920",
+      "error": "net::ERR_FAILED"
+    },
+    {
+      "url": "https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920",
+      "error": "net::ERR_FAILED"
+    },
+    {
+      "url": "https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920",
+      "error": "net::ERR_FAILED"
+    },
+    {
+      "url": "https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920",
+      "error": "net::ERR_FAILED"
+    },
+    {
+      "url": "https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920",
+      "error": "net::ERR_FAILED"
+    }
+  ],
+  "passed": true
+}

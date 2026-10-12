@@ -1,0 +1,6 @@
+Live turn idle:0
+Live turn running:1
+Live turn running:3
+Live turn running:5
+Live turn idle:7
+PASS authenticated DeepSeek browser agent and actual gucOS Bash tool; model deepseek-flash

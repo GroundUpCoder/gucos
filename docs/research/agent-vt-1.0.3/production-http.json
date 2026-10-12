@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "url": "https://os.groundupcoder.com",
+  "files": 36,
+  "runtime": "89250c7b2d43fbb9845431a61e01f7a06cb5b7a1da6c026193a60c578bd6cf9d",
+  "checks": [
+    "exact sizes and SHA256",
+    "COOP/COEP/CORP",
+    "cache policy",
+    "missing objects and operator manifests return 404"
+  ]
+}

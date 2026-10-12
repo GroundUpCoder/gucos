@@ -1,0 +1,65 @@
+{
+  "passed": true,
+  "runtime": "89250c7b2d43fbb9845431a61e01f7a06cb5b7a1da6c026193a60c578bd6cf9d",
+  "model": "deepseek-flash",
+  "blocks": [
+    {
+      "type": "text"
+    },
+    {
+      "type": "thinking",
+      "state": "complete"
+    },
+    {
+      "type": "toolUse",
+      "name": "Bash",
+      "state": "complete"
+    },
+    {
+      "type": "usage"
+    },
+    {
+      "type": "toolResult"
+    },
+    {
+      "type": "text",
+      "state": "complete"
+    },
+    {
+      "type": "usage"
+    }
+  ],
+  "usage": [
+    {
+      "id": "6d9de62f-5781-4127-8fd9-f8673917c83b",
+      "createdAt": 1791768404004,
+      "turnId": "4e29ff53-c3b1-4a86-bcb7-7af991c5348d",
+      "role": "system",
+      "type": "usage",
+      "messageId": "bbece5f9-b8b2-4138-b2aa-2f9f2930c39e",
+      "model": "deepseek-flash",
+      "prompt_tokens": 695,
+      "completion_tokens": 81,
+      "total_tokens": 776,
+      "cached_tokens": 512,
+      "reasoning_tokens": 21,
+      "provider_usage": "{\"prompt_tokens\":695,\"completion_tokens\":81,\"total_tokens\":776,\"prompt_tokens_details\":{\"cached_tokens\":512},\"completion_tokens_details\":{\"reasoning_tokens\":21},\"prompt_cache_hit_tokens\":512,\"prompt_cache_miss_tokens\":183}"
+    },
+    {
+      "id": "37c34df2-36e3-4ef2-a990-0a6f7cd3508b",
+      "createdAt": 1791768404715,
+      "turnId": "4e29ff53-c3b1-4a86-bcb7-7af991c5348d",
+      "role": "system",
+      "type": "usage",
+      "messageId": "5eec2f92-4ce3-4057-beb5-0507f2e1e2a3",
+      "model": "deepseek-flash",
+      "prompt_tokens": 799,
+      "completion_tokens": 26,
+      "total_tokens": 825,
+      "cached_tokens": 640,
+      "reasoning_tokens": 0,
+      "provider_usage": "{\"prompt_tokens\":799,\"completion_tokens\":26,\"total_tokens\":825,\"prompt_tokens_details\":{\"cached_tokens\":640},\"completion_tokens_details\":{\"reasoning_tokens\":0},\"prompt_cache_hit_tokens\":640,\"prompt_cache_miss_tokens\":159}"
+    }
+  ],
+  "scope": "Authenticated browser-to-DeepSeek SSE, real Bash tool writes and reads shared gucOS disk, assistant completion. Temporary guest credential never exported."
+}

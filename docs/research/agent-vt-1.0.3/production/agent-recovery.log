@@ -1,0 +1,1 @@
+PASS stop cancels actual process tree; reload restores durable intent/result, never repeats effects; repeated restore idempotent

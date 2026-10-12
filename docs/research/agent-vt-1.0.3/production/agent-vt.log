@@ -1,0 +1,9 @@
+PASS two independent terminal VTs, shared disk and terminal cleanup
+Opened agent library
+PAGE Failed to load resource: net::ERR_FAILED
+Opened conversation
+PAGE Failed to load resource: net::ERR_FAILED
+PAGE Failed to load resource: net::ERR_FAILED
+PAGE Failed to load resource: net::ERR_FAILED
+PAGE Failed to load resource: net::ERR_FAILED
+PASS cc block grouping, real shell tool, flat persistence, restored draft/history and continuation
